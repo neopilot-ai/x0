@@ -37,7 +37,7 @@ export default function RootLayout({
 }: Readonly<{ children: ReactNode }>) {
   return (
     <html lang="en">
-      <body className="antialiased">
+      <body className="antialiased font-sans">
         <Suspense fallback={null}>
           <NuqsAdapter>
             <ChatProvider>
