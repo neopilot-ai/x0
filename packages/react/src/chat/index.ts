@@ -30,3 +30,22 @@ export type { V0SandboxState, V0SandboxOptions } from './sandbox'
 export { V0CodeEditor, V0DiffView, V0SplitView, V0FileExplorer } from './code-editor'
 export { V0Terminal, V0PermissionGuard, V0CommandHistory } from './terminal'
 export { V0ConsolePanel, V0CodeEditorTab } from './sandbox-ui'
+export { AdvancedSettings, useAdvancedSettings } from './advanced-settings'
+export type { AgentPermissionsState, NetworkPolicyState, CustomInstructionsState, AdvancedSettingsData } from './advanced-settings'
+export {
+  SettingsPageLayout,
+  SettingsSidebar,
+  SettingsSidebarContent,
+  SettingsSidebarSection,
+  SettingsNavGroup,
+  SettingsNavItem,
+  SettingsHeader,
+  SettingsBreadcrumb,
+  SettingsLogo,
+  SettingsScopeSelector,
+  SettingsActionButton,
+} from './settings-page-layout'
+export {
+  SettingsSection,
+  SettingsSectionContent,
+} from './settings-section'

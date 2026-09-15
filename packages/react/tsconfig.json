@@ -12,7 +12,11 @@
     "jsx": "react-jsx",
     "types": ["bun"],
     "paths": {
-      "v0/browser": ["../v0-sdk/src/browser.ts"]
+      "v0": ["../v0-sdk/src/index.ts"],
+      "v0/browser": ["../v0-sdk/src/browser.ts"],
+      "v0/sandbox": ["../v0-sdk/src/sandbox/index.ts"],
+      "v0/terminal": ["../v0-sdk/src/terminal/index.ts"],
+      "v0/settings": ["../v0-sdk/src/settings.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"]
