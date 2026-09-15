@@ -105,5 +105,5 @@ Agents emit events during execution:
 
 ## See Also
 
-- [Agent types](/docs/api/v2/guides/agentic-features)
+- [Agent types](/docs/agentic-features)
 - [AgentManager](/docs/api/v2/guides/browser-entry)

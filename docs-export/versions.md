@@ -12,7 +12,7 @@ related:
 
 Each time v0 updates a code block from a message, it creates a new version. Non-message actions (such as editing code or modifying files directly) do not generate new versions.
 
-![Versions](/docs/light/versions.png)
+![Versions](https://v0.app/docs/light/versions.png)
 
 Restoring an old version creates a new, most recent version using the restored code to maintain a linear version history.
 

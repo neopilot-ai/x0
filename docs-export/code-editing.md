@@ -48,10 +48,10 @@ Edit code directly in the preview interface. v0 can refine code based on your fe
 
 ## Media
 
-- [Code Editor Video](/docs/videos/code%20editor.mp4)
-- [Switch Light Mode](/docs/light/switchlight.gif)
-- [Switch Dark Mode](/docs/dark/switchdark.gif)
-- [Diff View Light](/docs/light/diffviewlight.png)
-- [Diff View Dark](/docs/dark/diffviewdark.png)
-- [Split View Light](/docs/light/splitviewlight.png)
-- [Split View Dark](/docs/dark/splitviewdark.png)
+- [Code Editor Video](https://v0.app/docs/videos/code%20editor.mp4)
+- [Switch Light Mode](https://v0.app/docs/light/switchlight.gif)
+- [Switch Dark Mode](https://v0.app/docs/dark/switchdark.gif)
+- [Diff View Light](https://v0.app/docs/light/diffviewlight.png)
+- [Diff View Dark](https://v0.app/docs/dark/diffviewdark.png)
+- [Split View Light](https://v0.app/docs/light/splitviewlight.png)
+- [Split View Dark](https://v0.app/docs/dark/splitviewdark.png)

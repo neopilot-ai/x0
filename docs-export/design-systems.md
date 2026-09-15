@@ -1,11 +1,11 @@
 ---
-title: Design Systems (Legacy)
+title: Design Systems
 description: Legacy shadcn/ui registry-based design systems with Tailwind
 product: v0
 type: guide
 ---
 
-# Design Systems (Legacy)
+# Design Systems
 
 You can set up a custom design system to use with Tailwind and `shadcn/ui` for high-fidelity UIs that match your brand.
 

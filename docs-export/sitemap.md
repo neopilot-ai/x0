@@ -22,6 +22,7 @@
 - [/docs/paper](paper) - Paper
 - [/docs/instructions](instructions) - Instructions
 - [/docs/design-systems-2](design-systems-2) - Design Systems
+- [/docs/design-systems](design-systems) - Design Systems (Legacy)
 
 ## API v2
 - [/docs/api/v2](api/v2) - API Overview

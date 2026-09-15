@@ -12,13 +12,13 @@ related:
 
 Design mode provides an intuitive, visual way to refine your app's user interface. It lets you select any element in the live preview, tweak its styles with a visual panel (and/or natural-language instructions), and then apply those edits back to your source code.
 
-![Design Mode Video](/docs/videos/design-mode.mp4)
+![Design Mode Video](https://v0.app/docs/videos/design-mode.mp4)
 
 ## Enabling design mode
 
 Open Design mode by selecting the **Design** tab in the preview toolbar.
 
-![Design Mode](/docs/light/design-mode.png)
+![Design Mode](https://v0.app/docs/light/design-mode.png)
 
 Design mode opens beside your running app and provides layers, selection controls, and an editing panel.
 
@@ -30,7 +30,7 @@ With design mode on, your cursor becomes a selection tool. As you hover over you
 
 To toggle between selecting elements and interacting with your app normally, use the **Inspect** control in the design panel, or press `Cmd + I` / `Ctrl + I`. Press `Escape` to deselect the current element.
 
-![Design Element](/docs/light/design-element.png)
+![Design Element](https://v0.app/docs/light/design-element.png)
 
 ## Modifying elements
 
@@ -40,7 +40,7 @@ Once an element is selected, you have two ways to change it — and you can comb
 
 The design panel offers a suite of controls for making precise visual adjustments. It's ideal for tweaking styles to perfection. The panel includes:
 
-![Design Controls](/docs/light/controls.png)
+![Design Controls](https://v0.app/docs/light/controls.png)
 
 - **Typography**: Font family, size, weight, line height, letter spacing, alignment, and text decoration.
 - **Color**: Text color.
@@ -59,7 +59,7 @@ Design mode detects when your app is using Tailwind CSS and will surface Tailwin
 
 For anything structural or hard to express in the panel — "add a button next to this text", "make this a three-column grid", "match the style of the card above" — type a natural-language instruction into the text box in the design panel. v0 automatically attaches a screenshot of the selected element along with your instructions.
 
-![Design Prompt](/docs/light/design-prompt.png)
+![Design Prompt](https://v0.app/docs/light/design-prompt.png)
 
 ## Undo, redo, reset, and preview
 
@@ -75,7 +75,7 @@ Pending edits are kept until you apply them or leave the chat. If you try to nav
 
 When you're happy with your changes, click **Apply** in the design panel. v0 serializes your edits (and any instructions / screenshots), sends them to the chat, and generates an updated version of your project that reflects the changes in your source code. Because Apply produces a new chat version, you can review the diff, keep iterating, or revert just like any other v0 edit.
 
-![Design Save](/docs/light/design-save.png)
+![Design Save](https://v0.app/docs/light/design-save.png)
 
 ## Key features
 

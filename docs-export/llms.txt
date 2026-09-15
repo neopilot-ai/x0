@@ -25,6 +25,7 @@
 
 ## Design Systems
 - /docs/design-systems-2 - Design Systems 2.0
+- /docs/design-systems - Legacy registry design systems
 - /docs/api/v2/guides/design-systems - Design system skills guide
 
 ## SDK Documentation

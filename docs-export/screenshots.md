@@ -16,7 +16,7 @@ The v0 attachment feature allows users to upload or drag and drop files into the
 
 Upload a file by clicking the attachment icon or dragging the file into the chat. If it's a screenshot, v0 will analyze the layout, colors, and components in the image, then generate code that closely replicates the design. It also infers likely functionality based on visible UI elements.
 
-![Screenshot attachment](/docs/light/screenshot.png)
+![Screenshot attachment](https://v0.app/docs/light/screenshot.png)
 
 ## Best practices
 

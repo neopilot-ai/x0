@@ -83,5 +83,5 @@ The `rm -rf` command is currently denied by default as a safety guard. This prev
 
 ## Media
 
-- [Commands Video](/docs/videos/commands.mp4)
-- [Permissions Video](/docs/videos/permissions.mp4)
+- [Commands Video](https://v0.app/docs/videos/commands.mp4)
+- [Permissions Video](https://v0.app/docs/videos/permissions.mp4)

@@ -32,7 +32,7 @@ For searching across files within the code editor, use `Shift+Cmd+F` / `Shift+Ct
 
 ## Project settings
 
-![Project Settings Video](/docs/videos/project-settings.mp4)
+![Project Settings Video](https://v0.app/docs/videos/project-settings.mp4)
 
 Each project has its own settings that apply to all chats within it. Access these by opening the settings menu from the chat or Project page.
 

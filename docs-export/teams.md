@@ -188,7 +188,7 @@ You can transfer chats between any of your available scopes, either team or pers
 
 **Bulk transfer**: Go to [Settings → Workspace](https://v0.app/settings/workspace) and choose **Transfer Data** to transfer multiple chats at once.
 
-[Video: Transfer chats](/docs/videos/transfer-chats.mp4)
+[Video: Transfer chats](https://v0.app/docs/videos/transfer-chats.mp4)
 
 ## Team settings
 

@@ -22,7 +22,7 @@ v0 integrates with AI platforms like [fal](https://fal.ai/) and [Deep Infra](htt
 
 From **Project menu** `...` → **Settings** → **Integrations**, you'll see supported providers. Click **Install** to open the Marketplace and accept click-through terms to activate an integration.
 
-![AI Models](/docs/light/ai-models.png)
+![AI Models](https://v0.app/docs/light/ai-models.png)
 
 ## APIs
 

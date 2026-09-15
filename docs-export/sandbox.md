@@ -67,8 +67,8 @@ The sandbox filesystem persists between sessions within the lifetime of the chat
 
 ## Media
 
-- [Sandbox Startup Video](/docs/videos/sandbox-startup.mp4)
-- [Console Video](/docs/videos/console.mp4)
+- [Sandbox Startup Video](https://v0.app/docs/videos/sandbox-startup.mp4)
+- [Console Video](https://v0.app/docs/videos/console.mp4)
 
 ## Sandbox vs Preview
 
