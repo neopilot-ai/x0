@@ -140,6 +140,68 @@
   --sidebar-ring: oklch(0.65 0 0);
 }
 
+.tk-keyword {
+  color: oklch(0.5 0.18 283);
+}
+.tk-string {
+  color: oklch(0.58 0.13 151);
+}
+.tk-number {
+  color: oklch(0.62 0.15 52);
+}
+.tk-comment {
+  color: oklch(0.56 0 0);
+}
+.tk-fn {
+  color: oklch(0.55 0.17 247);
+}
+.tk-property {
+  color: oklch(0.51 0 0);
+}
+.tk-literal {
+  color: oklch(0.5 0.18 295);
+}
+.tk-operator {
+  color: oklch(0.45 0.01 0);
+}
+.tk-tag {
+  color: oklch(0.56 0.18 12);
+}
+.tk-attr {
+  color: oklch(0.56 0.16 225);
+}
+
+.dark .tk-keyword {
+  color: oklch(0.74 0.15 305);
+}
+.dark .tk-string {
+  color: oklch(0.76 0.12 156);
+}
+.dark .tk-number {
+  color: oklch(0.8 0.13 52);
+}
+.dark .tk-comment {
+  color: oklch(0.56 0 0);
+}
+.dark .tk-fn {
+  color: oklch(0.79 0.13 236);
+}
+.dark .tk-property {
+  color: oklch(0.72 0 0);
+}
+.dark .tk-literal {
+  color: oklch(0.75 0.15 312);
+}
+.dark .tk-operator {
+  color: oklch(0.62 0 0);
+}
+.dark .tk-tag {
+  color: oklch(0.73 0.16 20);
+}
+.dark .tk-attr {
+  color: oklch(0.78 0.1 231);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
