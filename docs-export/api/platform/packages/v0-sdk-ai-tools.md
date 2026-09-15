@@ -1,13 +1,13 @@
 ---
 title: v0 SDK AI Tools
-description: AI tools integration for the v0 SDK
+description: Agent-ready tool definitions for every v0 API endpoint
 product: v0
 type: reference
 ---
 
 # v0 SDK AI Tools
 
-The `@v0-sdk/ai-tools` package provides AI tools for integrating v0 with AI frameworks.
+The `@v0-sdk/ai-tools` package exposes the v0 API as agent-ready tool definitions (e.g. for AI SDK `ToolSet` usage). Each tool wraps one API endpoint with a Zod input schema.
 
 ## Installation
 
@@ -17,21 +17,37 @@ npm install @v0-sdk/ai-tools
 
 ## Usage
 
-The AI tools package provides pre-built tools for:
+```typescript
+import { v0Tools, v0ToolsByCategory } from '@v0-sdk/ai-tools'
 
-- Code generation
-- File operations
-- Terminal commands
-- Sandbox management
+// All tools, keyed by name: chatsCreate, chatsDeploy, ...
+const tools = v0Tools
 
-## Tools
+// Tools grouped by API category
+const { chats, messages, mcpServers, settings, usage, webhooks } = v0ToolsByCategory
+```
 
-- `v0-generate` — Generate code using v0
-- `v0-edit` — Edit existing code
-- `v0-run` — Run commands in the sandbox
-- `v0-preview` — Preview generated applications
+## Exports
+
+- `v0Tools` — flat map of every tool (`V0ToolsFlat`)
+- `v0ToolsByCategory` — tools grouped by category (`V0ToolsByCategory`)
+- Types: `V0ToolCategory`, `V0ToolsByCategory`, `V0ToolsConfig`, `V0ToolsFlat`
+
+## Tool categories
+
+| Category | Tools include |
+| --- | --- |
+| `chats` | `chatsCreate`, `chatsCreateAsync`, `chatsCreateFromFiles`, `chatsCreateFromRepo`, `chatsCreateFromZip`, `chatsCreateStream`, `chatsCreateVercelProject`, `chatsDelete`, `chatsDeploy`, `chatsDownloadFiles`, `chatsDuplicate`, `chatsGet`, … |
+| `messages` | `messagesSend`, `messagesSendStream`, `messagesResolve`, `messagesList`, `messagesGet`, `messagesStop`, … |
+| `mcpServers` | `mcpServersCreate`, `mcpServersList`, `mcpServersGet`, `mcpServersUpdate`, `mcpServersDelete` |
+| `settings` | `settingsGetPreviewHosts`, `settingsSetPreviewHosts` |
+| `usage` | `usageGetActivity`, `usageGetSummary`, `usageListEvents` |
+| `webhooks` | `webhooksCreate`, `webhooksList`, `webhooksGet`, `webhooksUpdate`, `webhooksDelete` |
+
+Chat-creation tools accept the same fields as the API, including `message`, `systemPrompt`, `modelConfiguration`, `attachments`, `mcpServerIds`, and `skills`.
 
 ## Related
 
 - [v0 SDK](/docs/api/platform/packages/v0-sdk)
 - [AI Tools Adapter](/docs/api/platform/adapters/ai-tools)
+- [AI Tools Guide](/docs/api/v2/guides/ai-tools-guide)
