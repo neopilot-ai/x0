@@ -19,19 +19,19 @@ All docs follow the `https://v0.app/docs/*` URL pattern:
 - `agents.md` - Agent-facing documentation
 - `index.md` - Overview page
 - `quickstart.md` - Getting started guide
-- `api/v2.md` - v2 API overview (119 lines)
-- `api/v1.md` - v1 API overview (148 lines, deprecated)
+- `api/v2.md` - v2 API overview (116 lines)
+- `api/v1.md` - v1 API overview (164 lines, deprecated)
 
 ## Stats
 
-- **196** markdown files
+- **205** markdown files
 - **21** chat API endpoints
 - **9** message API endpoints
 - **5** MCP server endpoints
 - **5** webhook endpoints
 - **2** settings endpoints
 - **3** usage endpoints
-- **21** API guides (including browser-entry, streaming-result, stream-diffpatch, skills-sh, design-systems)
+- **22** API guides (including browser-entry, streaming-result, stream-diffpatch, skills-sh, design-systems)
 - **4** comparison pages
 - **40+** product feature docs
 

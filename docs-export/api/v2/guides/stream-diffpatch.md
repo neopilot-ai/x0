@@ -10,18 +10,18 @@ related:
 
 # Stream Diffpatch
 
-The `v0-sdk/src/stream/diffpatch.ts` module provides JSON diff and patch utilities used internally by the v0 streaming system.
+The SDK's stream module provides JSON diff and patch utilities used by the v0 streaming system. They are exported from the main `v0` package (and `v0/browser`).
 
 ## Installation
 
 ```bash
-npm install v0@canary
+npm install v0
 ```
 
 ## Importing
 
 ```ts
-import { diff, patch } from 'v0/stream/diffpatch'
+import { diff, isV0StringAppendDelta, patch } from 'v0'
 ```
 
 ## diff()
@@ -29,7 +29,7 @@ import { diff, patch } from 'v0/stream/diffpatch'
 Computes a JSON diff between two values and returns a `V0StreamDelta`.
 
 ```ts
-import { diff } from 'v0/stream/diffpatch'
+import { diff } from 'v0'
 
 const delta = diff(original, modified)
 // delta is JsonDiffPatchDelta | V0StringAppendDelta
@@ -40,7 +40,7 @@ const delta = diff(original, modified)
 Applies a JSON patch to a value and returns the updated value.
 
 ```ts
-import { patch } from 'v0/stream/diffpatch'
+import { patch } from 'v0'
 
 const updated = patch(original, delta)
 ```
@@ -56,7 +56,7 @@ The delta type is either:
 The `isV0StringAppendDelta` function checks if a delta is a string append operation. This is used internally to handle string concatenation in streaming updates.
 
 ```ts
-import { isV0StringAppendDelta } from 'v0/stream/diffpatch'
+import { isV0StringAppendDelta } from 'v0'
 
 if (isV0StringAppendDelta(delta)) {
   // Handle string append

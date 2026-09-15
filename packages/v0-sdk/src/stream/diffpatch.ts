@@ -107,7 +107,7 @@ function isArrayDelta(delta: Delta): delta is ArrayDelta {
   return typeof delta === 'object' && delta !== null && '_t' in delta && delta._t === 'a'
 }
 
-function isV0StringAppendDelta(delta: unknown): delta is V0StringAppendDelta {
+export function isV0StringAppendDelta(delta: unknown): delta is V0StringAppendDelta {
   if (!Array.isArray(delta)) {
     return false
   }
