@@ -1,0 +1,48 @@
+{
+  "id": "docs-terminal-commands",
+  "slug": "terminal-commands",
+  "title": "Terminal commands",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "conceptual",
+  "description": "v0 can run bash commands in your project sandbox to test, debug, and use platform CLIs. Control its autonomy with three permission modes (Ask, Auto, Full).",
+  "topics": [
+    "security",
+    "agents",
+    "terminal",
+    "permissions"
+  ],
+  "related": [
+    "agentic-features",
+    "pre-installed-agents",
+    "security"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "What v0 can do in the terminal",
+    "Common use cases",
+    "How to ask for it",
+    "Permission modes",
+    "Auto Permissions",
+    "Ask Permissions",
+    "Full Permissions",
+    "Set the permission mode",
+    "Customize the rules",
+    "User and Team scopes",
+    "Rule format",
+    "Rule precedence",
+    "Current deletion guard"
+  ],
+  "excerpt": "v0 can run bash commands inside your project's sandbox to test interactions, inspect your repo, run unit tests, and call platform CLIs like Vercel and GitHub. You control how much autonomy v0 has with a permission mode that defaults to Auto.",
+  "snippets": [
+    {
+      "language": "json",
+      "code": "{\n  \"allow\": [\"Bash(pnpm test:*)\", \"Bash(pnpm lint:*)\"],\n  \"ask\": [\"Bash(git push:*)\"],\n  \"deny\": [\"Bash(curl:*)\"]\n}"
+    }
+  ],
+  "content": "\n\n# Terminal commands\n\nv0 can run bash commands inside your project's sandbox to test interactions, inspect your repo, run unit tests, and call platform CLIs like Vercel and GitHub. You control how much autonomy v0 has with a permission mode that defaults to Auto.\n\n## What v0 can do in the terminal\n\nv0's `Bash` tool runs commands in the same sandbox where your project files live. Each command runs in a fresh shell starting from the project root, so v0 chains operations explicitly rather than relying on shell state.\n\n### Common use cases\n\n* **Test interactions in a browser**: launch a headless browser session against your live preview to verify user flows and capture errors.\n* **Review commit history**: run `git log`, `git blame`, or `git diff` to understand prior changes before editing files.\n* **Write and run unit tests**: execute your project's test command, read the output, and fix failures in place.\n* **Use platform CLIs**: interact with the [Vercel CLI](https://vercel.com/docs/cli) (`vercel logs`, `vercel inspect`) and [GitHub CLI](https://cli.github.com/) (`gh pr view`, `gh issue list`) to inspect deployments, pull requests, and issues without leaving the chat.\n\n### How to ask for it\n\nDescribe the outcome you want. For example:\n\n* \"Test the signup flow in a browser and report any failures.\"\n* \"Look at the last 10 commits on this file and summarize what changed.\"\n* \"Run the unit tests and fix any failures.\"\n* \"Check the latest deployment logs in Vercel and identify the error.\"\n\nv0 picks the appropriate commands, runs them, and folds the output into its next response.\n\n## Permission modes\n\nv0 has three permission modes that control how the terminal permission layer handles a command. The setting persists across new chats.\n\n| Mode                       | What v0 does                                                                                                                                                                                     | When to use                                                                                                           |\n| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |\n| Ask Permissions            | Applies your permission rules. Allowed commands run, denied commands are blocked, and commands marked `ask` or not matched by a rule require confirmation.                                       | Sensitive projects, production data, or work where you want to review commands that have not been explicitly allowed. |\n| Auto Permissions (default) | Applies the same rules. Allowed commands run, denied commands are blocked, and commands marked `ask` require confirmation. For an unmatched command, v0 decides whether to request confirmation. | Day-to-day development where you want v0 to proceed autonomously while respecting configured rules.                   |\n| Full Permissions           | Skips terminal permission evaluation and runs commands without checking `allow`, `ask`, or `deny` rules.                                                                                         | Disposable or non-sensitive projects where you accept the risk of unrestricted commands.                              |\n\n### Auto Permissions\n\nAuto is the default mode and fits most users. v0 runs commands on its built-in allow list without confirmation. The list includes:\n\n* **Read-only file inspection**: `ls`, `find`, `cat`, `head`, `tail`, `tree`, `wc`, `cd`, `pwd`\n* **Search and data**: `grep`, `rg`, `jq`\n* **Local git**: `git status`, `git log`, `git diff`, `git show`\n* **Read-only GitHub CLI**: `gh pr view`, `gh pr list`, `gh pr diff`, `gh pr checks`, `gh issue view`, `gh repo view`\n* **Read-only Vercel CLI**: `vercel logs`, `vercel inspect`, `vercel list`, `vercel whoami`, `vercel activity`\n* **Output**: `echo`, `whoami`\n* **Browser automation and timing**: `agent-browser`, `sleep`\n\nAn unmatched command is not automatically approved or rejected. v0 can run it or explicitly request your confirmation based on the operation it intends to perform. Add an `ask` or `deny` rule when a command must have a deterministic outcome in Auto mode.\n\nYou can edit this list under [**Settings → Agent Permissions**](https://v0.app/settings/advanced). See [Customize the rules](#customize-the-rules).\n\n### Ask Permissions\n\nAsk mode shows a confirmation card for every command that is marked `ask` or does not match a rule. Commands matched by an `allow` rule still run without confirmation, and commands matched by a `deny` rule are blocked.\n\nUse Ask mode when you want a tight feedback loop, for example when working against a real production database or in a repo where you want to audit each step v0 takes.\n\n### Full Permissions\n\nFull mode bypasses terminal permission evaluation. It does not check built-in, team, or user `allow`, `ask`, and `deny` rules before running a command. This includes shell wrappers (`bash`, `sh`, `eval`), package execution (`pnpm dlx`, `npx -y`), remote git operations (`git push`, `gh pr create`), and destructive commands.\n\nOnly use Full mode if both of these apply:\n\n* You're working on a non-sensitive project with no production credentials or critical data.\n* You're comfortable reviewing v0's command history after the fact rather than approving each command up front.\n\n### Set the permission mode\n\n1. In the composer toolbar, open the **+** menu next to the model picker.\n2. Select **Auto Permissions**. The submenu shows your current mode.\n3. Choose **Ask Permissions**, **Auto Permissions**, or **Full Permissions**.\n\nYour selection persists across new chats until you change it.\n\n## Customize the rules\n\nThe permission mode controls how v0 reacts to unmatched commands. The rules themselves (which commands count as allowed, asked, or denied) live in your settings and can be edited directly. Open [**Settings → Agent Permissions**](https://v0.app/settings/advanced) to manage them.\n\n### User and Team scopes\n\nThe permissions panel has two tabs:\n\n* **User**: Rules tied to your account. They apply across every project you work on.\n* **Team**: Rules set by team owners that apply to every member of the team. Only team owners can edit this tab.\n\nUser, team, and built-in rules are evaluated together in Ask and Auto modes. A rule in one scope does not always override a rule in another scope. The most specific matching rule determines the result, as described in [Rule precedence](#rule-precedence).\n\n### Rule format\n\nEach scope holds three JSON arrays:\n\n| Array   | Behavior                                                                      |\n| ------- | ----------------------------------------------------------------------------- |\n| `allow` | v0 runs the matching command witho",
+  "sourceUrl": "https://v0.app/docs/terminal-commands",
+  "lastUpdated": "2026-08-19"
+}

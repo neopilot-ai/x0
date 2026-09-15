@@ -1,0 +1,26 @@
+{
+  "id": "docs-api-v2-reference-messages-stop-message",
+  "slug": "api/v2/reference/messages/stop-message",
+  "title": "Stop Message",
+  "section": "API Reference",
+  "category": "API · Messages",
+  "type": "",
+  "description": "Stops an in-flight assistant message generation. The agent aborts at the next safe point and the message is marked finished.",
+  "topics": [
+    "api",
+    "agents"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Stop Message\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.messages.stop({\nchatId: 'chat_abc123',\nmessageId: 'msg_xyz789',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST \"https://api.v0.dev/v2/chats/chat_abc123/messages/chat_abc123/stop\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the assistant message to stop.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the stopped message.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/messages/stop-message",
+  "lastUpdated": "2026-07-30"
+}

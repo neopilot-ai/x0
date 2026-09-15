@@ -1,0 +1,34 @@
+{
+  "id": "docs-templates",
+  "slug": "templates",
+  "title": "Templates",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Share your v0 creations with the community by publishing them as templates. Templates appear in your public profile and can be forked by other users.",
+  "topics": [
+    "deployment",
+    "design",
+    "sharing"
+  ],
+  "related": [
+    "sharing"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Publishing a template",
+    "Template details",
+    "Updating a template",
+    "Updating a Git-connected template",
+    "Discovering templates",
+    "Featured templates",
+    "Best practices for templates"
+  ],
+  "excerpt": "A template is a v0 chat published for others to fork and use. When you publish, it appears in the v0 Templates gallery.",
+  "snippets": [],
+  "content": "\n\n# Templates\n\nA template is a v0 chat published for others to fork and use. When you publish, it appears in the [v0 Templates gallery](https://v0.app/templates).\n\n## Publishing a template\n\nTo publish a template from an existing chat:\n\n1. Follow **Project menu** `...` → **Settings** → **Template** from the chat header.\n2. Click **Publish** in the **\"Publish as Template\"** section.\n3. Choose whether to create a new template or update an existing one.\n4. Fill in the template details and click **Publish Template**.\n\n### Template details\n\nWhen submitting a template, you'll need to provide:\n\n* **Template Preview**: A 1920x1080 image that represents your template. This is the first thing users see when browsing templates.\n* **Name**: A clear, descriptive name for your template.\n* **Description**: Explain what your template does and what makes it useful.\n* **Category**: Select the most relevant category (e.g., Landing Pages, Dashboards, E-commerce, AI, Components, etc.)\n* **Tags**: Add up to 10 tags to help users find your template.\n* **Visibility**: Control who can see your template. \"Everyone on v0\" makes it publicly discoverable.\n\n## Updating a template\n\nIf you've already published a chat as a template and made improvements, go to **Project menu** `...` → **Settings** → **Template** again. You'll see an **Update** button that updates your existing template while keeping the same URL.\n\n### Updating a Git-connected template\n\nGit-connected templates are pinned to the commit that was active when the template was published or last synced. Updating the connected Git branch does not automatically update the template. This keeps new projects created from the template on a consistent, known version.\n\nTo update a Git-connected template:\n\n1. Push or merge the changes you want to use into the connected Git branch. You do not need to deploy the changes to production.\n2. In the source chat, go to **Project menu** `...` → **Settings** → **Template**.\n3. Click **Update**, then click **Sync from Repo**.\n\nAfter the sync finishes, new projects created from the template will use the latest commit from the connected branch. Existing projects created from the template are not updated.\n\nIf the button says **Up to Date**, the template already points to the current commit from the connected branch.\n\n## Discovering templates\n\nAll published templates are listed in the [v0 Templates gallery](https://v0.app/templates), organized by categories. Users can browse, filter, and search for templates. Popular templates are featured based on forks and likes. Your templates also appear in the **Showcase** section of your public profile at `v0.app/@username`.\n\n## Featured templates\n\nThe best templates are selected and highlighted on the [v0 templates gallery](https://v0.app/templates). Getting featured gives your template maximum visibility across the platform.\n\nOur team reviews templates daily to ensure quality and safety. We check that templates:\n\n* Don't contain malicious code or harmful content\n* Are original work and not duplicated from other templates\n* Provide genuine value to the community\n\n## Best practices for templates\n\nTo create templates that others will find valuable:\n\n* **Design matters**: Most users choose templates based on how they look. A polished UI/UX and a clear thumbnail will make your template stand out.\n* **Use descriptive names**: Make it clear what the template does immediately.\n* **Write helpful descriptions**: Explain the use case, features, and any setup required.\n* **Document external APIs**: If your template uses non-native integrations, add modals or instructions on how to obtain those API keys.\n* **Add a README**: Include a `readme.md` with information about the project and suggestions for customization.\n* **Build modular code**: Structure your code to be maintainable so users who fork your template can easily scale it.\n* **Choose accurate categories and tags**: Help users find your template through search.\n* **Share on X**: Post your template and tag [@v0](https://x.com/v0)! We often share community templates to help you reach a wider audience.\n\nBrowse the templates gallery\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/templates",
+  "lastUpdated": "2026-08-19"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "docs-api-v1-examples-react-components",
+  "slug": "api/v1/examples/react-components",
+  "title": "React Components Example",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Using v0-sdk React components for streaming UI responses",
+  "topics": [
+    "design",
+    "api",
+    "streaming"
+  ],
+  "related": [
+    "api/v1/packages/react"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Features",
+    "Design Themes",
+    "Elegant Theme",
+    "Minimal Theme",
+    "Neobrutalism Theme",
+    "Terminal Theme",
+    "Streaming Theme",
+    "Key Components",
+    "StreamingMessage Component",
+    "Code Block Component",
+    "Thinking Section Component",
+    "Getting Started",
+    "Prerequisites",
+    "Installation",
+    "Usage Patterns",
+    "Basic Streaming",
+    "Theme Customization",
+    "Custom Styling",
+    "Technologies Used",
+    "Environment Variables",
+    "Source Code"
+  ],
+  "excerpt": "Explore different design themes and interactive components for rendering real-time AI responses. This showcase demonstrates the full capabilities of @v0-sdk/react components.",
+  "snippets": [
+    {
+      "language": "tsx",
+      "code": "import { StreamingMessage } from '@v0-sdk/react'\n\nfunction ChatInterface() {\n  return (\n    <StreamingMessage\n      message={streamingData}\n      theme=\"elegant\"\n      onComplete={(result) => {\n        console.log('Streaming complete:', result)\n      }}\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { CodeBlock } from '@v0-sdk/react'\n\nfunction CodeDisplay() {\n  return (\n    <CodeBlock\n      code={generatedCode}\n      language=\"typescript\"\n      showLineNumbers\n      copyable\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { ThinkingSection } from '@v0-sdk/react'\n\nfunction AIThinking() {\n  return (\n    <ThinkingSection thoughts={aiThoughts} isVisible={showThinking} animated />\n  )\n}"
+    },
+    {
+      "language": "bash",
+      "code": "cd examples/v0-sdk-react-example"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm install"
+    },
+    {
+      "language": "bash",
+      "code": "export V0_API_KEY=your_api_key_here"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm dev"
+    },
+    {
+      "language": "tsx",
+      "code": "import { useStreamingChat } from '@v0-sdk/react'\n\nfunction ChatApp() {\n  const { messages, sendMessage, isLoading } = useStreamingChat({\n    apiKey: process.env.V0_API_KEY,\n  })\n\n  return (\n    <div>\n      {messages.map((message, index) => (\n        <StreamingMessage key={index} message={message} />\n      ))}\n    </div>\n  )\n}"
+    }
+  ],
+  "content": "\n\n# React Components Example\n\nExplore different design themes and interactive components for rendering real-time AI responses. This showcase demonstrates the full capabilities of `@v0-sdk/react` components.\n\n## Features\n\n* **Multiple Design Themes**: Elegant, Minimal, Neobrutalism, Terminal styles\n* **Streaming Responses**: Real-time rendering of AI-generated content\n* **Interactive Components**: Code blocks, thinking sections, task management\n* **Modern UI**: Built with Next.js 15, React 19, and Tailwind CSS\n* **Responsive Design**: Works across different screen sizes and devices\n\n## Design Themes\n\n### Elegant Theme\n\nA sophisticated design with smooth animations and elegant typography.\n\n### Minimal Theme\n\nClean, distraction-free interface focusing on content clarity.\n\n### Neobrutalism Theme\n\nBold, high-contrast design with sharp edges and vibrant colors.\n\n### Terminal Theme\n\nDeveloper-focused interface mimicking terminal aesthetics.\n\n### Streaming Theme\n\nOptimized for real-time streaming content with live updates.\n\n## Key Components\n\n### StreamingMessage Component\n\n```tsx\nimport { StreamingMessage } from '@v0-sdk/react'\n\nfunction ChatInterface() {\n  return (\n    <StreamingMessage\n      message={streamingData}\n      theme=\"elegant\"\n      onComplete={(result) => {\n        console.log('Streaming complete:', result)\n      }}\n    />\n  )\n}\n```\n\n### Code Block Component\n\n```tsx\nimport { CodeBlock } from '@v0-sdk/react'\n\nfunction CodeDisplay() {\n  return (\n    <CodeBlock\n      code={generatedCode}\n      language=\"typescript\"\n      showLineNumbers\n      copyable\n    />\n  )\n}\n```\n\n### Thinking Section Component\n\n```tsx\nimport { ThinkingSection } from '@v0-sdk/react'\n\nfunction AIThinking() {\n  return (\n    <ThinkingSection thoughts={aiThoughts} isVisible={showThinking} animated />\n  )\n}\n```\n\n## Getting Started\n\n### Prerequisites\n\n* Node.js 22+\n* pnpm (recommended) or npm\n* v0 API key from [v0 settings](https://v0.app/settings/keys)\n\n### Installation\n\n1. Navigate to the react example directory:\n\n   ```bash\n   cd examples/v0-sdk-react-example\n   ```\n\n2. Install dependencies:\n\n   ```bash\n   pnpm install\n   ```\n\n3. Set up environment variables:\n\n   ```bash\n   export V0_API_KEY=your_api_key_here\n   ```\n\n4. Run the development server:\n\n   ```bash\n   pnpm dev\n   ```\n\n5. Open [http://localhost:3000](http://localhost:3000) in your browser\n\n## Usage Patterns\n\n### Basic Streaming\n\n```tsx\nimport { useStreamingChat } from '@v0-sdk/react'\n\nfunction ChatApp() {\n  const { messages, sendMessage, isLoading } = useStreamingChat({\n    apiKey: process.env.V0_API_KEY,\n  })\n\n  return (\n    <div>\n      {messages.map((message, index) => (\n        <StreamingMessage key={index} message={message} />\n      ))}\n    </div>\n  )\n}\n```\n\n### Theme Customization\n\n```tsx\nimport { ThemeProvider } from '@v0-sdk/react'\n\nfunction App() {\n  return (\n    <ThemeProvider theme=\"neobrutalism\">\n      <ChatInterface />\n    </ThemeProvider>\n  )\n}\n```\n\n### Custom Styling\n\n```tsx\nimport { StreamingMessage } from '@v0-sdk/react'\n\nfunction CustomChat() {\n  return (\n    <StreamingMessage\n      message={data}\n      className=\"custom-message\"\n      theme={{\n        primary: '#3b82f6',\n        background: '#f8fafc',\n        text: '#1e293b',\n        accent: '#06b6d4',\n      }}\n    />\n  )\n}\n```\n\n## Technologies Used\n\n* **Frontend Framework**: Next.js 15 with App Router\n* **React Version**: React 19\n* **Styling**: Tailwind CSS with custom design systems\n* **UI Components**: Custom components optimized for AI content\n* **Animations**: Framer Motion for smooth interactions\n* **Code Highlighting**: Syntax highlighting for code blocks\n\n## Environment Variables\n\n| Variable     | Description                        | Required |\n| ------------ | ---------------------------------- | -------- |\n| `V0_API_KEY` | Your v0 API key for authentication | Yes      |\n\n## Source Code\n\nView the complete source code on GitHub: [v0-sdk/examples/v0-sdk-react-example](https://github.com/vercel/v0-sdk/tree/main/examples/v0-sdk-react-example)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/examples/react-components",
+  "lastUpdated": "2026-07-30"
+}

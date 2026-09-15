@@ -1,0 +1,75 @@
+{
+  "id": "docs-api-v1-packages-create-v0-sdk-app",
+  "slug": "api/v1/packages/create-v0-sdk-app",
+  "title": "create-v0-sdk-app",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "reference",
+  "description": "Create v0 SDK-powered apps with one command",
+  "topics": [
+    "api",
+    "terminal"
+  ],
+  "related": [
+    "api/v1/packages/v0-sdk"
+  ],
+  "requires": [],
+  "headings": [
+    "Installation",
+    "Usage",
+    "Interactive Mode",
+    "Direct Usage",
+    "Available Templates",
+    "v0 Clone",
+    "Classic v0",
+    "AI Tools Example",
+    "Command Options",
+    "Options",
+    "Examples",
+    "Create a v0 clone",
+    "Create a classic v0 interface",
+    "Post-Creation Steps",
+    "Template Structure",
+    "Customization",
+    "Requirements",
+    "Links"
+  ],
+  "excerpt": "A command-line tool for quickly scaffolding new applications powered by the v0 SDK. Get started with pre-built templates and examples.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest my-app"
+    },
+    {
+      "language": "bash",
+      "code": "npm install -g create-v0-sdk-app\ncreate-v0-sdk-app my-app"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest my-app --template v0-clone"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest my-app --template v0-clone"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest my-app --template classic-v0"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app@latest my-app --template ai-tools-example"
+    },
+    {
+      "language": "bash",
+      "code": "create-v0-sdk-app [project-name] [options]"
+    }
+  ],
+  "content": "\n\n# create-v0-sdk-app\n\nA command-line tool for quickly scaffolding new applications powered by the v0 SDK. Get started with pre-built templates and examples.\n\n## Installation\n\nNo installation required! Use with `npx`:\n\n```bash\nnpx create-v0-sdk-app@latest my-app\n```\n\nOr install globally:\n\n```bash\nnpm install -g create-v0-sdk-app\ncreate-v0-sdk-app my-app\n```\n\n## Usage\n\n### Interactive Mode\n\n```bash\nnpx create-v0-sdk-app@latest\n```\n\nThe CLI will prompt you for:\n\n* **Project name**: Your app's directory name\n* **Template**: Choose from available templates\n* **Package manager**: npm, pnpm, or yarn\n\n### Direct Usage\n\n```bash\nnpx create-v0-sdk-app@latest my-app --template v0-clone\n```\n\n## Available Templates\n\n### v0 Clone\n\nA full-featured replica of v0.dev with authentication and multi-tenant support.\n\n```bash\nnpx create-v0-sdk-app@latest my-app --template v0-clone\n```\n\n**Features:**\n\n* User authentication (NextAuth.js)\n* Multi-tenant architecture\n* PostgreSQL database with Drizzle ORM\n* Real-time streaming\n* Rate limiting\n\n### Classic v0\n\nThe iconic v0.dev interface with three-generation workflow.\n\n```bash\nnpx create-v0-sdk-app@latest my-app --template classic-v0\n```\n\n**Features:**\n\n* Classic v0 UI/UX\n* Multiple generations (A, B, C)\n* shadcn/ui components\n* Next.js 15 with App Router\n\n### AI Tools Example\n\nDemonstrates AI SDK integration with v0 tools.\n\n```bash\nnpx create-v0-sdk-app@latest my-app --template ai-tools-example\n```\n\n**Features:**\n\n* AI SDK integration\n* v0 tools for autonomous agents\n* Multiple agent patterns\n* TypeScript examples\n\n## Command Options\n\n```bash\ncreate-v0-sdk-app [project-name] [options]\n```\n\n### Options\n\n* `--template ` - Specify template (v0-clone, classic-v0, ai-tools-example)\n* `--package-manager ` - Choose package manager (npm, pnpm, yarn)\n* `--help` - Show help information\n* `--version` - Show version number\n\n## Examples\n\n### Create a v0 clone\n\n```bash\nnpx create-v0-sdk-app@latest my-v0-clone --template v0-clone\ncd my-v0-clone\n```\n\nSet up environment variables:\n\n```bash\ncp .env.example .env\n# Edit .env with your API keys\n```\n\nInstall dependencies and start:\n\n```bash\npnpm install\npnpm db:migrate  # For v0-clone template\npnpm dev\n```\n\n### Create a classic v0 interface\n\n```bash\nnpx create-v0-sdk-app@latest my-classic-app --template classic-v0\ncd my-classic-app\npnpm install\npnpm dev\n```\n\n## Post-Creation Steps\n\nAfter creating your app:\n\n1. **Set up environment variables**:\n\n   ```bash\n   cp .env.example .env\n   # Add your V0_API_KEY\n   ```\n\n2. **Install dependencies**:\n\n   ```bash\n   pnpm install\n   ```\n\n3. **Database setup** (for v0-clone template):\n\n   ```bash\n   pnpm db:migrate\n   ```\n\n4. **Start development server**:\n   ```bash\n   pnpm dev\n   ```\n\n## Template Structure\n\nEach template includes:\n\n* **Complete source code** - Ready-to-run application\n* **Documentation** - Setup and usage instructions\n* **Environment examples** - `.env.example` files\n* **Package configuration** - Optimized `package.json`\n* **TypeScript config** - Proper TypeScript setup\n\n## Customization\n\nAfter creation, you can:\n\n* **Modify components** - All source code is yours to customize\n* **Add features** - Extend with additional v0 SDK capabilities\n* **Change styling** - Update themes and design systems\n* **Deploy** - Ready for deployment to Vercel, Netlify, etc.\n\n## Requirements\n\n* Node.js 22+\n* pnpm 9+ (recommended)\n* v0 API key from [v0 settings](https://v0.app/settings/keys)\n\n## Links\n\n* [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/create-v0-sdk-app)\n* [npm Package](https://www.npmjs.com/package/create-v0-sdk-app)\n* [Template Examples](/docs/api/v1/examples/v0-clone)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/packages/create-v0-sdk-app",
+  "lastUpdated": "2026-07-30"
+}

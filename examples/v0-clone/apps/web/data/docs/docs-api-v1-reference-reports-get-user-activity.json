@@ -1,0 +1,32 @@
+{
+  "id": "docs-api-v1-reference-reports-get-user-activity",
+  "slug": "api/v1/reference/reports/get-user-activity",
+  "title": "Get User Activity Report",
+  "section": "API Reference",
+  "category": "API · Reports",
+  "type": "reference",
+  "description": "Retrieves aggregated user activity data for team members, including chat counts, message counts, and activity timestamps. Shows the same data as displayed in the Usage settings for Enterprise teams. Only available for Enterprise teams with OWNER or BILLING role.",
+  "topics": [
+    "api",
+    "pricing",
+    "teams"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response",
+    "Authorization",
+    "Behavior",
+    "Notes"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Get User Activity Report\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.reports.getUserActivity()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/reports/user-activity \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"startDate\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Start date for the activity period in ISO 8601 format. If not provided, defaults to the beginning of available data.\",\n\"deprecated\": false\n},\n{\n\"name\": \"endDate\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"End date for the activity period in ISO 8601 format. If not provided, defaults to the current date.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"Array of user activity records\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"User activity record\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"User ID\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'user_activity'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"user\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"User information\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"User ID\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'user'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"User's display name\",\n\"deprecated\": false\n},\n{\n\"name\": \"email\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"User's email address\",\n\"deprecated\": false\n},\n{\n\"name\": \"avatar\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"URL to user's avatar image\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ISO 8601 timestamp of when the user was created\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"ISO 8601 timestamp of when the user was last updated\",\n\"deprecated\": false\n},\n{\n\"name\": \"teamV0Role\",\n\"type\": \"'V0Builder' | 'V0Chatter' | 'V0Viewer' | null\",\n\"required\": true,\n\"description\": \"The user's v0 role, or null if no role is assigned\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"chatCount\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"Total number of chats created by the user\",\n\"deprecated\": false\n},\n{\n\"name\": \"messageCount\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"Total number of messages sent by the user\",\n\"deprecated\": false\n},\n{\n\"name\": \"activeDays\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"Number of distinct days the user was active\",\n\"deprecated\": false\n},\n{\n\"name\": \"firstActivity\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"ISO 8601 timestamp of the user's first activity, or null if no activity\",\n\"deprecated\": false\n},\n{\n\"name\": \"lastActivity\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"ISO 8601 timestamp of the user's last activity, or null if no activity\",\n\"deprecated\": false\n}\n]\n}\n},\n{\n\"name\": \"meta\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"Metadata about the response\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"totalCount\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"Total number of users in the response\",\n\"deprecated\": false\n},\n{\n\"name\": \"dateRange\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"The date range of the query\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"start\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"ISO 8601 start date, or null if not specified\",\n\"deprecated\": false\n},\n{\n\"name\": \"end\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"ISO 8601 end date, or null if not specified\",\n\"deprecated\": false\n}\n]\n}\n]\n}\n]}\n/>\n\n## Authorization\n\nThis endpoint is only available for:\n\n* **Enterprise teams** (`v0-enterprise` plan)\n* Users with **OWNER** or **BILLING** role on the team\n\n## Behavior\n\n* Returns all team members who have v0 access, including those with zero activity\n* The date range cannot exceed 365 days\n* Start date must not be after end date\n* All timestamps are in ISO 8601 format\n\n## Notes\n\nThis endpoint shows the same data as displayed in the Usage settings for Enterprise teams. It provides a comprehensive view of team member activity, making it useful for team administrators to monitor engagement and usage patterns.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/reports/get-user-activity",
+  "lastUpdated": "2026-07-30"
+}

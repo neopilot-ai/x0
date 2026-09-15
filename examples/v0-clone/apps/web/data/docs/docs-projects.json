@@ -1,0 +1,39 @@
+{
+  "id": "docs-projects",
+  "slug": "projects",
+  "title": "Projects",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "conceptual",
+  "description": "Projects in v0 are one app that is shared between many chats.",
+  "topics": [
+    "deployment",
+    "teams",
+    "sharing"
+  ],
+  "related": [
+    "teams",
+    "deployments"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "How chats connect to Projects",
+    "Viewing your Projects",
+    "Finding Projects and chats",
+    "Project settings",
+    "Vercel Project",
+    "Integrations",
+    "Environment variables",
+    "GitHub",
+    "Template",
+    "Domains",
+    "Multiple chats, same Project"
+  ],
+  "excerpt": "Vercel Projects in v0 are one, cohesive app that many chats can contribute to. One Project shares deployment, hosting, domains, and environment variables for the chats connected to it.",
+  "snippets": [],
+  "content": "\n\n# Projects\n\nVercel Projects in v0 are one, cohesive app that many chats can contribute to. One Project shares deployment, hosting, domains, and environment variables for the chats connected to it.\n\n## How chats connect to Projects\n\nEach v0 chat is connected to a Project.\n\nWhen creating a new chat for an existing Project, the chat will be connected to the selected Project.\n\nIf you create a new chat without a Project, a new Project will be created the first time you publish the chat.\n\n## Viewing your Projects\n\nView your Projects from the **Projects** tab from the v0 sidebar.\n\n## Finding Projects and chats\n\nUse the **command palette** (`Cmd+K` on Mac, `Ctrl+K` on Windows/Linux) to search across all your chats and Vercel Projects. Results update as you type and are grouped by workspace. Select a result to navigate directly to it.\n\nFor searching across files within the code editor, use `Shift+Cmd+F` / `Shift+Ctrl+F`. See [Code Editing](/docs/code-editing) for more editor shortcuts.\n\n## Project settings\n\nEach project has its own settings that apply to all chats within it. Access these by opening the settings menu from the chat or Project page.\n\n### Vercel Project\n\nThis tab provides a high-level summary of your project. Here, you can see the connected Vercel project and control Production visibility settings.\n\n### Integrations\n\nConnect your project to third-party services to give your Project access to external data and functionality. Available integrations include databases like Upstash for Redis and Neon for Serverless Postgres, backend services like Supabase, and AI model providers. This allows v0 to interact with these services directly, for example, to query a database or use a specific AI model for a task.\n\n### Environment variables\n\nSecurely store sensitive information like API keys, tokens, and other credentials. These variables are encrypted and made available to v0 within the project's scope, so you don't have to expose them directly in your prompts.\n\nLearn more about how v0 and Vercel work together\n\n### GitHub\n\nView the current GitHub repository connection, or create a new repository if one doesn't already exist.\n\nLearn more about how v0 syncs with GitHub\n\n### Template\n\nPublish or update your chat as a Template for your team or the v0 community.\n\nLearn more about publishing v0 templates\n\n### Domains\n\nManage custom domains for your Production deployment.\n\nLearn more about managing custom domains for your v0 project\n\n## Multiple chats, same Project\n\nYou can connect multiple chats to the same Project. This is useful when working different parts of one Project, exploring different approaches to the same part of a Project, or working as a team.\n\nWhen multiple chats share a Project, deploying from any of them updates the same production URL. The Project that a chat is linked to will be shown at the top of the chat.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/projects",
+  "lastUpdated": "2026-09-01"
+}

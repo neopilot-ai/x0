@@ -1,0 +1,25 @@
+{
+  "id": "docs-api-v2-reference-webhooks-update-webhook",
+  "slug": "api/v2/reference/webhooks/update-webhook",
+  "title": "Update Webhook",
+  "section": "API Reference",
+  "category": "API · Webhooks",
+  "type": "",
+  "description": "Updates the configuration of an existing webhook, including its name, event subscriptions, or target URL.",
+  "topics": [
+    "api"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Update Webhook\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.webhooks.update({\nhookId: 'wh_ghi012',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X PATCH \"https://api.v0.dev/v2/hooks/chat_abc123\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"hookId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the webhook to update.\",\n\"deprecated\": false\n}\n]}\n/>\n\n#### Request Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A new display name for the webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"events\",\n\"type\": \"('chat.created' | 'chat.updated' | 'chat.deleted' | 'message.created' | 'message.updated' | 'message.deleted' | 'message.finished')[]\",\n\"required\": false,\n\"description\": \"Updated list of event types to subscribe to.\",\n\"deprecated\": false\n},\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A new target URL to receive webhook payloads.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A unique identifier for the webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO timestamp representing when the chat was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A user-defined name to label the webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"events\",\n\"type\": \"('chat.created' | 'chat.updated' | 'chat.deleted' | 'message.created' | 'message.updated' | 'message.deleted' | 'message.finished')[]\",\n\"required\": true,\n\"description\": \"List of event types this webhook is subscribed to.\",\n\"deprecated\": false\n},\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Target URL that receives event payloads for this webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"chatId\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"Optional ID of the chat that this webhook is scoped to.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/webhooks/update-webhook",
+  "lastUpdated": "2026-07-30"
+}

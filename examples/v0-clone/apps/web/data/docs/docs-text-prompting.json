@@ -1,0 +1,52 @@
+{
+  "id": "docs-text-prompting",
+  "slug": "text-prompting",
+  "title": "Text Prompting",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Use text prompting to create initial UIs and ask technical questions with natural language.",
+  "topics": [
+    "design",
+    "permissions"
+  ],
+  "related": [
+    "code-editing",
+    "instructions"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Voice input",
+    "Basic Examples",
+    "Development Workflow",
+    "Simple Projects (Direct Implementation)",
+    "Complex projects (planning first)",
+    "Best Practices",
+    "Be Specific",
+    "Break down complex tasks",
+    "Include technical details",
+    "Specify UI/UX preferences",
+    "Include error handling",
+    "Advanced techniques",
+    "Ask v0 to plan",
+    "Component-first development",
+    "Progressive enhancement",
+    "Prompt templates",
+    "Complete example workflow",
+    "1. Planning",
+    "2. Core implementation",
+    "3. Agent features",
+    "4. Enhancements",
+    "Prompt queuing",
+    "Technical questions",
+    "Example queries",
+    "Next steps"
+  ],
+  "excerpt": "Start simple. Plan your project. Provide context. Specify and make v0 clarify. Iterate.",
+  "snippets": [],
+  "content": "\n\n# Text Prompting\n\nStart simple. Plan your project. Provide context. Specify and make v0 clarify. Iterate.\n\n## Voice input\n\nYou can dictate prompts using your voice instead of typing. Click the **microphone icon** in the prompt bar to start recording, then click the **checkmark** to transcribe your audio. Your speech is converted to text and inserted into the prompt editor, where you can review or edit it before sending. Voice input requires being signed in.\n\n## Basic Examples\n\nStart with simple, descriptive prompts. For example:\n\n* \"A dashboard with a login page and user profile view\"\n* \"A landing page for a mobile app with a hero section, features grid, and pricing table\"\n* \"An internal tool to manage customer support tickets\"\n* \"A product feedback form that writes to a database\"\n\n## Development Workflow\n\n### Simple Projects (Direct Implementation)\n\nFor straightforward applications with clear requirements, start directly with implementation. This approach works well for single-purpose tools, landing pages, or simple CRUD applications.\n\n### Complex projects (planning first)\n\nFor multi-feature applications, enterprise tools, or systems with multiple user roles, start with planning. This helps ensure you don't miss critical requirements and creates a roadmap for development.\n\n#### 1. Requirements gathering\n\nDefine what you're building and who will use it:\n\n#### 2. Implementation\n\nBuild the core functionality based on your requirements:\n\n\"Build the MVP based on the PRD, starting with core features.\"\n\n#### 3. Iteration\n\nAdd features and refinements based on your initial implementation:\n\n\"Add search functionality and pagination to the task list.\"\n\n\"Implement real-time updates using WebSockets.\"\n\n## Best Practices\n\n### Be Specific\n\nThe more specific your prompt, the better the results. Include details about functionality, design preferences, and technical requirements.\n\n**Instead of:** `\"Make a website\"`\n\n**Try:**\n\n### Break down complex tasks\n\nLarge, complex applications are better built incrementally. This approach reduces errors, allows for testing at each stage, and makes debugging easier.\n\n**Too Complex:**\n\n**Better Approach:**\n\nThen follow up:\n\n### Include technical details\n\nSpecify your preferred technologies, frameworks, and integrations. This helps v0 generate code that matches your existing stack or preferences.\n\n### Specify UI/UX preferences\n\nInclude design preferences to get results that match your vision. Consider factors like color schemes, layout preferences, and user experience requirements.\n\n### Include error handling\n\nRobust applications need proper error handling. Specify how you want to handle common failure scenarios to ensure a good user experience.\n\n## Advanced techniques\n\n### Ask v0 to plan\n\nWhen you're unsure how to approach a complex project, let v0 help you break it down. This is especially useful for projects with multiple stakeholders or complex business logic.\n\n### Component-first development\n\nBuild your application piece by piece, starting with individual components. This approach gives you more control over each part and makes debugging easier.\n\nThen: \"Add a hero section below the header\"\n\n### Progressive enhancement\n\nStart with core functionality and gradually add features. This approach ensures your application works at every stage and helps you prioritize features based on user feedback.\n\n1. **Core Features:** `\"Create a basic todo list with add/delete\"`\n2. **Data Persistence:** `\"Add localStorage to save todos\"`\n3. **User Experience:** `\"Add completion checkboxes and filtering\"`\n\n### Prompt templates\n\nUse these templates as starting points for common development patterns. Customize them based on your specific requirements.\n\n#### CRUD operations\n\n#### Authentication\n\n#### Dashboards\n\n## Complete example workflow\n\nHere's how to build a customer support ticket system from start to finish. This example shows the progression from planning to a fully functional application:\n\n### 1. Planning\n\n### 2. Core implementation\n\n### 3. Agent features\n\n### 4. Enhancements\n\n## Prompt queuing\n\nYou can queue up to **10 prompts** while v0 is still generating a response. Queued prompts run automatically in order once the current generation finishes, so you don't have to wait between each step. You can reorder, edit, or remove queued prompts before they run. This is useful for planning multi-step workflows — for example, you can queue \"add authentication\", \"connect the database\", and \"add a settings page\" all at once and let v0 work through them sequentially.\n\n## Technical questions\n\nv0 is trained on the latest Vercel ecosystem documentation and can answer questions about:\n\n* **[Next.js](https://nextjs.org/)** - React framework for production\n* **[Svelte](https://svelte.dev/)** - Cybernetically enhanced web apps\n* **[Turborepo](https://turbo.build/repo)** - High-performance build system\n* **[AI SDK](https://sdk.vercel.ai/)** - AI-powered applications\n* **[Vercel](https://vercel.com/)** - Cloud platform for frontend developers\n\n### Example queries\n\nUse v0 to get specific answers about implementation details, best practices, and troubleshooting:\n\n* \"How do I implement server-side rendering in Next.js 14?\"\n* \"What's the best way to handle authentication in SvelteKit?\"\n* \"How can I optimize my Turborepo build performance?\"\n\n## Next steps\n\nOnce you've generated your initial application:\n\n* **[Design Mode](/docs/design-mode)** - Refine the visual design and layout\n* **[Code Editing](/docs/code-editing)** - Make direct code changes\n* **[Deployment](/docs/deployments)** - Deploy your application to Vercel\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/text-prompting",
+  "lastUpdated": "2026-07-30"
+}

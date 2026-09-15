@@ -1,0 +1,55 @@
+{
+  "id": "docs-api-v1-reference-chats-resolve-task",
+  "slug": "api/v1/reference/chats/resolve-task",
+  "title": "Resolve Task",
+  "section": "API Reference",
+  "category": "API · Chats",
+  "type": "reference",
+  "description": "Resolves a chat that's blocked waiting for user input and continues the conversation.",
+  "topics": [
+    "design",
+    "api",
+    "permissions",
+    "integrations"
+  ],
+  "related": [
+    "api/v1/guides/handling-integrations"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "Before You Call It",
+    "Task Types",
+    "confirmed-steps",
+    "plan-exit-response",
+    "answered-questions",
+    "confirmed-permissions",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "Use this endpoint when a chat is blocked on user input. This includes interacting with plan mode, answering agent questions, confirming integration installations, and responding to permission requests.",
+  "snippets": [
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": [\"Supabase\"],\n    \"connectedMcpPresetNames\": [\"Linear\"],\n    \"appliedScripts\": [\"scripts/bootstrap.sh\"],\n    \"addedEnvVars\": [\"SUPABASE_URL\"]\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"plan-exit-response\",\n    \"status\": \"request-changes\",\n    \"content\": \"Keep the API shape but split validation into a helper.\"\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"answered-questions\",\n    \"answers\": [\n      {\n        \"questionId\": \"db-choice\",\n        \"questionText\": \"Which database should I use?\",\n        \"selectedLabels\": [\"PostgreSQL\"]\n      }\n    ]\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"confirmed-permissions\",\n    \"permissions\": [\n      {\n        \"type\": \"ALLOW_DYNAMIC_TOOL_STRICT\",\n        \"toolName\": \"SystemAction\",\n        \"input\": {\n          \"systemAction\": \"executeScript\",\n          \"executeScript\": \"/app/scripts/migrate.sql\"\n        }\n      }\n    ]\n  }\n}"
+    }
+  ],
+  "content": "\n\n# Resolve Task\n\n## Usage\n\nUse this endpoint when a chat is blocked on user input. This includes interacting with plan mode, answering agent questions, confirming integration installations, and responding to permission requests.\n\nThe submitted `task.type` must match the blocked task from the most recent assistant message. If the latest message is not the task you are resolving, the endpoint returns `409 Conflict`.\n\nIf a task payload is structurally valid but empty in a way that would not carry meaningful user intent, the endpoint returns `422 Unprocessable Entity`. For example, blank `plan-exit-response.content`, empty `answered-questions.answers`, and empty `confirmed-permissions.permissions` are rejected.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.chats.resolveTask({\nchatId: '123',\ntask: {\ntype: 'plan-exit-response',\nstatus: 'approved',\ncontent: 'Proceed with the implementation.',\n},\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/chats/123/tasks/resolve \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"task\": {\n\"type\": \"plan-exit-response\",\n\"status\": \"approved\",\n\"content\": \"Proceed with the implementation.\"\n}\n}'`}\n/>\n\n## Before You Call It\n\nInspect the latest assistant message first. The blocked task is exposed in `experimental_content` on:\n\n* `GET /v1/chats/`\n* `GET /v1/chats//messages/`\n\nSubmit the matching resolution payload for the latest blocked task only.\n\n## Task Types\n\n### `confirmed-steps`\n\nUse when the assistant is blocked on integration, MCP preset, script, or environment setup. To reject the agent's request, pass an empty array for the relevant field.\n\n```json\n{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": [\"Supabase\"],\n    \"connectedMcpPresetNames\": [\"Linear\"],\n    \"appliedScripts\": [\"scripts/bootstrap.sh\"],\n    \"addedEnvVars\": [\"SUPABASE_URL\"]\n  }\n}\n```\n\n### `plan-exit-response`\n\nUse when the assistant proposed a plan and is waiting for approval, rejection, or requested changes.\n\n```json\n{\n  \"task\": {\n    \"type\": \"plan-exit-response\",\n    \"status\": \"request-changes\",\n    \"content\": \"Keep the API shape but split validation into a helper.\"\n  }\n}\n```\n\n### `answered-questions`\n\nUse when the assistant asked one or more multiple-choice questions.\n\n```json\n{\n  \"task\": {\n    \"type\": \"answered-questions\",\n    \"answers\": [\n      {\n        \"questionId\": \"db-choice\",\n        \"questionText\": \"Which database should I use?\",\n        \"selectedLabels\": [\"PostgreSQL\"]\n      }\n    ]\n  }\n}\n```\n\n### `confirmed-permissions`\n\nUse when the assistant is blocked on tool or environment variable approval. The submitted permissions must match the permissions currently pending on the latest blocked assistant message.\n\n```json\n{\n  \"task\": {\n    \"type\": \"confirmed-permissions\",\n    \"permissions\": [\n      {\n        \"type\": \"ALLOW_DYNAMIC_TOOL_STRICT\",\n        \"toolName\": \"SystemAction\",\n        \"input\": {\n          \"systemAction\": \"executeScript\",\n          \"executeScript\": \"/app/scripts/migrate.sql\"\n        }\n      }\n    ]\n  }\n}\n```\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat containing the pending task. Provided as a path parameter.\"\n}\n]}\n/>\n\n#### Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"task\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"The task resolution payload. The latest message in the active chat fork must be an assistant message blocked on the matching task type.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"type\",\n\"type\": \"'confirmed-steps' | 'plan-exit-response' | 'answered-questions' | 'confirmed-permissions'\",\n\"required\": true,\n\"description\": \"The blocked task type being resolved.\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"responseMode\",\n\"type\": \"'sync' | 'async' | 'experimental_stream'\",\n\"required\": false,\n\"description\": \"Controls how the response is delivered.\",\n\"deprecated\": false\n},\n{\n\"name\": \"modelConfiguration\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"Overrides for the model behavior.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\nReturns the updated chat object, using the same response shape as `GET /v1/chats/`.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/chats/resolve-task",
+  "lastUpdated": "2026-07-30"
+}

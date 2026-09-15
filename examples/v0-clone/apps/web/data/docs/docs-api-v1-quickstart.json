@@ -1,0 +1,61 @@
+{
+  "id": "docs-api-v1-quickstart",
+  "slug": "api/v1/quickstart",
+  "title": "Quickstart",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Get started with the v0 API in minutes",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "api/v1",
+    "api/v1/packages/v0-sdk"
+  ],
+  "requires": [],
+  "headings": [
+    "v0 SDK",
+    "Installation",
+    "Authentication",
+    "Use Case 1: Get a Chat URL for Iframe Embedding",
+    "Customize the loading background",
+    "Use Case 2: Get Generated Files",
+    "Continue the Conversation"
+  ],
+  "excerpt": "The v0 SDK is a TypeScript library that makes it simple to interact with the v0 API.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "pnpm add v0-sdk"
+    },
+    {
+      "language": "bash",
+      "code": "V0_API_KEY=your_api_key_here"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// No initialization needed - uses V0_API_KEY automatically"
+    },
+    {
+      "language": "tsx",
+      "code": "// Create a new chat\nconst chat = await v0.chats.create({\n  message: 'Create a responsive navbar with Tailwind CSS'\n})\n\n// Use the Demo URL in an iframe\n<iframe\n  src={chat.latestVersion?.demoUrl}\n  width=\"100%\"\n  height=\"600\">\n</iframe>"
+    },
+    {
+      "language": "tsx",
+      "code": "const demoUrl = chat.latestVersion?.demoUrl\nif (!demoUrl) {\n  throw new Error('Demo URL is not available')\n}\n\nconst iframeUrl = new URL(demoUrl)\niframeUrl.searchParams.set('loadingBackground', 'transparent')\n\n<iframe src={iframeUrl.toString()} width=\"100%\" height=\"600\" />"
+    },
+    {
+      "language": "typescript",
+      "code": "// Create a chat\nconst chat = await v0.chats.create({\n  message: 'Build a todo app with React and TypeScript',\n})\n\n// Access the generated files\nchat.latestVersion?.files?.forEach((file) => {\n  console.log(`File: ${file.name}`)\n  console.log(`Content: ${file.content}`)\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Add a follow-up message\nconst response = await v0.chats.sendMessage({\n  chatId: chat.id,\n  message: 'Add dark mode support',\n})"
+    }
+  ],
+  "content": "\n\n# Quickstart\n\n## v0 SDK\n\nThe v0 SDK is a TypeScript library that makes it simple to interact with the v0 API.\n\n## Installation\n\n```bash\npnpm add v0-sdk\n```\n\n## Authentication\n\nGet your API key from your [v0 account settings](https://v0.app/settings/keys) and set it as an environment variable:\n\nAdd your API key to `.env`:\n\n```bash\nV0_API_KEY=your_api_key_here\n```\n\nThe SDK automatically uses the `V0_API_KEY` environment variable:\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// No initialization needed - uses V0_API_KEY automatically\n```\n\n## Use Case 1: Get a Chat URL for Iframe Embedding\n\nCreate a chat and embed it directly in your application:\n\n```tsx\n// Create a new chat\nconst chat = await v0.chats.create({\n  message: 'Create a responsive navbar with Tailwind CSS'\n})\n\n// Use the Demo URL in an iframe\n<iframe\n  src={chat.latestVersion?.demoUrl}\n  width=\"100%\"\n  height=\"600\">\n</iframe>\n```\n\n### Customize the loading background\n\nDemo URLs follow the user's light or dark color scheme while the generated app loads. To use a transparent background instead, add the `loadingBackground` query parameter to the Demo URL:\n\n```tsx\nconst demoUrl = chat.latestVersion?.demoUrl\nif (!demoUrl) {\n  throw new Error('Demo URL is not available')\n}\n\nconst iframeUrl = new URL(demoUrl)\niframeUrl.searchParams.set('loadingBackground', 'transparent')\n\n<iframe src={iframeUrl.toString()} width=\"100%\" height=\"600\" />\n```\n\nThe parameter accepts `transparent` or any valid CSS color value. Invalid values are ignored.\n\n## Use Case 2: Get Generated Files\n\nCreate a chat and access the generated code files:\n\n```typescript\n// Create a chat\nconst chat = await v0.chats.create({\n  message: 'Build a todo app with React and TypeScript',\n})\n\n// Access the generated files\nchat.latestVersion?.files?.forEach((file) => {\n  console.log(`File: ${file.name}`)\n  console.log(`Content: ${file.content}`)\n})\n```\n\n## Continue the Conversation\n\nAdd follow-up messages to refine the output:\n\n```typescript\n// Add a follow-up message\nconst response = await v0.chats.sendMessage({\n  chatId: chat.id,\n  message: 'Add dark mode support',\n})\n```\n\nThat's it! You now have everything you need to integrate v0's AI-powered code generation into your application.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/quickstart",
+  "lastUpdated": "2026-07-30"
+}

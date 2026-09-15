@@ -1,0 +1,53 @@
+{
+  "id": "docs-api-v1-guides-handling-integrations",
+  "slug": "api/v1/guides/handling-integrations",
+  "title": "Handling Integrations",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Learn how to handle integration requests and follow-up script permissions in the v0 API",
+  "topics": [
+    "design",
+    "api",
+    "permissions",
+    "integrations"
+  ],
+  "related": [
+    "api/v1/reference/chats/resolve-task",
+    "api/v1/reference/chats/get-by-id",
+    "api/v1/reference/chats/get-message"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "1. Prompt the agent",
+    "2. Inspect the latest assistant message",
+    "3. Install the integration with the Vercel API",
+    "4. Confirm the install with resolve-task",
+    "5. Handle script permissions if needed",
+    "Example Flow"
+  ],
+  "excerpt": "Learn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\nconst chat = await v0.chats.getById({\n  chatId: '123',\n})\n\nif (!chat.vercelProjectId) {\n  throw new Error('This chat is not linked to a Vercel project yet.')\n}\n\nconst vercelProjectId = chat.vercelProjectId"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\nawait v0.chats.resolveTask({\n  chatId: '123',\n  task: {\n    type: 'confirmed-steps',\n    connectedIntegrationNames: ['Neon'],\n  },\n})"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": []\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"confirmed-permissions\",\n    \"permissions\": [\n      {\n        \"type\": \"ALLOW_DYNAMIC_TOOL_STRICT\",\n        \"toolName\": \"SystemAction\",\n        \"input\": {\n          \"systemAction\": \"executeScript\",\n          \"executeScript\": \"/scripts/setup-db.sql\"\n        }\n      }\n    ]\n  }\n}"
+    }
+  ],
+  "content": "\n\n# Handling Integrations\n\nLearn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:\n\n1. Prompt the agent.\n2. Inspect the latest assistant message and read the chat's `vercelProjectId`.\n3. Install the integration with the Vercel API.\n4. Confirm the install with `POST /v1/chats//tasks/resolve`.\n5. Handle script permissions if the agent asks for them next.\n\nThis guide focuses on the integration flow. For the full task schema, see [Resolve Task](/docs/api/v1/reference/chats/resolve-task).\n\n## 1. Prompt the agent\n\nStart or continue a chat with a request that depends on an integration.\n\nFor example:\n\n* \"Build a waiting list app with Neon.\"\n* \"Create a dashboard that uses Supabase auth.\"\n\nIf the agent can continue without extra setup, it will. If it needs an integration, it will stop and ask your app to handle it.\n\n## 2. Inspect the latest assistant message\n\nWhen a chat is blocked on integration setup, inspect the latest assistant message first. The blocked task is exposed in `experimental_content` on:\n\n* `GET /v1/chats/`\n* `GET /v1/chats//messages/`\n\nIf you use `GET /v1/chats/`, read the last assistant message in the `messages` array. Chat messages are returned oldest to newest.\n\nFor integration requests, you will typically see an assistant message part with:\n\n* stop reason `user-input-required`\n* type `task-get-or-request-integration-v1`\n\nInside that message content, you'll usually see a request telling you which integration to install, such as `Neon` or `Supabase`.\n\nThe same `GET /v1/chats/` response also includes `vercelProjectId` at the top level. You will need that value in the next step.\n\nUse the latest blocked assistant message only. If you try to resolve an older task after the chat has moved on, `resolve-task` returns `409 Conflict`.\n\n## 3. Install the integration with the Vercel API\n\nOnce you know which integration the assistant is asking for, install or connect it in Vercel.\n\nUse the chat's `vercelProjectId` for the project-scoped Vercel API calls in this step. In the beta chat response types, `vercelProjectId` is the linked Vercel project ID. Do not use `projectId` here. `projectId` is the separate v0 project ID, and it is deprecated in the chat response.\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\nconst chat = await v0.chats.getById({\n  chatId: '123',\n})\n\nif (!chat.vercelProjectId) {\n  throw new Error('This chat is not linked to a Vercel project yet.')\n}\n\nconst vercelProjectId = chat.vercelProjectId\n```\n\nThis step happens outside the v0 API. The exact Vercel API calls depend on your integration flow, but these docs are the relevant starting points:\n\n* [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)\n* [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)\n\nWhen you call the Vercel endpoint that connects a resource to a project, pass `vercelProjectId` from the chat.\n\nAfter the integration is actually connected, return to the v0 chat and confirm it with `resolve-task`.\n\n## 4. Confirm the install with `resolve-task`\n\nUse `task.type: \"confirmed-steps\"` after the integration is installed. Pass the integration names exactly as the assistant requested them, such as `Neon` or `Supabase`.\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\nawait v0.chats.resolveTask({\n  chatId: '123',\n  task: {\n    type: 'confirmed-steps',\n    connectedIntegrationNames: ['Neon'],\n  },\n})\n```\n\nIf you are rejecting the integration request instead of approving it, pass an empty array:\n\n```json\n{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": []\n  }\n}\n```\n\nYou can also confirm other setup work with the same task type, including MCP presets, scripts, and environment variables.\n\n## 5. Handle script permissions if needed\n\nAfter the integration is connected, the assistant may ask for permission to run follow-up scripts, such as database setup or migrations.\n\nWhen that happens, inspect the latest assistant message again. For permission requests, you will typically see:\n\n* stop reason `permissions`\n* a `suggestedPermissions` payload in the blocked assistant message\n\nTo approve the request, call `resolve-task` with `task.type: \"confirmed-permissions\"` and send back the `suggestedPermissions` objects from the latest blocked assistant message.\n\nPass the permission objects back unchanged. The submitted permissions must match the permissions currently pending on the latest blocked assistant message.\n\n```json\n{\n  \"task\": {\n    \"type\": \"confirmed-permissions\",\n    \"permissions\": [\n      {\n        \"type\": \"ALLOW_DYNAMIC_TOOL_STRICT\",\n        \"toolName\": \"SystemAction\",\n        \"input\": {\n          \"systemAction\": \"executeScript\",\n          \"executeScript\": \"/scripts/setup-db.sql\"\n        }\n      }\n    ]\n  }\n}\n```\n\nTo reject the request, ignore the permission request and send any other follow-up message.\n\n## Example Flow\n\nHere is the full flow in plain English:\n\n1. Your app prompts v0 to build something that needs Neon.\n2. The assistant stops with `user-input-required` and asks for the Neon integration.\n3. Your backend reads `vercelProjectId` from `GET /v1/chats/` and uses that value in the Vercel API calls that connect Neon.\n4. Your backend calls `POST /v1/chats//tasks/resolve` with `connectedIntegrationNames: [\"Neon\"]`.\n5. The assistant resumes. If it needs to run a migration script, it stops again with `permissions`.\n6. Your backend reads `suggestedPermissions` from the latest assistant message and sends them back with `confirmed-permissions`.\n\nThat is the complete pattern for handling integrations in the v0 API.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/handling-integrations",
+  "lastUpdated": "2026-07-30"
+}

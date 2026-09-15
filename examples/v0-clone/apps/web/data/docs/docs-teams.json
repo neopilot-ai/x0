@@ -1,0 +1,49 @@
+{
+  "id": "docs-teams",
+  "slug": "teams",
+  "title": "Teams",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "guide",
+  "description": "Collaborate with your team on projects with shared resources.",
+  "topics": [
+    "design",
+    "teams",
+    "sharing"
+  ],
+  "related": [
+    "projects",
+    "enterprise"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Setting up your team",
+    "1. Upgrade to a Plus plan",
+    "2. Add team members",
+    "3. Invite team members to your chats",
+    "Features",
+    "Team access",
+    "Team Owner administrative access",
+    "Sharing Chats",
+    "Team Templates",
+    "GitHub repository access",
+    "Collaboration",
+    "Enterprise",
+    "Credits",
+    "Integration with Vercel",
+    "Best Practices",
+    "Transferring chats and projects",
+    "Team settings",
+    "Members",
+    "Usage",
+    "Integrations",
+    "API Keys"
+  ],
+  "excerpt": "v0 makes it easy for teams to collaborate on projects, share resources, and manage workflows in one place. Collaboration features like team templates are available on Plus, Business, and Enterprise plans.",
+  "snippets": [],
+  "content": "\n\n# Teams\n\nv0 makes it easy for teams to collaborate on projects, share resources, and manage workflows in one place. Collaboration features like [team templates](#team-templates) are available on [Plus, Business, and Enterprise plans](/docs/pricing#plan-comparison).\n\n## Setting up your team\n\n### 1. Upgrade to a Plus plan\n\nGo to [v0.app/pricing](https://v0.app/pricing) and select the Plus plan. During checkout you can either select an existing Vercel team to upgrade, or create a new team.\n\n**If you already have a Vercel Hobby team**, any new team created will require a [Vercel Pro subscription](https://vercel.com/pricing) in addition to the selected v0 plan. This comes with an additional $20/mo cost that does not grant additional v0 capabilities.\n\nYour v0 Plus plan will be linked to the corresponding Vercel team, where you can manage members and billing from your Vercel team settings.\n\n### 2. Add team members\n\nYou can invite team members and provision v0 access in several ways:\n\n* **After upgrade**: Click **Manage Members** in the confirmation modal.\n* **From Vercel**: Invite new team members or allocate v0 access to existing members from [your team's Vercel member settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings%2Fmembers\\&title=Manage+Team+Members).\n* **During v0 checkout**: Check **Grant access to all Team members** to assign a v0 seat to existing team members.\n\n### 3. Invite team members to your chats\n\nOnce your team is set up, you can [share chats](#sharing-chats) with your team members.\n\n## Features\n\n### Team access\n\nOn **v0 Plus plans**, all team members have **Builder** access. This means every member can:\n\n* Create and edit chats and projects\n* Create deployments and manage environment variables\n* Access shared team projects and templates\n\nNote: Managing integrations requires the **Integrations Manager** permission, which is separate from v0 roles but can be assigned from the same **Manage v0 role** menu. Whether a member can inherently manage integrations without this depends on their [Vercel team role](https://vercel.com/docs/rbac/access-roles) (e.g., Members have this permission by default).\n\nFor advanced role-based access control (RBAC) with differentiated roles like v0 Builder, v0 Creator, and v0 Viewer, see [Enterprise](/docs/enterprise).\n\n### Team Owner administrative access\n\nMembers with the Vercel **Owner** team role have administrative access to every chat owned by the team — including teammate chats set to **Only people with access** — when they navigate to the chat directly. Owners can view, edit, and archive those chats without being explicitly invited.\n\nThis is intended for administrative oversight:\n\n* Owner access applies only on the team that owns the chat. Owners of other teams have no special access.\n* Owners do not see teammate chats in the sidebar, library, or project pages; they only get access when they open a chat by URL.\n* This is independent of the v0 Builder / Creator / Viewer roles, which control what a member can do but not whose chats they can administer.\n\n### Sharing Chats\n\nYou can control who has access to your chats using the Invite dialog.\n\n#### Visibility options\n\n| Option                   | Description                                                                 |\n| ------------------------ | --------------------------------------------------------------------------- |\n| Only people with access  | Only you and invited users can access                                       |\n| Everyone at \\[team-name] | All members of your team can access; turn on **View only** to prevent edits |\n| Anyone with the link     | Anyone with the URL can access                                              |\n| Anyone on the web        | Public, discoverable, and accessible by anyone                              |\n\n#### Default chat visibility\n\nNew chats created in a team workspace are available to the team by default. Team Owners can change this default under [**Settings → Workspace → Default Chat Visibility**](https://v0.app/settings/workspace):\n\n| Default       | Who can access a new chat                                            |\n| ------------- | -------------------------------------------------------------------- |\n| Private       | Only people with access                                              |\n| Team can view | Team members can view; editing remains limited to people with access |\n| Team can edit | Team members can view and edit                                       |\n\nChanging the workspace default affects only new chats. Existing chats keep their current visibility, and chat creators can override the default for an individual chat from its **Invite** dialog.\n\n#### Inviting team members\n\n1. Click **Invite** in the top-right corner\n2. Search for team members by name or email\n3. Choose permission level: **Can View** or **Can Edit**\n4. Click **Invite**\n\n### Team Templates\n\nTeam templates allow you to create and share reusable UI components and project starters within your organization. Unlike public templates, team templates are only visible to members of your team.\n\n#### Creating Team Templates\n\nYou can publish a template under the Publish menu by selecting \"Create Template\".\nWhen you publish a template as a team member, you can choose to make it:\n\n* **Public:** Visible to all v0 users\n* **Team-only:** Restricted to your team members\n\nTeam templates are created from your projects and can include:\n\n* Complete project starters\n* Reusable UI components\n* Design patterns and layouts\n* Pre-configured settings and environment variables\n\n#### Accessing Team Templates\n\nTeam members can access team templates in several places from the [team templates page](https://v0.app/templates/team).\n\nTeam templates show up alongside your [personal templates](https://v0.app/templates/submissions) and help maintain consistency across team projects.\n\n#### Benefits\n\n* **Consistency:** Ensure all team members use approved design patterns\n* **Efficiency:** Jumpstart new projects with pre-built components\n* **Knowledge Sharing:** Distribute best practices across the team\n* **Version Control:** Update templates and all team members get access to the latest version\n\n### GitHub repository access\n\nWhen a chat is connected to a GitHub repository, team members must have access to that repository on GitHub in order to collaborate on the chat and generate previews. This is the default behavior for all team plans (Plus, Business, and Enterprise).\n\nIf you'd prefer to allow team members to collaborate on chats without connecting GitHub to their Vercel accounts, you can enable **Allow v0 to Act on Behalf of Members** in your [workspace settings](https://v0.app/settings/workspace). When this setting is enabled, v0 can use the workspace's GitHub integration for eligible members who don't have a GitHub connection on their Vercel account, allowing them to access associated chats and generate previews.\n\nIf a member has GitHub connected to their Vercel account",
+  "sourceUrl": "https://v0.app/docs/teams",
+  "lastUpdated": "2026-09-11"
+}

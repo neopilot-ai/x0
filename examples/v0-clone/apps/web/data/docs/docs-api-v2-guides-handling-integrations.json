@@ -1,0 +1,56 @@
+{
+  "id": "docs-api-v2-guides-handling-integrations",
+  "slug": "api/v2/guides/handling-integrations",
+  "title": "Handling Integrations",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Learn how to handle integration requests and follow-up script permissions in the v0 API",
+  "topics": [
+    "mcp",
+    "design",
+    "api",
+    "permissions",
+    "integrations"
+  ],
+  "related": [
+    "api/v2/guides/environment-variables",
+    "api/v2/reference/mcp-servers/create-mcp-server",
+    "api/v2/reference/messages/resolve-task"
+  ],
+  "requires": [],
+  "headings": [
+    "1. Prompt the agent",
+    "2. Inspect the latest assistant message",
+    "3. Install the integration with the Vercel API",
+    "4. Confirm the install with resolve-task",
+    "5. Handle script permissions if needed",
+    "Example Flow"
+  ],
+  "excerpt": "Learn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst message = await v0.messages.send({\n  chatId: 'chat_abc123',\n  message: 'Build a waiting list app with Neon.',\n})\n\nconst integrationRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' &&\n    part.name === 'get_or_request_integration',\n)"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst chatResult = await v0.chats.get({\n  chatId: 'chat_abc123',\n})\n\nif (chatResult.error) throw new Error(chatResult.error.message)\n\nconst chat = chatResult.data\nlet { vercelProjectId } = chat\n\nif (!vercelProjectId) {\n  const projectResult = await v0.chats.createVercelProject({\n    chatId: chat.id,\n  })\n\n  if (projectResult.error) throw new Error(projectResult.error.message)\n  vercelProjectId = projectResult.data.vercelProjectId\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst result = await v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'confirmed-steps',\n    connectedIntegrationNames: ['Neon'],\n  },\n})\n\nif (result.error) throw new Error(result.error.message)"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": []\n  }\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "const permissionRequest = message.parts.find(\n  (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,\n)\n\nif (\n  permissionRequest?.type === 'tool-call' &&\n  permissionRequest.suggestedPermissions\n) {\n  await v0.messages.resolve({\n    chatId: 'chat_abc123',\n    task: {\n      type: 'confirmed-permissions',\n      permissions: permissionRequest.suggestedPermissions,\n    },\n  })\n}"
+    }
+  ],
+  "content": "\n\n# Handling Integrations\n\nLearn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:\n\n1. Prompt the agent.\n2. Inspect the latest assistant message and read the chat's `vercelProjectId`.\n3. Install the integration with the Vercel API.\n4. Confirm the install with `POST /v2/chats//messages/resolve`.\n5. Handle script permissions if the agent asks for them next.\n\nThis guide focuses on the integration flow. For the full task schema, see [Resolve Task](/docs/api/v2/reference/messages/resolve-task).\n\n## 1. Prompt the agent\n\nStart or continue a chat with a request that depends on an integration.\n\nFor example:\n\n* \"Build a waiting list app with Neon.\"\n* \"Create a dashboard that uses Supabase auth.\"\n\nIf the agent can continue without extra setup, it will. If it needs an integration, it will stop and ask your app to handle it.\n\n## 2. Inspect the latest assistant message\n\nWhen a chat is blocked on integration setup, inspect the latest assistant message first. How you access it depends on the response mode:\n\n* **Synchronous**: The request returns the completed assistant message directly.\n* **Asynchronous**: The request returns a `messageId`. Poll `GET /v2/chats//messages/` until `finishReason` is no longer `null`.\n* **Streaming**: Consume `result.stream` for updates, then inspect `result.final.parts` for the completed message parts.\n\nAn integration request surfaces as an `agent-action` part in the message's `parts` array with `name: \"get_or_request_integration\"`. Its `data.requestedIntegrations` lists the integration names to install (for example, `[\"Neon\"]`), and `data.requestedMcpPresets` lists any MCP presets. You pass these values back in step 4.\n\n```typescript\nimport { v0 } from 'v0'\n\nconst message = await v0.messages.send({\n  chatId: 'chat_abc123',\n  message: 'Build a waiting list app with Neon.',\n})\n\nconst integrationRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' &&\n    part.name === 'get_or_request_integration',\n)\n```\n\nUse the latest blocked assistant message only. If you try to resolve an older task after the chat has moved on, `resolve-task` returns `409 Conflict`.\n\n## 3. Install the integration with the Vercel API\n\nOnce you know which integration the assistant is asking for, install or connect it in Vercel.\n\nUse the chat's `vercelProjectId` for the project-scoped Vercel API calls in this step. `vercelProjectId` is the linked Vercel project ID. Do not use `projectId` here. `projectId` is the separate v0 project ID, and it is deprecated in the chat response.\n\n```typescript\nimport { v0 } from 'v0'\n\nconst chatResult = await v0.chats.get({\n  chatId: 'chat_abc123',\n})\n\nif (chatResult.error) throw new Error(chatResult.error.message)\n\nconst chat = chatResult.data\nlet { vercelProjectId } = chat\n\nif (!vercelProjectId) {\n  const projectResult = await v0.chats.createVercelProject({\n    chatId: chat.id,\n  })\n\n  if (projectResult.error) throw new Error(projectResult.error.message)\n  vercelProjectId = projectResult.data.vercelProjectId\n}\n```\n\nThis step happens outside the v0 API. The exact Vercel API calls depend on your integration flow, but these docs are the relevant starting points:\n\n* [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)\n* [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)\n\nWhen you call the Vercel endpoint that connects a resource to a project, pass `vercelProjectId` from the chat.\n\nAfter the integration is actually connected, return to the v0 chat and confirm it with `resolve-task`.\n\n## 4. Confirm the install with `resolve-task`\n\nUse `task.type: \"confirmed-steps\"` after the integration is installed. Pass the integration names exactly as the assistant requested them, such as `Neon` or `Supabase`.\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'confirmed-steps',\n    connectedIntegrationNames: ['Neon'],\n  },\n})\n\nif (result.error) throw new Error(result.error.message)\n```\n\nIf you are rejecting the integration request instead of approving it, pass an empty array:\n\n```json\n{\n  \"task\": {\n    \"type\": \"confirmed-steps\",\n    \"connectedIntegrationNames\": []\n  }\n}\n```\n\nYou can also confirm other setup work with the same task type, including MCP presets, scripts, and environment variables.\n\n## 5. Handle script permissions if needed\n\nAfter the integration is connected, the assistant may ask for permission to run follow-up scripts, such as database setup or migrations.\n\nWhen that happens, inspect the latest assistant message again. The pending action surfaces as a `tool-call` part in the message's `parts` array. While the agent is waiting for your approval, that part includes a `suggestedPermissions` array.\n\nTo approve the request, call `resolve` with `task.type: \"confirmed-permissions\"` and pass the `suggestedPermissions` objects back unchanged as `task.permissions`.\n\nThe submitted permissions must match the ones currently pending on the latest blocked assistant message, or `resolve` returns `409 Conflict`.\n\n```typescript\nconst permissionRequest = message.parts.find(\n  (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,\n)\n\nif (\n  permissionRequest?.type === 'tool-call' &&\n  permissionRequest.suggestedPermissions\n) {\n  await v0.messages.resolve({\n    chatId: 'chat_abc123',\n    task: {\n      type: 'confirmed-permissions',\n      permissions: permissionRequest.suggestedPermissions,\n    },\n  })\n}\n```\n\nTo reject the request, ignore the permission request and send any other follow-up message.\n\n## Example Flow\n\nHere is the full flow in plain English:\n\n1. Your app prompts v0 to build something that needs Neon.\n2. The assistant stops and asks for the Neon integration, surfaced as a `get_or_request_integration` agent-action part.\n3. Your backend reads `vercelProjectId` from `GET /v2/chats/` and uses that value in the Vercel API calls that connect Neon.\n4. Your backend calls `POST /v2/chats//messages/resolve` with `connectedIntegrationNames: [\"Neon\"]`.\n5. The assistant resumes. If it needs to run a migration script, it stops again with a `tool-call` part that carries `suggestedPermissions`.\n6. Your backend passes those `suggestedPermissions` back in a `confirmed-permissions` task to approve.\n\nThat is the complete pattern for handling integrations in the v0 API.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/handling-integrations",
+  "lastUpdated": "2026-07-30"
+}

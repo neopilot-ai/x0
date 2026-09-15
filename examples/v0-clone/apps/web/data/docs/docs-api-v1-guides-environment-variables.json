@@ -1,0 +1,74 @@
+{
+  "id": "docs-api-v1-guides-environment-variables",
+  "slug": "api/v1/guides/environment-variables",
+  "title": "Environment Variables",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Learn how to manage environment variables and configuration in v0 projects",
+  "topics": [
+    "design",
+    "api",
+    "environment-variables"
+  ],
+  "related": [
+    "api/v1/reference/projects/create-env-vars",
+    "api/v1/reference/projects/find-env-vars"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Managing Environment Variables",
+    "Creating Variables",
+    "Reading Variables",
+    "Updating Variables",
+    "Deleting Variables",
+    "Getting Individual Variables",
+    "Usage in Development",
+    "Chat Context",
+    "Best Practices",
+    "1. Secure Secrets Management",
+    "2. Consistent Naming",
+    "3. Documentation"
+  ],
+  "excerpt": "Learn how to securely manage environment variables and configuration settings in your v0 projects. Environment variables are tied to projects, making them available across all chats in that project.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// Create new environment variables\nawait v0.projects.createEnvVars({\n  projectId: 'your-project-id',\n  environmentVariables: [\n    {\n      key: 'DATABASE_URL',\n      value: 'postgresql://localhost:5432/myapp',\n    },\n    {\n      key: 'API_KEY',\n      value: 'your-api-key-here',\n    },\n  ],\n})\n\n// Create or update variables (upsert)\nawait v0.projects.createEnvVars({\n  projectId: 'your-project-id',\n  upsert: true,\n  environmentVariables: [\n    {\n      key: 'DATABASE_URL',\n      value: 'postgresql://newhost:5432/myapp',\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Get all environment variables for a project\nconst envVars = await v0.projects.findEnvVars({\n  projectId: 'your-project-id',\n  decrypted: 'false', // 'true' to get decrypted values\n})\n\nconsole.log('Environment variables:', envVars.data)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Update existing variables by ID\nawait v0.projects.updateEnvVars({\n  projectId: 'your-project-id',\n  environmentVariables: [\n    {\n      id: 'env-var-id-1',\n      value: 'updated-value',\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Delete variables by ID\nawait v0.projects.deleteEnvVars({\n  projectId: 'your-project-id',\n  environmentVariableIds: ['env-var-id-1', 'env-var-id-2'],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Get a specific environment variable by ID\nconst envVar = await v0.projects.getEnvVar({\n  projectId: 'your-project-id',\n  environmentVariableId: 'env-var-id-1',\n})\n\nconsole.log('Environment variable:', envVar.data)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Start a chat with project context\nconst chat = await v0.chats.init({\n  projectId: 'your-project-id',\n  files: existingFiles,\n  initialContext: `\n    Configure the database connection using the DATABASE_URL environment variable.\n    Use the API_KEY for third-party service authentication.\n  `,\n})\n\n// AI can reference and use environment variables in generated code"
+    },
+    {
+      "language": "typescript",
+      "code": "// ✅ Good: Keep sensitive data in environment variables\nawait v0.projects.createEnvVars({\n  projectId,\n  environmentVariables: [\n    { key: 'DATABASE_PASSWORD', value: 'secret-password' },\n    { key: 'API_SECRET_KEY', value: 'sk_live_...' },\n    { key: 'APP_NAME', value: 'My App' }, // Not sensitive\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// ✅ Good: Consistent naming convention\nconst variables = [\n  // Database\n  { key: 'DATABASE_URL', value: 'postgresql://...' },\n  { key: 'DATABASE_POOL_SIZE', value: '10' },\n\n  // API Configuration\n  { key: 'API_BASE_URL', value: 'https://api.example.com' },\n  { key: 'API_TIMEOUT', value: '30000' },\n\n  // Feature Flags\n  { key: 'FEATURE_NEW_UI', value: 'true' },\n  { key: 'FEATURE_BETA_FEATURES', value: 'false' },\n]"
+    }
+  ],
+  "content": "\n\n# Environment Variables\n\nLearn how to securely manage environment variables and configuration settings in your v0 projects. Environment variables are tied to projects, making them available across all chats in that project.\n\n## Overview\n\nEnvironment variables in v0 provide a secure way to manage:\n\n* **API keys and secrets** - Database connections, third-party services\n* **Configuration settings** - Feature flags, deployment settings\n* **Build-time variables** - Framework configurations, asset paths\n\nEnvironment variables are **project-scoped**, meaning all chats in a project have access to the same environment variables.\n\n## Managing Environment Variables\n\n### Creating Variables\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// Create new environment variables\nawait v0.projects.createEnvVars({\n  projectId: 'your-project-id',\n  environmentVariables: [\n    {\n      key: 'DATABASE_URL',\n      value: 'postgresql://localhost:5432/myapp',\n    },\n    {\n      key: 'API_KEY',\n      value: 'your-api-key-here',\n    },\n  ],\n})\n\n// Create or update variables (upsert)\nawait v0.projects.createEnvVars({\n  projectId: 'your-project-id',\n  upsert: true,\n  environmentVariables: [\n    {\n      key: 'DATABASE_URL',\n      value: 'postgresql://newhost:5432/myapp',\n    },\n  ],\n})\n```\n\n### Reading Variables\n\n```typescript\n// Get all environment variables for a project\nconst envVars = await v0.projects.findEnvVars({\n  projectId: 'your-project-id',\n  decrypted: 'false', // 'true' to get decrypted values\n})\n\nconsole.log('Environment variables:', envVars.data)\n```\n\n### Updating Variables\n\n```typescript\n// Update existing variables by ID\nawait v0.projects.updateEnvVars({\n  projectId: 'your-project-id',\n  environmentVariables: [\n    {\n      id: 'env-var-id-1',\n      value: 'updated-value',\n    },\n  ],\n})\n```\n\n### Deleting Variables\n\n```typescript\n// Delete variables by ID\nawait v0.projects.deleteEnvVars({\n  projectId: 'your-project-id',\n  environmentVariableIds: ['env-var-id-1', 'env-var-id-2'],\n})\n```\n\n### Getting Individual Variables\n\n```typescript\n// Get a specific environment variable by ID\nconst envVar = await v0.projects.getEnvVar({\n  projectId: 'your-project-id',\n  environmentVariableId: 'env-var-id-1',\n})\n\nconsole.log('Environment variable:', envVar.data)\n```\n\n## Usage in Development\n\n### Chat Context\n\nEnvironment variables are automatically available in chat sessions when you link your chat to a project:\n\n```typescript\n// Start a chat with project context\nconst chat = await v0.chats.init({\n  projectId: 'your-project-id',\n  files: existingFiles,\n  initialContext: `\n    Configure the database connection using the DATABASE_URL environment variable.\n    Use the API_KEY for third-party service authentication.\n  `,\n})\n\n// AI can reference and use environment variables in generated code\n```\n\n## Best Practices\n\n### 1. Secure Secrets Management\n\n```typescript\n// ✅ Good: Keep sensitive data in environment variables\nawait v0.projects.createEnvVars({\n  projectId,\n  environmentVariables: [\n    { key: 'DATABASE_PASSWORD', value: 'secret-password' },\n    { key: 'API_SECRET_KEY', value: 'sk_live_...' },\n    { key: 'APP_NAME', value: 'My App' }, // Not sensitive\n  ],\n})\n```\n\n### 2. Consistent Naming\n\n```typescript\n// ✅ Good: Consistent naming convention\nconst variables = [\n  // Database\n  { key: 'DATABASE_URL', value: 'postgresql://...' },\n  { key: 'DATABASE_POOL_SIZE', value: '10' },\n\n  // API Configuration\n  { key: 'API_BASE_URL', value: 'https://api.example.com' },\n  { key: 'API_TIMEOUT', value: '30000' },\n\n  // Feature Flags\n  { key: 'FEATURE_NEW_UI', value: 'true' },\n  { key: 'FEATURE_BETA_FEATURES', value: 'false' },\n]\n```\n\n### 3. Documentation\n\nDocument your environment variables for team members:\n\n```typescript\n// Document your environment variables\nconst environmentVariables = {\n  // Database Configuration\n  DATABASE_URL: {\n    description: 'PostgreSQL connection string',\n    example: 'postgresql://user:pass@localhost:5432/dbname',\n    required: true,\n  },\n\n  // API Configuration\n  API_KEY: {\n    description: 'Third-party service API key',\n    example: 'sk_live_...',\n    required: true,\n  },\n\n  // Optional Configuration\n  LOG_LEVEL: {\n    description: 'Logging level',\n    example: 'info',\n    default: 'info',\n    options: ['debug', 'info', 'warn', 'error'],\n  },\n}\n```\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/environment-variables",
+  "lastUpdated": "2026-07-30"
+}

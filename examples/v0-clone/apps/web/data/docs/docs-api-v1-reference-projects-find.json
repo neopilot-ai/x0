@@ -1,0 +1,25 @@
+{
+  "id": "docs-api-v1-reference-projects-find",
+  "slug": "api/v1/reference/projects/find",
+  "title": "Find Projects",
+  "section": "API Reference",
+  "category": "API · Projects",
+  "type": "reference",
+  "description": "Returns a list of all v0 projects in your workspace. Useful for browsing or managing projects across different chats or use cases.",
+  "topics": [
+    "api"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "Response"
+  ],
+  "excerpt": "Deprecated**: v0 Projects are deprecated. Use the Vercel API to list projects.",
+  "snippets": [],
+  "content": "\n\n# Find Projects\n\n**Deprecated**: v0 Projects are deprecated. Use the Vercel API to [list projects](https://vercel.com/docs/rest-api/projects/retrieve-a-list-of-projects).\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.projects.find()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/projects \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A unique identifier for the project.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'project'\",\n\"required\": false,\n\"description\": \"Fixed value identifying this object as a project.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The name of the project as defined by the user.\",\n\"deprecated\": false\n},\n{\n\"name\": \"privacy\",\n\"type\": \"'private' | 'team'\",\n\"required\": false,\n\"description\": \"The privacy setting for the project - either private or team.\",\n\"deprecated\": false\n},\n{\n\"name\": \"vercelProjectId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Optional ID of the linked Vercel project, if connected.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The ISO timestamp representing when the project was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The ISO timestamp of the most recent update, if available.\",\n\"deprecated\": false\n},\n{\n\"name\": \"apiUrl\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The API endpoint URL for accessing this project programmatically.\",\n\"deprecated\": false\n},\n{\n\"name\": \"webUrl\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The web URL where the project can be viewed or managed.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/projects/find",
+  "lastUpdated": "2026-07-30"
+}

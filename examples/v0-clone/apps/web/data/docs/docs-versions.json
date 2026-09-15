@@ -1,0 +1,25 @@
+{
+  "id": "docs-versions",
+  "slug": "versions",
+  "title": "Versions",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "conceptual",
+  "description": "",
+  "topics": [
+    "versions"
+  ],
+  "related": [
+    "code-editing",
+    "projects"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [],
+  "excerpt": "Each time v0 updates a code block from a message, it creates a new version. Non-message actions (such as editing code or modifying files directly) do not generate new versions.",
+  "snippets": [],
+  "content": "\n\n# Versions\n\nEach time v0 updates a code block from a message, it creates a new version. Non-message actions (such as editing code or modifying files directly) do not generate new versions.\n\nRestoring an old version creates a new, most recent version using the restored code to maintain a linear version history.\n\nWhen deploying, the latest version of the code is used. If you want to deploy a previous version, you can restore it and then deploy.\n\nUse the version controls attached to each generated message to inspect a version, view its diff, or restore an earlier generation.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/versions",
+  "lastUpdated": "2026-08-19"
+}

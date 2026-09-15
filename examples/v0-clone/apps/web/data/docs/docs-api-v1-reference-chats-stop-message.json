@@ -1,0 +1,28 @@
+{
+  "id": "docs-api-v1-reference-chats-stop-message",
+  "slug": "api/v1/reference/chats/stop-message",
+  "title": "Stop Message",
+  "section": "API Reference",
+  "category": "API · Chats",
+  "type": "reference",
+  "description": "Stops an in-flight message generation in a chat. Useful for cancelling a streaming response that is still being generated.",
+  "topics": [
+    "api",
+    "streaming"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Stop Message\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.chats.stopMessage({\nchatId: 'chat_abc123',\nmessageId: 'msg_xyz789',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/chats//messages//stop \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat containing the message to stop. Provided as a path parameter.\"\n},\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The identifier of the specific message to stop. Provided as a path parameter.\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"success\",\n\"type\": \"true\",\n\"required\": true,\n\"description\": \"Indicates that the stop signal was sent successfully.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/chats/stop-message",
+  "lastUpdated": "2026-07-30"
+}

@@ -1,0 +1,25 @@
+{
+  "id": "docs-api-v2-reference-chats-get-chat-files",
+  "slug": "api/v2/reference/chats/get-chat-files",
+  "title": "Get Chat Files",
+  "section": "API Reference",
+  "category": "API · Chats",
+  "type": "",
+  "description": "Returns the source files for a chat.",
+  "topics": [
+    "api"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Get Chat Files\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.chats.getFiles({\nchatId: 'chat_abc123',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/chats/chat_abc123/files\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"files\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"All source files in the chat.\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"A single source file in the chat.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"path\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Project-relative file path, e.g. \\\"app/page.tsx\\\".\",\n\"deprecated\": false\n},\n{\n\"name\": \"content\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Content of the file.\",\n\"deprecated\": false\n},\n{\n\"name\": \"encoding\",\n\"type\": \"'utf8' | 'base64'\",\n\"required\": true,\n\"description\": \"How `content` is encoded. `utf8` for text files; `base64` for binary files.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/chats/get-chat-files",
+  "lastUpdated": "2026-07-30"
+}

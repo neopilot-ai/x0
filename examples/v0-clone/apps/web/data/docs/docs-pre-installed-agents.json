@@ -1,0 +1,45 @@
+{
+  "id": "docs-pre-installed-agents",
+  "slug": "pre-installed-agents",
+  "title": "Pre-installed Agents",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "reference",
+  "description": "Use pre-installed coding agents like Claude Code directly in the v0 terminal.",
+  "topics": [
+    "ai",
+    "security",
+    "agents",
+    "terminal"
+  ],
+  "related": [
+    "security",
+    "enterprise",
+    "agentic-features",
+    "ai-models"
+  ],
+  "requires": [],
+  "headings": [
+    "How it works",
+    "Invoking an agent",
+    "Traffic routing through Vercel AI Gateway",
+    "Enterprise availability",
+    "What agents can access",
+    "Unsupported configurations",
+    "Direct binary execution",
+    "Overriding Gateway routing",
+    "Installing third-party agents",
+    "Vercel's visibility and responsibility",
+    "Third-party notices"
+  ],
+  "excerpt": "v0 sandboxes come with pre-installed coding agents that you can invoke directly from the terminal. These agents let you use tools like Claude Code alongside v0's built-in AI assistant, giving you flexibility to work with different agent paradigms within the same project.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "claude"
+    }
+  ],
+  "content": "\n\n# Pre-installed Agents\n\nv0 sandboxes come with pre-installed coding agents that you can invoke directly from the terminal. These agents let you use tools like [Claude Code](https://docs.anthropic.com/en/docs/agents-and-tools/claude-code/overview) alongside v0's built-in AI assistant, giving you flexibility to work with different agent paradigms within the same project.\n\n## How it works\n\n### Invoking an agent\n\nTo start using a pre-installed agent, open the terminal in your v0 project and run the agent's CLI command:\n\n```bash\nclaude\n```\n\nThe agent launches inside your project's sandbox environment and can read, edit, and create files in your codebase — just like it would on your local machine.\n\n### Traffic routing through Vercel AI Gateway\n\nBy default, all agent traffic is routed through the [Vercel AI Gateway](https://vercel.com/ai-gateway). This means:\n\n* **Model access follows your team's configuration**: The same model restrictions and permissions that apply to your v0 usage apply to agent requests.\n* **Subprocessor compliance**: Traffic routed through the Gateway is processed only by providers on [Vercel's subprocessor list](https://security.vercel.com/subprocessors), ensuring requests stay within your organization's approved data processing boundaries.\n* **Usage is metered**: Agent requests routed through the Gateway consume your team's AI Gateway credits, the same as other v0 usage.\n\n### Enterprise availability\n\nPre-installed agents are **disabled by default** for Enterprise accounts. An Enterprise admin must explicitly opt in to enable the feature for their team. This allows organizations to evaluate the feature against their security and compliance requirements before making it available to users.\n\nFor non-Enterprise accounts, pre-installed agents are available by default.\n\n## What agents can access\n\nWhen running inside the v0 sandbox, a pre-installed agent has access to:\n\n* **Your project's codebase**: All files and directories within the v0 project.\n* **Sandbox files and conversation history**: Any files generated during your session, including prior outputs and context.\n* **Environment variables and secrets**: Variables configured in your project's **Vars** panel are available in the sandbox environment, just as they would be in a local development setup.\n\nThis is the same level of access that any process running in the sandbox terminal has. Treat the sandbox environment the same way you would treat a local development machine — avoid storing secrets you wouldn't want a terminal process to read.\n\n## Unsupported configurations\n\nThe supported configuration for pre-installed agents is to use the provided CLI wrapper (e.g., `claude`) with traffic routed through Vercel AI Gateway. The following actions fall outside the supported configuration and are **at your own risk**:\n\n### Direct binary execution\n\nRunning agent binaries directly, bypassing the provided CLI wrapper, is unsupported use of the v0 terminal. The CLI wrapper ensures that agent traffic is routed through the Gateway with the correct authentication and model restrictions.\n\n### Overriding Gateway routing\n\nManually changing the agent's configuration to route traffic to providers outside of Vercel's approved list — for example, by supplying personal API keys to redirect requests away from the Gateway — removes the protections that Gateway routing provides.\n\n### Installing third-party agents\n\nInstalling additional agents or CLI tools not pre-installed by Vercel and using them to access project data is not a supported configuration. Vercel has not reviewed or vetted third-party tools installed by users into the sandbox.\n\n### Vercel's visibility and responsibility\n\nVercel does not monitor, log, or have visibility into agent activity conducted outside the supported configuration. This means:\n\n* **No responsibility for non-Gateway traffic**: Vercel disclaims all responsibility for data transmitted through non-Gateway channels or through unsupported agent configurations.\n* **Potential policy violations**: Unsupported use may violate your team's or organization's security policies. Users are responsible for ensuring their actions comply with their organization's requirements.\n* **Enterprise admin considerations**: Enterprise admins should be aware that users with terminal access can technically perform these actions. Admins should evaluate whether to enable the feature based on their organization's risk tolerance and security posture.\n\n## Third-party notices\n\nPre-installed agents such as Claude Code are third-party services. By using pre-installed agents in v0, you acknowledge the third-party terms referenced in Vercel's [Notices and License Information](https://vercel.com/legal/notices-and-license-information).\n\nLearn more about v0's security practices\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/pre-installed-agents",
+  "lastUpdated": "2026-07-30"
+}

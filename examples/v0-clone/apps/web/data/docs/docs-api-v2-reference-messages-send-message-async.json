@@ -1,0 +1,26 @@
+{
+  "id": "docs-api-v2-reference-messages-send-message-async",
+  "slug": "api/v2/reference/messages/send-message-async",
+  "title": "Send Message (Async)",
+  "section": "API Reference",
+  "category": "API · Messages",
+  "type": "",
+  "description": "Sends a new message to an existing chat and processes it in the background. Returns immediately with the assistant message ID. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` to detect completion.",
+  "topics": [
+    "api",
+    "streaming"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Send Message (Async)\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.messages.sendAsync({\nchatId: 'chat_abc123',\nmessage: 'Hello, world!',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST \"https://api.v0.dev/v2/chats/chat_abc123/messages/async\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d ''`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat.\",\n\"deprecated\": false\n}\n]}\n/>\n\n#### Request Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"message\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The prompt or instruction to send to the model.\",\n\"deprecated\": false\n},\n{\n\"name\": \"systemPrompt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"System-level context for the chat, such as frameworks or development environment details.\",\n\"deprecated\": false\n},\n{\n\"name\": \"modelConfiguration\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"Overrides for the model behavior.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"modelId\",\n\"type\": \"'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast'\",\n\"required\": true,\n\"description\": \"Model to use for the generation.\",\n\"deprecated\": false\n},\n{\n\"name\": \"imageGenerations\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Enables image generations to generate up to 5 images per version.\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"mcpServerIds\",\n\"type\": \"string[]\",\n\"required\": false,\n\"description\": \"MCP server IDs to enable. When omitted, uses default enabled servers.\",\n\"deprecated\": false\n},\n{\n\"name\": \"attachments\",\n\"type\": \"(object | object)[]\",\n\"required\": false,\n\"description\": \"Files or assets to include with the message. Provide either a URL or data URI, or inline UTF-8 text content.\",\n\"deprecated\": false\n},\n{\n\"name\": \"skills\",\n\"type\": \"('remote' | 'memory' | 'project')[]\",\n\"required\": false,\n\"description\": \"Skills to force-attach to the message. Supports skills.sh (`remote`), user/team memory (`memory`), and project (`project`) skills. Maximum 3.\",\n\"deprecated\": false,\n\"variants\": [\n{\n\"name\": \"remote\",\n\"description\": \"\",\n\"properties\": [\n{\n\"name\": \"type\",\n\"type\": \"'remote'\",\n\"required\": true,\n\"description\": \"Discriminator: a skills.sh skill.\",\n\"deprecated\": false\n},\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Skill ID from skills.sh.\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"memory\",\n\"description\": \"\",\n\"properties\": [\n{\n\"name\": \"type\",\n\"type\": \"'memory'\",\n\"required\": true,\n\"description\": \"Discriminator: a user- or team-scoped memory skill.\",\n\"deprecated\": false\n},\n{\n\"name\": \"scope\",\n\"type\": \"'user' | 'team'\",\n\"required\": true,\n\"description\": \"Whether the skill lives in user or team memory.\",\n\"deprecated\": false\n},\n{\n\"name\": \"skillName\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Name of the memory skill to attach.\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"project\",\n\"description\": \"\",\n\"properties\": [\n{\n\"name\": \"type\",\n\"type\": \"'project'\",\n\"required\": true,\n\"description\": \"Discriminator: a skill defined in the project repo.\",\n\"deprecated\": false\n},\n{\n\"name\": \"skillName\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Name of the project skill to attach.\",\n\"deprecated\": false\n}\n]\n}\n]\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ID of the assistant message that will receive the response. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` for completion.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/messages/send-message-async",
+  "lastUpdated": "2026-08-27"
+}

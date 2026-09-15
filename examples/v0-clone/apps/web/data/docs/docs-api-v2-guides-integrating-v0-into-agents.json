@@ -1,0 +1,64 @@
+{
+  "id": "docs-api-v2-guides-integrating-v0-into-agents",
+  "slug": "api/v2/guides/integrating-v0-into-agents",
+  "title": "Integrate v0 with AI Agents",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Give your agents v0's app-building capabilities",
+  "topics": [
+    "mcp",
+    "design",
+    "api",
+    "agents"
+  ],
+  "related": [
+    "api/v2/guides/mcp-server",
+    "api/v2/reference/chats/create-chat",
+    "api/v2/reference/messages/send-message"
+  ],
+  "requires": [],
+  "headings": [
+    "Use the v0 MCP server",
+    "Use v0 tools with AI SDK",
+    "Use v0 from an Eve agent"
+  ],
+  "excerpt": "v0 can act as a specialized app-building agent inside a larger agentic workflow. Your agent can delegate a build to v0, continue iterating in the same chat, resolve questions or approvals, and retrieve a preview or deployment when the app is ready.",
+  "snippets": [
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"url\": \"https://v0.app/api/mcp\"\n    }\n  }\n}"
+    },
+    {
+      "language": "txt",
+      "code": "Use v0 to build a responsive customer analytics dashboard. Return the v0 chat URL and a preview URL when it is ready."
+    },
+    {
+      "language": "bash",
+      "code": "pnpm add @v0-sdk/ai-tools ai @ai-sdk/openai"
+    },
+    {
+      "language": "bash",
+      "code": "V0_API_KEY=your_v0_api_key"
+    },
+    {
+      "language": "typescript",
+      "code": "import { openai } from '@ai-sdk/openai'\nimport { generateText, stepCountIs } from 'ai'\nimport { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst { chats, messages } = v0ToolsByCategory()\n\nconst result = await generateText({\n  model: openai('gpt-5.5'),\n  system: `You are an app-building orchestrator.\nUse v0 for creating and modifying web apps.\nContinue an existing v0 chat when a chat ID is available.`,\n  prompt: 'Build a responsive customer analytics dashboard with charts.',\n  tools: {\n    ...chats,\n    ...messages,\n  },\n  stopWhen: stepCountIs(10),\n})\n\nconsole.log(result.text)"
+    },
+    {
+      "language": "typescript",
+      "code": "const tools = v0ToolsByCategory({\n  auth: process.env.V0_API_KEY,\n})"
+    },
+    {
+      "language": "bash",
+      "code": "npx eve@latest init my-agent"
+    },
+    {
+      "language": "bash",
+      "code": "V0_API_KEY=your_v0_api_key"
+    }
+  ],
+  "content": "\n\n# Integrate v0 with AI Agents\n\nv0 can act as a specialized app-building agent inside a larger agentic workflow. Your agent can delegate a build to v0, continue iterating in the same chat, resolve questions or approvals, and retrieve a preview or deployment when the app is ready.\n\nYou can add v0 to an agent in three ways:\n\n| Integration                                         | Best for                                                     | Authentication |\n| --------------------------------------------------- | ------------------------------------------------------------ | -------------- |\n| [MCP](#use-the-v0-mcp-server)                       | MCP-compatible agent platforms, IDEs, and desktop assistants | OAuth          |\n| [AI SDK tools](#use-v0-tools-with-ai-sdk)           | TypeScript agents built with AI SDK                          | v0 API key     |\n| [Eve OpenAPI connection](#use-v0-from-an-eve-agent) | Durable agents built with [Eve](https://eve.dev)             | v0 API key     |\n\nThis guide covers using v0 as a tool from your agent. To give v0 access to another service's tools instead, [create an MCP server](/docs/api/v2/reference/mcp-servers/create-mcp-server) for the chat.\n\n## Use the v0 MCP server\n\nMCP is the fastest option when your agent platform supports remote MCP servers. The platform discovers v0's tools, handles their input schemas, and lets the model decide when to call them.\n\nAdd the v0 remote MCP server to your client:\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"url\": \"https://v0.app/api/mcp\"\n    }\n  }\n}\n```\n\nThe first connection starts an OAuth flow. Sign in to v0, choose the account or team the agent should use, and approve the connection. Do not add a v0 API key to the MCP configuration.\n\nYou can then give the agent a task such as:\n\n```txt\nUse v0 to build a responsive customer analytics dashboard. Return the v0 chat URL and a preview URL when it is ready.\n```\n\nThe MCP server exposes tools for creating and finding chats, reading and sending messages, resolving pending tasks, and getting preview URLs. See the [v0 MCP Server guide](/docs/api/v2/guides/mcp-server) for stdio configuration, available tools, and troubleshooting.\n\n## Use v0 tools with AI SDK\n\nUse `@v0-sdk/ai-tools` when you are building a TypeScript agent with the [AI SDK](https://ai-sdk.dev). The package generates AI SDK tools from the same OpenAPI specification as the `v0` SDK, so tool inputs and operations stay aligned with the v0 API.\n\nInstall the tools package, AI SDK, and your model provider:\n\n```bash\npnpm add @v0-sdk/ai-tools ai @ai-sdk/openai\n```\n\nSet your v0 API key in the server environment:\n\n```bash\nV0_API_KEY=your_v0_api_key\n```\n\nCreate only the tool categories the agent needs:\n\n```typescript\nimport { openai } from '@ai-sdk/openai'\nimport { generateText, stepCountIs } from 'ai'\nimport { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst { chats, messages } = v0ToolsByCategory()\n\nconst result = await generateText({\n  model: openai('gpt-5.5'),\n  system: `You are an app-building orchestrator.\nUse v0 for creating and modifying web apps.\nContinue an existing v0 chat when a chat ID is available.`,\n  prompt: 'Build a responsive customer analytics dashboard with charts.',\n  tools: {\n    ...chats,\n    ...messages,\n  },\n  stopWhen: stepCountIs(10),\n})\n\nconsole.log(result.text)\n```\n\n`v0ToolsByCategory()` reads `V0_API_KEY` by default. You can also pass client configuration directly:\n\n```typescript\nconst tools = v0ToolsByCategory({\n  auth: process.env.V0_API_KEY,\n})\n```\n\nThe available categories are `chats`, `messages`, `mcpServers`, and `webhooks`. Tool keys use canonical operation names, such as `chatsCreate`, `messagesSend`, and `chatsGetPreview`.\n\nUse `v0Tools()` if the agent needs every operation. For most agents, selecting categories reduces model context and limits the actions the agent can take.\n\n## Use v0 from an Eve agent\n\n[Eve](https://eve.dev) can turn the v0 OpenAPI specification into tools for a durable agent. Define one connection file and Eve will fetch the specification, derive a typed tool for each allowed operation, attach the v0 API key at execution time, and keep the credential out of model context.\n\nIf you do not have an Eve project yet, create one:\n\n```bash\nnpx eve@latest init my-agent\n```\n\nAdd a v0 API key from [v0 settings](https://v0.app/settings/keys) to the agent's server environment:\n\n```bash\nV0_API_KEY=your_v0_api_key\n```\n\nCreate `agent/connections/v0.ts`:\n\n```typescript\nimport { defineOpenAPIConnection } from 'eve/connections'\n\nexport default defineOpenAPIConnection({\n  spec: 'https://api.v0.dev/v2/openapi/json',\n  baseUrl: 'https://api.v0.dev/v2',\n  description:\n    'Build and iterate on web apps with v0. Reuse one v0 chat per app-building task.',\n  auth: {\n    getToken: async () => ({ token: process.env.V0_API_KEY! }),\n  },\n  operations: {\n    allow: [\n      'chats_create',\n      'messages_send',\n      'messages_resolve',\n      'chats_getPreview',\n    ],\n  },\n})\n```\n\nThe filename registers the connection as `v0`. Eve replaces unsupported characters in OpenAPI operation IDs, so `chats.create` becomes `chats_create`. After discovery, the model can call qualified tools such as `v0__chats_create`, `v0__messages_send`, and `v0__chats_getPreview`.\n\nGive the agent standing instructions in `agent/instructions.md`:\n\n```md\n# v0 app building\n\nUse the v0 connection when the user asks you to build or modify a web app.\n\n- Create one v0 chat for a new app-building task.\n- Reuse the returned chat ID for every follow-up message.\n- Resolve pending v0 tasks only from the user's answer or an explicit policy.\n- Return the v0 chat and preview URLs when the result is ready.\n```\n\nStart the Eve development server and ask the agent to build an app:\n\n```bash\nnpm run dev\n```\n\n```txt\nUse v0 to build a responsive customer analytics dashboard. Return the v0 chat URL and a preview URL when it is ready.\n```\n\nOpen **Agent Runs** in the Vercel dashboard to confirm that Eve discovered the `v0` connection and inspect its v0 tool calls. See [Eve's OpenAPI connections guide](https://eve.dev/docs/connections/openapi) for per-user credentials, custom headers, and operation filters.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/integrating-v0-into-agents",
+  "lastUpdated": "2026-07-30"
+}

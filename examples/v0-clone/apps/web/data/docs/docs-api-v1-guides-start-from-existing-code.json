@@ -1,0 +1,75 @@
+{
+  "id": "docs-api-v1-guides-start-from-existing-code",
+  "slug": "api/v1/guides/start-from-existing-code",
+  "title": "Start from Existing Code",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Learn how to start v0 chats from existing codebases, repositories, and file structures",
+  "topics": [
+    "github",
+    "design",
+    "api"
+  ],
+  "related": [
+    "git-import"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Importing from GitHub Repositories",
+    "Basic Repository Import",
+    "Lock Files from Modification",
+    "Importing from Files",
+    "Upload Individual Files",
+    "Upload from URLs",
+    "Importing from Zip Archives",
+    "Importing from Community Registries",
+    "Chat vs Init vs Create",
+    "When to Use chats.init()",
+    "When to Use chats.create()",
+    "Best Practices",
+    "1. File Organization",
+    "2. Selective File Locking"
+  ],
+  "excerpt": "Learn how to bootstrap v0 chats from your existing code, whether it's a GitHub repository, local files, or zip archives.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// Initialize chat from GitHub repository\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-react-app',\n    branch: 'main', // optional, defaults to default branch\n  },\n  name: 'My Imported Project', // optional\n})\n\nconsole.log(`Chat created: ${chat.id}`)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initialize with all files locked to prevent AI modification\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-app',\n  },\n  lockAllFiles: true, // Prevents AI from modifying any files\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initialize chat with specific files\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: `\n        import React from 'react'\n\n        export function Button({ children, onClick }) {\n          return (\n            <button onClick={onClick} className=\"btn\">\n              {children}\n            </button>\n          )\n        }\n      `,\n      locked: false, // Allow AI to modify this file\n    },\n    {\n      name: 'src/styles/button.css',\n      content: `\n        .btn {\n          padding: 8px 16px;\n          border: none;\n          border-radius: 4px;\n          background: #007bff;\n          color: white;\n          cursor: pointer;\n        }\n      `,\n      locked: true, // Prevent AI from modifying this file\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initialize chat with files from URLs\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'package.json',\n      url: 'https://raw.githubusercontent.com/username/repo/main/package.json',\n    },\n    {\n      name: 'README.md',\n      url: 'https://raw.githubusercontent.com/username/repo/main/README.md',\n      locked: true,\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initialize chat from zip file URL\nconst chat = await v0.chats.init({\n  type: 'zip',\n  zip: {\n    url: 'https://github.com/username/project/archive/refs/heads/main.zip',\n  },\n  lockAllFiles: false, // Allow AI to modify files\n  name: 'Project from Archive',\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initialize chat from component registry (e.g., shadcn/ui)\nconst chat = await v0.chats.init({\n  type: 'registry',\n  registry: {\n    url: 'https://ui.shadcn.com/registry/styles/default/button.json',\n  },\n  lockAllFiles: false,\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// chats.init() - Fast, no tokens, existing code\nconst initChat = await v0.chats.init({\n  type: 'files',\n  files: existingFiles,\n})\n\n// chats.create() - Slower, uses tokens, generates code\nconst createChat = await v0.chats.create({\n  message: 'Create a React dashboard with charts',\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// ✅ Good: Organized file structure\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    { name: 'src/components/Button.tsx', content: '...' },\n    { name: 'src/components/Card.tsx', content: '...' },\n    { name: 'src/styles/globals.css', content: '...' },\n    { name: 'package.json', content: '...', locked: true },\n  ],\n})"
+    }
+  ],
+  "content": "\n\n# Start from Existing Code\n\nLearn how to bootstrap v0 chats from your existing code, whether it's a GitHub repository, local files, or zip archives.\n\n## Overview\n\nThe v0 API supports multiple ways to initialize chats from existing code:\n\n* **GitHub Repositories** - Import directly from public or private repos\n* **File Uploads** - Upload individual files with content\n* **Zip Archives** - Import from zip file URLs\n* **Registry Components** - Use community components\n\n## Importing from GitHub Repositories\n\n### Basic Repository Import\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// Initialize chat from GitHub repository\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-react-app',\n    branch: 'main', // optional, defaults to default branch\n  },\n  name: 'My Imported Project', // optional\n})\n\nconsole.log(`Chat created: ${chat.id}`)\n```\n\n### Lock Files from Modification\n\n```typescript\n// Initialize with all files locked to prevent AI modification\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-app',\n  },\n  lockAllFiles: true, // Prevents AI from modifying any files\n})\n```\n\n## Importing from Files\n\n### Upload Individual Files\n\n```typescript\n// Initialize chat with specific files\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: `\n        import React from 'react'\n\n        export function Button({ children, onClick }) {\n          return (\n            <button onClick={onClick} className=\"btn\">\n              {children}\n            </button>\n          )\n        }\n      `,\n      locked: false, // Allow AI to modify this file\n    },\n    {\n      name: 'src/styles/button.css',\n      content: `\n        .btn {\n          padding: 8px 16px;\n          border: none;\n          border-radius: 4px;\n          background: #007bff;\n          color: white;\n          cursor: pointer;\n        }\n      `,\n      locked: true, // Prevent AI from modifying this file\n    },\n  ],\n})\n```\n\n### Upload from URLs\n\n```typescript\n// Initialize chat with files from URLs\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'package.json',\n      url: 'https://raw.githubusercontent.com/username/repo/main/package.json',\n    },\n    {\n      name: 'README.md',\n      url: 'https://raw.githubusercontent.com/username/repo/main/README.md',\n      locked: true,\n    },\n  ],\n})\n```\n\n## Importing from Zip Archives\n\n```typescript\n// Initialize chat from zip file URL\nconst chat = await v0.chats.init({\n  type: 'zip',\n  zip: {\n    url: 'https://github.com/username/project/archive/refs/heads/main.zip',\n  },\n  lockAllFiles: false, // Allow AI to modify files\n  name: 'Project from Archive',\n})\n```\n\n## Importing from Community Registries\n\nFor specialized use cases, you can import from component registries:\n\n```typescript\n// Initialize chat from component registry (e.g., shadcn/ui)\nconst chat = await v0.chats.init({\n  type: 'registry',\n  registry: {\n    url: 'https://ui.shadcn.com/registry/styles/default/button.json',\n  },\n  lockAllFiles: false,\n})\n```\n\n## Chat vs Init vs Create\n\n### When to Use `chats.init()`\n\nUse `chats.init()` when you have existing code and want to start development:\n\n* **Fast** - No AI processing during initialization\n* **Free** - Doesn't consume tokens\n* **Files-first** - Start with existing code structure\n\n### When to Use `chats.create()`\n\nUse `chats.create()` when starting from scratch:\n\n* **AI-powered** - Generates initial code from prompts\n* **Token cost** - Consumes tokens for AI generation\n* **Prompt-first** - Start with natural language description\n\n```typescript\n// chats.init() - Fast, no tokens, existing code\nconst initChat = await v0.chats.init({\n  type: 'files',\n  files: existingFiles,\n})\n\n// chats.create() - Slower, uses tokens, generates code\nconst createChat = await v0.chats.create({\n  message: 'Create a React dashboard with charts',\n})\n```\n\n## Best Practices\n\n### 1. File Organization\n\n```typescript\n// ✅ Good: Organized file structure\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    { name: 'src/components/Button.tsx', content: '...' },\n    { name: 'src/components/Card.tsx', content: '...' },\n    { name: 'src/styles/globals.css', content: '...' },\n    { name: 'package.json', content: '...', locked: true },\n  ],\n})\n```\n\n### 2. Selective File Locking\n\n```typescript\n// ✅ Good: Lock configuration files, allow code modification\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    { name: 'src/App.tsx', content: '...', locked: false }, // Allow AI changes\n    { name: 'package.json', content: '...', locked: true }, // Protect config\n    { name: '.env.example', content: '...', locked: true }, // Protect secrets\n  ],\n})\n```\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/start-from-existing-code",
+  "lastUpdated": "2026-09-11"
+}

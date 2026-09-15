@@ -1,0 +1,37 @@
+{
+  "id": "docs-api-v2-guides-environment-variables",
+  "slug": "api/v2/guides/environment-variables",
+  "title": "Environment Variables",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Add environment variables to a v0 chat",
+  "topics": [
+    "deployment",
+    "design",
+    "api",
+    "environment-variables",
+    "integrations"
+  ],
+  "related": [
+    "api/v2/guides/handling-integrations",
+    "api/v2/reference/chats/create-vercel-project",
+    "api/v2/reference/chats/get-chat"
+  ],
+  "requires": [],
+  "headings": [
+    "1. Ensure the chat has a Vercel project",
+    "2. Add environment variables with the Vercel API",
+    "3. v0 uses the variables automatically"
+  ],
+  "excerpt": "v0 uses your Vercel project's environment variables when generating code. The setup is:",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "// Add environment variables to the Vercel project\nawait fetch(\n  `https://api.vercel.com/v10/projects/${vercelProjectId}/env`,\n  {\n    method: \"POST\",\n    headers: {\n      Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,\n      \"Content-Type\": \"application/json\",\n    },\n    body: JSON.stringify({\n      key: \"DATABASE_URL\",\n      value: \"postgresql://user:pass@host:5432/db\",\n      type: \"encrypted\",\n      target: [\"production\", \"preview\", \"development\"],\n    }),\n  }\n)"
+    }
+  ],
+  "content": "\n\n# Environment Variables\n\nv0 uses your Vercel project's environment variables when generating code. The setup is:\n\n1. Ensure the chat has a Vercel project attached.\n2. Add environment variables using the Vercel API.\n3. v0 automatically uses those variables when generating code.\n\n## 1. Ensure the chat has a Vercel project\n\nEnvironment variables are stored on Vercel projects. Before adding them, make sure the chat has a `vercelProjectId`.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst chatResult = await v0.chats.get({\nchatId: 'chat_123',\n})\n\nif (chatResult.error) throw new Error(chatResult.error.message)\n\nlet vercelProjectId = chatResult.data.vercelProjectId\n\nif (!vercelProjectId) {\nconst projectResult = await v0.chats.createVercelProject({\nchatId: 'chat_123',\n})\n\nif (projectResult.error) throw new Error(projectResult.error.message)\nvercelProjectId = projectResult.data.vercelProjectId\n}`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`# Check if the chat has a Vercel project\ncurl -X GET \"https://api.v0.dev/v2/chats/chat_123\" \\\\\n-H \"Authorization: Bearer $V0_API_KEY\"\n\n# If vercelProjectId is missing, create one\ncurl -X POST \"https://api.v0.dev/v2/chats/chat_123/vercel-project\" \\\\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\\\n-H \"Content-Type: application/json\"`}\n/>\n\nFor more details, see [Create Vercel Project](/docs/api/v2/reference/chats/create-vercel-project).\n\n## 2. Add environment variables with the Vercel API\n\nUse the Vercel API to add environment variables to the project. This step happens outside the v0 API.\n\n```typescript\n// Add environment variables to the Vercel project\nawait fetch(\n  `https://api.vercel.com/v10/projects/${vercelProjectId}/env`,\n  {\n    method: \"POST\",\n    headers: {\n      Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,\n      \"Content-Type\": \"application/json\",\n    },\n    body: JSON.stringify({\n      key: \"DATABASE_URL\",\n      value: \"postgresql://user:pass@host:5432/db\",\n      type: \"encrypted\",\n      target: [\"production\", \"preview\", \"development\"],\n    }),\n  }\n)\n```\n\nFor the full Vercel API reference, see [Environment Variables](https://vercel.com/docs/rest-api/projects/create-one-or-more-environment-variables).\n\n**Sensitive variables**: v0 runs in the development environment. Vercel does not expose sensitive environment variables to the development environment, so avoid using the sensitive type for variables that v0 needs to access.\n\n## 3. v0 uses the variables automatically\n\nOnce environment variables are added to the Vercel project, v0 can access them when generating code in that chat. The assistant sees which variables are available and generates code that references them.\n\nFor example, if you add `DATABASE_URL` and then prompt v0 to build a database-connected app, the generated code will use `process.env.DATABASE_URL` automatically.\n\n**When changes take effect**: v0 reads environment variables from the Vercel project when it generates code. After adding, updating, or removing variables, sending a message will make the changes take effect in the chat and its preview.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\n// After adding DATABASE_URL to the Vercel project...\nconst result = await v0.messages.send({\nchatId: 'chat_123',\nmessage: 'Add a Postgres database connection using the DATABASE_URL',\n})\n\nif (result.error) throw new Error(result.error.message)\n\n// v0 generates code that uses process.env.DATABASE_URL`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`# After adding DATABASE_URL to the Vercel project...\ncurl -X POST \"https://api.v0.dev/v2/chats/chat_123/messages\" \\\\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\\\n-H \"Content-Type: application/json\" \\\\\n-d '{\n\"message\": \"Add a Postgres database connection using the DATABASE_URL\"\n}'`}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/environment-variables",
+  "lastUpdated": "2026-07-30"
+}

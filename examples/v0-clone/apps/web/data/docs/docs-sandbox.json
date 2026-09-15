@@ -1,0 +1,35 @@
+{
+  "id": "docs-sandbox",
+  "slug": "sandbox",
+  "title": "Sandbox",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "conceptual",
+  "description": "VM-backed chats run your project inside an isolated Vercel Sandbox that hosts your code, dev server, terminal, and agent tools.",
+  "topics": [
+    "security",
+    "agents",
+    "terminal"
+  ],
+  "related": [
+    "terminal-commands",
+    "pre-installed-agents",
+    "security",
+    "agentic-features"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "What the sandbox is",
+    "Where you see the sandbox",
+    "What runs inside",
+    "Isolation boundaries",
+    "Lifecycle"
+  ],
+  "excerpt": "VM-backed chats in v0 run inside an isolated virtual machine that hosts your project files, runs the live preview you see in the chat, and executes commands on your behalf. State from one chat never leaks into another.",
+  "snippets": [],
+  "content": "\n\n# Sandbox\n\nVM-backed chats in v0 run inside an isolated virtual machine that hosts your project files, runs the live preview you see in the chat, and executes commands on your behalf. State from one chat never leaks into another.\n\n## What the sandbox is\n\nv0's sandbox is powered by [Vercel Sandbox](https://vercel.com/docs/vercel-sandbox), a lightweight virtual machine that runs a full Node.js environment in seconds. It replaces the older browser-based preview, which couldn't run server code, API routes, or real database connections. Because the sandbox runs a real Node.js environment, the preview behaves the same way your project will once deployed to Vercel.\n\n## Where you see the sandbox\n\nThe sandbox surfaces in three places inside a VM-backed chat:\n\n* **Preview tab**: your app running in the sandbox. The dev server inside the sandbox serves this URL.\n* **Console panel**: tabs for **Logs** (the dev server's output) and **Terminal** (a shell where you can run commands directly, in addition to anything v0 runs through its [Bash tool](/docs/terminal-commands)).\n* **Code editor**: a built-in editor attached to the same filesystem, so edits from the editor, v0, or the terminal all read and write the same files.\n\n## What runs inside\n\nEvery sandbox includes:\n\n* **Node.js**, with `pnpm`, `npm`, `yarn`, and `bun` available out of the box. You can install any dependency your project needs.\n* **A framework-aware dev server**. v0 detects Next.js, Vite, and generic Node.js projects and starts the right command on the right port.\n* **Environment variables** from your connected Vercel project, available to both your app and any agent tool that runs in the sandbox.\n\nThis is the same environment v0's [Bash tool](/docs/terminal-commands) and [pre-installed agents](/docs/pre-installed-agents) operate in.\n\n## Isolation boundaries\n\nSandboxes are isolated along three axes:\n\n| Boundary             | What it means                                                                                                                                     |\n| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |\n| **Per chat**         | Each VM-backed chat has its own sandbox. Files, env vars, and running processes never cross from one chat to another.                             |\n| **Per user or team** | A sandbox belongs to the chat's owner. Other users can't reach it unless you [share the chat](/docs/sharing).                                          |\n| **From production**  | A sandbox is never the same machine as your deployed app. Deployments run on separate Vercel infrastructure with their own environment variables. |\n\nOn top of these boundaries, **Sandbox Network Policy** controls which outbound hosts the sandbox is allowed to reach. The default is `allow-all`. Team owners configure this from [team settings](https://v0.app/settings/advanced).\n\n## Lifecycle\n\nFor a VM-backed chat, v0 creates a sandbox the first time the chat needs one, for example when you generate code that needs a server or import a repository.\n\nAfter that:\n\n* **The filesystem persists** between sessions for the same chat. Files you or v0 wrote remain when you come back later.\n* **A pooled sandbox starts with a 30-minute lifetime.** This is the initial timeout assigned when v0 provisions or claims it, not the maximum time you can work.\n* **Active, running sandboxes are extended automatically.** Status checks and the agent's keep-alive heartbeat add 10 minutes when the sandbox has five minutes or less remaining.\n* **A sandbox can run for at most 24 hours from its creation.** Automatic extensions never cross this absolute cap.\n* **Inactive or stopped sandboxes are not revived by a keep-alive.** On your next visit or action, v0 reuses the sandbox if it is still available or recreates it if it has expired. You don't need to start or stop it manually.\n* **Starting a new VM-backed chat creates a new sandbox.** State doesn't carry over from older chats unless you explicitly fork or import.\n\nLearn how v0 runs commands inside the sandbox\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/sandbox",
+  "lastUpdated": "2026-07-30"
+}

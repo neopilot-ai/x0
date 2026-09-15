@@ -1,0 +1,30 @@
+{
+  "id": "docs-api-v1-reference-reports-get-usage",
+  "slug": "api/v1/reference/reports/get-usage",
+  "title": "Get Usage Report",
+  "section": "API Reference",
+  "category": "API · Reports",
+  "type": "reference",
+  "description": "Retrieves detailed usage events for the authenticated user or team, including costs, event types, models used, and metadata. Shows the same data as displayed in the usage dashboard. Can be filtered by chatId to show usage for a specific chat, or by userId to show usage for a specific user.",
+  "topics": [
+    "ai",
+    "api",
+    "authentication",
+    "teams"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Get Usage Report\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.reports.getUsage()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/reports/usage \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"startDate\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Query parameter \\\"startDate\\\"\"\n},\n{\n\"name\": \"endDate\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Query parameter \\\"endDate\\\"\"\n},\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Query parameter \\\"chatId\\\"\"\n},\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Query parameter \\\"messageId\\\"\"\n},\n{\n\"name\": \"userId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Query parameter \\\"userId\\\"\"\n},\n{\n\"name\": \"limit\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"Query parameter \\\"limit\\\"\"\n},\n{\n\"name\": \"cursor\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Base64 encoded cursor containing pagination data\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'usage_event'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"type\",\n\"type\": \"'image_generation' | 'message' | 'manual_debit' | 'api_request' | 'inline-edit' | 'buy-template' | 'reverse_template_sale' | 'refund_template_purchase'\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"promptCost\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"completionCost\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"totalCost\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"userId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Deprecated - use user object instead\",\n\"deprecated\": false\n},\n{\n\"name\": \"user\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO timestamp representing when the usage event was created.\",\n\"deprecated\": false\n}\n]\n}\n},\n{\n\"name\": \"pagination\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"hasMore\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"nextCursor\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"nextUrl\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"meta\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"totalCount\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/reports/get-usage",
+  "lastUpdated": "2026-07-30"
+}

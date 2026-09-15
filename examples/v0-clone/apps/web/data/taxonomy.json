@@ -1,0 +1,214 @@
+{
+  "generatedAt": "2026-09-15T05:45:42.988Z",
+  "source": "v0",
+  "sections": [
+    {
+      "name": "API Reference",
+      "count": 135
+    },
+    {
+      "name": "Guides",
+      "count": 22
+    },
+    {
+      "name": "Integrations",
+      "count": 12
+    },
+    {
+      "name": "Reference",
+      "count": 6
+    },
+    {
+      "name": "Compare",
+      "count": 4
+    },
+    {
+      "name": "Overview",
+      "count": 1
+    },
+    {
+      "name": "Getting Started",
+      "count": 1
+    },
+    {
+      "name": "FAQs",
+      "count": 1
+    }
+  ],
+  "categories": [
+    {
+      "name": "API · Chats",
+      "count": 41
+    },
+    {
+      "name": "Guides",
+      "count": 22
+    },
+    {
+      "name": "API · V1",
+      "count": 18
+    },
+    {
+      "name": "Integrations",
+      "count": 12
+    },
+    {
+      "name": "API · V2",
+      "count": 12
+    },
+    {
+      "name": "API · Projects",
+      "count": 12
+    },
+    {
+      "name": "API · Mcp-servers",
+      "count": 11
+    },
+    {
+      "name": "API · Messages",
+      "count": 9
+    },
+    {
+      "name": "API · Deployments",
+      "count": 6
+    },
+    {
+      "name": "Reference",
+      "count": 6
+    },
+    {
+      "name": "API · Hooks",
+      "count": 5
+    },
+    {
+      "name": "API · Webhooks",
+      "count": 5
+    },
+    {
+      "name": "API · User",
+      "count": 4
+    },
+    {
+      "name": "Compare",
+      "count": 4
+    },
+    {
+      "name": "API · Usage",
+      "count": 3
+    },
+    {
+      "name": "API · Integrations",
+      "count": 2
+    },
+    {
+      "name": "API · Settings",
+      "count": 2
+    },
+    {
+      "name": "API · Reports",
+      "count": 2
+    },
+    {
+      "name": "API Reference",
+      "count": 2
+    },
+    {
+      "name": "Overview",
+      "count": 1
+    },
+    {
+      "name": "Getting Started",
+      "count": 1
+    },
+    {
+      "name": "API · Rate-limits",
+      "count": 1
+    },
+    {
+      "name": "FAQs",
+      "count": 1
+    }
+  ],
+  "topics": [
+    {
+      "name": "api",
+      "count": 136
+    },
+    {
+      "name": "design",
+      "count": 70
+    },
+    {
+      "name": "integrations",
+      "count": 25
+    },
+    {
+      "name": "deployment",
+      "count": 22
+    },
+    {
+      "name": "mcp",
+      "count": 19
+    },
+    {
+      "name": "authentication",
+      "count": 18
+    },
+    {
+      "name": "agents",
+      "count": 16
+    },
+    {
+      "name": "teams",
+      "count": 16
+    },
+    {
+      "name": "streaming",
+      "count": 15
+    },
+    {
+      "name": "security",
+      "count": 12
+    },
+    {
+      "name": "ai",
+      "count": 12
+    },
+    {
+      "name": "previews",
+      "count": 11
+    },
+    {
+      "name": "permissions",
+      "count": 11
+    },
+    {
+      "name": "versions",
+      "count": 11
+    },
+    {
+      "name": "pricing",
+      "count": 11
+    },
+    {
+      "name": "environment-variables",
+      "count": 8
+    },
+    {
+      "name": "github",
+      "count": 7
+    },
+    {
+      "name": "sharing",
+      "count": 7
+    },
+    {
+      "name": "databases",
+      "count": 7
+    },
+    {
+      "name": "terminal",
+      "count": 5
+    }
+  ]
+}

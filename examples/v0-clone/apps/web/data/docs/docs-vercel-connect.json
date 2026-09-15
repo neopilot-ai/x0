@@ -1,0 +1,36 @@
+{
+  "id": "docs-vercel-connect",
+  "slug": "vercel-connect",
+  "title": "Vercel Connect",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Connect your v0 apps and agents to third-party services – no API keys required.",
+  "topics": [
+    "databases",
+    "design",
+    "authentication",
+    "agents",
+    "integrations"
+  ],
+  "related": [
+    "external-apis",
+    "databases",
+    "full-stack-apps"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Connect vs. environment variables",
+    "What you can build",
+    "Setting up a connection",
+    "Whose account does the app use?",
+    "Managing connections"
+  ],
+  "excerpt": "Vercel Connect in v0 is currently in **beta**. If you encounter bugs while using this experimental feature, please report them to the v0 team using the in-app feedback button.",
+  "snippets": [],
+  "content": "\n\n# Vercel Connect\n\nVercel Connect in v0 is currently in **beta**. If you encounter bugs while using this experimental feature, please report them to the v0 team using the in-app feedback button.\n\nv0-generated apps and agents can access third-party services – Slack, GitHub, Notion, Salesforce, and more – through [Vercel Connect](https://vercel.com/docs/connect). You authorize a service once in your browser, and your app receives short-lived, automatically refreshed tokens at runtime. There are no API keys to find, paste, rotate, or leak.\n\n## Connect vs. environment variables\n\nVercel Connect replaces pasted API keys and static environment variables with short lived, managed credentials issued to your app at runtime. See [Introducing Vercel Connect](https://vercel.com/blog/introducing-vercel-connect).\n\n|                      | Environment variables           | Vercel Connect                                              |\n| -------------------- | ------------------------------- | ----------------------------------------------------------- |\n| **Credential**       | A static key pasted per project | OAuth tokens issued and refreshed for you                   |\n| **Acts as**          | One shared key for everyone     | Each signed-in user, or a shared app identity               |\n| **Receiving events** | You configure provider webhooks | Verified webhooks delivered to your app by Connect          |\n| **Rotation**         | Manual                          | Automatic refresh; revoke anytime from the dashboard or API |\n\nKeep [environment variables](/docs/external-apis) for configuration that isn't a service credential.\n\n## What you can build\n\n* **Apps that act as the signed-in user.** *\"Build me a dashboard of my open GitHub pull requests.\"* Each viewer authorizes GitHub themselves and sees their own data, with their own permissions.\n* **Agents that work your tools.** *\"Build me a Slack agent that sends me a daily summary of my merged PRs.\"* v0 connects Slack and GitHub, and the agent posts on schedule.\n* **Bots that respond to events.** Connect delivers the service's webhooks (Slack mentions, messages, DMs, etc.) straight to your app. You never touch the provider's webhook settings.\n\n## Setting up a connection\n\nDescribe what you want to build; v0 handles the wiring.\n\n1. v0 proposes the services it needs and asks for your approval.\n2. A setup card opens the authorization flow in your browser, where you sign in to the service.\n3. When you finish, the chat resumes and v0 keeps building with the connection attached.\n\n## Whose account does the app use?\n\nv0 chooses between two authorization models based on what you asked for, and tells you which before setup:\n\n* **Your users' accounts** – each person authorizes the service themselves, and the app acts with their permissions. The first time someone uses the feature, they're prompted to sign in in the app, or as a button right in Slack.\n* **A shared app account** – one credential the whole app acts through, as itself; this is how bots and scheduled agents run. Everyone using the app shares its access.\n\n## Managing connections\n\nThe connections attached to a project are listed in **Project menu** → **Settings** → **Integrations**, with links out to each Connect client in the Vercel dashboard. From the [Connect dashboard](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fconnect\\&title=Go+to+Vercel+Connect) you can revoke access and review event delivery.\n\nTokens are encrypted and short-lived, and never appear in your code, environment variables, or chat.\n\nLearn more about Vercel Connect\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/vercel-connect",
+  "lastUpdated": "2026-08-19"
+}

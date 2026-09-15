@@ -1,0 +1,28 @@
+{
+  "id": "docs-api-v2-reference-settings-get-trusted-preview-hosts",
+  "slug": "api/v2/reference/settings/get-trusted-preview-hosts",
+  "title": "Get Trusted Preview Hosts",
+  "section": "API Reference",
+  "category": "API · Settings",
+  "type": "",
+  "description": "Returns the hostname patterns trusted to embed previews for the current team. Organization child teams inherit the parent organization’s hosts.",
+  "topics": [
+    "security",
+    "api",
+    "previews",
+    "teams"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Get Trusted Preview Hosts\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.settings.getPreviewHosts()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/settings/preview-hosts\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"hosts\",\n\"type\": \"string[]\",\n\"required\": true,\n\"description\": \"Canonicalized hostname patterns trusted to embed previews. Exact hosts match only themselves; *.example.com matches exactly one subdomain label; **.example.com matches one or more subdomain labels. Wildcards do not include the apex, so list example.com separately when it should also be trusted.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/settings/get-trusted-preview-hosts",
+  "lastUpdated": "2026-07-30"
+}

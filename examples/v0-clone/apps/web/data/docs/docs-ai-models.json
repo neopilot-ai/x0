@@ -1,0 +1,31 @@
+{
+  "id": "docs-ai-models",
+  "slug": "ai-models",
+  "title": "AI models",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Add AI functionality to your v0 projects by integrating AI models and platforms.",
+  "topics": [
+    "databases",
+    "ai",
+    "integrations"
+  ],
+  "related": [
+    "external-apis",
+    "databases"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Using the Vercel AI Gateway",
+    "Marketplace integrations",
+    "APIs"
+  ],
+  "excerpt": "v0 can build AI functionality into your projects by integrating with AI platforms or by using API keys for specific providers.",
+  "snippets": [],
+  "content": "\n\n# AI models\n\nv0 can build AI functionality into your projects by integrating with AI platforms or by using API keys for specific providers.\nBy default, v0 uses the [Vercel AI Gateway](https://vercel.com/ai-gateway) to connect to various AI models.\n\n### Using the Vercel AI Gateway\n\nTo use the Vercel AI Gateway, no additional setup is required. v0 is pre-configured to connect to the gateway and access supported AI models.\n\n### Marketplace integrations\n\nv0 integrates with AI platforms like [fal](https://fal.ai/) and [Deep Infra](https://deepinfra.com/). You can also connect directly to [Grok by xAI](https://x.ai/grok).\n\nFrom **Project menu** `...` → **Settings** → **Integrations**, you'll see supported providers. Click **Install** to open the Marketplace and accept click-through terms to activate an integration.\n\n### APIs\n\nTo integrate with third-party AI models such as [OpenAI](https://openai.com/), you can add the necessary environment variables (e.g. `OPEN_AI_API_KEY`) from **Project menu** `...` → **Settings** → **Environment Variables**.\n\nv0 will now use this variable when prompted to generate AI functionality.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/ai-models",
+  "lastUpdated": "2026-08-19"
+}

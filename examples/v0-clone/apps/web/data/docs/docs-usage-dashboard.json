@@ -1,0 +1,42 @@
+{
+  "id": "docs-usage-dashboard",
+  "slug": "usage-dashboard",
+  "title": "Usage & Activity",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "guide",
+  "description": "Track your credit consumption and activity, or review usage across your team.",
+  "topics": [
+    "design",
+    "pricing",
+    "teams"
+  ],
+  "related": [
+    "pricing",
+    "teams",
+    "account"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "What you see on the page",
+    "Selecting a date range",
+    "Credits tab",
+    "Consumption chart",
+    "Team credit usage",
+    "Per-message drill-down",
+    "Data freshness",
+    "Your credit usage",
+    "Activity tab",
+    "Team activity",
+    "Your activity",
+    "Exporting and visualizing",
+    "Enterprise trials"
+  ],
+  "excerpt": "The **Usage & Activity** dashboard at v0.app/settings/usage shows credit consumption and activity for your personal account or team. On eligible team plans, Owners and members with the Billing role can also review team-wide data.",
+  "snippets": [],
+  "content": "\n\n# Usage & Activity\n\nThe **Usage & Activity** dashboard at [v0.app/settings/usage](https://v0.app/settings/usage) shows credit consumption and activity for your personal account or team. On eligible team plans, Owners and members with the Billing role can also review team-wide data.\n\n## What you see on the page\n\nThe page looks different depending on your account, team role, plan, and billing model.\n\n| Account type and role                                                      | What the page shows                                                                                             |\n| -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |\n| Team **Owner** or **Billing** role on a Plus, Business, or Enterprise team | Team-wide and personal activity. On credit-based billing, the **Credits** tab also shows team-wide consumption. |\n| Any other member of an eligible team                                       | Only their own activity. On credit-based billing, the **Credits** tab shows only their own consumption.         |\n| Personal Free or Premium account                                           | Personal activity and, on credit-based billing, personal credit consumption.                                    |\n| An unsupported plan or billing model                                       | The legacy usage view or a message explaining that usage data isn't available.                                  |\n\nCredit-based accounts have **Credits** and **Activity** tabs. When credit data isn't available, the page shows **Activity** only.\n\nOwners and members with the Billing role can switch the Activity tab between **Team** and **Self**. Other members and personal accounts only see their own data. When team-wide access is available, the badge next to the page title reports how many v0 Builder and v0 Viewer seats are assigned.\n\n## Selecting a date range\n\nThe date selector applies to whichever tabs and activity views are present, and the range carries over when you switch between them. Presets are:\n\n* **This billing cycle** (default) — only offered on credit-billed teams\n* **Last 7 days**\n* **Last 30 days**\n* **Last 90 days**\n\nUse the calendar icon to pick a custom start and end date, then click **Apply**. The label to the left of the selector always shows the resolved range, for example `May 1 – Jul 30, 2026`.\n\nRanges can reach back up to 365 days. Earlier dates are not selectable, because\nwindows that wide cannot be aggregated.\n\n## Credits tab\n\nThis tab appears when the selected account or team is billed in credits. It reports credits actually debited, split by where they came from:\n\n* **Monthly Credits** — the per-seat monthly allotment (plus daily bonus credits). Spent first, and rolls over for one month.\n* **Shared Pool Credits** — the team-wide purchased pool (including redeemed coupon credits). Covers the overflow once monthly credits run out, and expires one year after purchase.\n\n### Consumption chart\n\nA stacked bar per day, with monthly credits in black in light mode or white in dark mode, and shared pool credits in blue. Days with no activity are still shown so the axis stays continuous. Hover a bar to see the monthly, shared pool, and total amounts for that day.\n\n### Team credit usage\n\nOwners and members with the Billing role see every member with v0 access and their **Monthly Credits** and **Shared Pool Credits** for the selected range. Team totals appear in the section header, and every column is sortable.\n\n### Per-message drill-down\n\nClick any row to see that member's individual charges. The chart above the table narrows to just that member, and the table shows:\n\n| Column    | Description                                                                |\n| --------- | -------------------------------------------------------------------------- |\n| **Date**  | When the charge was recorded                                               |\n| **Event** | The billed event, linking to the message when you have access to that chat |\n| **Kind**  | Monthly Credits, Shared Pool Credits, or both                              |\n| **Model** | The model that served the request                                          |\n| **Cost**  | Credits consumed                                                           |\n\nCharges waived because they were an auto-fix with v0 are struck through and tagged **FREE**.\n\nClick **Back** to return to the per-member view.\n\nChat links only appear for team Owners and for your own chats. Everyone else\nsees the event name as plain text.\n\n### Data freshness\n\nCredit data is aggregated, so the timestamp under the tables shows when it was last updated. Use the refresh button next to it to pull the latest numbers.\n\n### Your credit usage\n\nTeam members without team-wide access and personal accounts see a chart and transaction table for their own consumption. The table includes the event date, event type, credit source, model, and cost. Events link to chats you can access, and waived auto-fixes are struck through and tagged **FREE**.\n\nUse **Download** to export your transactions for the selected range. The CSV includes `Timestamp`, `Source`, `Type`, `Model`, `Chat ID`, `Cost`, and `Free Fix` columns.\n\n## Activity tab\n\nThe Activity tab reports how v0 is being used rather than how many credits were spent. It is available even when the Credits tab is not.\n\n### Team activity\n\nOwners and members with the Billing role can select **Team**, then group activity by **Users** or **Projects**. Three summary cards cover the selected range:\n\n* **Active users** — members with at least one day of v0 activity\n* **Total chats** — chats with user-message activity\n* **Total messages** — messages sent across the team\n\nWhen grouped by **Users**, the table breaks the range down per member:\n\n| Column             | Description                      |\n| ------------------ | -------------------------------- |\n| **Email**          | Team member                      |\n| **Chats**          | Chats with activity in the range |\n| **Messages**       | Messages sent in the range       |\n| **Days**           | Days with at least one message   |\n| **First Activity** | First message in the range       |\n| **Last Activity**  | Most recent message in the range |\n\nWhen grouped by **Projects**, the table shows each project's chat count, message count, active days, and first and last activity. Project names link to their project pages when they are still available.\n\nCollaborative chats count once in team and project chat totals. Messages remain attributed to the members who sent them.\n\n### Your activity\n\nSelect **Self** to review your own activity. This is the only activity scope available to personal accounts and team members without team-wide access. The summary cards show your **Active days**, **Total chats**, and **Total messages**.\n\nBy default, activity is grouped by **Pro",
+  "sourceUrl": "https://v0.app/docs/usage-dashboard",
+  "lastUpdated": "2026-09-11"
+}

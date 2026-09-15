@@ -1,0 +1,55 @@
+{
+  "id": "docs-api-v1-examples-classic-v0",
+  "slug": "api/v1/examples/classic-v0",
+  "title": "Classic v0",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "A faithful recreation of the original v0.dev interface",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "api/v1/packages/v0-sdk"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Features",
+    "Technologies Used",
+    "Getting Started",
+    "Prerequisites",
+    "Installation",
+    "Usage",
+    "Example Prompts",
+    "Interface Components",
+    "Prompt Input Stage",
+    "Generations View",
+    "Environment Variables",
+    "Source Code"
+  ],
+  "excerpt": "Build the iconic v0.dev experience with modern web technologies. This example shows you how to create the classic three-generation workflow using React, Next.js, and the v0 SDK.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "cd examples/classic-v0"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm install"
+    },
+    {
+      "language": "bash",
+      "code": "export V0_API_KEY=your_api_key_here"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm dev"
+    }
+  ],
+  "content": "\n\n# Classic v0\n\nBuild the iconic v0.dev experience with modern web technologies. This example shows you how to create the classic three-generation workflow using React, Next.js, and the v0 SDK.\n\n## Features\n\n* **Classic v0 Interface**: Faithful recreation of the original v0.dev workflow\n* **Multiple Generations**: Creates 3 different variations (A, B, C) for each prompt\n* **Generation Selection**: Click between different generations to compare and choose\n* **Live Preview**: See your generated components in real-time via iframe\n* **Modern Stack**: Built with Next.js 15, React 19, TypeScript, and Tailwind CSS\n* **shadcn/ui Components**: Professional UI components for a polished interface\n* **Two-Stage Workflow**: Prompt input → Multiple generations → Selection and iteration\n\n## Technologies Used\n\n* **Frontend Framework**: Next.js 15 with App Router\n* **UI Library**: shadcn/ui + Radix UI primitives\n* **Styling**: Tailwind CSS\n* **AI Integration**: v0-sdk for chat and component generation\n* **Code Highlighting**: react-syntax-highlighter\n* **Icons**: Lucide React\n\n## Getting Started\n\n### Prerequisites\n\n* Node.js 22+\n* pnpm (recommended) or npm\n* v0 API key from [v0 settings](https://v0.app/settings/keys)\n\n### Installation\n\n1. Navigate to the classic-v0 directory:\n\n   ```bash\n   cd examples/classic-v0\n   ```\n\n2. Install dependencies:\n\n   ```bash\n   pnpm install\n   ```\n\n3. Set up environment variables:\n\n   ```bash\n   export V0_API_KEY=your_api_key_here\n   ```\n\n4. Run the development server:\n\n   ```bash\n   pnpm dev\n   ```\n\n5. Open [http://localhost:3000](http://localhost:3000) in your browser\n\n## Usage\n\n1. **Enter Your Prompt**: Describe the UI component you want to build\n2. **Get Suggestions**: Click on any of the provided prompt suggestions to get started quickly\n3. **View Multiple Generations**: Three different variations (A, B, C) are generated simultaneously\n4. **Select Your Favorite**: Click on the generation buttons to switch between options\n5. **Continue Iterating**: Choose one generation to continue refining and iterating\n6. **Start Over**: Use the back button or \"+\" to begin a new prompt\n\n### Example Prompts\n\n* \"Create a responsive navbar with Tailwind CSS\"\n* \"Build a todo app with React hooks\"\n* \"Make a landing page for a coffee shop\"\n* \"Design a contact form with validation\"\n* \"Create a dashboard with charts\"\n\n## Interface Components\n\n### Prompt Input Stage\n\n* **Main Prompt**: Large textarea for describing your UI\n* **Suggestions**: Quick-start prompts for inspiration\n* **Loading State**: Animated feedback while generating\n\n### Generations View\n\n* **Generation Display**: Full-screen preview of selected generation\n* **Generation Selector**: A, B, C buttons to switch between options\n* **Navigation**: Back button to return to prompt input\n* **Headers**: Clean navigation with v0 branding\n\n## Environment Variables\n\n| Variable     | Description                        | Required |\n| ------------ | ---------------------------------- | -------- |\n| `V0_API_KEY` | Your v0 API key for authentication | Yes      |\n\n## Source Code\n\nView the complete source code on GitHub: [v0-sdk/examples/classic-v0](https://github.com/vercel/v0-sdk/tree/main/examples/classic-v0)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/examples/classic-v0",
+  "lastUpdated": "2026-07-30"
+}

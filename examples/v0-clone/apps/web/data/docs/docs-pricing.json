@@ -1,0 +1,32 @@
+{
+  "id": "docs-pricing",
+  "slug": "pricing",
+  "title": "Pricing",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "reference",
+  "description": "Understand the v0 plans, pricing, and usage limits.",
+  "topics": [
+    "pricing"
+  ],
+  "related": [
+    "account",
+    "enterprise"
+  ],
+  "requires": [],
+  "headings": [
+    "Plan comparison",
+    "How do credits work?",
+    "Shared Credit Pool (Plus, Business, and Enterprise)",
+    "What are tokens?",
+    "Model Pricing",
+    "Usage and billing",
+    "Credit purchase options",
+    "Best practices"
+  ],
+  "excerpt": "v0 offers 5 plans:",
+  "snippets": [],
+  "content": "\n\n# Pricing\n\nv0 offers 5 plans:\n\n* **Free**: No cost. For people looking to explore.\n* **Premium**: $20/month. For higher limits and power users.\n* **Plus**: $30/user/month. For fast moving teams and collaboration.\n* **Business**: $100/user/month. For privacy conscious teams.\n* **Enterprise**: For large companies that require additional security.\n\nThe Premium plan is in the process of being sunsetted and is no longer\navailable to new users.\n\n## Plan comparison\n\n| **Feature**         | **Free**   | **Premium**  | **Plus**       | **Business**    | **Enterprise**    |\n| ------------------- | ---------- | ------------ | -------------- | --------------- | ----------------- |\n| Price               | $0/month   | $20/month    | $30/user/month | $100/user/month | Custom            |\n| Monthly Credits     | $5         | $20          | $30 per user   | $30 per user    | Custom            |\n| Daily Message Limit | 7 messages | Credit-based | Credit-based   | Credit-based    | Credit-based      |\n| Team Features       | No         | No           | Yes            | Yes             | Advanced controls |\n| Shared Projects     | No         | No           | Yes            | Yes             | Yes               |\n| Shared Credit Pool  | No         | No           | Yes            | Yes             | Yes               |\n| Access Controls     | No         | No           | Basic          | Basic           | RBAC              |\n| Centralized Billing | No         | No           | Yes            | Yes             | Yes               |\n| Usage Analytics     | Basic      | Basic        | Team-wide      | Team-wide       | Advanced          |\n| Data Opt-out        | No         | No           | No             | Yes             | Yes               |\n| SAML SSO            | No         | No           | No             | No              | Yes               |\n| Priority Access     | No         | No           | No             | No              | Yes               |\n\n[Choose your plan →](https://v0.app/pricing)\n\n## How do credits work?\n\nCredits function like a prepaid balance:\n\n* Each plan includes a monthly credit allowance.\n* Generations draw from your credit balance.\n* When credits are used up, generation pauses.\n* You can buy more credits any time (Premium, Plus, and Business plans).\n* Unused monthly credits roll over to the next billing cycle and expire after 65 days.\n* Purchased credits remain in your balance when your subscription expires, but they require an active paid plan to use and expire one year after purchase.\n\n### Shared Credit Pool (Plus, Business, and Enterprise)\n\nOn Plus, Business, and Enterprise plans, Shared Credit Pool credits are shared among all team members:\n\n* Monthly credits are still individual per user\n* Shared Credit Pool credits are shared across the team\n* Shared Credit Pool credits are used after individual monthly credits are exhausted\n* Shared Credit Pool credits expire one year after purchase\n\n## What are tokens?\n\nTokens are the units used to measure how much text is processed:\n\n* **Input tokens** come from your prompt or uploaded content.\n* **Output tokens** are what v0 generates in response.\n\nEach time you use v0, your input and the generated output are split into tokens and counted. Token usage varies based on the length of your input and the size of the output. Longer prompts or more detailed responses will use more tokens.\n\nv0 also includes all relevant context like chat history, source files, and Vercel-specific knowledge when generating responses. This context is counted as input, and higher-quality responses may use more tokens as a result.\n\n## Model Pricing\n\nThe number of tokens per credit used depends on the model. You can view model costs by hovering each in the model selector or from the [**pricing page**](https://v0.app/pricing).\n\n## Usage and billing\n\nYou can monitor your usage and manage billing in your v0 dashboard:\n\n* [**Usage**](https://v0.app/settings/usage): Your credit consumption and activity, grouped by project or chat. On eligible team plans, Owners and members with the Billing role can also review team-wide credit and activity data by member or project.\n* [**Billing**](https://v0.app/settings/billing): Your current plan, credit balances and expiry dates, payment method, and invoices.\n\nLearn more about the Usage & Activity dashboard\n\n## Credit purchase options\n\nPremium, Plus, and Business plans can purchase additional credits at any time. Enterprise accounts should contact their Account Executive to organise additional credit purchases.\n\n## Best practices\n\n* Be specific in your prompts to reduce iterations. See our [prompting guide](https://vercel.com/blog/how-to-prompt-v0) for tips.\n* Break large projects into smaller components.\n* Use server components for better performance.\n* Monitor your credit usage regularly.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/pricing",
+  "lastUpdated": "2026-07-31"
+}

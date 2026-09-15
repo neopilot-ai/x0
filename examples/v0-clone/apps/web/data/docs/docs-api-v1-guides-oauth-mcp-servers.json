@@ -1,0 +1,54 @@
+{
+  "id": "docs-api-v1-guides-oauth-mcp-servers",
+  "slug": "api/v1/guides/oauth-mcp-servers",
+  "title": "OAuth MCP Servers",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Configure OAuth-authenticated MCP servers with the v0 API",
+  "topics": [
+    "mcp",
+    "design",
+    "api",
+    "authentication"
+  ],
+  "related": [
+    "api/v1/reference/mcp-servers/create",
+    "api/v1/reference/mcp-servers/create-oauth-authorization-url",
+    "api/v1/reference/mcp-servers/update",
+    "api/v1/reference/chats/create"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "1. Register the OAuth client",
+    "2. Create the MCP server",
+    "3. Create an authorization URL",
+    "4. Handle the return URL",
+    "5. Use the server in chats",
+    "Updating OAuth configuration"
+  ],
+  "excerpt": "Use OAuth MCP servers when an MCP provider requires a user authorization flow before v0 can call its tools. The v0 API stores the MCP server configuration, creates a provider authorization URL, stores tokens from the OAuth callback, and redirects back to your application.",
+  "snippets": [
+    {
+      "language": "txt",
+      "code": "https://api.v0.dev/v1/mcp-servers/oauth/callback"
+    },
+    {
+      "language": "txt",
+      "code": "https://v0.app/api/chat/integrations/oauth/client-metadata.json"
+    },
+    {
+      "language": "txt",
+      "code": "?oauth_success=true&mcpServerId=mcp_123"
+    },
+    {
+      "language": "txt",
+      "code": "?error=access_denied&error_description=The+user+denied+access&mcpServerId=mcp_123"
+    }
+  ],
+  "content": "\n\n# OAuth MCP Servers\n\nUse OAuth MCP servers when an MCP provider requires a user authorization flow before v0 can call its tools. The v0 API stores the MCP server configuration, creates a provider authorization URL, stores tokens from the OAuth callback, and redirects back to your application.\n\n## 1. Register the OAuth client\n\nRegister v0 as an OAuth client with your MCP provider.\n\nUse this redirect URI for v0 API OAuth flows:\n\n```txt\nhttps://api.v0.dev/v1/mcp-servers/oauth/callback\n```\n\nIf the provider supports Client ID Metadata Documents, use this URL as the client ID:\n\n```txt\nhttps://v0.app/api/chat/integrations/oauth/client-metadata.json\n```\n\nIf the provider requires dynamic client registration or a manually registered OAuth app, use the provider's registration flow and save the resulting client ID and optional client secret.\n\n## 2. Create the MCP server\n\nCreate the MCP server with `auth.type` set to `oauth`. The `resource` value is usually the MCP server URL and is sent as an RFC 8707 resource indicator during authorization.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst server = await v0.mcpServers.create({\nname: 'Linear',\nurl: 'https://mcp.linear.app/mcp',\nauth: {\ntype: 'oauth',\nconfig: {\nauthorizationUrl: 'https://linear.app/oauth/authorize',\ntokenUrl: 'https://api.linear.app/oauth/token',\nclientId: 'your-client-id',\nscopes: ['read'],\nusePKCE: true,\nresource: 'https://mcp.linear.app/mcp',\n},\n},\n})\n\nconsole.log(server.id)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/mcp-servers \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"name\": \"Linear\",\n\"url\": \"https://mcp.linear.app/mcp\",\n\"auth\": {\n\"type\": \"oauth\",\n\"config\": {\n\"authorizationUrl\": \"https://linear.app/oauth/authorize\",\n\"tokenUrl\": \"https://api.linear.app/oauth/token\",\n\"clientId\": \"your-client-id\",\n\"scopes\": [\"read\"],\n\"usePKCE\": true,\n\"resource\": \"https://mcp.linear.app/mcp\"\n}\n}\n}'`}\n/>\n\nThe server is created disconnected. The API response redacts secret values and returns only the authentication type.\n\n## 3. Create an authorization URL\n\nCreate an authorization URL for the MCP server and redirect the user to it from your application. The `returnUrl` is an absolute URL in your application.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'next/navigation'\n\nconst authorization = await v0.mcpServers.createOAuthAuthorizationUrl({\nmcpServerId: 'mcp_123',\nreturnUrl: 'https://your-app.example.com/oauth/v0-mcp/callback',\n})\n\nredirect(authorization.url)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/mcp-servers/mcp_123/oauth/authorize \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"returnUrl\": \"https://your-app.example.com/oauth/v0-mcp/callback\"\n}'`}\n/>\n\nThe authorization URL expires after 5 minutes.\n\n## 4. Handle the return URL\n\nAfter the user authorizes with the MCP provider, v0 stores the OAuth tokens and redirects to your `returnUrl`.\n\nOn success, v0 appends:\n\n```txt\n?oauth_success=true&mcpServerId=mcp_123\n```\n\nOn failure, v0 appends:\n\n```txt\n?error=access_denied&error_description=The+user+denied+access&mcpServerId=mcp_123\n```\n\nAfter authorization, v0 can attach the stored OAuth token when it calls the MCP server. If the token expires and the provider issued a refresh token, v0 refreshes it automatically.\n\n## 5. Use the server in chats\n\nPass the MCP server ID when creating a chat or sending a message.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst chat = await v0.chats.create({\nmessage: 'Use Linear context to summarize my active issues',\nmcpServerIds: ['mcp_123'],\n})\n\nawait v0.chats.sendMessage({\nchatId: chat.id,\nmessage: 'Create a project plan from those issues',\nmcpServerIds: ['mcp_123'],\n})`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/chats \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"message\": \"Use Linear context to summarize my active issues\",\n\"mcpServerIds\": [\"mcp_123\"]\n}'\n\ncurl -X POST https://api.v0.dev/v1/chats/chat_123/messages \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"message\": \"Create a project plan from those issues\",\n\"mcpServerIds\": [\"mcp_123\"]\n}'`}\n/>\n\nIf the user has not authorized the server yet, v0 will not load its tools for the chat.\n\n## Updating OAuth configuration\n\nUse `v0.mcpServers.update()` to replace the stored OAuth configuration.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nawait v0.mcpServers.update({\nmcpServerId: 'mcp_123',\nauth: {\ntype: 'oauth',\nconfig: {\nauthorizationUrl: 'https://auth.example.com/oauth/authorize',\ntokenUrl: 'https://auth.example.com/oauth/token',\nclientId: 'updated-client-id',\nscopes: ['read', 'write'],\nusePKCE: true,\nresource: 'https://mcp.example.com/mcp',\n},\n},\n})`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X PATCH https://api.v0.dev/v1/mcp-servers/mcp_123 \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"auth\": {\n\"type\": \"oauth\",\n\"config\": {\n\"authorizationUrl\": \"https://auth.example.com/oauth/authorize\",\n\"tokenUrl\": \"https://auth.example.com/oauth/token\",\n\"clientId\": \"updated-client-id\",\n\"scopes\": [\"read\", \"write\"],\n\"usePKCE\": true,\n\"resource\": \"https://mcp.example.com/mcp\"\n}\n}\n}'`}\n/>\n\nIf the provider changes client IDs, scopes, or token endpoints, create a new authorization URL and have the user authorize the MCP server again.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/oauth-mcp-servers",
+  "lastUpdated": "2026-07-30"
+}
