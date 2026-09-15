@@ -23,6 +23,28 @@
 - [/docs/instructions](instructions) - Instructions
 - [/docs/design-systems-2](design-systems-2) - Design Systems
 - [/docs/design-systems](design-systems) - Design Systems (Legacy)
+- [/docs/account](account) - Account
+- [/docs/pricing](pricing) - Pricing
+- [/docs/security](security) - Security
+- [/docs/faqs](faqs) - FAQs
+- [/docs/text-prompting](text-prompting) - Text Prompting
+- [/docs/prototyping](prototyping) - Prototyping
+- [/docs/prd-design](prd-design) - PRD Design
+- [/docs/full-stack-apps](full-stack-apps) - Full-Stack Apps
+- [/docs/images-and-videos](images-and-videos) - Images and Videos
+- [/docs/figma](figma) - Figma
+- [/docs/github](github) - GitHub
+- [/docs/git-import](git-import) - Git Import
+- [/docs/sharing](sharing) - Sharing
+- [/docs/templates](templates) - Templates
+- [/docs/usage-dashboard](usage-dashboard) - Usage Dashboard
+- [/docs/vercel-integration](vercel-integration) - Vercel Integration
+- [/docs/vercel-connect](vercel-connect) - Vercel Connect
+- [/docs/external-apis](external-apis) - External APIs
+- [/docs/slack](slack) - Slack
+- [/docs/snowflake](snowflake) - Snowflake
+- [/docs/shopify](shopify) - Shopify
+- [/docs/MCP](MCP) - MCP Integrations
 
 ## API v2
 - [/docs/api/v2](api/v2) - API Overview

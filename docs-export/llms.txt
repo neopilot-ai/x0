@@ -22,6 +22,27 @@
 - /docs/pre-installed-agents - Pre-installed agents
 - /docs/paper - Paper mode
 - /docs/instructions - Instructions configuration
+- /docs/account - Account and billing
+- /docs/pricing - Plans and pricing
+- /docs/security - Security practices
+- /docs/faqs - FAQs
+- /docs/prototyping - Prototyping guide
+- /docs/prd-design - PRD design guide
+- /docs/full-stack-apps - Full-stack apps guide
+- /docs/images-and-videos - Images and file uploads
+- /docs/figma - Figma integration
+- /docs/github - GitHub integration
+- /docs/git-import - Import from GitHub
+- /docs/sharing - Sharing and collaboration
+- /docs/templates - Templates
+- /docs/usage-dashboard - Usage dashboard
+- /docs/vercel-integration - Vercel integration
+- /docs/vercel-connect - Vercel Connect
+- /docs/external-apis - External APIs
+- /docs/slack - Slack integration
+- /docs/snowflake - Snowflake integration
+- /docs/shopify - Shopify integration
+- /docs/MCP - MCP integrations
 
 ## Design Systems
 - /docs/design-systems-2 - Design Systems 2.0
@@ -64,6 +85,7 @@
 - /docs/api/v2/guides/accessing-previews - Preview access
 - /docs/api/v2/guides/custom-chat-interface - Custom chat interface
 - /docs/api/v2/guides/handling-integrations - Handling integrations
+- /docs/api/v2/guides/handling-agent-interactions - Handling agent interactions
 - /docs/api/v2/guides/mcp-server - MCP server guide
 - /docs/api/v2/guides/organizations - Organizations
 - /docs/api/v2/guides/resuming-streams - Resuming streams
