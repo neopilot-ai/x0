@@ -18,19 +18,28 @@ npm install @v0-sdk/ai-tools
 ## Usage
 
 ```typescript
+import { generateText } from 'ai'
 import { v0Tools, v0ToolsByCategory } from '@v0-sdk/ai-tools'
 
-// All tools, keyed by name: chatsCreate, chatsDeploy, ...
-const tools = v0Tools
+// All tools, built from client config (same options as createV0Client, plus apiKey)
+const tools = v0Tools({ apiKey: process.env.V0_API_KEY })
 
-// Tools grouped by API category
-const { chats, messages, mcpServers, settings, usage, webhooks } = v0ToolsByCategory
+const result = await generateText({
+  model: openai('gpt-4o-mini'),
+  prompt: 'Create and deploy a React dashboard',
+  tools,
+})
+
+// Or grouped by API category
+const { chats, messages, mcpServers, settings, usage, webhooks } = v0ToolsByCategory({
+  apiKey: process.env.V0_API_KEY,
+})
 ```
 
 ## Exports
 
-- `v0Tools` — flat map of every tool (`V0ToolsFlat`)
-- `v0ToolsByCategory` — tools grouped by category (`V0ToolsByCategory`)
+- `v0Tools(config)` — builds the full tool set (`V0ToolsFlat`)
+- `v0ToolsByCategory(config)` — builds tools grouped by category (`V0ToolsByCategory`)
 - Types: `V0ToolCategory`, `V0ToolsByCategory`, `V0ToolsConfig`, `V0ToolsFlat`
 
 ## Tool categories
