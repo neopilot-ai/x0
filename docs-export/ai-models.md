@@ -1,41 +1,31 @@
 ---
 title: AI Models
-description: Model configurations for v0
+description: Add AI functionality to your v0 projects by integrating AI models and platforms
 product: v0
-type: guide
+type: integration
+related:
+  - /docs/external-apis
+  - /docs/databases
 ---
 
 # AI Models
 
-v0 supports multiple AI models for code generation and chat interactions.
+v0 can build AI functionality into your projects by integrating with AI platforms or by using API keys for specific providers. By default, v0 uses the [Vercel AI Gateway](https://vercel.com/ai-gateway) to connect to various AI models.
 
-## Available Models
+## Using the Vercel AI Gateway
 
-- **v0-mini** - Fast, lightweight model for simple tasks
-- **v0-pro** - Balanced model for general use
-- **v0-max** - Most capable model for complex tasks
-- **v0-max-fast** - High-performance variant
+To use the Vercel AI Gateway, no additional setup is required. v0 is pre-configured to connect to the gateway and access supported AI models.
 
-## Configuring Models
+## Marketplace integrations
 
-```typescript
-const result = await v0.chats.createStream({
-  message: 'Build a dashboard',
-  modelConfiguration: { modelId: 'v0-pro' },
-})
-```
+v0 integrates with AI platforms like [fal](https://fal.ai/) and [Deep Infra](https://deepinfra.com/). You can also connect directly to [Grok by xAI](https://x.ai/grok).
 
-## Image Generations
+From **Project menu** `...` → **Settings** → **Integrations**, you'll see supported providers. Click **Install** to open the Marketplace and accept click-through terms to activate an integration.
 
-Enable image generations to generate up to 5 images per version:
+![AI Models](/docs/light/ai-models.png)
 
-```typescript
-const result = await v0.chats.createStream({
-  message: 'Create a landing page with images',
-  modelConfiguration: { modelId: 'v0-pro', imageGenerations: true },
-})
-```
+## APIs
 
-## Vercel AI Gateway
+To integrate with third-party AI models such as [OpenAI](https://openai.com/), you can add the necessary environment variables (e.g. `OPEN_AI_API_KEY`) from **Project menu** `...` → **Settings** → **Environment Variables**.
 
-v0 includes Vercel AI Gateway integration, which automatically configures your API key using your Vercel account. This gives you access to hundreds of AI models through a single endpoint.
+v0 will now use this variable when prompted to generate AI functionality.
