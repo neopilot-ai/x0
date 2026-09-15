@@ -3,6 +3,8 @@ title: Prototyping
 description: Accelerate your product development lifecycle with interactive prototypes
 product: v0
 type: guide
+prerequisites:
+  - /docs/quickstart
 related:
   - /docs/design-mode
   - /docs/figma

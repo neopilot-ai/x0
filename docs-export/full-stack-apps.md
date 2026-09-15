@@ -3,6 +3,8 @@ title: Full-Stack Apps
 description: Build full-stack apps with v0
 product: v0
 type: guide
+prerequisites:
+  - /docs/quickstart
 related:
   - /docs/databases
   - /docs/external-apis
@@ -42,7 +44,9 @@ When building full-stack applications, take an incremental approach.
 
 ### Start with UI
 
-Create your component layout and design first.
+Create your component layout and design:
+
+<PromptLink text="Create a modern task management dashboard with a sidebar, task list, and add task form" />
 
 ### Add data layer
 
@@ -67,3 +71,11 @@ Add performance improvements and advanced features, e.g. "Add task filtering by 
 - Provide detailed implementation instructions to avoid incorrect assumptions
 
 Deploy full-stack apps to Vercel with one click — see [Deployments](/docs/deployments).
+
+## Solutions
+
+See how v0 can help with different use cases:
+
+- [AI Website Builder](https://v0.app/solutions/ai-website-builder) - Turn prompts, screenshots, or Figma files into live websites
+- [AI Code Generator](https://v0.app/solutions/ai-code-generator) - Generate production-ready full-stack apps from natural language prompts
+- [AI UI Design Generator](https://v0.app/solutions/ai-ui-design-generator) - Generate production-ready UI from designs, screenshots, or prompts

@@ -3,6 +3,8 @@ title: PRD Design
 description: Create a Product Requirements Document (PRD) with v0
 product: v0
 type: guide
+prerequisites:
+  - /docs/quickstart
 related:
   - /docs/prototyping
   - /docs/text-prompting
