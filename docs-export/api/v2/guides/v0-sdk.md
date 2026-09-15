@@ -16,11 +16,11 @@ The `v0` package is a TypeScript SDK generated from the v0 API OpenAPI schema. I
 ## Installation
 
 ```bash
-npm install v0@canary
+npm install v0
 # or
-pnpm add v0@canary
+pnpm add v0
 # or
-bun add v0@canary
+bun add v0
 ```
 
 ## Authentication

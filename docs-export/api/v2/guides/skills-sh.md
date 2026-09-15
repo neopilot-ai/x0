@@ -15,7 +15,7 @@ Integrate skills.sh with the v0 API to use remote skills in your chat applicatio
 ## Installation
 
 ```bash
-npm install v0@canary
+npm install v0
 ```
 
 ## Using skills.sh Skills

@@ -87,7 +87,7 @@ npx create-v0-sdk-app my-app
 Or integrate manually:
 
 ```bash
-npm install v0@canary @v0-sdk/react @v0-sdk/ai-tools
+npm install v0 @v0-sdk/react @v0-sdk/ai-tools
 ```
 
 ## Next Steps

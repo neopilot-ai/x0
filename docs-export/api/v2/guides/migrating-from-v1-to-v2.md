@@ -28,7 +28,7 @@ The v2 API has been significantly redesigned. This guide covers the key changes 
 npm uninstall v0-sdk
 
 # Install v2
-npm install v0@canary @v0-sdk/react @v0-sdk/ai-tools
+npm install v0 @v0-sdk/react @v0-sdk/ai-tools
 ```
 
 ## SDK Client
