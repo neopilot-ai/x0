@@ -1,0 +1,47 @@
+{
+  "name": "vscode-v0-model",
+  "displayName": "v0 Model for VS Code Chat",
+  "description": "VS Code extension that provides v0 language models for VS Code chat via the Language Model Chat Provider API.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vercel/v0-language-model-chat-provider"
+  },
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.104.0-20250828"
+  },
+  "categories": ["AI", "Chat"],
+  "contributes": {
+    "languageModelChatProviders": [
+      {
+        "vendor": "v0",
+        "displayName": "v0",
+        "managementCommand": "v0.manage"
+      }
+    ],
+    "commands": [
+      {
+        "command": "v0.manage",
+        "title": "Manage v0 API Key"
+      }
+    ]
+  },
+  "main": "./out/extension.js",
+  "scripts": {
+    "vscode:prepublish": "bun run compile",
+    "compile": "tsc -p ./",
+    "lint": "oxlint",
+    "format": "oxfmt --write \"src/**/*.ts\"",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.103.0",
+    "@vscode/vsce": "^3.6.0",
+    "oxlint": "^1.70.0",
+    "oxfmt": "^0.55.0",
+    "typescript": "^5.9.3"
+  }
+}
