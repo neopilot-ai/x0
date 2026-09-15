@@ -247,7 +247,7 @@ const result = await v0.chats.getFiles({ chatId: 'chat_xxx' })
 ### Get Connect Setup Status
 
 ```ts
-const result = await v0.chats.getConnectSetupStatus({
+const result = await v0.chats.getConnectStatus({
   chatId: 'chat_xxx',
   requestId: 'req_xxx',
 })
