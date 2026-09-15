@@ -7,6 +7,7 @@ export enum Models {
   XaiGrok41Reasoning = 'xai/grok-4.1-fast-reasoning',
   KiloClaudeSonnet46 = 'kilo-anthropic/claude-sonnet-4.6',
   KiloOpenAIGPT5 = 'kilo-openai/gpt-5',
+  KiloAutoFree = 'kilo-auto/free',
 }
 
 export const DEFAULT_MODEL = Models.AnthropicClaudeOpus46
@@ -18,6 +19,7 @@ export const SUPPORTED_MODELS: GatewayModelId[] = [
   Models.XaiGrok41Reasoning,
   Models.KiloClaudeSonnet46,
   Models.KiloOpenAIGPT5,
+  Models.KiloAutoFree,
 ]
 
 export const MODEL_NAMES: Record<string, string> = {
@@ -27,6 +29,7 @@ export const MODEL_NAMES: Record<string, string> = {
   [Models.XaiGrok41Reasoning]: 'Grok 4.1 Reasoning',
   [Models.KiloClaudeSonnet46]: 'Kilo Claude Sonnet 4.6',
   [Models.KiloOpenAIGPT5]: 'Kilo GPT-5',
+  [Models.KiloAutoFree]: 'Kilo Auto Free',
 }
 
 export const TEST_PROMPTS = [
