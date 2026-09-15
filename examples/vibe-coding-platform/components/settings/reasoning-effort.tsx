@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { useModelId, useReasoningEffort } from "./use-settings";
 
 export function ReasoningEffort() {
-  const [modelId] = useModelId();
+  const { modelId } = useModelId();
   const [effort, setEffort] = useReasoningEffort();
   if (modelId !== Models.OpenAIGPT53Codex) {
     return null;

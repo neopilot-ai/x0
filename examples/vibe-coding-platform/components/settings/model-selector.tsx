@@ -16,7 +16,7 @@ import { useAvailableModels } from './use-available-models'
 import { useModelId } from './use-settings'
 
 export function ModelSelector({ className }: { className?: string }) {
-  const [modelId, setModelId] = useModelId()
+  const { modelId, setModelId } = useModelId()
   const { models: available, isLoading, error } = useAvailableModels()
   const models = useMemo(
     () => available?.sort((a, b) => a.label.localeCompare(b.label)) || [],

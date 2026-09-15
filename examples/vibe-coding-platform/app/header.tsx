@@ -1,5 +1,7 @@
 import { ToggleWelcome } from '@/components/modals/welcome'
 import { VercelDashed } from '@/components/icons/vercel-dashed'
+import { SlidersHorizontalIcon } from 'lucide-react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
 interface Props {
@@ -16,6 +18,9 @@ export async function Header({ className }: Props) {
         </span>
       </div>
       <div className="flex items-center ml-auto space-x-1.5">
+        <Link href="/settings" className="p-1 hover:bg-accent rounded-md transition-colors">
+          <SlidersHorizontalIcon className="size-4 text-muted-foreground" />
+        </Link>
         <ToggleWelcome />
       </div>
     </header>
