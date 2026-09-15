@@ -1,13 +1,20 @@
 ---
 title: MCP Integrations
-description: Connect external MCP servers and Vercel Marketplace integrations to v0
+description: Connect and use MCP servers directly in v0
 product: v0
-type: guide
+type: integration
+prerequisites:
+  - /docs/quickstart
+related:
+  - /docs/external-apis
+  - /docs/agentic-features
 ---
 
 # MCP Integrations
 
-MCP stands for Model Context Protocol. It allows v0 to connect to external servers that provide tools and capabilities for enhanced interactions.
+## Introduction
+
+MCP stands for [Model Context Protocol](https://modelcontextprotocol.io). It allows v0 to connect to external servers that provide tools and capabilities for enhanced interactions.
 
 v0 offers MCP in two ways:
 
@@ -18,19 +25,21 @@ v0 offers MCP in two ways:
 
 Open the **+** menu in the prompt form and select **MCPs** to use your own MCP server.
 
+![Prompt Form — opening the + menu and selecting MCPs](https://v0.app/docs/_next/static/media/mcp-prompt-form.23z151ztgkp-4.png)
+
 From the MCP menu, you can configure a custom MCP server or select from a preset. Some presets include:
 
-- **Contentful**: for managing structured content
-- **Context7**: for searching documentation and knowledge bases
-- **Glean**: for querying internal company data
-- **Granola**: for AI meeting notes and transcription
-- **Hex**: for data analysis and visualization
-- **Linear**: for project management and issue tracking
-- **Notion**: for accessing and managing Notion databases and pages
-- **PostHog**: for product analytics and feature flags
-- **Sanity**: for content management and retrieval
-- **Sentry**: for error tracking and monitoring
-- **Zapier**: for connecting to thousands of apps and automating workflows
+- [Contentful](https://www.contentful.com/): for managing structured content
+- [Context7](https://context7.com/): for searching documentation and knowledge bases
+- [Glean](https://glean.com/): for querying internal company data
+- [Granola](https://granola.ai/): for AI meeting notes and transcription
+- [Hex](https://hex.tech): for data analysis and visualization
+- [Linear](https://linear.app): for project management and issue tracking
+- [Notion](https://notion.com): for accessing and managing Notion databases and pages
+- [PostHog](https://posthog.com/): for product analytics and feature flags
+- [Sanity](https://sanity.io/): for content management and retrieval
+- [Sentry](https://sentry.io/): for error tracking and monitoring
+- [Zapier](https://zapier.com/): for connecting to thousands of apps and automating workflows
 
 ### Configuring an MCP Server
 
@@ -47,7 +56,7 @@ Currently, MCP servers only provide tools for v0 to use during generation. When 
 
 ## MCP from Marketplace Integrations
 
-v0 supports tool calls from Vercel Marketplace Integrations, allowing you to connect services from the Vercel Marketplace directly to your v0 chats. These integrations provide v0 with specialized tools and capabilities to interact with external services like databases, APIs, and other platforms.
+v0 supports tool calls from [Vercel Marketplace Integrations](https://vercel.com/changelog/vercel-marketplace-integrations-now-available-in-v0), allowing you to connect services from the Vercel Marketplace directly to your v0 chats. These integrations provide v0 with specialized tools and capabilities to interact with external services like databases, APIs, and other platforms.
 
 With Native Integrations, v0 can:
 
@@ -66,7 +75,7 @@ With Native Integrations, v0 can:
 
 1. **Open Integrations** — Open **Project menu** → **Settings** → **Integrations**
 2. **Install an Integration** — Select an integration from the marketplace, follow the authentication and setup flow, and grant necessary permissions
-3. **Configure Integration Settings** — After connecting, click on the integration to manage its settings and configure MCP tool availability
+3. **Configure Integration Settings** — After connecting, click on the integration to manage its settings, configure MCP tool availability (see [Availability and approval](#availability-and-approval) below), and set up resource-specific access if applicable
 
 ## Availability and approval
 
@@ -103,6 +112,8 @@ After an MCP tool is available, the global mode applies:
 
 There is no separate five-second cancellation window after an MCP call. A potentially destructive operation is also not guaranteed to require approval: an `allow` rule or Full mode can let it run without confirmation.
 
+See [Terminal commands: Permission modes](/docs/terminal-commands#permission-modes) for the global modes and rule precedence used by agent tools.
+
 ## Managing Integrations
 
 ### Configuration Dialog
@@ -123,11 +134,11 @@ To manage an integration's settings:
 To change an integration's Remote MCP setting:
 
 1. Open the Manage Integration dialog
-2. Locate the **Remote MCP** section
+2. Locate the **Remote MCP** section (marked with a "New" badge)
 3. Select your preferred mode:
-   - Click the **X** icon for Disabled
-   - Click the **hand** icon for Ask for Approval
-   - Click the **checkmark** icon for Always Run
+   - Click the **🚫** icon for Disabled
+   - Click the **✋** icon for Ask for Approval
+   - Click the **✓** icon for Always Run
 4. Changes take effect immediately
 
 ### Disconnecting Integrations
@@ -174,5 +185,5 @@ v0: [Uses neon_query tool to inspect schema]
 
 ## Related Resources
 
-- Vercel Marketplace - Browse available integrations
-- v0 MCP Server - Use v0 as an MCP server in your IDE
+- [Vercel Marketplace](https://vercel.com/marketplace) - Browse available integrations
+- [v0 MCP Server](/docs/api/v2/guides/mcp-server) - Use v0 as an MCP server in your IDE
