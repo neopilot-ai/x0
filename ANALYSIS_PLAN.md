@@ -55,7 +55,9 @@
 
 | Doc File | Current State | Action Needed |
 |----------|--------------|---------------|
-| `docs-export/design-systems-2.md` | 105 lines, thin | **Expand with create/update/apply workflows** |
+| `docs-export/design-systems-2.md` | Was 105 lines, missing import workflow, v0.json schema, logo/colors customization, FAQ | **Expanded with full content** — before-you-begin, 5-step import, v0.json schema, use saved design system, customize logo/colors, team default, keep up to date, best practices, FAQ (6 questions) |
+| `docs-export/api/v2/guides/design-systems.md` | Was 51 lines, used `name` instead of `skillName`, missing skill types table | **Expanded** — `skillName` field, `remote`/`project` skill types, Vercel OIDC limitation, detailed update example |
+| `docs-export/design-systems-legacy.md` | Was 14 lines, stub | **Expanded** — Tailwind config, shadcn components, registry creation, customizing (colors/fonts/components/blocks), deploying, using in v0, integrating with MCP |
 | `docs-export/agentic-features.md` | 150 lines, thin | **Add web search, site inspection, error fixing details** |
 | `docs-export/prd-design.md` | 105 lines, thin | **Add use cases, examples, templates** |
 | `docs-export/pre-installed-agents.md` | 150 lines, thin | **Add agent list, descriptions, configuration** |
