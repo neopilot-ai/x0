@@ -21,3 +21,12 @@ export type {
   V0TransportStreamControls,
   V0TransportUrls,
 } from './transport'
+export {
+  V0SandboxProvider,
+  V0SandboxPreview,
+  useV0Sandbox,
+} from './sandbox'
+export type { V0SandboxState, V0SandboxOptions } from './sandbox'
+export { V0CodeEditor, V0DiffView, V0SplitView, V0FileExplorer } from './code-editor'
+export { V0Terminal, V0PermissionGuard, V0CommandHistory } from './terminal'
+export { V0ConsolePanel, V0CodeEditorTab } from './sandbox-ui'

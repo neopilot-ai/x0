@@ -1,0 +1,88 @@
+# v0 Documentation Index
+
+## Getting Started
+- /docs/quickstart - Quickstart tutorial
+- /docs/text-prompting - Prompt engineering guide
+- /docs/code-editing - Code editing guide
+- /docs/design-mode - Design mode guide
+
+## Product Features
+- /docs/ai-models - Available AI models
+- /docs/databases - Database integration
+- /docs/deployments - Deployment guide
+- /docs/custom-domains - Custom domains
+- /docs/projects - Projects overview
+- /docs/teams - Teams collaboration
+- /docs/enterprise - Enterprise features
+- /docs/sandbox - Sandbox/preview documentation
+- /docs/terminal-commands - Terminal commands and permission modes
+- /docs/screenshots - Screenshots guide
+- /docs/versions - Versioning guide
+- /docs/agentic-features - Agentic features
+- /docs/pre-installed-agents - Pre-installed agents
+- /docs/paper - Paper mode
+- /docs/instructions - Instructions configuration
+
+## Design Systems
+- /docs/design-systems-2 - Design Systems 2.0
+- /docs/api/v2/guides/design-systems - Design system skills guide
+
+## SDK Documentation
+- /docs/api/v2/guides/browser-entry - Browser entry point
+- /docs/api/v2/guides/streaming-result - V0StreamResult and readV0Stream
+- /docs/api/v2/guides/stream-diffpatch - JSON diff and patch utilities
+
+## API v2
+- /docs/api/v2 - API overview
+- /docs/api/v2/quickstart - Quickstart
+- /docs/api/v2/guides - Guides (18 guides)
+- /docs/api/v2/reference/chats - 21 chat endpoints
+- /docs/api/v2/reference/messages - 9 message endpoints
+- /docs/api/v2/reference/mcp-servers - 5 MCP server endpoints
+- /docs/api/v2/reference/webhooks - 5 webhook endpoints
+- /docs/api/v2/reference/settings - 2 settings endpoints
+- /docs/api/v2/reference/usage - 3 usage endpoints
+
+## API v1 (Deprecated)
+- /docs/api/v1 - v1 overview (deprecated)
+- 72+ reference files
+
+## Skills
+- /docs/api/v2/guides/skills-sh - Skills.sh integration
+
+## Platform API
+- /docs/api/platform/overview - Platform API overview
+- /docs/api/platform/packages/v0-sdk - v0 SDK package
+- /docs/api/platform/packages/create-v0-sdk-app - CLI tool
+- /docs/api/platform/packages/v0-sdk-react - React package
+- /docs/api/platform/packages/v0-sdk-ai-tools - AI Tools package
+- /docs/api/platform/adapters/mcp-server - MCP Server adapter
+- /docs/api/platform/adapters/ai-tools - AI Tools adapter
+
+## Guides
+- /docs/api/v2/guides/accessing-previews - Preview access
+- /docs/api/v2/guides/custom-chat-interface - Custom chat interface
+- /docs/api/v2/guides/handling-integrations - Handling integrations
+- /docs/api/v2/guides/mcp-server - MCP server guide
+- /docs/api/v2/guides/organizations - Organizations
+- /docs/api/v2/guides/resuming-streams - Resuming streams
+- /docs/api/v2/guides/react-transport - React transport
+- /docs/api/v2/guides/v0-sdk - V0 SDK guide
+- /docs/api/v2/guides/ai-tools-guide - AI tools guide
+- /docs/api/v2/guides/create-v0-sdk-app - CLI tool guide
+- /docs/api/v2/guides/react-chat-example - React chat example
+- /docs/api/v2/guides/basic-example - Basic example
+
+## SDK Modules
+- /docs/api/v2/guides/browser-entry - Browser entry point
+- /docs/api/v2/guides/streaming-result - Streaming result types
+- /docs/api/v2/guides/stream-diffpatch - Stream diffpatch utilities
+
+## Compare
+- /docs/compare/v0-vs-base44 - v0 vs Base44
+- /docs/compare/v0-vs-bolt - v0 vs Bolt
+- /docs/compare/v0-vs-figma-make - v0 vs Figma Make
+- /docs/compare/v0-vs-replit - v0 vs Replit
+
+## Agent-Facing
+- /docs/agents.md - Agent-facing documentation
