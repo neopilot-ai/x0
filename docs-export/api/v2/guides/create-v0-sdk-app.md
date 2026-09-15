@@ -78,18 +78,13 @@ After bootstrapping, customize the chat interface by modifying:
 
 ## Programmatic Usage
 
-The `createApp` function can be used programmatically:
+`create-v0-sdk-app` ships as a CLI binary only (no library entrypoint), so `createApp` cannot be imported from the published package. To scaffold programmatically, invoke the CLI from a script:
 
-```ts
-import { createApp } from 'create-v0-sdk-app'
-
-await createApp({
-  appPath: './my-app',
-  packageManager: 'pnpm',
-  example: 'v0-clone',
-  skipInstall: false,
-})
+```bash
+npx create-v0-sdk-app ./my-app --example v0-clone
 ```
+
+The underlying `createApp({ appPath, packageManager, example, skipInstall })` helper lives in the package source (`src/create-app.ts`) alongside the CLI.
 
 ## Package Manager
 
