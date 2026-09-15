@@ -2,4 +2,49 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { searchDocs } from '@/lib/docs-data'
-export default function Page() { const [query, setQuery] = useState(''); const results = searchDocs(query); return <main className="mx-auto min-h-screen max-w-4xl px-6 py-12"><p className="text-sm text-muted-foreground">Retrieval-first local assistant</p><h1 className="mt-3 text-4xl font-semibold tracking-tight">Ask the docs</h1><p className="mt-4 text-muted-foreground">Application-generated explanations are grounded in the indexed official source material below.</p><div className="mt-10 rounded-2xl border border-border bg-card p-5"><textarea value={query} onChange={(event) => setQuery(event.target.value)} placeholder="What do you want to learn about v0?" className="min-h-32 w-full resize-none bg-transparent outline-none" /><div className="mt-4 flex justify-end"><span className="text-xs text-muted-foreground">{results.length} cited sources</span></div></div>{query && <div className="mt-6 flex flex-col gap-3"><div className="rounded-2xl border border-border bg-muted/30 p-5"><p className="text-sm font-medium">Retrieved from official documentation</p><p className="mt-2 text-sm leading-6 text-muted-foreground">The indexed source material most relevant to “{query}” is shown below. Open a source to read its canonical details.</p></div>{results.map((doc) => <Link key={doc.id} href={`/docs/${doc.slug}`} className="rounded-xl border border-border p-4 hover:bg-card"><p className="font-medium">{doc.title}</p><p className="mt-1 text-sm text-muted-foreground">{doc.description}</p></Link>)}</div>}</main> }
+export default function Page() {
+  const [query, setQuery] = useState('')
+  const results = searchDocs(query)
+  return (
+    <main className="mx-auto min-h-screen max-w-4xl px-6 py-12">
+      <p className="text-sm text-muted-foreground">Retrieval-first local assistant</p>
+      <h1 className="mt-3 text-4xl font-semibold tracking-tight">Ask the docs</h1>
+      <p className="mt-4 text-muted-foreground">
+        Application-generated explanations are grounded in the indexed official source material
+        below.
+      </p>
+      <div className="mt-10 rounded-2xl border border-border bg-card p-5">
+        <textarea
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder="What do you want to learn about v0?"
+          className="min-h-32 w-full resize-none bg-transparent outline-none"
+        />
+        <div className="mt-4 flex justify-end">
+          <span className="text-xs text-muted-foreground">{results.length} cited sources</span>
+        </div>
+      </div>
+      {query && (
+        <div className="mt-6 flex flex-col gap-3">
+          <div className="rounded-2xl border border-border bg-muted/30 p-5">
+            <p className="text-sm font-medium">Retrieved from official documentation</p>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              The indexed source material most relevant to “{query}” is shown below. Open a source
+              to read its canonical details.
+            </p>
+          </div>
+          {results.map((doc) => (
+            <Link
+              key={doc.id}
+              href={`/docs/${doc.slug}`}
+              className="rounded-xl border border-border p-4 hover:bg-card"
+            >
+              <p className="font-medium">{doc.title}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{doc.description}</p>
+            </Link>
+          ))}
+        </div>
+      )}
+    </main>
+  )
+}
