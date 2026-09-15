@@ -10,6 +10,14 @@ export type { FetchPreviewOptions } from './preview-proxy'
 export { vercelOidcAuth, type VercelOidcAuthOptions } from './vercel-oidc'
 export type * from './generated/types.gen'
 export * from './sandbox'
+export {
+  connectToSandbox as connectToCodeServerSandbox,
+  startCodeServer,
+  stopCodeServer,
+  getCodeServerUrl,
+} from './sandbox/code-server'
+export type { V0SandboxConfig, CodeServerSandboxConnection } from './sandbox/code-server'
+export * from './code-server'
 export * from './design-systems'
 export * from './deployments'
 export * from './versions'

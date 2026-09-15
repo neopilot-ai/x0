@@ -14,6 +14,13 @@ export type * from './generated/types.gen'
 export * from './generated/transformers.gen'
 export * from './stream'
 export * from './sandbox'
+export {
+  connectToSandbox as connectToCodeServerSandbox,
+  startCodeServer,
+  stopCodeServer,
+  getCodeServerUrl,
+} from './sandbox/code-server'
+export type { V0SandboxConfig, CodeServerSandboxConnection } from './sandbox/code-server'
 export * from './code-server'
 export * from './design-systems'
 export * from './deployments'
