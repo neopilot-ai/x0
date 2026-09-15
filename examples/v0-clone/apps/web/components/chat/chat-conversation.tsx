@@ -10,7 +10,7 @@ import {
   type V0UIMessage,
 } from '@v0-sdk/react'
 import { useMessages, useResolveTask, useRestoreMessage, useStopMessage } from '@v0-sdk/react/swr'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { readV0Stream } from 'v0/browser'
 import { ConversationView } from '@/components/chat/conversation-view'
 import { PromptBox } from '@/components/prompt-box'
@@ -22,11 +22,17 @@ export function ChatConversation({
   messages: initialMessages,
   onContentChange,
   vercelProjectId,
+  isNewChat = false,
+  onChatCreated,
+  onChatFinished,
 }: {
   chatId: string
   messages: Message[]
   onContentChange: () => void
   vercelProjectId?: string
+  isNewChat?: boolean
+  onChatCreated?: (chatId: string) => void
+  onChatFinished?: () => void
 }) {
   const { settings, updateSettings } = useSettings()
   const [isResolving, setIsResolving] = useState(false)
@@ -52,18 +58,26 @@ export function ChatConversation({
     `/api/chats/${encodeURIComponent(chatId)}/restore`,
   )
   const initialUiMessages = useMemo(() => toV0UIMessages(initialMessages), [initialMessages])
+  const createdChatIdRef = useRef<string | null>(null)
   const transport = useMemo(
     () =>
       new V0Transport({
-        chatId,
         messages: persistedMessages,
         urls: {
           create: '/api/chats',
           send: (id) => `/api/chats/${encodeURIComponent(id)}/messages`,
           resume: (id) => `/api/chats/${encodeURIComponent(id)}/resume`,
         },
+        ...(isNewChat
+          ? {
+              onChatCreated: (id: string) => {
+                createdChatIdRef.current = id
+                onChatCreated?.(id)
+              },
+            }
+          : { chatId }),
       }),
-    [chatId, persistedMessages],
+    [chatId, isNewChat, persistedMessages, onChatCreated],
   )
 
   const {
@@ -81,6 +95,10 @@ export function ChatConversation({
     transport,
     onFinish: () => {
       onContentChange()
+      if (isNewChat) {
+        onChatFinished?.()
+        return
+      }
       void refreshMessages().catch((error) => {
         setActionError(errorMessage(error, 'Failed to refresh messages.'))
       })
@@ -106,6 +124,7 @@ export function ChatConversation({
   }, [chatIsBusy, isResolving, persistedMessages, setMessages])
 
   const refreshMessages = async () => {
+    if (isNewChat) return
     if (!(await messagesQuery.mutate())) {
       throw new Error('Failed to refresh messages.')
     }
@@ -184,6 +203,19 @@ export function ChatConversation({
 
     setActionError(null)
     setIsStopping(true)
+
+    if (isNewChat) {
+      try {
+        await stop()
+        onContentChange()
+        if (createdChatIdRef.current) onChatFinished?.()
+      } catch (error) {
+        setActionError(errorMessage(error, 'Failed to stop message.'))
+      } finally {
+        setIsStopping(false)
+      }
+      return
+    }
 
     try {
       await stopMessageMutation.trigger()
