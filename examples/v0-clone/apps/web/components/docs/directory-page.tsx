@@ -1,12 +1,92 @@
 import Link from 'next/link'
 import { docs, searchDocs } from '@/lib/docs-data'
 
-export function DirectoryPage({ kind, title, description }: { kind: 'topics' | 'examples' | 'api-reference' | 'integrations' | 'tutorials' | 'troubleshooting'; title: string; description: string }) {
-  const items = kind === 'topics' ? [...new Set(docs.flatMap((doc) => doc.topics))].map((topic) => ({ href: `/topics/${topic}`, title: topic, description: `Explore documentation connected to ${topic}.` })) : docs.filter((doc) => kind === 'integrations' ? doc.section === 'Integrations' : true).map((doc) => ({ href: kind === 'api-reference' ? `/api-reference/${doc.slug}` : kind === 'examples' ? `/examples/${doc.slug}` : kind === 'tutorials' ? `/tutorials/${doc.slug}` : kind === 'troubleshooting' ? `/troubleshooting/${doc.slug}` : `/integrations/${doc.slug}`, title: doc.title, description: doc.description }))
-  return <main className="mx-auto min-h-screen max-w-7xl px-6 py-12"><p className="text-sm text-muted-foreground">Application-generated index over official sources</p><h1 className="mt-3 text-4xl font-semibold tracking-tight">{title}</h1><p className="mt-4 max-w-2xl text-muted-foreground">{description}</p><div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">{items.map((item) => <Link key={item.href} href={item.href} className="rounded-2xl border border-border bg-card p-5 hover:border-foreground/30"><h2 className="font-medium">{item.title}</h2><p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p></Link>)}</div></main>
+export function DirectoryPage({
+  kind,
+  title,
+  description,
+}: {
+  kind: 'topics' | 'examples' | 'api-reference' | 'integrations' | 'tutorials' | 'troubleshooting'
+  title: string
+  description: string
+}) {
+  const items =
+    kind === 'topics'
+      ? [...new Set(docs.flatMap((doc) => doc.topics))].map((topic) => ({
+          href: `/topics/${topic}`,
+          title: topic,
+          description: `Explore documentation connected to ${topic}.`,
+        }))
+      : docs
+          .filter((doc) => (kind === 'integrations' ? doc.section === 'Integrations' : true))
+          .map((doc) => ({
+            href:
+              kind === 'api-reference'
+                ? `/api-reference/${doc.slug}`
+                : kind === 'examples'
+                  ? `/examples/${doc.slug}`
+                  : kind === 'tutorials'
+                    ? `/tutorials/${doc.slug}`
+                    : kind === 'troubleshooting'
+                      ? `/troubleshooting/${doc.slug}`
+                      : `/integrations/${doc.slug}`,
+            title: doc.title,
+            description: doc.description,
+          }))
+  return (
+    <main className="mx-auto min-h-screen max-w-7xl px-6 py-12">
+      <p className="text-sm text-muted-foreground">
+        Application-generated index over official sources
+      </p>
+      <h1 className="mt-3 text-4xl font-semibold tracking-tight">{title}</h1>
+      <p className="mt-4 max-w-2xl text-muted-foreground">{description}</p>
+      <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {items.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="rounded-2xl border border-border bg-card p-5 hover:border-foreground/30"
+          >
+            <h2 className="font-medium">{item.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{item.description}</p>
+          </Link>
+        ))}
+      </div>
+    </main>
+  )
 }
 
 export function SearchPage({ query }: { query?: string }) {
   const results = searchDocs(query ?? '')
-  return <main className="mx-auto min-h-screen max-w-5xl px-6 py-12"><h1 className="text-4xl font-semibold tracking-tight">Search</h1><p className="mt-3 text-muted-foreground">Keyword search over the seeded documentation index.</p><form className="mt-8"><input name="q" defaultValue={query} placeholder="Search docs..." className="h-12 w-full rounded-xl border border-border bg-card px-4 outline-none focus:ring-2 focus:ring-ring" /></form><div className="mt-10 flex flex-col gap-3">{results.map((doc) => <Link key={doc.id} href={`/docs/${doc.slug}`} className="rounded-xl border border-border p-5 hover:bg-card"><div className="flex items-center justify-between"><h2 className="font-medium">{doc.title}</h2><span className="text-xs text-muted-foreground">{doc.section}</span></div><p className="mt-2 text-sm text-muted-foreground">{doc.description}</p></Link>)}</div></main>
+  return (
+    <main className="mx-auto min-h-screen max-w-5xl px-6 py-12">
+      <h1 className="text-4xl font-semibold tracking-tight">Search</h1>
+      <p className="mt-3 text-muted-foreground">
+        Keyword search over the seeded documentation index.
+      </p>
+      <form className="mt-8">
+        <input
+          name="q"
+          defaultValue={query}
+          placeholder="Search docs..."
+          className="h-12 w-full rounded-xl border border-border bg-card px-4 outline-none focus:ring-2 focus:ring-ring"
+        />
+      </form>
+      <div className="mt-10 flex flex-col gap-3">
+        {results.map((doc) => (
+          <Link
+            key={doc.id}
+            href={`/docs/${doc.slug}`}
+            className="rounded-xl border border-border p-5 hover:bg-card"
+          >
+            <div className="flex items-center justify-between">
+              <h2 className="font-medium">{doc.title}</h2>
+              <span className="text-xs text-muted-foreground">{doc.section}</span>
+            </div>
+            <p className="mt-2 text-sm text-muted-foreground">{doc.description}</p>
+          </Link>
+        ))}
+      </div>
+    </main>
+  )
 }
