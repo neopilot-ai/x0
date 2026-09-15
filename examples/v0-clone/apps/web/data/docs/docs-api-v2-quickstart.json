@@ -1,0 +1,70 @@
+{
+  "id": "docs-api-v2-quickstart",
+  "slug": "api/v2/quickstart",
+  "title": "Quickstart",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Build your first app-generation interface with the v0 API",
+  "topics": [
+    "design",
+    "api",
+    "previews",
+    "agents"
+  ],
+  "related": [
+    "api/v2/guides/custom-chat-interface",
+    "api/v2/guides/accessing-previews",
+    "api/v2/guides/integrating-v0-into-agents",
+    "api/v2/reference/chats/create-chat"
+  ],
+  "requires": [],
+  "headings": [
+    "Start a new app",
+    "1. Create the app",
+    "2. Add your API key",
+    "3. Run the app",
+    "Add to an existing app",
+    "React",
+    "Non-React",
+    "Next steps"
+  ],
+  "excerpt": "Build an app-generation experience where users can prompt, preview, and iterate on applications. Your frontend owns the experience; a small server layer keeps your v0 credentials private and forwards requests to the API.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npm install v0"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app my-v0-app"
+    },
+    {
+      "language": "bash",
+      "code": "cd my-v0-app\ncp .env.example .env.local"
+    },
+    {
+      "language": "text",
+      "code": "Keep this value server-side. Do not expose it in browser code or prefix it with `NEXT_PUBLIC_`.\n\n### 3. Run the app"
+    },
+    {
+      "language": "text",
+      "code": "Open the local URL printed in your terminal. You can now prompt v0, stream a generation, inspect the generated files, and load the live preview from the app.\n\n## Add to an existing app\n\nYour browser should call routes owned by your application instead of calling v0 directly. Those routes use the server-side `v0` package to authenticate with v0 and return data or streams to your frontend.\n\nCreate an [API key](https://v0.app/settings/keys) and add it to your server environment as `V0_API_KEY` before continuing.\n\nInstall the server SDK:"
+    },
+    {
+      "language": "text",
+      "code": "If you're using React, also install the v0 React helpers and AI SDK:"
+    },
+    {
+      "language": "text",
+      "code": "### React\n\nUse the `v0` package in your server routes to create chats, send messages, and resume streams. Then configure `V0Transport` in your React app to connect AI SDK's `useChat` to those routes:"
+    },
+    {
+      "language": "text",
+      "code": "Use the returned `messages`, `sendMessage`, `status`, and `stop` values to build your interface. Follow [Build a Custom Chat Interface](/docs/api/v2/guides/custom-chat-interface) to add the proxy routes, render rich message parts, load history, authorize users, and resume interrupted streams.\n\n### Non-React\n\nInstall the server SDK:"
+    }
+  ],
+  "content": "\n\n# Quickstart\n\nBuild an app-generation experience where users can prompt, preview, and iterate on applications. Your frontend owns the experience; a small server layer keeps your v0 credentials private and forwards requests to the API.\n\n```bash\nnpm install v0\n```\n\n## Start a new app\n\nThe fastest way to get started is with the complete app template.\n\n### 1. Create the app\n\n```bash\nnpx create-v0-sdk-app my-v0-app\n```\n\nThe starter includes a React chat interface, server proxy routes, generated code and file views, and an isolated live-preview app. It also adds a v0 agent skill at `.agents/skills/v0/SKILL.md` so coding agents can use current SDK patterns when extending the project.\n\n### 2. Add your API key\n\nCreate an API key in [v0 settings](https://v0.app/settings/keys). Then copy the starter environment file and add the key:\n\n```bash\ncd my-v0-app\ncp .env.example .env.local\n```\n\n```bash title=\".env.local\"\nV0_API_KEY=your_v0_api_key\n```\n\nKeep this value server-side. Do not expose it in browser code or prefix it with `NEXT_PUBLIC_`.\n\n### 3. Run the app\n\n```bash\nnpm run dev\n```\n\nOpen the local URL printed in your terminal. You can now prompt v0, stream a generation, inspect the generated files, and load the live preview from the app.\n\n## Add to an existing app\n\nYour browser should call routes owned by your application instead of calling v0 directly. Those routes use the server-side `v0` package to authenticate with v0 and return data or streams to your frontend.\n\nCreate an [API key](https://v0.app/settings/keys) and add it to your server environment as `V0_API_KEY` before continuing.\n\nInstall the server SDK:\n\n```bash\nnpm install v0\n```\n\nIf you're using React, also install the v0 React helpers and AI SDK:\n\n```bash\nnpm install @v0-sdk/react ai @ai-sdk/react\n```\n\n### React\n\nUse the `v0` package in your server routes to create chats, send messages, and resume streams. Then configure `V0Transport` in your React app to connect AI SDK's `useChat` to those routes:\n\n```tsx title=\"hooks/use-v0-app-builder.ts\"\n'use client'\n\nimport { useChat } from '@ai-sdk/react'\nimport { V0Transport, type V0UIMessage } from '@v0-sdk/react'\nimport { useState } from 'react'\n\nexport function useV0AppBuilder() {\n  const [transport] = useState(\n    () =>\n      new V0Transport({\n        urls: {\n          create: '/api/v0/chats',\n          send: (chatId) => `/api/v0/chats/${chatId}/messages`,\n          resume: (chatId) => `/api/v0/chats/${chatId}/resume`,\n        },\n      }),\n  )\n\n  return useChat<V0UIMessage>({ transport })\n}\n```\n\nUse the returned `messages`, `sendMessage`, `status`, and `stop` values to build your interface. Follow [Build a Custom Chat Interface](/docs/api/v2/guides/custom-chat-interface) to add the proxy routes, render rich message parts, load history, authorize users, and resume interrupted streams.\n\n### Non-React\n\nInstall the server SDK:\n\n```bash\nnpm install v0\n```\n\nAdd an endpoint in your server framework that accepts a prompt from your frontend and calls v0. For example:\n\n```typescript title=\"api/v0/chats.ts\"\nimport { v0 } from 'v0'\n\nexport async function POST(request: Request) {\n  const { message } = (await request.json()) as { message: string }\n  const result = await v0.chats.create({ message })\n\n  if (result.error) {\n    return Response.json(result.error, { status: result.response.status })\n  }\n\n  return Response.json(result.data)\n}\n```\n\nCall your endpoint from the browser when the user submits a prompt:\n\n```typescript title=\"app.ts\"\nconst response = await fetch('/api/v0/chats', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  body: JSON.stringify({\n    message: 'Create a project management dashboard with a kanban board',\n  }),\n})\n\nconst { chat } = await response.json()\nconsole.log('Created chat:', chat.id)\n```\n\nThis example waits for the first generation to finish. For a streaming interface, use `v0.chats.createStream()` in your server endpoint and return `result.toResponse()`, then consume the stream with your frontend framework.\n\n## Next steps\n\n* [Build a custom chat interface](/docs/api/v2/guides/custom-chat-interface) with React and AI SDK.\n* [Embed the live preview](/docs/api/v2/guides/accessing-previews) in your product.\n* [Use v0 from another agent](/docs/api/v2/guides/integrating-v0-into-agents) through MCP or AI SDK tools.\n* [Migrate an existing v1 integration](/docs/api/v2/guides/migrating-from-v1-to-v2).\n* Browse the [endpoint reference](/docs/api/v2/reference/chats/list-chats).\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/quickstart",
+  "lastUpdated": "2026-09-02"
+}

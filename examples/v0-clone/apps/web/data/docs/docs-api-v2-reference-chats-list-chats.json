@@ -1,0 +1,26 @@
+{
+  "id": "docs-api-v2-reference-chats-list-chats",
+  "slug": "api/v2/reference/chats/list-chats",
+  "title": "List Chats",
+  "section": "API Reference",
+  "category": "API · Chats",
+  "type": "",
+  "description": "Lists chats accessible to the authenticated user. Use metadata[key]=value style query parameters to filter by metadata.",
+  "topics": [
+    "api",
+    "authentication"
+  ],
+  "related": [],
+  "requires": [],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# List Chats\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.chats.list()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/chats\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"limit\",\n\"type\": \"integer\",\n\"required\": false,\n\"description\": \"Maximum number of chats to return (1-100, default 20).\",\n\"deprecated\": false\n},\n{\n\"name\": \"cursor\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Pagination cursor returned from a previous response.\",\n\"deprecated\": false\n},\n{\n\"name\": \"authorId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Restrict results to chats created by this user. Must be a member of the calling scope.\",\n\"deprecated\": false\n},\n{\n\"name\": \"vercelProjectId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Restrict results to chats associated with this Vercel project.\",\n\"deprecated\": false\n},\n{\n\"name\": \"metadata\",\n\"type\": \"Record\",\n\"required\": false,\n\"description\": \"Filter by metadata, e.g. metadata[environment]=production. Returns chats matching all supplied key-value pairs.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chats\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"The chats in this page.\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Unique chat identifier.\",\n\"deprecated\": false\n},\n{\n\"name\": \"title\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Chat title, if generated.\",\n\"deprecated\": false\n},\n{\n\"name\": \"privacy\",\n\"type\": \"'public' | 'private' | 'team' | 'team-edit' | 'unlisted'\",\n\"required\": true,\n\"description\": \"Visibility setting of the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ISO timestamp of when the chat was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"ISO timestamp of when the chat was last updated.\",\n\"deprecated\": false\n},\n{\n\"name\": \"authorId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ID of the user who created the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"vercelProjectId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Associated Vercel project ID, if any.\",\n\"deprecated\": false\n},\n{\n\"name\": \"metadata\",\n\"type\": \"Record\",\n\"required\": true,\n\"description\": \"User-defined key-value metadata.\",\n\"deprecated\": false\n},\n{\n\"name\": \"writePermission\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Whether the caller has write access to this chat.\",\n\"deprecated\": false\n}\n]\n}\n},\n{\n\"name\": \"cursor\",\n\"type\": \"string | null\",\n\"required\": true,\n\"description\": \"Cursor to fetch the next page, or null if there are no more chats.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/reference/chats/list-chats",
+  "lastUpdated": "2026-07-30"
+}

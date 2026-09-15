@@ -1,0 +1,82 @@
+{
+  "id": "docs-api-v1-packages-ai-tools",
+  "slug": "api/v1/packages/ai-tools",
+  "title": "@v0-sdk/ai-tools",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "reference",
+  "description": "AI SDK tools for the v0 API",
+  "topics": [
+    "api"
+  ],
+  "related": [
+    "api/v1/adapters/ai-tools",
+    "api/v1/packages/v0-sdk"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Installation",
+    "Quick Start",
+    "Tool Categories",
+    "All Tools (High Context)",
+    "Selective Tools (Recommended)",
+    "Available Tool Categories",
+    "Chat Tools",
+    "Project Tools",
+    "Deployment Tools",
+    "User Tools",
+    "Hook Tools",
+    "Agent Patterns",
+    "Multi-Step Agent",
+    "Sequential Processing",
+    "Routing Agent",
+    "Parallel Processing",
+    "Configuration",
+    "Environment Variables",
+    "Custom Configuration",
+    "Error Handling",
+    "Best Practices",
+    "Requirements",
+    "Links"
+  ],
+  "excerpt": "AI SDK tools that enable autonomous agents to interact with the v0 API. Build intelligent workflows that can create projects, manage chats, handle deployments, and more.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npm install @v0-sdk/ai-tools ai\n# or\npnpm add @v0-sdk/ai-tools ai\n# or\nyarn add @v0-sdk/ai-tools ai"
+    },
+    {
+      "language": "typescript",
+      "code": "import { generateText } from 'ai'\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new React todo app project',\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n})\n\nconsole.log(result.text)"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0Tools } from '@v0-sdk/ai-tools'\n\nconst tools = v0Tools({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Build a complete web app with deployment',\n  tools,\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst tools = v0ToolsByCategory({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new project and start a chat',\n  tools: {\n    ...tools.project, // Project management tools\n    ...tools.chat, // Chat tools\n  },\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a chat about building a landing page',\n  tools: tools.chat,\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new project called \"My Portfolio\"',\n  tools: tools.project,\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Deploy the project and check its status',\n  tools: tools.deployment,\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Check my account information and billing status',\n  tools: tools.user,\n})"
+    }
+  ],
+  "content": "\n\n# @v0-sdk/ai-tools\n\nAI SDK tools that enable autonomous agents to interact with the v0 API. Build intelligent workflows that can create projects, manage chats, handle deployments, and more.\n\n## Installation\n\n```bash\nnpm install @v0-sdk/ai-tools ai\n# or\npnpm add @v0-sdk/ai-tools ai\n# or\nyarn add @v0-sdk/ai-tools ai\n```\n\n## Quick Start\n\n```typescript\nimport { generateText } from 'ai'\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new React todo app project',\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n})\n\nconsole.log(result.text)\n```\n\n## Tool Categories\n\n### All Tools (High Context)\n\nUse all available tools for maximum capability:\n\n```typescript\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst tools = v0Tools({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Build a complete web app with deployment',\n  tools,\n})\n```\n\n⚠️ **Note**: Includes 20+ tools which adds significant context to AI calls.\n\n### Selective Tools (Recommended)\n\nChoose specific tool categories for better performance:\n\n```typescript\nimport { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst tools = v0ToolsByCategory({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new project and start a chat',\n  tools: {\n    ...tools.project, // Project management tools\n    ...tools.chat, // Chat tools\n  },\n})\n```\n\n## Available Tool Categories\n\n### Chat Tools\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a chat about building a landing page',\n  tools: tools.chat,\n})\n```\n\n**Available tools:**\n\n* `createChat` - Create new chats\n* `sendMessage` - Send messages to chats\n* `getChat` - Retrieve chat details\n* `findChats` - List user chats\n* `deleteChat` - Remove chats\n\n### Project Tools\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new project called \"My Portfolio\"',\n  tools: tools.project,\n})\n```\n\n**Available tools:**\n\n* `createProject` - Create new projects\n* `getProject` - Get project details\n* `findProjects` - List projects\n* `updateProject` - Modify projects\n* `deleteProject` - Remove projects\n\n### Deployment Tools\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Deploy the project and check its status',\n  tools: tools.deployment,\n})\n```\n\n**Available tools:**\n\n* `createDeployment` - Deploy projects\n* `getDeployment` - Check deployment status\n* `findDeployments` - List deployments\n* `getDeploymentLogs` - View deployment logs\n* `getDeploymentErrors` - Check for errors\n\n### User Tools\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Check my account information and billing status',\n  tools: tools.user,\n})\n```\n\n**Available tools:**\n\n* `getUser` - Get user information\n* `getUserBilling` - Check billing details\n* `getUserPlan` - View subscription plan\n* `getUserScopes` - Check permissions\n\n### Hook Tools\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Set up a webhook for deployment notifications',\n  tools: tools.hook,\n})\n```\n\n**Available tools:**\n\n* `createHook` - Create webhooks\n* `getHook` - Get webhook details\n* `findHooks` - List webhooks\n* `updateHook` - Modify webhooks\n* `deleteHook` - Remove webhooks\n\n## Agent Patterns\n\n### Multi-Step Agent\n\n```typescript\nimport { generateText, stopWhen, stepCountIs } from 'ai'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Build and deploy a complete todo app',\n  tools: {\n    ...tools.project,\n    ...tools.chat,\n    ...tools.deployment,\n  },\n  stopWhen: stepCountIs(5), // Limit execution steps\n})\n```\n\n### Sequential Processing\n\n```typescript\n// Step 1: Create project\nconst projectResult = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a new project for a todo app',\n  tools: tools.project,\n})\n\n// Step 2: Start development chat\nconst chatResult = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `Create a chat for project ${projectResult.toolResults[0].result.id}`,\n  tools: tools.chat,\n})\n\n// Step 3: Deploy when ready\nconst deployResult = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Deploy the completed project',\n  tools: tools.deployment,\n})\n```\n\n### Routing Agent\n\n```typescript\nimport { generateText } from 'ai'\n\nconst routingResult = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: userRequest,\n  tools: {\n    routeToProject: tool({\n      description: 'Route to project management',\n      parameters: z.object({\n        action: z.string(),\n      }),\n    }),\n    routeToChat: tool({\n      description: 'Route to chat management',\n      parameters: z.object({\n        action: z.string(),\n      }),\n    }),\n  },\n})\n\n// Use appropriate tools based on routing\nconst tools =\n  routingResult.toolResults[0].toolName === 'routeToProject'\n    ? tools.project\n    : tools.chat\n```\n\n### Parallel Processing\n\n```typescript\nconst [projectResult, userResult] = await Promise.all([\n  generateText({\n    model: openai('gpt-4o-mini'),\n    prompt: 'Analyze my projects',\n    tools: tools.project,\n  }),\n  generateText({\n    model: openai('gpt-4o-mini'),\n    prompt: 'Check my account status',\n    tools: tools.user,\n  }),\n])\n```\n\n## Configuration\n\n### Environment Variables\n\n```bash\nV0_API_KEY=your_v0_api_key_here\nAI_GATEWAY_API_KEY=your_ai_gateway_api_key_here\n```\n\n### Custom Configuration\n\n```typescript\nconst tools = v0ToolsByCategory({\n  apiKey: process.env.V0_API_KEY,\n  baseURL: 'https://api.v0.dev/v1', // Optional\n  timeout: 30000, // Optional\n})\n```\n\n## Error Handling\n\n```typescript\ntry {\n  const result = await generateText({\n    model: openai('gpt-4o-mini'),\n    prompt: 'Create a project',\n    tools: tools.project,\n  })\n} catch (error) {\n  if (error.name === 'V0Error') {\n    console.error('v0 API error:', error.message)\n  } else if (error.name === 'AIError') {\n    console.error('AI SDK error:', error.message)\n  } else {\n    console.error('Unexpected error:', error)\n  }\n}\n```\n\n## Best Practices\n\n1. **Use selective tools** - Only include categories you need\n2. **Set step limits** - Use `stopWhen` to control execution\n3. **Handle errors** - Wrap calls in try-catch blocks\n4. **Monitor usage** - Track API calls and costs\n5. **Test incrementally** - Start with simple workflows\n\n## Requirements\n\n* Node.js 22+\n* AI SDK 5.0+\n* v0 API key from [v0 settings](https://v0.app/settings/keys)\n\n## Links\n\n* [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/ai-tools)\n* [npm Package](https://www.npmjs.com/package/@v0-sdk/ai-tools)\n* [AI Tools Example](/docs/api/v1/examples/ai-tools)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/packages/ai-tools",
+  "lastUpdated": "2026-07-30"
+}

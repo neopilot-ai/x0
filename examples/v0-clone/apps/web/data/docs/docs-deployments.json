@@ -1,0 +1,46 @@
+{
+  "id": "docs-deployments",
+  "slug": "deployments",
+  "title": "Deployments",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Preview and publish v0 projects on Vercel, then manage domains, visibility, and production updates.",
+  "topics": [
+    "github",
+    "deployment",
+    "design",
+    "previews",
+    "integrations",
+    "sharing"
+  ],
+  "related": [
+    "custom-domains",
+    "vercel-integration",
+    "github",
+    "projects"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Preview and production deployments",
+    "First publish",
+    "Publish updates",
+    "Deployment status and actions",
+    "Domains and visibility",
+    "Advanced deployment settings",
+    "Deployment policies",
+    "Troubleshooting",
+    "A preview or production build fails",
+    "A GitHub publish is blocked",
+    "Publish is disabled by your team",
+    "The expected domain is missing",
+    "Next steps"
+  ],
+  "excerpt": "v0 deploys projects to Vercel. Working branches get preview deployments for review, while publishing updates the Vercel project's production deployment and stable production URL.",
+  "snippets": [],
+  "content": "\n\n# Deployments\n\nv0 deploys projects to Vercel. Working branches get preview deployments for review, while publishing updates the Vercel project's production deployment and stable production URL.\n\n## Preview and production deployments\n\n* **Preview deployments** are built from working branches. They have unique URLs and do not change the project's production URL.\n* **Production deployments** serve the project's domains. Publishing promotes the current work through the project's configured Git and Vercel workflow.\n\nFor a GitHub-backed project, open the branch button next to **Publish** to inspect the working branch's preview. The menu shows deployment status, the branch diff, pull request, and CI checks. For a project without GitHub, open **Publish** to inspect the latest deployment.\n\n## First publish\n\nSelect **Publish** in the chat header. The first-publish flow guides you through the setup the project needs:\n\n1. **Create project:** Confirm the Vercel project name if the chat is not already connected to one.\n2. **Visibility:** Choose who can access the deployed app. Available choices depend on your team's plan and deployment protection settings.\n3. **Domains:** Confirm the provided `vercel.app` domain, select a connected custom domain, or open Vercel to add one.\n4. **Commerce mode, when needed:** Review unclaimed Stripe test sandboxes or Shopify development stores and choose whether to claim them before publishing.\n5. **Publish:** Start the production deployment.\n\nEvery Vercel project has a stable production URL. Future production deployments update the app at that URL without changing it.\n\n## Publish updates\n\nAfter making another code change:\n\n1. Open **Publish**.\n2. Review the production deployment and selected domain.\n3. Select **Publish Changes**.\n\nFor GitHub-backed projects, Publish creates or reuses a pull request, merges it into the chat's base branch, and waits for the production deployment. GitHub branch protection still applies. See [GitHub → Publish GitHub changes](/docs/github#publish-github-changes).\n\nProjects without GitHub deploy the chat's current code directly to the connected Vercel project.\n\n## Deployment status and actions\n\nThe deployment card reports live build progress and the final state. Depending on the deployment, it also links to:\n\n* The deployed site\n* The commit or working branch\n* The deployment inspector in Vercel\n* Build logs and errors\n\nFor GitHub-backed projects, the branch menu also reports CI and pull-request state. Its v0 action changes with the current problem: **Review Code**, **Fix Build**, **Fix CI**, **Fix Conflicts**, or **Fix CI + Conflicts**.\n\n## Domains and visibility\n\nYou can change deployment settings from v0:\n\n* Open **Project menu** `...` → **Settings** → **Domains** to manage project domains.\n* Open **Project menu** `...` → **Settings** → **Vercel Project** to manage production visibility.\n* During the first publish, choose visibility and a domain in the publish flow.\n\nAdvanced DNS configuration, redirects, and other domain settings open in the Vercel dashboard. See [Custom domain](/docs/custom-domains).\n\n## Advanced deployment settings\n\nOpen the deployment's inspector link to manage the Vercel project, including:\n\n* Build and deployment settings\n* Environment variables for Production, Preview, and Development\n* Deployment Protection and Vercel Authentication\n* Web Analytics and Speed Insights\n* Runtime logs and observability\n* Rollbacks and redeployments\n\nSee [Vercel project configuration](https://vercel.com/docs/projects/project-configuration) for the full set of controls.\n\n## Deployment policies\n\nTeams can configure [Deployment Policies](https://vercel.com/docs/deployments/deployment-policy) that restrict which Git sources and deployment mechanisms can create deployments. If a policy blocks v0 for the target environment, a team Owner must allow the source at the team level or override the policy for the project.\n\n## Troubleshooting\n\n### A preview or production build fails\n\nWhen a deployment has errors or warnings, select **Fix with v0** or **Fix Build**. v0 reads the relevant logs, diagnoses the failure, and applies a fix. On paid plans, you get up to  free uses per day on unedited code; after that, fixes cost credits like a normal prompt. See [Agentic Features → Fix with v0](/docs/agentic-features#fix-with-v0).\n\nIf needed, ask v0 to revert the change or restore an earlier chat version, then publish again.\n\n### A GitHub publish is blocked\n\nOpen the branch menu to inspect CI and the pull request. v0 can address actionable CI failures and merge conflicts. Required reviews and other human approval rules must be completed in GitHub before you publish again.\n\n### Publish is disabled by your team\n\nCheck the team's [deployment policy](#deployment-policies) and your Vercel project permissions. Publishing also requires a v0 role that can edit the chat and permission to deploy to the connected Vercel project.\n\n### The expected domain is missing\n\nOpen **Project menu** `...` → **Settings** → **Domains** and confirm the domain belongs to the connected Vercel project. Unverified domains must be verified in Vercel before you can select them.\n\n## Next steps\n\n* [Connect GitHub and publish through branches](/docs/github)\n* [Add a custom domain](/docs/custom-domains)\n* [Configure environment variables](https://vercel.com/docs/environment-variables)\n* [Set up Web Analytics](https://vercel.com/docs/analytics)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/deployments",
+  "lastUpdated": "2026-09-01"
+}

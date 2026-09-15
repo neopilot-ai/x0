@@ -1,0 +1,38 @@
+{
+  "id": "docs-security",
+  "slug": "security",
+  "title": "Security",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "reference",
+  "description": "Learn about v0's security practices, threat modeling, and enterprise security features.",
+  "topics": [
+    "ai",
+    "security"
+  ],
+  "related": [
+    "enterprise",
+    "account"
+  ],
+  "requires": [],
+  "headings": [
+    "General security approach",
+    "Threat model and code validation",
+    "Environment variable security",
+    "Code execution security",
+    "Enterprise security features",
+    "Data privacy and training",
+    "Access control",
+    "Team Security",
+    "Compliance and certifications",
+    "Best practices",
+    "Environment variables",
+    "Team collaboration",
+    "Security reporting"
+  ],
+  "excerpt": "v0 is built with security as a fundamental principle, implementing multiple layers of protection to ensure your code and data remain secure throughout the development process.",
+  "snippets": [],
+  "content": "\n\n# Security\n\nv0 is built with security as a fundamental principle, implementing multiple layers of protection to ensure your code and data remain secure throughout the development process.\n\n## General security approach\n\n### Threat model and code validation\n\nFrom a threat model perspective, v0 doesn't take LLM-generated code for granted. We consider all code potentially incorrect or adversarial, implementing robust validation and security measures:\n\n* **Code Analysis**: All generated code undergoes security analysis before execution\n* **Sandboxed Execution**: Code runs in isolated environments to prevent system access\n* **Input Validation**: Comprehensive validation of all user inputs and generated content\n* **Adversarial Testing**: Regular security testing against potential attack vectors\n\n### Environment variable security\n\nv0 leverages Next.js's strong distinction between server-side and client-side environment variables:\n\n* **Server-side tokens**: Environment variables without the `NEXT_PUBLIC_` prefix remain secure on the server\n* **Client-side tokens**: Only variables prefixed with `NEXT_PUBLIC_` are exposed to the browser\n* **Automatic Analysis**: v0 analyzes `NEXT_PUBLIC_` usage and warns users about potential security risks\n* **Smart Refactoring**: The AI can move code to Route Handlers, Server Actions, or other server-side contexts to improve security\n\n### Code execution security\n\nWhen v0 deploys to Vercel, server-side code becomes secure Functions that run in isolated sandboxes:\n\n* **Isolated Execution**: Each function runs in its own secure container\n* **Encrypted Environment**: Environment variables are stored in Vercel's built-in secure vault\n* **Network Isolation**: Functions have controlled network access\n* **Resource Limits**: Memory and execution time limits prevent resource exhaustion attacks\n\n## Enterprise security features\n\nEnterprise plans include advanced security features designed for organizations with strict compliance and security requirements.\n\n### Data privacy and training\n\n* **Opt-out of Data Training**: Enterprise customers can opt out of having their content used for model training\n* **Data Isolation**: Enterprise data is processed on separate infrastructure\n* **No Cross-contamination**: Your data never influences models used by other customers\n\n### Access control\n\n* **Single Sign-On (SSO)**: SAML-based SSO integration with your existing identity provider\n* **Role-based Access Control**: Granular permissions for different team members\n* **Audit Logs**: Comprehensive logging of all user actions for compliance\n* **Session Management**: Advanced session controls and timeout policies\n\n### Team Security\n\nEnterprise teams benefit from enhanced collaboration security:\n\n* **Private Workspaces**: Isolated environments for sensitive projects\n* **Approval Workflows**: Request and manage reviews before deployment\n* **Version Control**: Track all changes with detailed history\n* **Secure Sharing**: Control who can access and modify shared projects\n\nFor more information about team collaboration features, see our [Teams documentation](/docs/teams).\n\n### Compliance and certifications\n\n* **SOC 2 Type 2**: v0 is included in Vercel's SOC 2 Type 2 attestation for Security, Confidentiality, and Availability\n* **GDPR Compliance**: Full compliance with European data protection regulations\n* **Enterprise Support**: Dedicated support channels for security-related inquiries\n\n## Best practices\n\n### Environment variables\n\n* Never expose sensitive tokens with `NEXT_PUBLIC_` prefix\n* Use Vercel's environment variable management for production deployments\n* Regularly rotate API keys and secrets\n* Use different keys for development and production environments\n\n### Team collaboration\n\n* Set appropriate access levels for team members\n* Use private workspaces for sensitive projects\n* Enable audit logging for compliance requirements\n* Regularly review team member permissions\n\n## Security reporting\n\nIf you discover a security vulnerability in v0, please report it to our security team at [security@vercel.com](mailto:security@vercel.com). We take all security reports seriously and will respond promptly.\n\nFor more information about Vercel's security practices, visit [security.vercel.com](https://security.vercel.com).\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/security",
+  "lastUpdated": "2026-07-30"
+}

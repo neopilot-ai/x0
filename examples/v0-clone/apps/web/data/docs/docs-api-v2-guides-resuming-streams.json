@@ -1,0 +1,62 @@
+{
+  "id": "docs-api-v2-guides-resuming-streams",
+  "slug": "api/v2/guides/resuming-streams",
+  "title": "Resume a Chat Stream",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Reconnect to an active v0 generation after a client disconnects",
+  "topics": [
+    "design",
+    "api",
+    "streaming"
+  ],
+  "related": [
+    "api/v2/guides/custom-chat-interface",
+    "api/v2/reference/chats/resume-chat-stream",
+    "api/v2/reference/messages/list-messages"
+  ],
+  "requires": [
+    "api/v2"
+  ],
+  "headings": [
+    "Install the SDK",
+    "Resume with @v0-sdk/react",
+    "Load the message history",
+    "Add a resume proxy",
+    "Configure useChat",
+    "Resume with the core v0 SDK",
+    "Consume the stream in a browser",
+    "Resume behavior"
+  ],
+  "excerpt": "A dropped client connection (e.g. if you refresh your browser) does not stop the agent's active v0 generation. Resume the",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "pnpm add v0"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm add @v0-sdk/react ai @ai-sdk/react"
+    },
+    {
+      "language": "text",
+      "code": "### Add a resume proxy\n\nThe proxy calls the v0 API with server-side credentials and forwards the\n`V0StreamResult` as SSE."
+    },
+    {
+      "language": "text",
+      "code": "Before calling v0, also verify that the signed-in application user can access\n`chatId` in your data model.\n\n### Configure `useChat`\n\nPass the newest-first v0 history to the transport and convert it to\nchronological AI SDK messages with `toV0UIMessages()`. The `resume` option is\ntrue only when the newest message is an assistant message whose `finishReason`\nis `null`."
+    },
+    {
+      "language": "text",
+      "code": "`V0Transport` seeds the reconnect with the persisted unfinished assistant\nmessage, applies each resumed update, and prevents the existing partial content\nfrom being duplicated.\n\nThe transport requires create, send, and resume URLs because the same `useChat`\ninstance can handle the full chat lifecycle. The create and send URLs should\npoint to your existing v0 stream proxy routes.\n\n## Resume with the core `v0` SDK\n\nUse the core SDK directly in a trusted server environment when you do not need\nthe React package:"
+    },
+    {
+      "language": "text",
+      "code": "Each item in `result.stream` is an accumulated snapshot. `update.parts` contains\nthe complete message parts received so far, not a raw delta that you need to\npatch yourself. The raw API event remains available on `update.event` when you\nneed it.\n\n`result.final` resolves to the completed snapshot. The stream result starts\nwhen either `result.stream` or `result.final` is consumed, and both can be used\non the same result.\n\n### Consume the stream in a browser\n\nIf your custom client runs in a browser, reuse the authenticated proxy route\nfrom the React example. The route itself only uses the core `v0` package. Then\nreconstruct the same `V0StreamResult` with the browser-safe entrypoint:"
+    }
+  ],
+  "content": "\n\n# Resume a Chat Stream\n\nA dropped client connection (e.g. if you refresh your browser) does not stop the agent's active v0 generation. Resume the\nlatest generation with its chat ID, then continue receiving accumulated\nmessage snapshots until the stream finishes.\n\nThis guide shows two ways to reconnect:\n\n* Simplest: use `@v0-sdk/react` if you're building a React or Next.js application.\n* Otherwise, use the core `v0` package and manage stream state yourself.\n\nResuming reconnects to the latest generation for a chat. It does not restart a\nstopped generation or create a new assistant message.\n\n## Install the SDK\n\nInstall the v0 SDK:\n\n```bash\npnpm add v0\n```\n\nFor the React approach, also install the v0 React package and AI SDK:\n\n```bash\npnpm add @v0-sdk/react ai @ai-sdk/react\n```\n\n## Resume with `@v0-sdk/react`\n\nThe React package provides `V0Transport`, which converts v0 stream updates into\nAI SDK UI messages. When the newest persisted message is an unfinished\nassistant message, AI SDK's `useChat` reconnects automatically.\n\nThis flow has three pieces:\n\n1. Load the chat's message history.\n2. Proxy the resume request through your server.\n3. Configure `useChat` with the history and `V0Transport`.\n\n### Load the message history\n\nLoad messages on the server so your API key is never sent to the browser.\nMessages are returned newest first, which is the order expected by\n`shouldResumeV0Chat()` and `V0Transport`.\n\n```tsx title=\"app/chat/[chatId]/page.tsx\"\nimport { notFound } from 'next/navigation'\nimport { v0 } from 'v0'\n\nimport { V0Chat } from './v0-chat'\n\nexport default async function ChatPage({\n  params,\n}: {\n  params: Promise<{ chatId: string }>\n}) {\n  const { chatId } = await params\n  const result = await v0.messages.list({\n    chatId,\n    limit: 50,\n  })\n\n  if (result.error) {\n    throw new Error(result.error.message)\n  }\n\n  if (!result.data) {\n    notFound()\n  }\n\n  return <V0Chat chatId={chatId} history={result.data.messages} />\n}\n```\n\n### Add a resume proxy\n\nThe proxy calls the v0 API with server-side credentials and forwards the\n`V0StreamResult` as SSE.\n\n```typescript title=\"app/api/v0/chats/[chatId]/resume/route.ts\"\nimport { v0 } from 'v0'\n\nimport { auth } from '@/auth'\n\nexport async function POST(\n  _request: Request,\n  {\n    params,\n  }: {\n    params: Promise<{ chatId: string }>\n  },\n) {\n  const session = await auth()\n  if (!session?.user) {\n    return new Response('Unauthorized', { status: 401 })\n  }\n\n  const { chatId } = await params\n  const result = await v0.chats.resume({ chatId })\n  return result.toResponse()\n}\n```\n\nBefore calling v0, also verify that the signed-in application user can access\n`chatId` in your data model.\n\n### Configure `useChat`\n\nPass the newest-first v0 history to the transport and convert it to\nchronological AI SDK messages with `toV0UIMessages()`. The `resume` option is\ntrue only when the newest message is an assistant message whose `finishReason`\nis `null`.\n\n```tsx title=\"app/chat/[chatId]/v0-chat.tsx\"\n'use client'\n\nimport { useChat } from '@ai-sdk/react'\nimport {\n  shouldResumeV0Chat,\n  toV0UIMessages,\n  V0Transport,\n  type MessagesListResponse,\n  type V0UIMessage,\n} from '@v0-sdk/react'\nimport { useMemo } from 'react'\n\nexport function V0Chat({\n  chatId,\n  history,\n}: {\n  chatId: string\n  history: MessagesListResponse['messages']\n}) {\n  const transport = useMemo(\n    () =>\n      new V0Transport({\n        chatId,\n        messages: history,\n        urls: {\n          create: '/api/v0/chats/stream',\n          send: (id) => `/api/v0/chats/${id}/messages/stream`,\n          resume: (id) => `/api/v0/chats/${id}/resume`,\n        },\n      }),\n    [chatId, history],\n  )\n\n  const chat = useChat<V0UIMessage>({\n    id: chatId,\n    messages: toV0UIMessages(history),\n    resume: shouldResumeV0Chat(history),\n    transport,\n  })\n\n  return (\n    <main>\n      <p aria-live=\"polite\">{chat.status}</p>\n\n      {chat.messages.map((message) => (\n        <article key={message.id}>\n          <strong>{message.role}</strong>\n          {message.parts.map((part, index) => {\n            if (part.type === 'text') {\n              return <p key={`${message.id}:${index}`}>{part.text}</p>\n            }\n\n            if (part.type === 'reasoning') {\n              return (\n                <details key={`${message.id}:${index}`}>\n                  <summary>Reasoning</summary>\n                  <p>{part.text}</p>\n                </details>\n              )\n            }\n\n            return null\n          })}\n        </article>\n      ))}\n\n      {chat.error ? <p role=\"alert\">{chat.error.message}</p> : null}\n    </main>\n  )\n}\n```\n\n`V0Transport` seeds the reconnect with the persisted unfinished assistant\nmessage, applies each resumed update, and prevents the existing partial content\nfrom being duplicated.\n\nThe transport requires create, send, and resume URLs because the same `useChat`\ninstance can handle the full chat lifecycle. The create and send URLs should\npoint to your existing v0 stream proxy routes.\n\n## Resume with the core `v0` SDK\n\nUse the core SDK directly in a trusted server environment when you do not need\nthe React package:\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.chats.resume({\n  chatId: 'chat_abc123',\n})\n\nfor await (const update of result.stream) {\n  renderMessageParts(update.parts)\n\n  if (update.title) {\n    updateChatTitle(update.title)\n  }\n}\n\nconst final = await result.final\nconsole.log('Generation finished:', final.parts)\n```\n\nEach item in `result.stream` is an accumulated snapshot. `update.parts` contains\nthe complete message parts received so far, not a raw delta that you need to\npatch yourself. The raw API event remains available on `update.event` when you\nneed it.\n\n`result.final` resolves to the completed snapshot. The stream result starts\nwhen either `result.stream` or `result.final` is consumed, and both can be used\non the same result.\n\n### Consume the stream in a browser\n\nIf your custom client runs in a browser, reuse the authenticated proxy route\nfrom the React example. The route itself only uses the core `v0` package. Then\nreconstruct the same `V0StreamResult` with the browser-safe entrypoint:\n\n```typescript\nimport { readV0Stream } from 'v0/browser'\n\nexport async function resumeChat(chatId: string) {\n  const response = await fetch(\n    `/api/v0/chats/${encodeURIComponent(chatId)}/resume`,\n    { method: 'POST' },\n  )\n\n  const result = readV0Stream(response)\n\n  for await (const update of result.stream) {\n    renderMessageParts(update.parts)\n  }\n\n  return result.final\n}\n```\n\nAuthenticate browser-facing proxy routes and verify that the application user\ncan access the requested chat before calling v0.\n\n## Resume behavior\n\n* The endpoint resumes only the latest message when it is an unfinished\nassistant message.\n* If the latest assistant message has already finished, the endpoint emits its\ncurrent chat state and closes.\n* If the chat has no assistant message to resume, or its backing stream is no\nlonger available, the endpoint returns `404`.\n* Res",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/resuming-streams",
+  "lastUpdated": "2026-08-03"
+}

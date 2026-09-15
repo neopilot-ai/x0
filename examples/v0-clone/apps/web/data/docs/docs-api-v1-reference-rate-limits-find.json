@@ -1,0 +1,27 @@
+{
+  "id": "docs-api-v1-reference-rate-limits-find",
+  "slug": "api/v1/reference/rate-limits/find",
+  "title": "Find Rate Limit",
+  "section": "API Reference",
+  "category": "API · Rate-limits",
+  "type": "reference",
+  "description": "Retrieves rate limit information for a given scope. Useful for monitoring usage limits and avoiding throttling.",
+  "topics": [
+    "api"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [],
+  "content": "\n\n# Find Rate Limit\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.rateLimits.find()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/rate-limits \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"scope\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The context or namespace to check rate limits for (e.g., a project slug or feature area).\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"remaining\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"reset\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"limit\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"dailyLimit\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"Daily message limit information for free users.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"limit\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"The maximum number of daily messages allowed for free users.\",\n\"deprecated\": false\n},\n{\n\"name\": \"remaining\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"The number of messages the user has remaining for the day.\",\n\"deprecated\": false\n},\n{\n\"name\": \"reset\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"Unix timestamp (in milliseconds) when the daily limit resets.\",\n\"deprecated\": false\n},\n{\n\"name\": \"isWithinGracePeriod\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Whether the user is within the 48-hour grace period for new users, during which usage tracking is disabled.\",\n\"deprecated\": false\n}\n]\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/rate-limits/find",
+  "lastUpdated": "2026-07-30"
+}

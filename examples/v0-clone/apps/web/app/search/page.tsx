@@ -1,4 +1,5 @@
-import { SearchPage } from '@/components/docs/directory-page'
+import { SearchClient } from '@/components/search/search-client'
+
 export default async function Page({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
-  return <SearchPage query={(await searchParams).q} />
+  return <SearchClient initialQuery={(await searchParams).q} />
 }

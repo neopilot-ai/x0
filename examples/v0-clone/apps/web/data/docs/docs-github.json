@@ -1,0 +1,45 @@
+{
+  "id": "docs-github",
+  "slug": "github",
+  "title": "GitHub",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Connect GitHub repositories to v0 and ship changes through branches, previews, pull requests, and CI.",
+  "topics": [
+    "github",
+    "deployment",
+    "previews",
+    "integrations"
+  ],
+  "related": [
+    "git-import",
+    "deployments",
+    "vercel-integration",
+    "projects"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "How v0 works with Git",
+    "Connect a project to GitHub",
+    "Import an existing repository",
+    "Work from the branch menu",
+    "Publish GitHub changes",
+    "Branch protection and blocked publishes",
+    "Continue after publishing",
+    "Duplicate a branch",
+    "Troubleshooting",
+    "The repository is missing from Import from GitHub",
+    "The branch has no preview",
+    "Pull Changes is unavailable",
+    "Publish is blocked",
+    "Next steps"
+  ],
+  "excerpt": "Connect a v0 project to GitHub to keep its code in a repository, work on isolated branches, preview changes, run CI, and publish through pull requests.",
+  "snippets": [],
+  "content": "\n\n# GitHub\n\nConnect a v0 project to GitHub to keep its code in a repository, work on isolated branches, preview changes, run CI, and publish through pull requests.\n\n**Plus plans:** By default, team members must have access to a GitHub\nrepository to collaborate on its associated chat and generate previews. To\nallow members without a GitHub connection on their Vercel account to\nparticipate, enable **Allow v0 to Act on Behalf of Members** in your [workspace\nsettings](https://v0.app/settings/workspace). See [Teams → GitHub\nrepository access](/docs/teams#github-repository-access) for details.\n\n## How v0 works with Git\n\nWhen a chat is connected to GitHub, it starts from the base branch you selected. When v0 has a code change to push, it creates a working branch from that base. Generated code changes are then committed and pushed to the working branch automatically.\n\n| Branch                | How v0 uses it                                                                                                                                                                                                                           |\n| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |\n| **Default branch**    | The repository's default branch on GitHub. v0 selects it initially when you import a repository unless you choose another branch.                                                                                                        |\n| **Base branch**       | The branch a chat starts from and the branch its pull request targets.                                                                                                                                                                   |\n| **Working branch**    | The branch v0 creates for a chat. v0 pushes generated changes here instead of pushing directly to the base branch.                                                                                                                       |\n| **Production branch** | The branch configured on the linked Vercel project to create production deployments. It is often the default or base branch, while other branches create [preview deployments](https://vercel.com/docs/deployments/preview-deployments). |\n\nAfter a successful publish, v0 returns the chat to its updated base branch. The next code change starts a new working branch, so you can continue in the same chat and publish again.\n\n## Connect a project to GitHub\n\nOnce a GitHub repository is connected, it becomes the source of truth for\nyour project's code. If you delete the repository, the code may become\nunrecoverable.\n\nTo connect an existing v0 project:\n\n1. Open the **Project menu** `...` → **Settings** → **GitHub**.\n2. Select **Connect**.\n3. Under **Git Scope**, select the GitHub account or organization that will own the repository.\n4. Enter a **Repository Name**.\n5. Select **Create Repository**. v0 creates a private repository and pushes the project's current code to it.\n\nManage or repair the connection later from **Project menu** `...` → **Settings** → **GitHub**.\n\n### Import an existing repository\n\nTo start from code already on GitHub, use [Import from GitHub](/docs/git-import). Importing creates a chat at the selected base branch; the first code change creates its working branch. It does not duplicate a repository you can write to. You can connect the import to an existing Vercel project or create a new one.\n\n## Work from the branch menu\n\nA GitHub-backed chat shows its current branch next to **Publish** in the chat header. Before the first code change and after a publish, this is the base branch. v0 creates the working branch lazily when it has a code change to push. The branch menu brings the Git workflow into one place:\n\n* **Preview deployment:** Inspect the latest deployment for the working branch and open its URL.\n* **Branch and diff:** Open the branch on GitHub and see its additions and deletions.\n* **Pull request:** Create a pull request or open the existing pull request.\n* **CI checks:** See whether checks are running, passing, skipped, or failing.\n* **Pull Changes:** Bring changes from the base branch into the working branch.\n* **Review or repair:** Ask v0 to review the branch, fix a failed preview build or CI check, or resolve merge conflicts. The action changes to match the current branch state.\n\nEach working branch gets its own Vercel preview deployment. Use it to review the app before publishing without changing the project's production URL.\n\n## Publish GitHub changes\n\nWhen you are ready to ship:\n\n1. Review the branch preview and CI status from the branch menu.\n2. Select **Publish**.\n3. Confirm the domain and deployment visibility when prompted.\n4. Select **Publish** to finish.\n\nv0 creates a pull request if the branch does not have one, or reuses its existing pull request. It then merges the pull request into the base branch and waits for the production deployment.\n\n### Branch protection and blocked publishes\n\nv0 follows the repository's GitHub rules. Required checks, required reviews, draft pull requests, and other branch protections can block the merge. When that happens, v0 keeps the pull request open, explains what needs attention, and links to the pull request on GitHub. Complete the requirement, then select **Publish** again.\n\nIf the pull request has merge conflicts or CI failures that v0 can address, open the branch menu and select **Fix Conflicts**, **Fix CI**, or **Fix CI + Conflicts**.\n\n## Continue after publishing\n\nYou do not need to create a new chat after every publish. After the pull request merges, v0 synchronizes the chat with the base branch. Continue prompting in the same chat; the next code change creates the next working branch and preview.\n\nCreate another chat when you want a separate stream of work. Each chat starts from its selected base branch and creates an isolated working branch for its first code change, while sharing the same GitHub repository and Vercel project.\n\n## Duplicate a branch\n\nTo continue the current work in a separate chat:\n\n1. Open the chat menu and select **Duplicate…**.\n2. Enter the name for the new branch.\n3. Select **Branch**.\n\nThe **Duplicate Branch** dialog creates a new chat and branch containing the current branch's commits. The duplicate stays connected to the same GitHub repository and Vercel project and targets the same base branch for pull requests.\n\n## Troubleshooting\n\n### The repository is missing from Import from GitHub\n\nMake sure the [Vercel GitHub App](https://github.com/apps/vercel) is installed for the correct GitHub account or organization and has access to the repository. You can change repository access in your [GitHub App settings](https://github.com/settings/installations).\n\n### The branch has no preview\n\nA preview appears after v0 pushes a ",
+  "sourceUrl": "https://v0.app/docs/github",
+  "lastUpdated": "2026-09-01"
+}

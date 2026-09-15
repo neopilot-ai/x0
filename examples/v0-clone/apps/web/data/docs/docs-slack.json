@@ -1,0 +1,62 @@
+{
+  "id": "docs-slack",
+  "slug": "slack",
+  "title": "Slack",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Add v0 to your Slack workspace so your whole team can contribute to production.",
+  "topics": [
+    "github",
+    "integrations",
+    "teams"
+  ],
+  "related": [
+    "github",
+    "vercel-integration"
+  ],
+  "requires": [
+    "quickstart",
+    "github"
+  ],
+  "headings": [
+    "Get started",
+    "How it works",
+    "Setup",
+    "Install the Slack app",
+    "Link your Vercel account",
+    "Usage",
+    "Specifying a repository",
+    "Continuing in threads",
+    "Channel settings",
+    "Commands",
+    "Previewing changes",
+    "Privacy Policy"
+  ],
+  "excerpt": "The bot for Slack is currently in **beta**. If you encounter bugs while using this experimental feature, please report them to the v0 team using the in-app feedback button.",
+  "snippets": [
+    {
+      "language": "text",
+      "code": "@v0 Add a dark mode toggle to the settings page"
+    },
+    {
+      "language": "text",
+      "code": "@v0 [repo=acme/dashboard] Add a chart to the analytics page"
+    },
+    {
+      "language": "text",
+      "code": "@v0 [repo=acme/dashboard branch=feature-x] Fix the broken tooltip"
+    },
+    {
+      "language": "text",
+      "code": "@v0 Fix the header on https://my-app-abc123.vercel.app"
+    },
+    {
+      "language": "text",
+      "code": "@v0 Update the login page in the acme/website repo"
+    }
+  ],
+  "content": "\n\n# Slack\n\nThe bot for Slack is currently in **beta**. If you encounter bugs while using this experimental feature, please report them to the v0 team using the in-app feedback button.\n\n## Get started\n\n1. Install the Slack app at [v0.app/slack/install](https://v0.app/slack/install).\n2. Tag `@v0` in your team's Slack channel with a prompt.\n\n***\n\nThe v0 bot for Slack lets anyone on your team contribute to production by mentioning `@v0` in a Slack channel. v0 reads the conversation thread for context, writes the code changes, creates a branch, and opens a pull request -- all without leaving Slack.\n\nWith the bot for Slack, your team can:\n\n* **Ask v0 to make changes** to any connected GitHub repository\n* **Attach images and files** so v0 has additional visual or document context\n* **Iterate in threads** -- tag `@v0` again in a thread to continue the conversation on the same branch\n* **Set a default repo per channel** so nobody has to specify a repo every time\n\n## How it works\n\nWhen you mention `@v0` in Slack:\n\n1. v0 reacts with a 👀 emoji to acknowledge your message.\n2. v0 posts a reply with a link to the v0 chat (for example, \"On it.\").\n3. v0 reads the thread for context, makes the code changes, and creates a branch.\n4. v0 opens a pull request with a summary and a link back to the Slack thread.\n5. Vercel generates a **preview deployment** on every commit pushed to the branch, so your team can view and QA changes directly in the browser.\n\n## Setup\n\n### Install the Slack app\n\nVisit [v0.app/slack/install](https://v0.app/slack/install) to add v0 to your Slack workspace. Depending on your workspace settings, you may need Slack admin permissions or workspace-level app approval to complete the installation.\n\n### Link your Vercel account\n\nThe first time you mention `@v0` in Slack, it will prompt you to link your Vercel account. During this step you select which Vercel team to connect. This determines which repositories and projects v0 can access.\n\nEach Slack user links their own Vercel account independently. You need a v0 Premium, Plus, or Enterprise plan and access to the GitHub repos you want to work with.\n\n## Usage\n\nMention `@v0` followed by your request in any channel where the bot is installed:\n\n```\n@v0 Add a dark mode toggle to the settings page\n```\n\n### Specifying a repository\n\nUse a structured syntax to tell v0 exactly which repository to target:\n\n```\n@v0 [repo=acme/dashboard] Add a chart to the analytics page\n```\n\nTo target a specific branch:\n\n```\n@v0 [repo=acme/dashboard branch=feature-x] Fix the broken tooltip\n```\n\nVercel project names, deployment URLs, and project IDs work as well:\n\n```\n@v0 Fix the header on https://my-app-abc123.vercel.app\n```\n\nIf you don't specify a repo, v0 will try to intelligently infer the repository from your message, so you can also write naturally:\n\n```\n@v0 Update the login page in the acme/website repo\n```\n\n### Continuing in threads\n\nTo continue a conversation, reply in the thread and tag `@v0` again. v0 remembers the full thread and works within the same v0 chat and branch, so you can iterate on changes without starting over.\n\nMessages in the thread that don't tag `@v0` are regular Slack messages -- you can discuss changes with your team in the same thread without triggering another generation.\n\nIf you tag `@v0` with a different repo in an existing thread, v0 starts a new chat for that repo.\n\n## Channel settings\n\nUse `@v0 settings` in any channel to open the channel settings modal. From here you can configure:\n\n* **Default Repository** -- An `org/repo` value that applies to every request in the channel. Once set, team members can mention `@v0` without specifying a repo each time.\n* **Default Branch** -- The branch v0 should target by default for the channel.\n\nSettings apply to the channel, not per user. The first time someone uses a repo in a channel that does not have a default configured, v0 will suggest setting one.\n\n## Commands\n\n| Command        | Description                                             |\n| -------------- | ------------------------------------------------------- |\n| `@v0 settings` | View and change channel settings (default repo, branch) |\n| `@v0 whoami`   | Show your connected account and team                    |\n| `@v0 team`     | Change your connected Vercel team                       |\n| `@v0 signout`  | Sign out of v0                                          |\n\n## Previewing changes\n\nYou can use the bot for Slack even if a full preview of your repository does not load inside v0. Once v0 opens a pull request, Vercel generates a **preview deployment** on every commit pushed to that branch. You can use these preview deployment URLs to view and QA your changes directly in the browser, without needing the v0 in-app preview at all.\n\nThis makes the bot for Slack a great fit for repositories of any size or complexity -- your team can request changes in Slack and review the results through Vercel preview deployments.\n\n### Privacy Policy\n\nFor details on how v0 handles the collection, use, and protection of your personal information, please refer to our [Privacy Policy](https://vercel.com/legal/privacy-policy) and [AI Policy](https://v0.app/policy).\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/slack",
+  "lastUpdated": "2026-07-30"
+}

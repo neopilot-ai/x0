@@ -1,0 +1,32 @@
+{
+  "id": "docs-prd-design",
+  "slug": "prd-design",
+  "title": "PRD design",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Create a Product Requirements Document (PRD) with v0.",
+  "topics": [
+    "design"
+  ],
+  "related": [
+    "prototyping",
+    "text-prompting"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Getting started",
+    "Breaking down product features",
+    "API specifications",
+    "Database schema design",
+    "Best practices",
+    "Validating results"
+  ],
+  "excerpt": "A **Product Requirements Document (PRD)** outlines what you're building, who it's for, and how it should work. It bridges the gap between product ideas and technical implementation.",
+  "snippets": [],
+  "content": "\n\n# PRD design\n\nA **Product Requirements Document (PRD)** outlines what you're building, who it's for, and how it should work. It bridges the gap between product ideas and technical implementation.\n\nv0 can help turn high-level product ideas into detailed technical specs. In addition to writing code, it supports technical planning by breaking down features, drafting API specs, and designing database schemas.\n\n## Getting started\n\nStart by providing clear project context: product type (web, mobile, API), key features, constraints, dependencies, and required integrations. You can include text, images, or code snippets.\n\n### Breaking down product features\n\nv0 can decompose product features into smaller, manageable technical components.\n\n### API specifications\n\nv0 can help design complete API specifications based on your product requirements, including:\n\n* Boilerplate code for Route handlers in Next.js.\n* Request formatting and requirements.\n\n### Database schema design\n\nv0 can design high-level database schemas that align with your product requirements, usually generated in `mermaid` format as entity-relationship diagrams.\n\n## Best practices\n\nUse v0 as your AI collaborator to iteratively develop clear, detailed product requirements. Start broad, then refine through guided prompts. Here's a recommended workflow:\n\n1. **Start with high-level requirements**: Outline the core product goals and functionality.\n2. **Generate initial specs**: Ask v0 to draft the first version of the technical details.\n3. **Review and refine**: Spot gaps, unclear areas, or missing edge cases.\n4. **Prompt for updates**: Use feedback to guide v0 in refining the output.\n5. **Finalize**: Consolidate the results into a complete, usable specification.\n\n## Validating results\n\nValidate the outputs v0 generates to ensure they meet your project needs. You can also prompt v0 to review its own results against your requirements. Use the following criteria to guide validation:\n\n* **Completeness**: Do the technical specifications cover all the requirements outlined in the PRD?\n* **Feasibility**: Are the proposed solutions realistic given your technical and timeline constraints?\n* **Consistency**: Are the technical specifications aligned with each other and with existing systems or architecture?\n* **Clarity**: Are the instructions clear and easy for developers to follow?\n* **Testability**: Can each part of the implementation be tested effectively?\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/prd-design",
+  "lastUpdated": "2026-07-30"
+}

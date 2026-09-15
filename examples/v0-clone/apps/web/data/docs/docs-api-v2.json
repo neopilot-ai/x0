@@ -1,0 +1,41 @@
+{
+  "id": "docs-api-v2",
+  "slug": "api/v2",
+  "title": "Overview",
+  "section": "API Reference",
+  "category": "API Reference",
+  "type": "overview",
+  "description": "Build custom app-generation experiences with the v0 API",
+  "topics": [
+    "design",
+    "api",
+    "previews",
+    "agents"
+  ],
+  "related": [
+    "api/v2/quickstart",
+    "api/v2/guides/custom-chat-interface",
+    "api/v2/guides/accessing-previews",
+    "api/v2/guides/integrating-v0-into-agents"
+  ],
+  "requires": [],
+  "headings": [
+    "Why use the v0 API?",
+    "Get Started",
+    "Reference and migration"
+  ],
+  "excerpt": "The v0 API gives your product v0's app-building agent, including code generation, secure live previews, integrations, and deployment to Vercel.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst result = await v0.chats.create({\n  message: 'Create a project management dashboard with a kanban board',\n})\n\nif (result.error) {\n  throw new Error(result.error.message)\n}\n\nconsole.log('Created chat:', result.data.chat.id)"
+    },
+    {
+      "language": "bash",
+      "code": "npx create-v0-sdk-app"
+    }
+  ],
+  "content": "\n\n# Overview\n\nThe v0 API gives your product v0's app-building agent, including code generation, secure live previews, integrations, and deployment to Vercel.\n\nCreate a full-stack app from a prompt with one API call:\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.chats.create({\n  message: 'Create a project management dashboard with a kanban board',\n})\n\nif (result.error) {\n  throw new Error(result.error.message)\n}\n\nconsole.log('Created chat:', result.data.chat.id)\n```\n\n## Why use the v0 API?\n\nBuilding an app-generation experience requires more than just generating code. You need an agent that can plan and iterate, a secure environment for running its work, and a path from a prompt to a production application. The v0 API provides the complete workflow through one API.\n\nBenefits include:\n\n* **Agentic app generation:** Create full-stack applications from natural language, then continue iterating through follow-up messages.\n* **Secure live previews:** Run generated applications and embed their previews without exposing credentials to the browser.\n* **Extensible workflows:** Connect MCP servers, integrations, environment variables, and design systems.\n* **Built-in deployment:** Deploy generated applications to Vercel without building separate deployment infrastructure.\n\nThe v0 API supports these primary workflows:\n\n* **Generate and iterate on apps** with the [Chats](/docs/api/v2/reference/chats/list-chats) and [Messages](/docs/api/v2/reference/messages/list-messages) APIs.\n* **Build a custom chat interface** with [`@v0-sdk/react`](/docs/api/v2/guides/custom-chat-interface) and AI SDK.\n* **Embed live previews** securely in your product with [authenticated iframe URLs](/docs/api/v2/guides/accessing-previews).\n* **Add app generation to agents** through the [v0 MCP server or AI SDK tools](/docs/api/v2/guides/integrating-v0-into-agents).\n\n## Get Started\n\nStart with a complete app-generation frontend:\n\n```bash\nnpx create-v0-sdk-app\n```\n\nThe starter includes a full chat interface with live previews. Follow the [Quickstart](/docs/api/v2/quickstart) to configure the starter or add v0 to an existing app.\n\n## Reference and migration\n\n* [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2)\n* [Browse the endpoint reference](/docs/api/v2/reference/chats/list-chats)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2",
+  "lastUpdated": "2026-09-02"
+}

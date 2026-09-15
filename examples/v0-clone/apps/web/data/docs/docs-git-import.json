@@ -1,0 +1,41 @@
+{
+  "id": "docs-git-import",
+  "slug": "git-import",
+  "title": "Import from GitHub",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Import an existing GitHub repository into v0, connect its Vercel project, and work from an isolated branch.",
+  "topics": [
+    "github",
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "github",
+    "vercel-integration",
+    "projects"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Before you import",
+    "Import a repository",
+    "Configure the import",
+    "Repository without a Vercel project",
+    "Repository with a Vercel project",
+    "What v0 creates",
+    "Development environment",
+    "Import the same repository again",
+    "Troubleshooting",
+    "v0 cannot access the repository",
+    "The wrong application starts in a monorepo",
+    "The preview is waiting for a code change"
+  ],
+  "excerpt": "Import a GitHub repository to build against an existing codebase in v0. The import creates a chat with a full development environment; the first code change creates a working branch and preview deployment.",
+  "snippets": [],
+  "content": "\n\n# Import from GitHub\n\nImport a GitHub repository to build against an existing codebase in v0. The import creates a chat with a full development environment; the first code change creates a working branch and preview deployment.\n\n## Before you import\n\nYou can import public repositories and private repositories you can access. The [Vercel GitHub App](https://github.com/apps/vercel) must have access to the repository.\n\nIf a repository is missing from the list, grant the Vercel GitHub App access\nfrom your [GitHub App settings](https://github.com/settings/installations),\nthen reopen the import dialog.\n\nv0 also supports monorepos. During import, choose the root directory that contains the application you want to run.\n\n## Import a repository\n\n1. Start a new chat.\n2. Open the **+** menu in the composer.\n3. Select **Import from…** → **Import from GitHub**.\n4. Paste a full GitHub repository URL, or select an account or organization and search by repository name.\n5. Select **Import**.\n\n## Configure the import\n\nAfter selecting a repository, choose how it should connect to v0 and Vercel.\n\n### Repository without a Vercel project\n\nIf the repository is not connected to a Vercel project, configure:\n\n* **Team:** The Vercel scope that will own the project and chat.\n* **Project Name:** The name of the new Vercel project.\n* **Base Branch:** The branch the chat starts from and its pull requests target.\n* **Root Directory:** The application directory v0 should install, run, and deploy. For a single-app repository, this is usually `./`.\n\nv0 creates the Vercel project as part of the import.\n\n### Repository with a Vercel project\n\nIf Vercel projects are already connected to the repository, select the team and project to use. You can also choose to create a new Vercel project.\n\nConnecting an existing project gives the chat access to its configuration:\n\n* Development environment variables for the v0 preview\n* Connected integrations\n* Framework and root-directory settings\n* Preview and production deployments\n* Custom domains\n\nYou still choose the base branch for the chat. The Vercel project's production branch remains responsible for production deployments.\n\n## What v0 creates\n\nThe import does not make another copy of a repository you can write to. It creates:\n\n1. A v0 chat connected to the selected Vercel project.\n2. A Vercel Sandbox with the repository checked out at the selected base branch.\n3. An isolated working branch when the chat first changes code.\n4. A Vercel preview deployment after v0 pushes that working branch.\n\nGenerated code changes are committed and pushed automatically. v0 does not push them directly to the base branch.\n\nLearn how to review the branch, check CI, and publish through a pull request\n\n## Development environment\n\nImported repositories run in [Vercel Sandbox](https://vercel.com/docs/vercel-sandbox), which provides:\n\n* A full Node.js environment for the repository's development server\n* Installation with the repository's package manager and lockfile\n* Server-side code, API routes, background processes, and filesystem access\n* A terminal and code editor connected to the same workspace\n\nFor monorepos, v0 installs and runs the selected root directory while retaining access to the rest of the repository when the application depends on shared workspace packages.\n\n## Import the same repository again\n\nImporting the same repository again creates another chat at the selected base branch. Its first code change creates a separate working branch. The import does not create another GitHub repository. You can connect the new chat to the same Vercel project for a separate stream of work, or select a different project during import.\n\n## Troubleshooting\n\n### v0 cannot access the repository\n\nCheck both your GitHub access and the Vercel GitHub App installation. For an organization repository, an organization owner may need to approve the app or authorize it for the repository.\n\n### The wrong application starts in a monorepo\n\nRe-import the repository and select the directory containing the intended application's `package.json`. If the repository is connected to a Vercel project, confirm its Root Directory in the Vercel project settings too.\n\n### The preview is waiting for a code change\n\nThe selected base branch may already power production, so v0 waits to create a working-branch preview until the chat changes code. Send a prompt that edits the project and wait for the automatic push.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/git-import",
+  "lastUpdated": "2026-09-01"
+}

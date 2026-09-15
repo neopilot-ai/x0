@@ -1,0 +1,32 @@
+{
+  "id": "docs-code-editing",
+  "slug": "code-editing",
+  "title": "Code editing",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Edit v0's code output directly in the browser.",
+  "topics": [
+    "design"
+  ],
+  "related": [
+    "text-prompting",
+    "design-mode"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Basic editing",
+    "Editor features",
+    "Diff view",
+    "Split view",
+    "File management",
+    "Toolbar actions"
+  ],
+  "excerpt": "v0 includes a full-featured code editor with syntax highlighting, global search, diff views, split editing, and more.",
+  "snippets": [],
+  "content": "\n\n# Code editing\n\nv0 includes a full-featured code editor with syntax highlighting, global search, diff views, split editing, and more.\n\n## Basic editing\n\nSelect the **Code** tab in the preview toolbar to access the editor. You can edit any file directly. When you make changes, an \"Unsaved Changes\" banner appears where you can save or reset. Press `Cmd+S` (Mac) or `Ctrl+S` (Windows/Linux) to save.\n\n## Editor features\n\nv0 integrates a capable IDE that includes many of the expected features along with their shortcuts, such as:\n\n* **Syntax highlighting**: Code is properly highlighted based on the file type\n* **Line numbers**: Easily navigate through your code with line numbers\n* **Find and replace**: Press `Cmd+F` / `Ctrl+F` to search within the current file\n* **Global search**: Press `Shift+Cmd+F` / `Shift+Ctrl+F` to search across all files. Filter results with \"files to include\" and \"files to exclude\" options\n* **File Explorer**: Press `Cmd+B` / `Ctrl+B` to toggle the file explorer panel\n\n### Diff view\n\nView v0's changes in the diff view. This helps you understand exactly what was modified in each generation. Click the **Toggle Diff View** button in the editor toolbar to enable it.\n\n### Split view\n\nEdit files side-by-side with split view. Click the **Split Layout** button in the editor toolbar to open a second editor panel. This is useful when you want to view v0's changes in diff view while making additional edits in another panel, or when working on related files like a component and its styles.\n\n### File management\n\nYou can create, rename, and delete files directly in the editor:\n\n* **Create a file**: Click the new file icon in the File Explorer header, or right-click in the file tree\n* **Create a folder**: Click the new folder icon in the File Explorer header, or right-click in the file tree\n* **Rename a file**: Right-click on a file and select \"Rename\"\n* **Delete a file**: Right-click on a file and select \"Delete\"\n\n### Toolbar actions\n\nThe editor toolbar provides quick access to common actions:\n\n* **Copy File**: Copy the current file's contents to your clipboard\n* **Toggle Diff View**: Show or hide the diff view for the current file\n* **Split Layout**: Toggle split view to edit two files side-by-side\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/code-editing",
+  "lastUpdated": "2026-08-19"
+}

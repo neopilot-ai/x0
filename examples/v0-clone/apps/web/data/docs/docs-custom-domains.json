@@ -1,0 +1,34 @@
+{
+  "id": "docs-custom-domains",
+  "slug": "custom-domains",
+  "title": "Custom domain",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Add custom domains to your v0 deployments to give your applications a professional, branded URL.",
+  "topics": [
+    "deployment",
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "deployments",
+    "vercel-integration"
+  ],
+  "requires": [
+    "deployments"
+  ],
+  "headings": [
+    "Step 1: Access the Domains menu",
+    "Step 2: Choose your domain option",
+    "Option A: Use an available .vercel.app domain",
+    "Option B: Add your own custom domain",
+    "Configuring your own custom domain",
+    "Next steps"
+  ],
+  "excerpt": "v0 provides all deployments with a unique vercel.app URL, but you can add custom domains to give your applications a professional, branded web address.",
+  "snippets": [],
+  "content": "\n\n# Custom domain\n\nv0 provides all deployments with a unique `vercel.app` URL, but you can add custom domains to give your applications a professional, branded web address.\n\nOnce you have a deployment available, you can add a custom domain directly from the v0 interface:\n\n## Step 1: Access the Domains menu\n\nYou can access your project's domains settings from either:\n\n* **Publish** → **Customize Domain**\n* **Project menu** `...` → **Settings** → **Domains**\n\n## Step 2: Choose your domain option\n\nWhen you click **Add**, you'll have two main options:\n\n### Option A: Use an available `.vercel.app` domain\n\n* Select from available `.vercel.app` domains\n* These are free and instantly available\n* Perfect for testing and development\n* Automatically configured with HTTPS\n\n### Option B: Add your own custom domain\n\n* Enter your own domain name (e.g., `myapp.com`)\n* Requires DNS configuration with your domain registrar\n* Provides professional branding\n* Full control over your domain\n\n## Configuring your own custom domain\n\nIf you choose to use your own domain, you'll need to configure it through the Vercel console:\n\n1. **Click \"Inspect on Vercel\"** from the Publish menu\n2. **Follow the detailed instructions** in the Vercel dashboard\n3. **Configure DNS records** with your domain registrar\n\nFor complete instructions on setting up custom domains, including DNS configuration and domain management, see the [Vercel documentation on adding domains](https://vercel.com/docs/domains/working-with-domains/add-a-domain).\n\n## Next steps\n\n* [Learn about deployments](/docs/deployments)\n* [Explore Vercel's domain features](https://vercel.com/docs/domains)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/custom-domains",
+  "lastUpdated": "2026-08-19"
+}

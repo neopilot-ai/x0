@@ -1,0 +1,32 @@
+{
+  "id": "docs-account",
+  "slug": "account",
+  "title": "Account",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "guide",
+  "description": "Manage your account and billing information.",
+  "topics": [
+    "design",
+    "pricing",
+    "teams"
+  ],
+  "related": [
+    "pricing",
+    "teams"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Billing",
+    "Cancelling your subscription",
+    "Transferring your chats",
+    "Account recovery"
+  ],
+  "excerpt": "You can manage your account from the settings page. To access it, open the user menu in the bottom-left corner of the interface and select **Settings**.",
+  "snippets": [],
+  "content": "\n\n# Account\n\nYou can manage your account from the settings page. To access it, open the user menu in the bottom-left corner of the interface and select **Settings**.\n\n## Billing\n\nBilling information and credit balances can be viewed from the [**Billing section**](https://v0.app/settings/billing). This includes your current plan, credit balances and expiry schedules, payment methods, and invoices. Viewing invoices will take you to your Vercel dashboard.\n\nLearn more about pricing\n\n## Cancelling your subscription\n\nYou can cancel your subscription at any time. To do this:\n\n1. Ensure you have selected the scope whose subscription you want to cancel using the dropdown located at the top left of the page\n2. Open the user menu in the bottom-left corner of the interface\n3. Click **Settings**\n4. Click on **Billing** in the sidebar\n5. In the **Current Plan** section, click on **Cancel Plan**\n\nThis will move your account to the free plan at the end of your current billing period.\n\n## Transferring your chats\n\nYou can transfer chats between any of your available scopes, either team or personal. When a chat has a linked Vercel project, the project is transferred along with it if you are an [Owner](https://vercel.com/docs/rbac/access-roles#owner-role) of the project's current team. You can transfer a single chat from the chat header menu, or transfer multiple chats at once from [Settings → Workspace](https://v0.app/settings/workspace).\n\nLearn more about transferring chats and projects\n\n## Account recovery\n\nOnce an account or team has been confirmed for deletion, the deletion process cannot be stopped nor the account recovered. If you wish to reuse, you will need to wait 7 days to sign up with the same email address.\n\nFor chats, when you archive a chat, it is stored in your [chat archive](https://v0.app/chats?kind=archived). Chats stay in your archive for 30 days, during which they can be restored before being permanently deleted.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/account",
+  "lastUpdated": "2026-08-19"
+}

@@ -1,0 +1,75 @@
+{
+  "id": "docs-api-v1-guides-lock-files-from-ai-changes",
+  "slug": "api/v1/guides/lock-files-from-ai-changes",
+  "title": "Lock Files from AI Changes",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Learn how to protect files from AI modifications in v0 chats",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Setting File Locks During Initialization",
+    "Lock Individual Files",
+    "Lock All Files from Repository",
+    "Lock All Files from Zip",
+    "Updating File Locks",
+    "Update Files and Lock Status",
+    "Lock Existing Files",
+    "Common Use Cases",
+    "1. Protect Configuration Files",
+    "2. Preserve Working Components",
+    "3. Import and Selectively Protect",
+    "Best Practices",
+    "1. Lock Configuration Files",
+    "2. Protect Working Code",
+    "3. Use Descriptive Comments",
+    "4. Strategic Locking for Large Projects",
+    "File Lock Status"
+  ],
+  "excerpt": "File locks allow you to protect specific files from AI modifications during code generation, giving you precise control over which parts of your codebase can be changed.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// Initialize chat with some files locked\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: buttonCode,\n      locked: false, // AI can modify this file\n    },\n    {\n      name: 'package.json',\n      content: packageJson,\n      locked: true, // AI cannot modify this file\n    },\n    {\n      name: 'tsconfig.json',\n      content: tsConfig,\n      locked: true, // AI cannot modify this file\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Import repository with all files locked\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-app',\n  },\n  lockAllFiles: true, // Prevents AI from modifying any files\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Import zip archive with all files locked\nconst chat = await v0.chats.init({\n  type: 'zip',\n  zip: {\n    url: 'https://example.com/project.zip',\n  },\n  lockAllFiles: true, // Protects all imported files\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Update file content and lock status\nawait v0.chats.updateVersion({\n  chatId: 'chat_123',\n  versionId: 'version_456',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: updatedButtonCode,\n      locked: true, // Lock this file after updating\n    },\n    {\n      name: 'src/utils/helpers.ts',\n      content: helperCode,\n      locked: false, // Keep this file unlocked\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Lock files without changing content\nawait v0.chats.updateVersion({\n  chatId: 'chat_123',\n  versionId: 'version_456',\n  files: [\n    {\n      name: 'package.json',\n      content: existingPackageJson, // Same content\n      locked: true, // Just lock the file\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    // Source code - AI can modify\n    { name: 'src/App.tsx', content: appCode, locked: false },\n    { name: 'src/components/Header.tsx', content: headerCode, locked: false },\n\n    // Configuration - AI cannot modify\n    { name: 'package.json', content: packageJson, locked: true },\n    { name: 'tsconfig.json', content: tsConfig, locked: true },\n    { name: '.env.example', content: envExample, locked: true },\n    { name: 'README.md', content: readme, locked: true },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    // Working component - protect from changes\n    {\n      name: 'src/components/WorkingButton.tsx',\n      content: workingButtonCode,\n      locked: true,\n    },\n\n    // New component - AI can build this\n    {\n      name: 'src/components/NewCard.tsx',\n      content: '',\n      locked: false,\n    },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// First, import everything unlocked\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/project',\n  },\n  lockAllFiles: false,\n})\n\n// Then lock specific files\nawait v0.chats.updateVersion({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n  files: [\n    // Lock configuration files only\n    { name: 'package.json', content: existingPackageJson, locked: true },\n    { name: 'vite.config.ts', content: existingViteConfig, locked: true },\n  ],\n})"
+    }
+  ],
+  "content": "\n\n# Lock Files from AI Changes\n\nFile locks allow you to protect specific files from AI modifications during code generation, giving you precise control over which parts of your codebase can be changed.\n\n## Overview\n\nFile locks in v0 protect specific files from AI modifications during generation. This is useful when you want to:\n\n* **Preserve configuration files** - Keep package.json, tsconfig.json unchanged\n* **Protect existing code** - Prevent AI from modifying working components\n* **Maintain file structure** - Lock files that shouldn't be altered\n* **Control AI scope** - Direct AI attention to specific files only\n\n## Setting File Locks During Initialization\n\n### Lock Individual Files\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// Initialize chat with some files locked\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: buttonCode,\n      locked: false, // AI can modify this file\n    },\n    {\n      name: 'package.json',\n      content: packageJson,\n      locked: true, // AI cannot modify this file\n    },\n    {\n      name: 'tsconfig.json',\n      content: tsConfig,\n      locked: true, // AI cannot modify this file\n    },\n  ],\n})\n```\n\n### Lock All Files from Repository\n\n```typescript\n// Import repository with all files locked\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/my-app',\n  },\n  lockAllFiles: true, // Prevents AI from modifying any files\n})\n```\n\n### Lock All Files from Zip\n\n```typescript\n// Import zip archive with all files locked\nconst chat = await v0.chats.init({\n  type: 'zip',\n  zip: {\n    url: 'https://example.com/project.zip',\n  },\n  lockAllFiles: true, // Protects all imported files\n})\n```\n\n## Updating File Locks\n\n### Update Files and Lock Status\n\n```typescript\n// Update file content and lock status\nawait v0.chats.updateVersion({\n  chatId: 'chat_123',\n  versionId: 'version_456',\n  files: [\n    {\n      name: 'src/components/Button.tsx',\n      content: updatedButtonCode,\n      locked: true, // Lock this file after updating\n    },\n    {\n      name: 'src/utils/helpers.ts',\n      content: helperCode,\n      locked: false, // Keep this file unlocked\n    },\n  ],\n})\n```\n\n### Lock Existing Files\n\n```typescript\n// Lock files without changing content\nawait v0.chats.updateVersion({\n  chatId: 'chat_123',\n  versionId: 'version_456',\n  files: [\n    {\n      name: 'package.json',\n      content: existingPackageJson, // Same content\n      locked: true, // Just lock the file\n    },\n  ],\n})\n```\n\n## Common Use Cases\n\n### 1. Protect Configuration Files\n\n```typescript\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    // Source code - AI can modify\n    { name: 'src/App.tsx', content: appCode, locked: false },\n    { name: 'src/components/Header.tsx', content: headerCode, locked: false },\n\n    // Configuration - AI cannot modify\n    { name: 'package.json', content: packageJson, locked: true },\n    { name: 'tsconfig.json', content: tsConfig, locked: true },\n    { name: '.env.example', content: envExample, locked: true },\n    { name: 'README.md', content: readme, locked: true },\n  ],\n})\n```\n\n### 2. Preserve Working Components\n\n```typescript\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    // Working component - protect from changes\n    {\n      name: 'src/components/WorkingButton.tsx',\n      content: workingButtonCode,\n      locked: true,\n    },\n\n    // New component - AI can build this\n    {\n      name: 'src/components/NewCard.tsx',\n      content: '',\n      locked: false,\n    },\n  ],\n})\n```\n\n### 3. Import and Selectively Protect\n\n```typescript\n// First, import everything unlocked\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/username/project',\n  },\n  lockAllFiles: false,\n})\n\n// Then lock specific files\nawait v0.chats.updateVersion({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n  files: [\n    // Lock configuration files only\n    { name: 'package.json', content: existingPackageJson, locked: true },\n    { name: 'vite.config.ts', content: existingViteConfig, locked: true },\n  ],\n})\n```\n\n## Best Practices\n\n### 1. Lock Configuration Files\n\n```typescript\n// ✅ Good: Always lock configuration files\nconst configFiles = [\n  'package.json',\n  'tsconfig.json',\n  'vite.config.ts',\n  'next.config.js',\n  '.env.example',\n  'README.md',\n]\n\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    ...sourceFiles.map((f) => ({ ...f, locked: false })),\n    ...configFiles.map((f) => ({ ...f, locked: true })),\n  ],\n})\n```\n\n### 2. Protect Working Code\n\n```typescript\n// ✅ Good: Lock files that are already working\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    // Tested, working components\n    { name: 'src/components/Button.tsx', content: buttonCode, locked: true },\n    { name: 'src/utils/api.ts', content: apiCode, locked: true },\n\n    // New features AI should build\n    { name: 'src/components/Dashboard.tsx', content: '', locked: false },\n    { name: 'src/pages/Settings.tsx', content: '', locked: false },\n  ],\n})\n```\n\n### 3. Use Descriptive Comments\n\n```typescript\n// ✅ Good: Explain why files are locked\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    {\n      name: 'src/components/PaymentForm.tsx',\n      content: paymentFormCode,\n      locked: true, // Critical payment logic - don't modify\n    },\n    {\n      name: 'src/components/UserProfile.tsx',\n      content: profileCode,\n      locked: false, // Needs UI improvements\n    },\n  ],\n})\n```\n\n### 4. Strategic Locking for Large Projects\n\n```typescript\n// For large imports, lock everything first, then unlock what AI should modify\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: 'https://github.com/company/large-app',\n  },\n  lockAllFiles: true, // Protect everything initially\n})\n\n// Then unlock specific files for AI to work on\nawait v0.chats.updateVersion({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n  files: [\n    // Unlock only the component that needs work\n    {\n      name: 'src/components/ProductCard.tsx',\n      content: existingProductCard,\n      locked: false, // AI can improve this component\n    },\n  ],\n})\n```\n\n## File Lock Status\n\nWhen files are locked:\n\n* ✅ **AI will not modify** the file content during generation\n* ✅ **File remains available** for reference and context\n* ✅ **You can still manually update** locked files via API\n* ✅ **Lock status persists** across chat sessions\n\nWhen files are unlocked:\n\n* ⚠️ **AI can freely modify** the file content\n* ⚠️ **Changes may overwrite** your existing code\n* ✅ **AI uses file for context** when generating other files\n* ✅ **You can lock again** at any time\n\nFile locks give you precise control over what the AI can and cannot change, ensuring your important code stays protected while still allowing AI assistance where you need it.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/lock-files-from-ai-changes",
+  "lastUpdated": "2026-07-30"
+}

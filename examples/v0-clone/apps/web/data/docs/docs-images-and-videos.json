@@ -1,0 +1,40 @@
+{
+  "id": "docs-images-and-videos",
+  "slug": "images-and-videos",
+  "title": "Images, videos, and file uploads",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Attach media, documents, code, and other supported assets to give v0 context or add them to your application.",
+  "topics": [
+    "design",
+    "streaming"
+  ],
+  "related": [
+    "screenshots",
+    "figma"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Uploading files",
+    "Using the attachment button",
+    "Drag and drop",
+    "Copy and paste",
+    "Supported file types",
+    "Use Cases",
+    "Product galleries and catalogs",
+    "Media players and video content",
+    "User avatars and profiles",
+    "Hero sections and banners",
+    "Limits",
+    "Best practices",
+    "Troubleshooting"
+  ],
+  "excerpt": "You can attach images, videos, audio, documents, code, and other assets to give v0 context or add them to your application. v0 supports uploading files directly into the chat or copying and pasting images from your clipboard.",
+  "snippets": [],
+  "content": "\n\n# Images, videos, and file uploads\n\nYou can attach images, videos, audio, documents, code, and other assets to give v0 context or add them to your application. v0 supports uploading files directly into the chat or copying and pasting images from your clipboard.\n\n## Uploading files\n\n### Using the attachment button\n\n1. Click the **+ icon** in the chat input area and choose **Upload from computer**\n2. Select a supported file from your device\n3. The file will be uploaded and displayed in the chat\n4. Add your prompt describing how v0 should use the file\n\n### Drag and drop\n\nYou can also drag and drop files directly into the chat area:\n\n1. Select a supported file from your file explorer\n2. Drag it over the chat interface\n3. Drop it when you see the upload indicator\n\n### Copy and paste\n\nFor quick additions, you can copy images directly from other applications and paste them into the chat:\n\n1. Copy an image from any application (browser, design tool, etc.)\n2. Use `Cmd` + `V` (Mac) or `Ctrl` + `V` (Windows/Linux) to paste\n\n## Supported file types\n\nThe upload server accepts the following formats:\n\n| Category             | Supported formats                                                                                                                                 |\n| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |\n| Images               | PNG, JPEG/JPG, WebP, GIF, SVG, ICO, AVIF                                                                                                          |\n| Video                | MP4, WebM, OGG, MOV/QuickTime                                                                                                                     |\n| Audio                | MP3/MPEG, WAV, OGG                                                                                                                                |\n| Documents            | PDF, DOCX, XLSX                                                                                                                                   |\n| 3D and model assets  | GLB, glTF, OBJ                                                                                                                                    |\n| Text, code, and data | Plain text and other `text/*` files; common code and configuration files; JSON, TypeScript, JavaScript, YAML, SQL, XML, shell, PHP, Ruby, and AWK |\n| Archives             | ZIP, GZIP/GZ                                                                                                                                      |\n| Fonts                | WOFF, WOFF2, TTF                                                                                                                                  |\n| Email                | EML                                                                                                                                               |\n| Rive assets          | RIV                                                                                                                                               |\n\nFile acceptance is based primarily on the file's detected MIME type. Known text, code, and Rive extensions are handled separately when browsers do not report a useful MIME type.\n\nDOCX and XLSX files are available in VM-backed chats, where v0 materializes and reads them in the sandbox. Legacy DOC and XLS files are not supported.\n\n## Use Cases\n\n### Product galleries and catalogs\n\nAdd product images to create rich e-commerce experiences:\n\n### Media players and video content\n\nInclude video files for media-rich applications:\n\n### User avatars and profiles\n\nAdd user profile images and avatars:\n\n### Hero sections and banners\n\nIncorporate images into landing pages and hero sections:\n\n## Limits\n\nFile size limits vary depending on where you're uploading and your subscription tier:\n\n| Upload Type      | Free Users | Premium/Plus/Business/Enterprise Users |\n| ---------------- | ---------- | -------------------------------------- |\n| Chat attachments | 5 MB       | 20 MB                                  |\n| ZIP file uploads | 10 MB      | 50 MB                                  |\n\n## Best practices\n\n* Use **high-resolution images** (at least 1024px wide) for better display quality\n* Optimize images for web use to ensure fast loading times\n* Combine media with clear instructions to get better results\n\n## Troubleshooting\n\nIf you're having trouble uploading files:\n\n* Check that your file is under the size limit\n* Ensure the file format is supported\n* Try refreshing the page and uploading again\n\nIf v0 isn't properly integrating your media:\n\n* Provide more specific instructions about how you want the media displayed\n* Specify the component type (gallery, player, background, etc.)\n* Include layout preferences (grid, carousel, single display)\n\nBy leveraging images and videos in your v0 workflow, you can create rich, media-enhanced applications that provide engaging user experiences.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/images-and-videos",
+  "lastUpdated": "2026-07-30"
+}

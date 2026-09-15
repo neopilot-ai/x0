@@ -1,0 +1,39 @@
+{
+  "id": "docs-api-v1-reference-mcp-servers-create-oauth-authorization-url",
+  "slug": "api/v1/reference/mcp-servers/create-oauth-authorization-url",
+  "title": "Create MCP Server OAuth Authorization URL",
+  "section": "API Reference",
+  "category": "API · Mcp-servers",
+  "type": "reference",
+  "description": "Creates an OAuth authorization URL for an OAuth MCP server. Redirect the user to the returned URL to complete authorization without visiting v0.app.",
+  "topics": [
+    "mcp",
+    "design",
+    "api",
+    "authentication"
+  ],
+  "related": [
+    "api/v1/guides/oauth-mcp-servers",
+    "api/v1/reference/mcp-servers/create"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response",
+    "OAuth Callback"
+  ],
+  "excerpt": "language=\"TypeScript\"",
+  "snippets": [
+    {
+      "language": "txt",
+      "code": "https://api.v0.dev/v1/mcp-servers/oauth/callback"
+    }
+  ],
+  "content": "\n\n# Create MCP Server OAuth Authorization URL\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst authorization = await v0.mcpServers.createOAuthAuthorizationUrl({\nmcpServerId: 'mcp_123',\nreturnUrl: 'https://your-app.example.com/oauth/v0-mcp/callback',\n})\n\n// Redirect the user to authorization.url in your application.\nconsole.log(authorization.url)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/mcp-servers/mcp_123/oauth/authorize \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"returnUrl\": \"https://your-app.example.com/oauth/v0-mcp/callback\"\n}'`}\n/>\n\nAfter the user authorizes with the MCP provider, v0 stores the OAuth tokens and redirects to your `returnUrl` with `oauth_success=true` and `mcpServerId`. If authorization fails, v0 redirects to your `returnUrl` with `error` and `error_description`.\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"mcpServerId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ID of the OAuth MCP server to authorize.\"\n}\n]}\n/>\n\n#### Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"returnUrl\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"An absolute URL in your application where v0 redirects after OAuth completes. HTTPS is required in production.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'mcp_server_oauth_authorization'\",\n\"required\": true,\n\"description\": \"Fixed value identifying this object as an MCP server OAuth authorization.\",\n\"deprecated\": false\n},\n{\n\"name\": \"mcpServerId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The MCP server being authorized.\",\n\"deprecated\": false\n},\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The provider authorization URL to redirect the user to.\",\n\"deprecated\": false\n},\n{\n\"name\": \"state\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The OAuth state value. This expires after 5 minutes.\",\n\"deprecated\": false\n},\n{\n\"name\": \"expiresAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO 8601 timestamp when the authorization URL expires.\",\n\"deprecated\": false\n}\n]}\n/>\n\n## OAuth Callback\n\nRegister this redirect URI with the MCP provider:\n\n```txt\nhttps://api.v0.dev/v1/mcp-servers/oauth/callback\n```\n\nThis callback is handled by v0. Your application should handle the `returnUrl` you pass to this endpoint.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/mcp-servers/create-oauth-authorization-url",
+  "lastUpdated": "2026-07-30"
+}

@@ -1,0 +1,65 @@
+{
+  "id": "docs-api-v2-guides-accessing-previews",
+  "slug": "api/v2/guides/accessing-previews",
+  "title": "Accessing Previews",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Display a v0 chat preview in your application",
+  "topics": [
+    "design",
+    "security",
+    "api",
+    "previews"
+  ],
+  "related": [
+    "api/v2/guides/custom-chat-interface",
+    "api/v2/reference/chats/get-preview-url",
+    "api/v2/reference/settings/set-trusted-preview-hosts"
+  ],
+  "requires": [],
+  "headings": [
+    "Trust the preview hostname",
+    "Set up the proxy",
+    "1. Fetch and cache the preview",
+    "2. Add a catch-all preview route",
+    "3. Add a loading route",
+    "4. Route root-relative requests through the preview",
+    "Configure the iframe",
+    "Use an isolated preview origin"
+  ],
+  "excerpt": "Use chats.getPreview to display the live preview for a chat in your own product.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst result = await v0.settings.setPreviewHosts({\n  hosts: ['preview.example-preview.com'],\n})\n\nif (result.error) throw new Error(result.error.message)"
+    },
+    {
+      "language": "typescript",
+      "code": "// lib/preview.ts\nimport { fetchPreview, v0, type ChatsGetPreviewResponse } from 'v0'\n\ntype Preview = NonNullable<ChatsGetPreviewResponse>\n\nconst previewCache = new Map<string, Preview>()\n\nasync function getPreview(chatId: string) {\n  const cached = previewCache.get(chatId)\n  const now = Date.now()\n\n  if (cached && new Date(cached.expiresAt).getTime() - now > 60_000) {\n    return cached\n  }\n\n  const response = await v0.chats.getPreview({ chatId })\n  if (response.error) throw new Error(response.error.message)\n\n  const preview = response.data\n  if (preview) previewCache.set(chatId, preview)\n  else previewCache.delete(chatId)\n\n  return preview\n}\n\nexport async function proxyPreviewRequest(\n  request: Request,\n  chatId: string,\n  path: string[],\n) {\n  const preview = await getPreview(chatId)\n  const fallbackUrl = new URL(\n    `/api/v0-preview/${encodeURIComponent(chatId)}/loading`,\n    request.url,\n  )\n\n  return fetchPreview({\n    request,\n    preview,\n    path,\n    fallbackUrl,\n    onPreviewRefresh: () => {\n      previewCache.delete(chatId)\n    },\n  })\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "// app/api/v0-preview/[chatId]/[[...path]]/route.ts\nimport { proxyPreviewRequest } from '@/lib/preview'\n\ntype RouteContext = {\n  params: Promise<{ chatId: string; path?: string[] }>\n}\n\nasync function handler(request: Request, context: RouteContext) {\n  const { chatId, path = [] } = await context.params\n\n  // Authenticate the request and verify that the current user can access\n  // chatId before proxying it. Return 401 or 403 when they cannot.\n\n  return proxyPreviewRequest(request, chatId, path)\n}\n\nexport {\n  handler as DELETE,\n  handler as GET,\n  handler as HEAD,\n  handler as OPTIONS,\n  handler as PATCH,\n  handler as POST,\n  handler as PUT,\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "// app/api/v0-preview/[chatId]/loading/route.ts\nexport async function GET(\n  _request: Request,\n  { params }: { params: Promise<{ chatId: string }> },\n) {\n  const { chatId } = await params\n  const previewPath = `/api/v0-preview/${encodeURIComponent(chatId)}`\n\n  return new Response(\n    `<!doctype html>\n<html>\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta http-equiv=\"refresh\" content=\"2;url=${previewPath}\" />\n  </head>\n  <body>Loading preview…</body>\n</html>`,\n    {\n      headers: {\n        'Cache-Control': 'no-store',\n        'Content-Type': 'text/html; charset=utf-8',\n      },\n    },\n  )\n}"
+    },
+    {
+      "language": "html",
+      "code": "<script src=\"/_next/static/chunks/app.js\"></script>"
+    },
+    {
+      "language": "typescript",
+      "code": "// proxy.ts\nimport { NextResponse, type NextRequest } from 'next/server'\n\nconst previewPath = /^\\/api\\/v0-preview\\/([^/]+)(?:\\/|$)/\n\nexport function proxy(request: NextRequest) {\n  const referer = request.headers.get('referer')\n  if (!referer) return NextResponse.next()\n  if (!URL.canParse(referer)) return NextResponse.next()\n\n  const refererUrl = new URL(referer)\n  if (refererUrl.origin !== request.nextUrl.origin) {\n    return NextResponse.next()\n  }\n\n  const chatId = refererUrl.pathname.match(previewPath)?.[1]\n  if (!chatId) return NextResponse.next()\n\n  const proxyUrl = request.nextUrl.clone()\n  proxyUrl.pathname =\n    `/api/v0-preview/${chatId}${request.nextUrl.pathname}`\n\n  return NextResponse.redirect(proxyUrl, 307)\n}\n\nexport const config = {\n  matcher: '/((?!api/v0-preview/).*)',\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "<iframe\n  src={`https://preview.example-preview.com/api/v0-preview/${encodeURIComponent(chatId)}`}\n  sandbox=\"allow-scripts allow-same-origin\"\n  title=\"Chat preview\"\n/>"
+    }
+  ],
+  "content": "\n\n# Accessing Previews\n\nUse [`chats.getPreview`](/docs/api/v2/reference/chats/get-preview-url) to display the live preview for a chat in your own product.\n\nPreview access is designed to go through your backend. The API returns a preview URL and a short-lived preview token. Browsers cannot attach that token as a custom header when loading an iframe, so point the iframe at a proxy that you control instead of directly at the preview URL. Run this proxy on a preview-only origin whose site is different from your host application.\n\nA complete preview proxy has four parts:\n\n1. A backend helper that gets and caches preview details, then calls `fetchPreview`.\n2. A catch-all route that handles document, asset, navigation, and in-app requests.\n3. A loading route that retries while a preview is starting or restarting.\n4. A framework-level proxy that routes root-relative requests, such as `/_next/static/...`, through the catch-all route.\n\n## Trust the preview hostname\n\nBefore embedding a preview, add the hostname of the isolated preview proxy to your team's trusted preview hosts. Previews will not work correctly without this.\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.settings.setPreviewHosts({\n  hosts: ['preview.example-preview.com'],\n})\n\nif (result.error) throw new Error(result.error.message)\n```\n\n## Set up the proxy\n\n### 1. Fetch and cache the preview\n\nThe SDK's `fetchPreview` helper forwards the request to the preview URL with the short-lived `x-v0-preview-token` header. The token is valid until `expiresAt`, so you can cache the preview URL and token until then.\n\n`fetchPreview` handles stale preview responses for you. When v0 adds `x-v0-preview-refresh: 1` to a response, the helper reads the header, calls the `onPreviewRefresh` callback you provide, and redirects to `fallbackUrl`. You do not need to inspect the response header yourself. Use `onPreviewRefresh` to clear your cached preview details, and see [Step 3](#3-add-a-loading-route) to implement the fallback loading route.\n\nThe following example uses an in-memory cache for clarity. Use Redis or another shared cache in production so preview details are available across instances.\n\n```typescript\n// lib/preview.ts\nimport { fetchPreview, v0, type ChatsGetPreviewResponse } from 'v0'\n\ntype Preview = NonNullable<ChatsGetPreviewResponse>\n\nconst previewCache = new Map<string, Preview>()\n\nasync function getPreview(chatId: string) {\n  const cached = previewCache.get(chatId)\n  const now = Date.now()\n\n  if (cached && new Date(cached.expiresAt).getTime() - now > 60_000) {\n    return cached\n  }\n\n  const response = await v0.chats.getPreview({ chatId })\n  if (response.error) throw new Error(response.error.message)\n\n  const preview = response.data\n  if (preview) previewCache.set(chatId, preview)\n  else previewCache.delete(chatId)\n\n  return preview\n}\n\nexport async function proxyPreviewRequest(\n  request: Request,\n  chatId: string,\n  path: string[],\n) {\n  const preview = await getPreview(chatId)\n  const fallbackUrl = new URL(\n    `/api/v0-preview/${encodeURIComponent(chatId)}/loading`,\n    request.url,\n  )\n\n  return fetchPreview({\n    request,\n    preview,\n    path,\n    fallbackUrl,\n    onPreviewRefresh: () => {\n      previewCache.delete(chatId)\n    },\n  })\n}\n```\n\n`fetchPreview` does not call `chats.getPreview`, manage your cache, or authenticate the user. It forwards a request when you pass a preview, redirects to `fallbackUrl` when you pass `null`, and calls `onPreviewRefresh` before redirecting when v0 asks for fresh preview details.\n\n### 2. Add a catch-all preview route\n\nIn a Next.js app, create `app/api/v0-preview/[chatId]/[[...path]]/route.ts`. The optional catch-all path lets the same route forward the initial document, relative assets, client-side navigations, API requests, and non-GET requests.\n\n```typescript\n// app/api/v0-preview/[chatId]/[[...path]]/route.ts\nimport { proxyPreviewRequest } from '@/lib/preview'\n\ntype RouteContext = {\n  params: Promise<{ chatId: string; path?: string[] }>\n}\n\nasync function handler(request: Request, context: RouteContext) {\n  const { chatId, path = [] } = await context.params\n\n  // Authenticate the request and verify that the current user can access\n  // chatId before proxying it. Return 401 or 403 when they cannot.\n\n  return proxyPreviewRequest(request, chatId, path)\n}\n\nexport {\n  handler as DELETE,\n  handler as GET,\n  handler as HEAD,\n  handler as OPTIONS,\n  handler as PATCH,\n  handler as POST,\n  handler as PUT,\n}\n```\n\nThe preview route is an authenticated application endpoint. `fetchPreview` does not know which users can access a chat. Apply your own authentication and authorization to every proxied request, and never send your v0 API key to the browser or preview URL.\n\n### 3. Add a loading route\n\nWhen `chats.getPreview` returns `null`, or when v0 reports that cached preview details are stale, `fetchPreview` redirects to `fallbackUrl`. The loading route should render a loading state and retry the chat's preview URL.\n\n```typescript\n// app/api/v0-preview/[chatId]/loading/route.ts\nexport async function GET(\n  _request: Request,\n  { params }: { params: Promise<{ chatId: string }> },\n) {\n  const { chatId } = await params\n  const previewPath = `/api/v0-preview/${encodeURIComponent(chatId)}`\n\n  return new Response(\n    `<!doctype html>\n<html>\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta http-equiv=\"refresh\" content=\"2;url=${previewPath}\" />\n  </head>\n  <body>Loading preview…</body>\n</html>`,\n    {\n      headers: {\n        'Cache-Control': 'no-store',\n        'Content-Type': 'text/html; charset=utf-8',\n      },\n    },\n  )\n}\n```\n\n### 4. Route root-relative requests through the preview\n\nThe catch-all route cannot intercept root-relative URLs by itself. For example, HTML returned from the preview may contain:\n\n```html\n<script src=\"/_next/static/chunks/app.js\"></script>\n```\n\nThe browser resolves that URL against the iframe's origin and requests `/_next/static/chunks/app.js`, not `/api/v0-preview//_next/static/chunks/app.js`.\n\nIn Next.js, add a root-level `proxy.ts`. It reads the preview route from the request's `Referer` header and redirects the root-relative request through the catch-all route.\n\n```typescript\n// proxy.ts\nimport { NextResponse, type NextRequest } from 'next/server'\n\nconst previewPath = /^\\/api\\/v0-preview\\/([^/]+)(?:\\/|$)/\n\nexport function proxy(request: NextRequest) {\n  const referer = request.headers.get('referer')\n  if (!referer) return NextResponse.next()\n  if (!URL.canParse(referer)) return NextResponse.next()\n\n  const refererUrl = new URL(referer)\n  if (refererUrl.origin !== request.nextUrl.origin) {\n    return NextResponse.next()\n  }\n\n  const chatId = refererUrl.pathname.match(previewPath)?.[1]\n  if (!chatId) return NextResponse.next()\n\n  const proxyUrl = request.nextUrl.clone()\n  proxyUrl.pathname =\n    `/api/v0-preview/${chatId}${request.nextUrl.pathname}`\n\n  return NextResponse.redirect(",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/accessing-previews",
+  "lastUpdated": "2026-09-02"
+}

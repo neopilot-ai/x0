@@ -3,6 +3,7 @@
 import { createContext, useContext, useState } from 'react'
 import { Sidebar } from '@/components/layout/sidebar'
 import { Button } from '@/components/ui/button'
+import { CommandPalette } from '@/components/search/command-palette'
 import type { getSidebarChats } from '@/lib/sidebar-chats'
 import { SidebarToggleIcon } from '@/lib/icons'
 import { cn } from '@/lib/utils'
@@ -55,6 +56,7 @@ export function AppShell({
         />
         <main className="min-w-0 flex-1 overflow-hidden">{children}</main>
       </div>
+      <CommandPalette />
     </SidebarContext.Provider>
   )
 }

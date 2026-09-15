@@ -1,0 +1,33 @@
+{
+  "id": "docs-external-apis",
+  "slug": "external-apis",
+  "title": "External APIs",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Build full-stack applications by calling external APIs with environment variables.",
+  "topics": [
+    "databases",
+    "design",
+    "ai",
+    "environment-variables",
+    "integrations"
+  ],
+  "related": [
+    "databases",
+    "ai-models",
+    "full-stack-apps"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Adding API keys",
+    "Environments"
+  ],
+  "excerpt": "You can call external services in your v0 prototypes by storing access keys as environment variables. This works for both third-party and your own APIs.",
+  "snippets": [],
+  "content": "\n\n# External APIs\n\nYou can call external services in your v0 prototypes by storing access keys as environment variables. This works for both third-party and your own APIs.\n\n## Adding API keys\n\nFollow **Project menu** `...` → **Settings** → **Environment Variables** to add your necessary keys or modify existing environment variables. Note that the v0 preview will only be able to access environment variables that are available to the Development environment.\n\n## Environments\n\nWhen adding a variable, you can choose which environments it applies to. This lets you use different API keys for testing vs production, or enable features only in certain environments.\n\n| Environment     | Description                                              |\n| --------------- | -------------------------------------------------------- |\n| **Production**  | Applied to your live, published app                      |\n| **Preview**     | Applied to preview deployments (non-production branches) |\n| **Development** | Applied to the v0 preview panel or when running locally  |\n\nEnvironment variables are encrypted and stored securely on Vercel. Once added, you can instruct v0 to use them in your API calls.\n\nLearn more about environment variables\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/external-apis",
+  "lastUpdated": "2026-08-19"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "docs-api-v1-reference-chats-update",
+  "slug": "api/v1/reference/chats/update",
+  "title": "Update Chat",
+  "section": "API Reference",
+  "category": "API · Chats",
+  "type": "reference",
+  "description": "Updates the metadata of an existing chat using its `chatId`. Supports changes to the chat name, privacy setting, and custom metadata.",
+  "topics": [
+    "security",
+    "api"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "Metadata Management",
+    "Merging Metadata",
+    "Updating Existing Keys",
+    "Deleting Specific Keys",
+    "Deleting All Metadata",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "v0-auto is deprecated. Requests using it are handled as v0-pro. Use v0-pro for new integrations.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { sessionId: '456' }\n})\n// Result: { userId: '123', source: 'web', sessionId: '456' }"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { userId: '789' }\n})\n// Result: { userId: '789', source: 'web' }"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initial metadata: { userId: '123', source: 'web', sessionId: '456' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { source: null }\n})\n// Result: { userId: '123', sessionId: '456' }"
+    },
+    {
+      "language": "typescript",
+      "code": "// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: null\n})\n// Result: {}"
+    }
+  ],
+  "content": "\n\n# Update Chat\n\n`v0-auto` is deprecated. Requests using it are handled as `v0-pro`. Use `v0-pro` for new integrations.\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.chats.update({\nchatId: '123',\nname: 'My Renamed Chat',\nprivacy: 'public',\nmetadata: {\nuserId: 'user_123',\nsessionId: 'session_456'\n}\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X PATCH https://api.v0.dev/v1/chats/123 \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"name\": \"My Renamed Chat\",\n\"privacy\": \"public\",\n\"metadata\": {\n\"userId\": \"user_123\",\n\"sessionId\": \"session_456\"\n}\n}'`}\n/>\n\n## Metadata Management\n\nThe `metadata` field allows you to attach arbitrary key-value pairs to a chat. This is useful for storing external IDs, session information, or other custom data.\n\n### Merging Metadata\n\nWhen you provide a metadata object, it will be merged with existing metadata. Existing keys not included in the update will be preserved:\n\n```typescript\n// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { sessionId: '456' }\n})\n// Result: { userId: '123', source: 'web', sessionId: '456' }\n```\n\n### Updating Existing Keys\n\nTo update an existing metadata key, simply provide a new value:\n\n```typescript\n// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { userId: '789' }\n})\n// Result: { userId: '789', source: 'web' }\n```\n\n### Deleting Specific Keys\n\nTo delete a specific metadata key, pass `null` as its value:\n\n```typescript\n// Initial metadata: { userId: '123', source: 'web', sessionId: '456' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: { source: null }\n})\n// Result: { userId: '123', sessionId: '456' }\n```\n\n### Deleting All Metadata\n\nTo delete all metadata, pass `null` instead of an object:\n\n```typescript\n// Initial metadata: { userId: '123', source: 'web' }\nawait v0.chats.update({\n  chatId: '123',\n  metadata: null\n})\n// Result: {}\n```\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat to update. Provided as a path parameter.\"\n}\n]}\n/>\n\n#### Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A new name to assign to the chat. Helps with identification and organization.\",\n\"deprecated\": false\n},\n{\n\"name\": \"privacy\",\n\"type\": \"'public' | 'private' | 'team' | 'team-edit' | 'unlisted'\",\n\"required\": false,\n\"description\": \"Sets the privacy level of the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"metadata\",\n\"type\": \"Record | null\",\n\"required\": false,\n\"description\": \"Arbitrary key-value data to attach to the chat. Useful for storing additional data about the chat, such as external user IDs. Metadata added will be merged with existing attributes. Pass `null` as the value to delete a specific key, or pass `null` instead of an object to delete all existing metadata. The total number of active metadata entries cannot exceed 50.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A unique identifier for the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'chat'\",\n\"required\": true,\n\"description\": \"Fixed value identifying this object as a chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"shareable\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Deprecated: Use the `privacy` field instead. A chat is shareable when privacy is public or unlisted.\",\n\"deprecated\": true\n},\n{\n\"name\": \"privacy\",\n\"type\": \"'public' | 'private' | 'team' | 'team-edit' | 'unlisted'\",\n\"required\": true,\n\"description\": \"Defines the visibility of the chat—private, team-only, or public.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"An optional name assigned to the chat by the user.\",\n\"deprecated\": false\n},\n{\n\"name\": \"title\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Deprecated title field preserved for backward compatibility.\",\n\"deprecated\": true\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO timestamp representing when the chat was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The ISO timestamp of the last update to the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"favorite\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Indicates whether the chat is marked as a favorite.\",\n\"deprecated\": false\n},\n{\n\"name\": \"authorId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ID of the user who created the chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"projectId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Optional ID of the v0 project associated with this chat.\",\n\"deprecated\": true\n},\n{\n\"name\": \"vercelProjectId\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Optional ID of the linked Vercel project, if connected.\",\n\"deprecated\": false\n},\n{\n\"name\": \"webUrl\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Web URL to view this chat in the browser.\",\n\"deprecated\": false\n},\n{\n\"name\": \"apiUrl\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"API URL to access this chat via the API.\",\n\"deprecated\": false\n},\n{\n\"name\": \"latestVersion\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"Full details of the most recent generated version, if available.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A unique identifier for the version.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'version'\",\n\"required\": true,\n\"description\": \"Fixed value identifying this object as a version.\",\n\"deprecated\": false\n},\n{\n\"name\": \"status\",\n\"type\": \"'pending' | 'completed' | 'failed'\",\n\"required\": true,\n\"description\": \"The current status of the version generation process.\",\n\"deprecated\": false\n},\n{\n\"name\": \"demoUrl\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Optional URL for previewing the generated output.\",\n\"deprecated\": false\n},\n{\n\"name\": \"screenshotUrl\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"An authenticated URL to retrieve a screenshot of this version. Fetching this URL requires the same Authorization: Bearer header as all other API calls — it cannot be used directly as an `` `src`. To display it in a browser, proxy the request server-side and forward the Authorization header. Append `?ignoreCache=1` to bypass the one-week screenshot cache.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The date and time when the version was created, in ISO 8601 format.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The date and time when the ver",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/chats/update",
+  "lastUpdated": "2026-09-03"
+}

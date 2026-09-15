@@ -1,0 +1,73 @@
+{
+  "id": "docs-api-v2-guides-mcp-server",
+  "slug": "api/v2/guides/mcp-server",
+  "title": "Use v0 from an MCP Client",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Let another agent use v0 through the v0 MCP server",
+  "topics": [
+    "mcp",
+    "design",
+    "api",
+    "agents"
+  ],
+  "related": [
+    "api/v2/guides/integrating-v0-into-agents",
+    "api/v2/reference/mcp-servers/create-mcp-server",
+    "api/v2/reference/chats/create-chat"
+  ],
+  "requires": [],
+  "headings": [
+    "1. Connect your MCP client",
+    "2. Use v0 tools",
+    "3. Try common workflows",
+    "Create a chat",
+    "List chats",
+    "Get chat details",
+    "List messages in a chat",
+    "Continue an existing chat",
+    "Resolve a pending task",
+    "Get a preview URL",
+    "4. Reconnect or change accounts",
+    "Troubleshooting"
+  ],
+  "excerpt": "The v0 MCP server lets another agent use v0. Connect it to an IDE, desktop assistant, or agent runtime to create chats, inspect and continue app builds, resolve pending tasks, and get preview URLs from an MCP client.",
+  "snippets": [
+    {
+      "language": "txt",
+      "code": "https://v0.app/api/mcp"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"url\": \"https://v0.app/api/mcp\"\n    }\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "language": "txt",
+      "code": "Create a v0 chat that builds a React dashboard with charts and filters."
+    },
+    {
+      "language": "txt",
+      "code": "List my v0 chats related to React dashboards."
+    },
+    {
+      "language": "txt",
+      "code": "Show me the details of v0 chat chat_abc123."
+    },
+    {
+      "language": "txt",
+      "code": "List the messages in v0 chat chat_abc123."
+    },
+    {
+      "language": "txt",
+      "code": "Send a message to chat chat_abc123 asking v0 to add dark mode support."
+    }
+  ],
+  "content": "\n\n# Use v0 from an MCP Client\n\nThe v0 MCP server lets another agent use v0. Connect it to an IDE, desktop assistant, or agent runtime to create chats, inspect and continue app builds, resolve pending tasks, and get preview URLs from an MCP client.\n\nTo give v0 access to an external service's tools instead, [create an MCP server](/docs/api/v2/reference/mcp-servers/create-mcp-server).\n\nThe MCP server runs at:\n\n```txt\nhttps://v0.app/api/mcp\n```\n\n## 1. Connect your MCP client\n\nUse the remote MCP URL directly if your client supports streamable HTTP MCP servers:\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"url\": \"https://v0.app/api/mcp\"\n    }\n  }\n}\n```\n\nIf your client requires a local stdio bridge, use `mcp-remote`:\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}\n```\n\nThe first connection starts an OAuth flow. Sign in to v0, choose the account or team you want the client to use, and approve the connection.\n\nThe MCP server uses OAuth for MCP clients. Do not put a v0 API key in your MCP client configuration.\n\n## 2. Use v0 tools\n\nThe v0 MCP server exposes tools backed by these v0 API endpoints:\n\n* Create chat: `POST /v2/chats`\n* List chats: `GET /v2/chats`\n* Get chat: `GET /v2/chats/`\n* List messages: `GET /v2/chats//messages`\n* Send message: `POST /v2/chats//messages`\n* Resolve task: `POST /v2/chats//messages/resolve`\n* Get preview: `GET /v2/chats//preview`\n\nTools that return a chat (such as create chat and get chat) include a ready-to-open `url` for the chat, scoped to the account or team you connected, so you don't have to construct it yourself.\n\n## 3. Try common workflows\n\nOnce connected, ask your MCP client to work with v0.\n\n### Create a chat\n\n```txt\nCreate a v0 chat that builds a React dashboard with charts and filters.\n```\n\n### List chats\n\n```txt\nList my v0 chats related to React dashboards.\n```\n\n### Get chat details\n\n```txt\nShow me the details of v0 chat chat_abc123.\n```\n\n### List messages in a chat\n\n```txt\nList the messages in v0 chat chat_abc123.\n```\n\n### Continue an existing chat\n\n```txt\nSend a message to chat chat_abc123 asking v0 to add dark mode support.\n```\n\n### Resolve a pending task\n\nWhen v0 pauses for input—such as approving a plan, answering a question, granting a permission, or finishing integration setup—resolve the task to let it continue.\n\n```txt\nApprove the plan that v0 proposed in chat chat_abc123.\n```\n\n### Get a preview URL\n\n```txt\nGet the preview URL for chat chat_abc123.\n```\n\n## 4. Reconnect or change accounts\n\nIf the client loses access, reconnect the v0 MCP server from your MCP client. If you need to switch users or teams, remove the existing v0 MCP connection in the client and connect to `https://v0.app/api/mcp` again.\n\n## Troubleshooting\n\n**Connection failed**\n\n* Verify the MCP server URL is `https://v0.app/api/mcp`.\n* Make sure your MCP client supports remote MCP servers or is configured through `mcp-remote`.\n\n**Authentication failed**\n\n* Reconnect the v0 MCP server in your client.\n* If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request.\n\n**Tool is missing**\n\n* Restart or reconnect your MCP client so it refreshes the server's tool list.\n* Check the v0 API v2 reference for the resource you expect the MCP server to use.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/mcp-server",
+  "lastUpdated": "2026-07-30"
+}

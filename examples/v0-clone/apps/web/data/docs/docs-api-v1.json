@@ -1,0 +1,100 @@
+{
+  "id": "docs-api-v1",
+  "slug": "api/v1",
+  "title": "Overview",
+  "section": "API Reference",
+  "category": "API Reference",
+  "type": "overview",
+  "description": "Core concepts, capabilities, and architecture",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "api/v1/quickstart",
+    "api/v1/packages/v0-sdk"
+  ],
+  "requires": [],
+  "headings": [
+    "What can you build with the v0 API?",
+    "Core Concepts",
+    "Projects",
+    "Chats",
+    "Messages",
+    "Deployments",
+    "API Architecture",
+    "Base URL",
+    "RESTful Design",
+    "Authentication",
+    "Error Handling",
+    "Key Capabilities",
+    "1. Code Generation & AI Chat",
+    "2. Project Management",
+    "3. Import & Export",
+    "4. Deployment & Hosting",
+    "5. Team Collaboration",
+    "Integration Patterns",
+    "1. Direct API Usage",
+    "2. AI Agent Integration",
+    "3. Workflow Automation",
+    "4. Custom Development Tools",
+    "Development Workflow",
+    "Typical Development Flow",
+    "Best Practices",
+    "Security & Privacy",
+    "API Security",
+    "Data Privacy",
+    "Best Practices",
+    "Limits & Quotas",
+    "API Limits",
+    "Usage Quotas",
+    "Getting Started",
+    "1. Get Your API Key",
+    "2. Install the SDK",
+    "3. Make Your First Call",
+    "4. Explore the Guides",
+    "5. Try the Examples",
+    "Support & Resources",
+    "Documentation",
+    "Enterprise",
+    "What's Next?"
+  ],
+  "excerpt": "v0 turns your ideas into real web apps using natural language—describe what you want and v0's intelligent agent builds it for you with modern frontend tools. The v0 API gives you programmatic access to all of v0's capabilities, letting you integrate v0's AI-powered code generation, chat interface, project management, and deployment fea…",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "// Create a new project\nconst project = await v0.projects.create({\n  name: 'My React App',\n})\n\n// Most common: Initialize from existing files\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    { name: 'src/App.tsx', content: appCode },\n    { name: 'package.json', content: packageJson },\n  ],\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "// Start chat with existing code (recommended)\nconst chat = await v0.chats.init({\n  files: existingFiles,\n  initialContext: 'Help me optimize this React component',\n})\n\n// Start chat from scratch with AI generation\nconst chat = await v0.chats.create({\n  initialMessage: 'Create a todo app with React and TypeScript',\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const deployment = await v0.deployments.create({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n})"
+    },
+    {
+      "language": "text",
+      "code": "https://api.v0.dev"
+    },
+    {
+      "language": "text",
+      "code": "GET    https://api.v0.dev/v1/projects           # List projects\nPOST   https://api.v0.dev/v1/projects           # Create project\nGET    https://api.v0.dev/v1/projects/:id       # Get project\nPUT    https://api.v0.dev/v1/projects/:id       # Update project\nDELETE https://api.v0.dev/v1/projects/:id       # Delete project\n\nPOST   https://api.v0.dev/v1/chats              # Create/init chat\nGET    https://api.v0.dev/v1/chats/:id/messages # Get messages\nPOST   https://api.v0.dev/v1/chats/:id/messages # Send message"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// Automatically uses process.env.V0_API_KEY\nconst projects = await v0.projects.find()"
+    },
+    {
+      "language": "bash",
+      "code": "# .env file or environment\nV0_API_KEY=your_api_key_here"
+    },
+    {
+      "language": "typescript",
+      "code": "import { createClient } from 'v0-sdk'\n\n// Custom API key\nconst v0 = createClient({\n  apiKey: process.env.CUSTOM_V0_KEY,\n})\n\n// Multiple clients for different accounts\nconst personalV0 = createClient({\n  apiKey: process.env.PERSONAL_V0_KEY,\n})\n\nconst teamV0 = createClient({\n  apiKey: process.env.TEAM_V0_KEY,\n})\n\n// Custom base URL (for enterprise)\nconst enterpriseV0 = createClient({\n  apiKey: process.env.V0_API_KEY,\n  baseUrl: 'https://api.enterprise.v0.dev',\n})"
+    }
+  ],
+  "content": "\n\n# Overview\n\nv0 turns your ideas into real web apps using natural language—describe what you want and v0's intelligent agent builds it for you with modern frontend tools. The v0 API gives you programmatic access to all of v0's capabilities, letting you integrate v0's AI-powered code generation, chat interface, project management, and deployment features into your own applications and workflows.\n\n## What can you build with the v0 API?\n\nWith the v0 API, you can create your own experiences around v0's core functionality:\n\n* **Custom chat interfaces** - Build your own UI for v0's AI-powered code generation\n* **Automated workflows** - Trigger code generation, iterate on projects, and deploy automatically\n* **Development tools** - Integrate v0 into IDEs, CI/CD pipelines, or internal tools\n* **Team dashboards** - Create custom project management and collaboration interfaces\n* **AI agents** - Build autonomous systems that use v0 to generate and deploy code\n* **Educational platforms** - Create coding tutorials and interactive learning experiences\n\n## Core Concepts\n\n### Projects\n\nProjects are containers for your code and development work. They can be:\n\n* **Created from scratch** with AI assistance\n* **Imported from GitHub repositories**\n* **Initialized with existing files** you upload\n* **Built from community templates**\n\n```typescript\n// Create a new project\nconst project = await v0.projects.create({\n  name: 'My React App',\n})\n\n// Most common: Initialize from existing files\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: [\n    { name: 'src/App.tsx', content: appCode },\n    { name: 'package.json', content: packageJson },\n  ],\n})\n```\n\n### Chats\n\nChats are AI-powered conversations that help you develop your projects:\n\n* **`v0.chats.create()`** - Start from scratch with AI code generation\n* **`v0.chats.init()`** - Start with existing files (fast, no tokens)\n\n```typescript\n// Start chat with existing code (recommended)\nconst chat = await v0.chats.init({\n  files: existingFiles,\n  initialContext: 'Help me optimize this React component',\n})\n\n// Start chat from scratch with AI generation\nconst chat = await v0.chats.create({\n  initialMessage: 'Create a todo app with React and TypeScript',\n})\n```\n\n### Messages\n\nMessages flow through chats and can contain:\n\n* **Text content** with markdown formatting\n* **Code blocks** with syntax highlighting\n* **Component previews** with live rendering\n* **System notifications** and status updates\n\n### Deployments\n\nDeploy your projects to production with built-in hosting:\n\n```typescript\nconst deployment = await v0.deployments.create({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n})\n```\n\n## API Architecture\n\n### Base URL\n\nAll API requests are made to:\n\n```\nhttps://api.v0.dev\n```\n\n### RESTful Design\n\nThe API follows REST principles with predictable resource URLs:\n\n```\nGET    https://api.v0.dev/v1/projects           # List projects\nPOST   https://api.v0.dev/v1/projects           # Create project\nGET    https://api.v0.dev/v1/projects/:id       # Get project\nPUT    https://api.v0.dev/v1/projects/:id       # Update project\nDELETE https://api.v0.dev/v1/projects/:id       # Delete project\n\nPOST   https://api.v0.dev/v1/chats              # Create/init chat\nGET    https://api.v0.dev/v1/chats/:id/messages # Get messages\nPOST   https://api.v0.dev/v1/chats/:id/messages # Send message\n```\n\n### Authentication\n\nAll requests require API key authentication. The SDK provides two ways to authenticate:\n\n#### Option 1: Default Client (Recommended)\n\nThe simplest approach uses the default `v0` client, which automatically reads from the `V0_API_KEY` environment variable:\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// Automatically uses process.env.V0_API_KEY\nconst projects = await v0.projects.find()\n```\n\nSet your API key in your environment:\n\n```bash\n# .env file or environment\nV0_API_KEY=your_api_key_here\n```\n\n#### Option 2: Custom Client Configuration\n\nUse `createClient()` when you need to:\n\n* Use a different environment variable name\n* Use multiple API keys in the same application\n* Customize the base URL or other settings\n\n```typescript\nimport { createClient } from 'v0-sdk'\n\n// Custom API key\nconst v0 = createClient({\n  apiKey: process.env.CUSTOM_V0_KEY,\n})\n\n// Multiple clients for different accounts\nconst personalV0 = createClient({\n  apiKey: process.env.PERSONAL_V0_KEY,\n})\n\nconst teamV0 = createClient({\n  apiKey: process.env.TEAM_V0_KEY,\n})\n\n// Custom base URL (for enterprise)\nconst enterpriseV0 = createClient({\n  apiKey: process.env.V0_API_KEY,\n  baseUrl: 'https://api.enterprise.v0.dev',\n})\n```\n\nGet your API key from [v0 settings](https://v0.app/settings/keys).\n\n### Error Handling\n\nConsistent error responses across all endpoints:\n\n```json\n{\n  \"error\": {\n    \"code\": \"project_not_found\",\n    \"type\": \"not_found_error\",\n    \"message\": \"Project not found\",\n    \"userMessage\": \"The project you're looking for doesn't exist.\"\n  }\n}\n```\n\n## Key Capabilities\n\n### 1. Code Generation & AI Chat\n\n* **Natural language** to code conversion\n* **Context-aware** suggestions and improvements\n* **Multi-turn conversations** for iterative development\n* **Framework-specific** optimizations (React, Next.js, Vue, etc.)\n\n### 2. Project Management\n\n* **Version control** integration with Git\n* **File management** with conflict resolution\n* **Template system** for rapid project setup\n* **Workspace organization** for team collaboration\n\n### 3. Import & Export\n\n* **GitHub integration** for repository imports\n* **File uploads** for existing codebases\n* **Template creation** from existing projects\n* **Export capabilities** for backup and migration\n\n### 4. Deployment & Hosting\n\n* **One-click deployments** to v0's hosting platform\n* **Custom domains** and SSL certificates\n* **Environment management** (staging, production)\n* **Deployment logs** and monitoring\n\n### 5. Team Collaboration\n\n* **Shared projects** with permission management\n* **Real-time collaboration** on code and chats\n* **Activity feeds** and notifications\n* **Role-based access** control\n\n## Integration Patterns\n\n### 1. Direct API Usage\n\nUse the core SDK for full control:\n\n```typescript\nimport { v0 } from 'v0-sdk'\n// Or with custom configuration:\n// import { createClient } from 'v0-sdk'\n// const v0 = createClient({ apiKey: process.env.V0_API_KEY })\n\n// Create chat\nconst chat = await v0.chats.init({\n  type: 'files',\n  files: myFiles,\n})\n```\n\n### 2. AI Agent Integration\n\nBuild autonomous agents with AI SDK:\n\n```typescript\nimport { generateText } from 'ai'\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create and deploy a React dashboard',\n  tools: v0Tools({ apiKey: process.env.V0_API_KEY }),\n})\n```\n\n### 3. Workflow Automation\n\nIntegrate with CI/CD and development tools:\n\n```typescript\n// GitHub Actions integration\nconst chat = await v0.chats.init({\n  type: 'repo',\n  repo: {\n    url: `https://github.com/${context.payload.repository.full_name}`,\n  },\n}",
+  "sourceUrl": "https://v0.app/docs/api/v1",
+  "lastUpdated": "2026-08-21"
+}

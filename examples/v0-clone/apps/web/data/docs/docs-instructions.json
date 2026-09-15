@@ -1,0 +1,29 @@
+{
+  "id": "docs-instructions",
+  "slug": "instructions",
+  "title": "Instructions",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Create and apply custom instructions to guide v0's responses",
+  "topics": [
+    "design"
+  ],
+  "related": [
+    "text-prompting",
+    "projects"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Built-in presets",
+    "Creating custom instructions",
+    "Applying instructions"
+  ],
+  "excerpt": "Instructions are reusable prompts you can save to your account and apply on-demand when chatting with v0. Use them to customize v0's behavior for specific tasks or workflows.",
+  "snippets": [],
+  "content": "\n\n# Instructions\n\nInstructions are reusable prompts you can save to your account and apply on-demand when chatting with v0. Use them to customize v0's behavior for specific tasks or workflows.\n\n## Built-in presets\n\nv0 includes built-in preset instructions:\n\n* **Be Concise** - v0 will provide shorter, more direct responses\n* **Plan Mode** - Before implementing any code changes, v0 creates a detailed plan outlining the approach, steps, and potential challenges, then asks for your approval before proceeding\n\n## Creating custom instructions\n\nCreate your own instructions for common workflows or preferences:\n\n1. Click the **+** button in the prompt bar\n2. From **Instructions**, select **New Instruction**\n3. Add a **Title** (e.g., \"Mobile first\")\n4. Add the **Rule** content (e.g., \"Always design for mobile screens first, then adapt the layout for larger screens\")\n5. Click **Add**\n\nYour instruction is now saved to your account and available across all your chats and projects.\n\n## Applying instructions\n\nTo apply instructions to your conversation:\n\n1. Click the **+** button in the prompt bar\n2. Check the instructions you want to apply\n3. Send your prompt\n\nYou can enable multiple instructions at once. Checked instructions will be applied to your messages until you uncheck them.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/instructions",
+  "lastUpdated": "2026-08-12"
+}

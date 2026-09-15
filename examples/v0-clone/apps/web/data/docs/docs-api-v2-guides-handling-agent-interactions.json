@@ -1,0 +1,56 @@
+{
+  "id": "docs-api-v2-guides-handling-agent-interactions",
+  "slug": "api/v2/guides/handling-agent-interactions",
+  "title": "Handling Agent Interactions",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Learn how to handle plan reviews, questions, and permission requests from the v0 agent",
+  "topics": [
+    "design",
+    "api",
+    "agents",
+    "permissions",
+    "integrations",
+    "pricing"
+  ],
+  "related": [
+    "api/v2/reference/messages/resolve-task",
+    "api/v2/reference/messages/get-message",
+    "api/v2/guides/handling-integrations"
+  ],
+  "requires": [],
+  "headings": [
+    "1. Inspect the latest assistant message",
+    "2. Review a plan",
+    "3. Answer agent questions",
+    "4. Handle permission requests",
+    "5. Continue the conversation"
+  ],
+  "excerpt": "The v0 agent may pause when it needs a decision from the user. Your app should show that request, collect the user's response, and resolve the task so the agent can continue.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "const planRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' && part.name === 'exit_plan_mode',\n)\n\nconsole.log(planRequest?.data)"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nawait v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'plan-exit-response',\n    status: 'approved',\n    content: 'Proceed with the implementation.',\n  },\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const questionRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' && part.name === 'ask_user_questions',\n)\n\nconsole.log(questionRequest?.data)"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nawait v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'answered-questions',\n    answers: [\n      {\n        questionId: 'database',\n        questionText: 'Which database should I use?',\n        selectedLabels: ['PostgreSQL'],\n      },\n    ],\n  },\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "const permissionRequest = message.parts.find(\n  (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,\n)\n\nif (\n  permissionRequest?.type === 'tool-call' &&\n  permissionRequest.suggestedPermissions\n) {\n  await v0.messages.resolve({\n    chatId: 'chat_abc123',\n    task: {\n      type: 'confirmed-permissions',\n      permissions: permissionRequest.suggestedPermissions,\n    },\n  })\n}"
+    }
+  ],
+  "content": "\n\n# Handling Agent Interactions\n\nThe v0 agent may pause when it needs a decision from the user. Your app should show that request, collect the user's response, and resolve the task so the agent can continue.\n\nThis guide covers:\n\n* Reviewing a proposed plan\n* Answering agent questions\n* Granting tool permissions\n\nFor integration setup, see [Handling Integrations](/docs/api/v2/guides/handling-integrations).\n\n## 1. Inspect the latest assistant message\n\nPending interactions appear in the latest assistant message's `parts` array:\n\n| Interaction        | Message part                                     | Resolve task            |\n| ------------------ | ------------------------------------------------ | ----------------------- |\n| Plan review        | `agent-action` with `name: \"exit_plan_mode\"`     | `plan-exit-response`    |\n| Questions          | `agent-action` with `name: \"ask_user_questions\"` | `answered-questions`    |\n| Permission request | `tool-call` with `suggestedPermissions`          | `confirmed-permissions` |\n\nHow you get the message depends on the response mode:\n\n* **Synchronous:** The request returns the completed assistant message.\n* **Asynchronous:** The request returns a `messageId`. Poll `GET /v2/chats//messages/` until `finishReason` is no longer `null`.\n* **Streaming:** Consume `result.stream`, then inspect `(await result.final).parts`.\n\nUse the latest blocked assistant message only. If the chat has moved on or the submitted task type does not match the pending interaction, `resolve` returns `409 Conflict`.\n\n## 2. Review a plan\n\nWhen the agent finishes planning, the message includes an `agent-action` part with `name: \"exit_plan_mode\"`. Its `data` contains the proposed plan.\n\n```typescript\nconst planRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' && part.name === 'exit_plan_mode',\n)\n\nconsole.log(planRequest?.data)\n```\n\nResolve the task with the user's decision:\n\n```typescript\nimport { v0 } from 'v0'\n\nawait v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'plan-exit-response',\n    status: 'approved',\n    content: 'Proceed with the implementation.',\n  },\n})\n```\n\nUse `status: \"request-changes\"` to send feedback before implementation, or `status: \"rejected\"` when the user does not want to continue with the plan. `content` is required for every status.\n\n## 3. Answer agent questions\n\nQuestions appear in an `agent-action` part with `name: \"ask_user_questions\"`. The part's `data.questions` includes each question's ID, text, options, and whether it accepts multiple selections.\n\n```typescript\nconst questionRequest = message.parts.find(\n  (part) =>\n    part.type === 'agent-action' && part.name === 'ask_user_questions',\n)\n\nconsole.log(questionRequest?.data)\n```\n\nSend one answer for each question the user answered:\n\n```typescript\nimport { v0 } from 'v0'\n\nawait v0.messages.resolve({\n  chatId: 'chat_abc123',\n  task: {\n    type: 'answered-questions',\n    answers: [\n      {\n        questionId: 'database',\n        questionText: 'Which database should I use?',\n        selectedLabels: ['PostgreSQL'],\n      },\n    ],\n  },\n})\n```\n\nPass option labels in `selectedLabels`, not option IDs. For a multi-select question, include every selected label. Use `customText` when the user selects another option or wants to add context.\n\n## 4. Handle permission requests\n\nThe agent may ask for permission before running a tool, script, or MCP call. The request appears as a `tool-call` part with a non-empty `suggestedPermissions` array.\n\nPass those permission objects back unchanged to approve the request:\n\n```typescript\nconst permissionRequest = message.parts.find(\n  (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,\n)\n\nif (\n  permissionRequest?.type === 'tool-call' &&\n  permissionRequest.suggestedPermissions\n) {\n  await v0.messages.resolve({\n    chatId: 'chat_abc123',\n    task: {\n      type: 'confirmed-permissions',\n      permissions: permissionRequest.suggestedPermissions,\n    },\n  })\n}\n```\n\nThe submitted permissions must match the ones on the latest blocked assistant message, or `resolve` returns `409 Conflict`.\n\nTo reject a permission request, send a regular follow-up message instead. You can use that message to tell the agent why the action was not approved or ask it to take another approach.\n\n## 5. Continue the conversation\n\n`v0.messages.resolve()` waits for the agent and returns the next assistant message. Inspect that message too: resolving one interaction may lead to another.\n\nUse `v0.messages.resolveAsync()` when you want the agent to continue in the background, or `v0.messages.resolveStream()` when you want to stream its response.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/handling-agent-interactions",
+  "lastUpdated": "2026-07-30"
+}

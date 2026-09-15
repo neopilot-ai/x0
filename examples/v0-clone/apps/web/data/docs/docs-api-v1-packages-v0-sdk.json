@@ -1,0 +1,73 @@
+{
+  "id": "docs-api-v1-packages-v0-sdk",
+  "slug": "api/v1/packages/v0-sdk",
+  "title": "v0-sdk",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "reference",
+  "description": "TypeScript SDK for the v0 API",
+  "topics": [
+    "api"
+  ],
+  "related": [
+    "api/v1/packages/react",
+    "api/v1/packages/ai-tools"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Installation",
+    "Quick Start",
+    "Features",
+    "Core APIs",
+    "Chats",
+    "Projects",
+    "Deployments",
+    "User & Account",
+    "Configuration",
+    "Environment Variables",
+    "Client Options",
+    "Error Handling",
+    "Requirements",
+    "Links"
+  ],
+  "excerpt": "The core TypeScript SDK for interacting with the v0 API. Provides type-safe methods for creating chats, managing projects, handling deployments, and more.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npm install v0-sdk\n# or\npnpm add v0-sdk\n# or\nyarn add v0-sdk"
+    },
+    {
+      "language": "typescript",
+      "code": "import { V0 } from 'v0-sdk'\n\nconst v0 = new V0({\n  apiKey: process.env.V0_API_KEY,\n})\n\n// Create a new chat\nconst chat = await v0.chats.create({\n  message: 'Create a todo app with React',\n})\n\nconsole.log(chat.id)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Create a chat\nconst chat = await v0.chats.create({\n  message: 'Build a landing page',\n})\n\n// Send a message\nconst response = await v0.chats.sendMessage(chat.id, {\n  message: 'Add a contact form',\n})\n\n// Get chat history\nconst chatData = await v0.chats.getById(chat.id)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Create a project\nconst project = await v0.projects.create({\n  name: 'My App',\n})\n\n// Get project details\nconst projectData = await v0.projects.getById(project.id)\n\n// List all projects\nconst projects = await v0.projects.find()"
+    },
+    {
+      "language": "typescript",
+      "code": "// Create a deployment\nconst deployment = await v0.deployments.create({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n})\n\n// Get deployment status\nconst deploymentData = await v0.deployments.getById(deployment.id)\n\n// Get deployment logs\nconst logs = await v0.deployments.findLogs(deployment.id)"
+    },
+    {
+      "language": "typescript",
+      "code": "// Get user information\nconst user = await v0.user.get()\n\n// Get billing information\nconst billing = await v0.user.getBilling()\n\n// Get current plan\nconst plan = await v0.user.getPlan()"
+    },
+    {
+      "language": "bash",
+      "code": "V0_API_KEY=your_api_key_here\nV0_API_URL=https://api.v0.dev/v1  # Optional, defaults to production"
+    },
+    {
+      "language": "typescript",
+      "code": "const v0 = new V0({\n  apiKey: 'your-api-key',\n  baseURL: 'https://api.v0.dev/v1', // Optional\n  timeout: 30000, // Optional, in milliseconds\n  maxRetries: 3, // Optional\n})"
+    }
+  ],
+  "content": "\n\n# v0-sdk\n\nThe core TypeScript SDK for interacting with the v0 API. Provides type-safe methods for creating chats, managing projects, handling deployments, and more.\n\n## Installation\n\n```bash\nnpm install v0-sdk\n# or\npnpm add v0-sdk\n# or\nyarn add v0-sdk\n```\n\n## Quick Start\n\n```typescript\nimport { V0 } from 'v0-sdk'\n\nconst v0 = new V0({\n  apiKey: process.env.V0_API_KEY,\n})\n\n// Create a new chat\nconst chat = await v0.chats.create({\n  message: 'Create a todo app with React',\n})\n\nconsole.log(chat.id)\n```\n\n## Features\n\n* **Type-safe API**: Full TypeScript support with comprehensive type definitions\n* **Complete Coverage**: Access all v0 API endpoints\n* **Modern Architecture**: Built with modern JavaScript/TypeScript patterns\n* **Error Handling**: Comprehensive error handling and validation\n* **Streaming Support**: Real-time streaming for chat responses\n\n## Core APIs\n\n### Chats\n\n```typescript\n// Create a chat\nconst chat = await v0.chats.create({\n  message: 'Build a landing page',\n})\n\n// Send a message\nconst response = await v0.chats.sendMessage(chat.id, {\n  message: 'Add a contact form',\n})\n\n// Get chat history\nconst chatData = await v0.chats.getById(chat.id)\n```\n\n### Projects\n\n```typescript\n// Create a project\nconst project = await v0.projects.create({\n  name: 'My App',\n})\n\n// Get project details\nconst projectData = await v0.projects.getById(project.id)\n\n// List all projects\nconst projects = await v0.projects.find()\n```\n\n### Deployments\n\n```typescript\n// Create a deployment\nconst deployment = await v0.deployments.create({\n  chatId: chat.id,\n  versionId: chat.latestVersion.id,\n})\n\n// Get deployment status\nconst deploymentData = await v0.deployments.getById(deployment.id)\n\n// Get deployment logs\nconst logs = await v0.deployments.findLogs(deployment.id)\n```\n\n### User & Account\n\n```typescript\n// Get user information\nconst user = await v0.user.get()\n\n// Get billing information\nconst billing = await v0.user.getBilling()\n\n// Get current plan\nconst plan = await v0.user.getPlan()\n```\n\n## Configuration\n\n### Environment Variables\n\n```bash\nV0_API_KEY=your_api_key_here\nV0_API_URL=https://api.v0.dev/v1  # Optional, defaults to production\n```\n\n### Client Options\n\n```typescript\nconst v0 = new V0({\n  apiKey: 'your-api-key',\n  baseURL: 'https://api.v0.dev/v1', // Optional\n  timeout: 30000, // Optional, in milliseconds\n  maxRetries: 3, // Optional\n})\n```\n\n## Error Handling\n\n```typescript\nimport { V0Error } from 'v0-sdk'\n\ntry {\n  const chat = await v0.chats.create({\n    message: 'Create an app',\n  })\n} catch (error) {\n  if (error instanceof V0Error) {\n    console.error('API Error:', error.message)\n    console.error('Status:', error.status)\n    console.error('Code:', error.code)\n  } else {\n    console.error('Unexpected error:', error)\n  }\n}\n```\n\n## Requirements\n\n* Node.js 22+\n* TypeScript 5.0+ (for TypeScript projects)\n\n## Links\n\n* [GitHub Repository](https://github.com/vercel/v0-sdk)\n* [npm Package](https://www.npmjs.com/package/v0-sdk)\n* [API Reference](/docs/api/v1/quickstart)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/packages/v0-sdk",
+  "lastUpdated": "2026-08-20"
+}

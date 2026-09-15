@@ -1,0 +1,31 @@
+{
+  "id": "docs-api-v1-reference-projects-find-env-vars",
+  "slug": "api/v1/reference/projects/find-env-vars",
+  "title": "Find Environment Variables",
+  "section": "API Reference",
+  "category": "API · Projects",
+  "type": "reference",
+  "description": "Retrieves all environment variables for a given project.",
+  "topics": [
+    "design",
+    "api",
+    "environment-variables"
+  ],
+  "related": [
+    "api/v2/guides/environment-variables"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To read environment variables for a chat, see the Environment Variables guide.",
+  "snippets": [],
+  "content": "\n\n# Find Environment Variables\n\n**Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To read environment variables for a chat, see the [Environment Variables guide](/docs/api/v2/guides/environment-variables).\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.projects.findEnvVars({\nprojectId: 'project_abc123',\ndecrypted: 'false',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/projects/project_abc123/env-vars?decrypted=true \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"projectId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the project whose environment variables should be retrieved.\"\n}\n]}\n/>\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"decrypted\",\n\"type\": \"'true' | 'false'\",\n\"required\": false,\n\"description\": \"Whether to return decrypted values. Defaults to false (encrypted).\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A unique identifier for the environment variable.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'environment_variable'\",\n\"required\": false,\n\"description\": \"The object type.\",\n\"deprecated\": false\n},\n{\n\"name\": \"key\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The name of the environment variable.\",\n\"deprecated\": false\n},\n{\n\"name\": \"value\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The value of the environment variable.\",\n\"deprecated\": false\n},\n{\n\"name\": \"decrypted\",\n\"type\": \"boolean\",\n\"required\": false,\n\"description\": \"Whether the value is decrypted or encrypted.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"The timestamp when the environment variable was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"The timestamp when the environment variable was last updated.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/projects/find-env-vars",
+  "lastUpdated": "2026-07-30"
+}

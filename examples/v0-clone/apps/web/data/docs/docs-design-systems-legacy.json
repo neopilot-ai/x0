@@ -1,0 +1,47 @@
+{
+  "id": "docs-design-systems-legacy",
+  "slug": "design-systems-legacy",
+  "title": "Design systems",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Create a custom registry to use your design system with v0 and Shadcn.",
+  "topics": [
+    "design"
+  ],
+  "related": [
+    "figma",
+    "design-mode"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Tailwind config",
+    "Shadcn components",
+    "What is a registry?",
+    "How to create a registry",
+    "Customizing the registry",
+    "Colors",
+    "Fonts",
+    "Custom components",
+    "Custom blocks",
+    "Deploying your registry",
+    "Using a registry in v0",
+    "Integrating the registry with AI code editors"
+  ],
+  "excerpt": "You can set up a custom design system to use with Tailwind and shadcn/ui for high-fidelity UIs that match your brand.",
+  "snippets": [
+    {
+      "language": "css",
+      "code": "@font-face {\n  font-family: 'Montserrat';\n  font-style: normal;\n  font-weight: 400;\n  src:\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW5rygbi49c.woff2')\n      format('woff2'),\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW5rygbj49c.woff')\n      format('woff');\n}\n\n@font-face {\n  font-family: 'Montserrat';\n  font-style: normal;\n  font-weight: 700;\n  src:\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.woff2')\n      format('woff2'),\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3g3D_w.woff')\n      format('woff');\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"shadcn\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"shadcn@canary\", \"registry:mcp\"],\n      \"env\": {\n        \"REGISTRY_URL\": \"https://registry-starter.vercel.app/r/registry.json\"\n      }\n    }\n  }\n}"
+    }
+  ],
+  "content": "\n\n# Design systems\n\nYou can set up a custom design system to use with Tailwind and `shadcn/ui` for high-fidelity UIs that match your brand.\n\nThis is the legacy registry-based design systems guide. For the current Design Systems 2.0 workflow, see [Design Systems 2.0](/docs/design-systems-2).\n\n## Tailwind config\n\nv0 supports tailwind configs and `globals.css` files, you can use custom utility classes and CSS variables in your generations.\n\n## Shadcn components\n\nv0 uses [Shadcn/ui](https://ui.shadcn.com/) as its default component system to generate high-quality, customizable UIs.\n\n`shadcn/ui` is not a component library but rather a toolkit for building one. Unlike traditional component libraries, `shadcn/ui` gives you direct access to the source code. This works well with AI generated code, as it allows you to customize the components to fit your design system.\n\nAlthough v0 defaults to `shadcn/ui`, it is still capable of generating code using other component libraries, styling tools, and even frameworks.\n\n## What is a registry?\n\nA registry is a distribution specification designed to pass context from your design system to AI Models.\n\nFor example, the [Shadcn Registry](https://ui.shadcn.com/docs/registry) provides a structured way to share your components, blocks, and design tokens with v0. It lets v0 generate prototypes that match your design system, without manual overrides.\n\n## How to create a registry\n\nTo get started, you can use [Vercel's Registry Starter Template](https://vercel.com/templates/next.js/shadcn-ui-registry-starter), built with `shadcn/ui`.\n\n## Customizing the registry\n\nTo customize the registry to match your design system, you must style the registry using your design systems tokens (e.g. colors, fonts, etc).\n\nThe Registry Template assumes you follow the `shadcn/ui` CSS variables standard, which can be found in the [documentation](https://ui.shadcn.com/docs/theming#list-of-variables).\n\n### Colors\n\nYou can overwrite the colors in the [`src/app/tokens.css`](https://github.com/vercel/registry-starter/blob/main/src/app/tokens.css) file with your custom theme ensuring all the variable names remain unchanged.\n\nYou may choose from a few default themes on [`ui.shadcn.com/themes`](https://ui.shadcn.com/themes) or utilize free, third-party tools such as [`tweakcn.com`](https://tweakcn.com) to design your own.\n\n### Fonts\n\nTo update the font, modify [`src/app/layout.tsx`](https://github.com/vercel/registry-starter/blob/main/src/app/layout.tsx) and import your chosen font using `next/font/google`. `shadcn/ui` and Tailwind are preconfigured to use the `--font-sans`, `--font-mono`, and `--font-serif` variables. See the [Next.js documentation](https://nextjs.org/docs/app/getting-started/fonts) to learn more about custom fonts.\n\nYou can also use `@font-face` to import custom fonts:\n\n```css\n@font-face {\n  font-family: 'Montserrat';\n  font-style: normal;\n  font-weight: 400;\n  src:\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW5rygbi49c.woff2')\n      format('woff2'),\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTUSjIg1_i6t8kCHKm45xW5rygbj49c.woff')\n      format('woff');\n}\n\n@font-face {\n  font-family: 'Montserrat';\n  font-style: normal;\n  font-weight: 700;\n  src:\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3gnD-w.woff2')\n      format('woff2'),\n    url('https://fonts.gstatic.com/s/montserrat/v15/JTURjIg1_i6t8kCHKm45_dJE3g3D_w.woff')\n      format('woff');\n}\n```\n\nIf you introduce new `*.css` files, ensure they are imported in all of the `layout.tsx` and any layout in your [`/src/v0/`](https://github.com/vercel/registry-starter/blob/main/src/v0) directory.\n\n### Custom components\n\nThe Registry template comes with all the default `shadcn/ui` [primitive UI components](https://ui.shadcn.com/docs/components) and some prebuilt, example components.\n\nv0 automatically uses `shadcn/ui` components in your generation, so there is no need to import the UI primitives into v0. If you customize the underlying `shadcn/ui` components in your registry, you may see unexpected v0 generations. v0 is specifically trained on the default implementations of the `shadcn/ui` components and may struggle with any customizations.\n\nTo use custom UI primitives and components, you must follow a few steps to ensure it's properly added to your Registry.\n\n1. Add the new UI primitive or component code to your registry source code.\n2. Add a new `registry-item` in [`registry.json`](https://github.com/vercel/registry-starter/blob/main/registry.json).\n\nIf you want to ensure the Registry UI also gets updated, you must also add a new demo to [`src/app/demo/[name]/index.tsx`](https://github.com/vercel/registry-starter/blob/main/src/app/demo/%5Bname%5D/index.tsx) following the structure in [`/`](https://github.com/vercel/registry-starter/tree/main/src/app/demo/%5Bname%5D) directory.\n\n### Custom blocks\n\nThe Registry template comes with three example blocks:\n\n1. A blank application\n2. A dashboard application\n3. A store application\n\nThese application blocks serve as a good starting point for prototypes. Depending on your use case, you can create custom blocks to meet your team's needs. To add or edit existing blocks:\n\n1. Open or create `src/app/demo/[name]/blocks` and modify its pages or components as you would in a standard Next.js app.\n* Sometimes the layout needed in the registry differs from the layout you want to include in the registry. In such cases, best practice is to create such collateral in [`/src/v0/`](https://github.com/vercel/registry-starter/blob/main/src/v0) to reference in your `registry.json` as shown in next step.\n2. Add a new `registry-item` to the `registry.json` to represent your new block. Make sure the entry follows the `registry-item` [specification](https://ui.shadcn.com/docs/registry/registry-item-json)\n1. Specify other registry dependencies by using the `registryDependencies` property\n* For example, a block might reference smaller, more specific UI primitives or components from your `registry.json`.\n2. Include all relevant files in the `files` property\n* The `path` property points to the local file path of your component/page\n* The `target` property specifies where the file will be placed in v0 during the import\n3. Deploy your updated registry.\n4. Navigate to your Registry's `/registry/[name]` page to view your new block with an `Open in v0` button.\n\n## Deploying your registry\n\nBefore deploying it, the template contains a [`registry.json`](https://github.com/vercel/registry-starter/blob/main/registry.json) file which exposes the default components/blocks in the registry. The `baseUrl` and the full route dependency URLs must be replaced with your deployed URL.\n\n## Using a registry in v0\n\nTo use your registry, you can open all UI primitives, components, and blocks using the `Open in v0` button. This will make an API call to [v0.app](https://v0.app) with the necessary metadata, file content, and styles of the respective UI primitive,",
+  "sourceUrl": "https://v0.app/docs/design-systems-legacy",
+  "lastUpdated": "2026-09-01"
+}

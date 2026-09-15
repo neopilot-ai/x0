@@ -1,0 +1,36 @@
+{
+  "id": "docs-overview",
+  "slug": "",
+  "title": "What is v0?",
+  "section": "Overview",
+  "category": "Overview",
+  "type": "overview",
+  "description": "v0 is an AI agent that helps anyone create real code and full-stack apps and agents.",
+  "topics": [
+    "design",
+    "agents"
+  ],
+  "related": [
+    "quickstart"
+  ],
+  "requires": [],
+  "headings": [
+    "What can you do with v0?",
+    "Examples",
+    "Who is v0 for?",
+    "Product Managers",
+    "Designers",
+    "Engineers",
+    "Data Scientists",
+    "Marketing Teams",
+    "Content Creators and Educators",
+    "Customer Support",
+    "Founders",
+    "What makes v0 different?"
+  ],
+  "excerpt": "Ship features, refine designs, update copy, and create live prototypes, all with a prompt. Deploy to production immediately, or open a pull request for review.",
+  "snippets": [],
+  "content": "\n\n# What is v0?\n\nShip features, refine designs, update copy, and create live prototypes, all with a prompt. Deploy to production immediately, or open a pull request for review.\n\n## What can you do with v0?\n\n* **Describe your idea** in your preferred language.\n* **Create high-fidelity UIs** from your wireframes or mockups.\n* **Connect to backend** to build rich, data driven applications.\n* **Deploy with one click** to secure, scalable infrastructure powered by Vercel.\n* **Automatically fix errors** in your code with intelligent diagnostics.\n\nGetting Started\n\nQuickstart tutorial to create your first project.\n\nPrompt Engineering\n\nBuild faster in v0 with effective prompting.\n\nFAQs\n\nFind commonly asked questions about v0.\n\nBlog\n\nStay up to date with new product features and announcements.\n\nWhy should I choose v0 instead of other tools?\n\n## Examples\n\nYou can use v0 to build anything, from landing pages, dashboards, ecommerce stores, AI apps, to full-stack applications.\n\nExplore what our community is building\n\n## Who is v0 for?\n\nv0 helps teams prototype, build, and ship faster. Here's how different roles are using it:\n\n### Product Managers\n\nQuickly prototype and iterate to align stakeholders, validate ideas early, and gather user feedback before using engineering resources.\n\nExamples:\n\n* [Draft project plans and timelines](https://v0.app/chat/realtime-food-delivery-app-SYnS5F3f4eQ)\n* [Generate user interview questions for researching new features](https://v0.app/chat/figma-integration-questions-tEygM4v11nr)\n* [Create feedback forms where submissions are sent to a database](https://v0.app/chat/vercel-blob-form-AEdow4eYNT1?b=b_lL01SLSDPbg)\n* [Create templates for new features or RFCs](https://v0.app/chat/rfc-template-creation-1SUWumwg7VA?b=b_r4q4NtEyq7L)\n\n### Designers\n\nTurn mockups into real, high-fidelity user interfaces that reflect user flows and constraints.\n\nExamples:\n\n* [Clone pages with screenshots or Figma files](https://v0.app/chat/air-bn-b-clone-z2USwBXCUkt?b=b_wsRgLc7Q6Np)\n* [Generate CSS and HTML for prototypes and landing pages](https://v0.app/chat/responsive-grid-layout-ORiwZhoEQJN?b=b_cbgUrNMYrUI)\n* [Add accessibility improvements for basic design elements](https://v0.app/chat/accessible-form-component-cfAFpQlzYij?b=b_PLmcnssJsJT)\n* [Create interactive components to handoff to developers](https://v0.app/chat/next-js-dark-mode-pU5dltJuOlC?b=b_woRepE69E8F)\n\n### Engineers\n\nQuickly scaffold full-stack apps or components following best practices and modern standards. Focus on solving the harder problems while using v0 as your AI pair programmer.\n\nExamples:\n\n* [Create React components](https://v0.app/chat/responsive-nav-bar-ndXU3P0uwkI?b=b_A63dydZKsmW)\n* [Create custom hooks and functionality](https://v0.app/chat/custom-react-hook-mTAR0Mfr1fE?b=b_sHFhXDNCZq3)\n* [Migrate to the latest Next.js features](https://v0.app/chat/migrating-to-new-api-s-BS2vObWxSnw)\n\n### Data Scientists\n\nBuild and deploy data applications on Snowflake with v0. Work with Python and SQL to analyze data and create visualizations. Use tools like [Matplotlib](https://matplotlib.org/), [Pandas](https://pandas.pydata.org/), and more.\n\nExamples:\n\n* [Learn SQL](https://v0.app/chat/sql-basics-QWHEeRIUuK8)\n* [Write complex queries](https://v0.app/chat/sql-query-for-p99-4RhGamYCG2Q)\n* [Generate code for data visualization and analysis](https://v0.app/chat/matplotlib-summary-plots-qSnMQHS5tYm)\n* [Create dashboards for visualizations](https://v0.app/chat/next-js-charts-ky1gWd57Jbq?ref=TQT1P6)\n\n### Marketing Teams\n\nReduce time-to-market for promotional initiatives by launching custom marketing pages. Generate content ideas, copy, and draft email campaigns.\n\nExamples:\n\n* [Generate ideas for blog posts, social media content, and ad copy](https://v0.app/chat/ai-blog-topic-ideas-g6gCHmftUFZ?b=b_G5a4ouPZyFk)\n* [Research keywords and optimize your SEO](https://v0.app/chat/next-js-blog-component-liT74sXMshG?b=b_g2hXZa9ruMw)\n* [Draft email campaigns and newsletters](https://v0.app/chat/MdfCDyWYFQw?b=b_d0dKVt93l1C)\n* [Collaborate with developers on features like A/B testing](https://v0.app/chat/next-js-a-b-testing-AFjquiFstFY?b=b_wTb5bso8PDn)\n\n### Content Creators and Educators\n\nCreate interactive examples and games that are easy to follow and understand. Write lesson plans and create engineering quizzes.\n\nExamples:\n\n* [Help create lesson plans and educational content](https://v0.app/chat/next-js-lesson-plan-uDmldsC7TBg?b=b_2xwzGb1Nn85)\n* [Generate practice exercises and quizzes](https://v0.app/chat/interactive-react-quiz-vXjFt7Xr2Ja?b=b_aoDHlI7JKat)\n* [Assist in developing online course materials with progress tracking](https://v0.app/chat/progress-tracking-component-h4VLQZsiMjc?b=b_kTjunlFR2hE)\n* [Provide visual explanations for complex concepts, especially related to engineering](https://v0.app/chat/git-basics-for-beginners-GI25SZGQtqP)\n\n### Customer Support\n\nHelp customers with technical issues, and build customer support tools.\n\nExamples:\n\n* [Create a chatbot for customer support](https://v0.app/chat/chatbot-interface-component-eJquKqGe4l8?ref=TQT1P6)\n* [Assist in creating a searchable knowledge base and articles](https://v0.app/chat/searchable-knowledge-base-QRwo0y9ClK1?b=b_CJpNHy3hUJe)\n* [Design a customer feedback form](https://v0.app/chat/customer-feedback-form-jgRqnP9KYpF?b=b_fP8kTb5fldI)\n\n### Founders\n\nShip MVPs fast without hiring a dev team, and focus your time on refining product and market fit.\n\n## What makes v0 different?\n\n* **End-to-end Development**: Build both UI and backend logic, not just mockups.\n* **Works with your stack**: Use modern tools like Next.js, Tailwind, shadcn/ui, and more.\n* **Team-friendly**: Powers collaborative design, product, and engineering workflows.\n* **Extensible**: Use your APIs, databases, and components.\n* **Intelligent Agent**: Autonomous capabilities including web search, site inspection, error fixing, and external tool integration.\n* **Real-time Feedback**: Real-time preview of your app, with visual progress indicators and rich UI feedback for all agent actions.\n* **Multi-modal**: Combines code generation, web browsing, debugging, and external API interactions in one platform.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs",
+  "lastUpdated": "2026-07-30"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "docs-api-v1-examples-v0-clone",
+  "slug": "api/v1/examples/v0-clone",
+  "title": "v0 Clone",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "A full-featured v0 clone with authentication and multi-tenant support",
+  "topics": [
+    "design",
+    "api",
+    "authentication"
+  ],
+  "related": [
+    "api/v1/packages/v0-sdk",
+    "api/v1/packages/react"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Deploy Your Own",
+    "Features",
+    "Core Features",
+    "Authentication & Multi-Tenant Features",
+    "Setup",
+    "Environment Variables",
+    "Database Setup",
+    "Getting Started",
+    "Architecture",
+    "Multi-Tenant Design",
+    "Database Schema",
+    "User Types & Rate Limits",
+    "Source Code"
+  ],
+  "excerpt": "This example demonstrates how to build a complete v0.dev replica using the v0 SDK, featuring user authentication, multi-tenant architecture, and real-time streaming capabilities.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "# Auth Secret - Generate a random string for production\n# Generate with: openssl rand -base64 32\n# Or visit: https://generate-secret.vercel.app/32\nAUTH_SECRET=your-auth-secret-here\n\n# Database URL - PostgreSQL connection string\nPOSTGRES_URL=postgresql://user:password@localhost:5432/v0_clone\n# For a Marketplace Postgres integration, use the connection string from your dashboard\n\n# Get your API key from https://v0.app/settings/keys\nV0_API_KEY=your_v0_api_key_here\n\n# Optional: Use a custom API URL\n# V0_API_URL=http://localhost:3001/v1"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm db:generate"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm db:migrate"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm db:studio"
+    },
+    {
+      "language": "bash",
+      "code": "pnpm dev"
+    }
+  ],
+  "content": "\n\n# v0 Clone\n\nThis example demonstrates how to build a complete v0.dev replica using the v0 SDK, featuring user authentication, multi-tenant architecture, and real-time streaming capabilities.\n\n## Deploy Your Own\n\nYou can deploy your own version of the v0 clone to Vercel with one click:\n\n[**Deploy with Vercel →**](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fv0-sdk\\&env=V0_API_KEY,AUTH_SECRET,POSTGRES_URL\\&envDescription=Learn+more+about+how+to+get+the+required+environment+variables\\&envLink=https%3A%2F%2Fgithub.com%2Fvercel%2Fv0-sdk%2Fblob%2Fmain%2Fexamples%2Fv0-clone%2FREADME.md%23environment-variables\\&project-name=v0-clone\\&repository-name=v0-clone\\&demo-title=v0+Clone\\&demo-description=A+full-featured+v0+clone+built+with+Next.js%2C+shadcn%2Fui%2C+and+the+v0+SDK\\&demo-url=https%3A%2F%2Fv0.dev\\&root-directory=examples%2Fv0-clone)\n\n## Features\n\n### Core Features\n\n* **shadcn/ui Integration**: Uses shadcn/ui components for a polished UI\n* **v0 SDK Integration**: Connects to the v0 API for generating apps\n* **Real-time Preview**: Split-screen interface with chat and preview panels\n* **Conversation History**: Maintains chat history throughout the session\n* **Suggestion System**: Provides helpful prompts to get users started\n* **Streaming Support**: Toggle between streaming and non-streaming AI responses for real-time updates\n\n### Authentication & Multi-Tenant Features\n\n* **Anonymous Access**: Unauthenticated users can create chats directly (with rate limits)\n* **Guest Access**: Users can register as guests for persistent sessions\n* **User Registration/Login**: Email/password authentication with secure password hashing\n* **Session Management**: Secure session handling with NextAuth.js\n* **Multi-Tenant Architecture**: Multiple users share the same v0 API organization\n* **Ownership Mapping**: Authenticated users only see their own chats and projects\n* **Rate Limiting**: Different limits for anonymous, guest, and registered users\n* **User Navigation**: Header dropdown with user info and sign-out options\n\n## Setup\n\n### Environment Variables\n\nCreate a `.env` file with all required variables:\n\n```bash\n# Auth Secret - Generate a random string for production\n# Generate with: openssl rand -base64 32\n# Or visit: https://generate-secret.vercel.app/32\nAUTH_SECRET=your-auth-secret-here\n\n# Database URL - PostgreSQL connection string\nPOSTGRES_URL=postgresql://user:password@localhost:5432/v0_clone\n# For a Marketplace Postgres integration, use the connection string from your dashboard\n\n# Get your API key from https://v0.app/settings/keys\nV0_API_KEY=your_v0_api_key_here\n\n# Optional: Use a custom API URL\n# V0_API_URL=http://localhost:3001/v1\n```\n\n### Database Setup\n\nThis project uses PostgreSQL with Drizzle ORM. Set up your database:\n\n1. **Generate Database Schema**:\n\n   ```bash\n   pnpm db:generate\n   ```\n\n2. **Run Database Migrations**:\n\n   ```bash\n   pnpm db:migrate\n   ```\n\n3. **Optional - Open Database Studio**:\n   ```bash\n   pnpm db:studio\n   ```\n\n## Getting Started\n\nThen, run the development server:\n\n```bash\npnpm dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.\n\n## Architecture\n\n### Multi-Tenant Design\n\n* **v0 API as Source of Truth**: All actual chat/project data stays in v0 API\n* **Ownership Layer**: Database only tracks \"who owns what\"\n* **Access Control**: API routes filter v0 data based on ownership\n* **No Data Duplication**: Avoids storing redundant data\n\n### Database Schema\n\n* **Users**: Store user accounts with email and hashed passwords\n* **ProjectOwnership**: Maps v0 API project IDs → user IDs (ownership only)\n* **ChatOwnership**: Maps v0 API chat IDs → user IDs with optional project association\n* **AnonymousChatLog**: Tracks anonymous chat creation by IP address for rate limiting\n\n### User Types & Rate Limits\n\n* **Anonymous Users**: No account needed, 3 chats per day, no data persistence\n* **Guest Users**: Auto-created accounts, 5 chats per day, data persists during session\n* **Registered Users**: Permanent accounts, 50 chats per day, data persists across sessions and devices\n\nRate limits are enforced per 24-hour period and reset daily.\n\n## Source Code\n\nView the complete source code on GitHub: [v0-sdk/examples/v0-clone](https://github.com/vercel/v0-sdk/tree/main/examples/v0-clone)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/examples/v0-clone",
+  "lastUpdated": "2026-08-21"
+}

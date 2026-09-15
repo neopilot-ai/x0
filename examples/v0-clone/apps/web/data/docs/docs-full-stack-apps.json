@@ -1,0 +1,40 @@
+{
+  "id": "docs-full-stack-apps",
+  "slug": "full-stack-apps",
+  "title": "Full-stack apps",
+  "section": "Guides",
+  "category": "Guides",
+  "type": "guide",
+  "description": "Build full-stack apps with v0.",
+  "topics": [
+    "databases",
+    "deployment",
+    "design"
+  ],
+  "related": [
+    "databases",
+    "external-apis",
+    "deployments"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Integrations",
+    "Supported integrations",
+    "Environment variables",
+    "Incremental development workflow",
+    "Start with UI",
+    "Add data layer",
+    "Implement core features",
+    "Enhance functionality",
+    "Optimize and polish",
+    "Best practices",
+    "Solutions"
+  ],
+  "excerpt": "v0 can transform prototypes into full-stack applications. In a new chat or existing generation, ask v0 to implement features that require data persistence, API calls, or backend logic.",
+  "snippets": [],
+  "content": "\n\n# Full-stack apps\n\nv0 can transform prototypes into full-stack applications. In a new chat or existing generation, ask v0 to implement features that require data persistence, API calls, or backend logic.\n\nv0 defaults to Next.js, which offers advantages like server actions and API routes for colocating frontend and backend code. While v0 can use other frameworks, Next.js provides the most reliable results.\n\nWhen building full-stack applications, v0 can:\n\n* Leverage [React Server Components](https://react.dev/reference/rsc/server-components) (RSCs) for improved performance and SEO\n* Create backend endpoints using Next.js App Router conventions\n* Connect to databases like [Supabase](https://supabase.com), [Neon](https://neon.com), and [Upstash](https://upstash.com) without ORMs by default\n\n## Integrations\n\nLeveraging the [Vercel marketplace](https://vercel.com/marketplace), v0 has access to a variety of integrations that enable it to add databases, queues, blob storage, AI models, and more through **Project menu** → **Settings** → **Integrations**. You can either prompt v0 to add integrations, add them manually, or v0 can prompt you to create the resource when necessary, depending on the feature you are building.\n\n### Supported integrations\n\n* [**Databases**](/docs/databases): Supabase, Blob, Neon, Upstash.\n* [**AI**](/docs/ai-models): Grok, fal, Deep Infra.\n\n## Environment variables\n\nIn each project, you can configure secure environment variables that v0 will have access to. These can be used for external integrations with LLM providers and APIs.\n\nClient-side environment variables must be prefixed with\n`NEXT_PUBLIC_`\nto be accessible in browser code.\n\n## Incremental development workflow\n\nWhen building full-stack applications, take an incremental approach with v0.\n\n### Start with UI\n\nCreate your component layout and design:\n\n### Add data layer\n\nPrompt v0 to add database schema and API routes:\n\n\"Add a Supabase database with tables for tasks, users, and projects. Include API routes for managing tasks.\"\n\n### Implement core features\n\nAdd authentication, CRUD operations, or real-time updates:\n\n\"Add user authentication so users can only see and manage their own tasks.\"\n\n### Enhance functionality\n\nBuild on existing features with detailed instructions:\n\n\"Add the ability to edit and delete tasks, plus real-time updates when team members make changes.\"\n\n### Optimize and polish\n\nAdd performance improvements and advanced features:\n\n\"Add task filtering by status and due date, plus optimize with caching and image optimization.\"\n\n### Best practices\n\n* Duplicate existing generations to add logic instead of combining UI and logic in a single prompt\n* Use popular, well-documented libraries in your prompts\n* Provide detailed implementation instructions to avoid incorrect assumptions\n\n## Solutions\n\nSee how v0 can help with different use cases:\n\n* [AI Website Builder](https://v0.app/solutions/ai-website-builder) - Turn prompts, screenshots, or Figma files into live websites\n* [AI Code Generator](https://v0.app/solutions/ai-code-generator) - Generate production-ready full-stack apps from natural language prompts\n* [AI UI Design Generator](https://v0.app/solutions/ai-ui-design-generator) - Generate production-ready UI from designs, screenshots, or prompts\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/full-stack-apps",
+  "lastUpdated": "2026-08-19"
+}

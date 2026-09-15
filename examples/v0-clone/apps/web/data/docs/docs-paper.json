@@ -1,0 +1,30 @@
+{
+  "id": "docs-paper",
+  "slug": "paper",
+  "title": "Paper",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Turn a Paper design into a working app.",
+  "topics": [
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "figma",
+    "design-mode"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Import a Paper design",
+    "Choose which link to share",
+    "Get the best results"
+  ],
+  "excerpt": "Paste a Paper link into v0 and turn the design into a working app. v0 reads the file you point it to and builds it in code, using your layout, text, and assets.",
+  "snippets": [],
+  "content": "\n\n# Paper\n\nPaste a [Paper](https://paper.design) link into v0 and turn the design into a working app. v0 reads the file you point it to and builds it in code, using your layout, text, and assets.\n\nYou do not need to connect an account. Sharing a Paper link is all v0 needs.\n\n## Import a Paper design\n\nClick the **+** button in the prompt form, choose **Import from…** → **Import from Paper**, and paste a link to the file, page, or frame you want to build. You can also paste any `app.paper.design` link directly into the chat and v0 does the rest.\n\nWhen v0 sees a Paper link, it loads the design and starts building. As it works, you can point it to a different section or frame at any time.\n\n## Choose which link to share\n\nShare a link to a Paper file, page, or frame.\n\n* **Share a file link** when you want v0 to build several screens or a full flow. Tell v0 which feature, page, or flow you want.\n* **Share a frame link** when you want v0 to match one screen or section. In Paper, select the section or frame and copy its link.\n\nPaper file links have the form `app.paper.design/file/`, optionally followed by a page and node when you link to a specific frame.\n\n## Get the best results\n\n* Name pages, frames, and sections clearly so v0 can find the right screens.\n* Keep each screen or state in its own frame.\n* Share a frame link when you need an exact screen or section.\n* Tell v0 how screens connect when the design does not show it.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/paper",
+  "lastUpdated": "2026-08-19"
+}

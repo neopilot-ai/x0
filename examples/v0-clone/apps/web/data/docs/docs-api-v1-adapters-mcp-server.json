@@ -1,0 +1,76 @@
+{
+  "id": "docs-api-v1-adapters-mcp-server",
+  "slug": "api/v1/adapters/mcp-server",
+  "title": "MCP Server",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "integration",
+  "description": "The v0 MCP (Model Context Protocol) server allows you to integrate v0's capabilities directly into your IDE, providing seamless access to v0's AI-powered code generation and assistance.",
+  "topics": [
+    "mcp",
+    "ai",
+    "api",
+    "integrations"
+  ],
+  "related": [
+    "MCP"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Supported IDEs",
+    "Configuration",
+    "Prerequisites",
+    "IDE Configuration",
+    "Usage",
+    "Create Chats",
+    "Access Chat Information",
+    "Find Chats",
+    "Send Messages",
+    "Resolve Tasks",
+    "Get Previews",
+    "Troubleshooting",
+    "Common Issues",
+    "Next Steps"
+  ],
+  "excerpt": "The v0 MCP server enables your IDE's AI assistant to:",
+  "snippets": [
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "language": "json",
+      "code": "{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}"
+    },
+    {
+      "language": "text",
+      "code": "\"Create a v0 chat for building a React dashboard component\""
+    },
+    {
+      "language": "text",
+      "code": "\"Show me the details of v0 chat ID abc123\""
+    },
+    {
+      "language": "text",
+      "code": "\"Find my v0 chats related to React components\""
+    },
+    {
+      "language": "text",
+      "code": "\"Send a message to chat abc123 asking to add dark mode support\""
+    },
+    {
+      "language": "text",
+      "code": "\"Approve the plan that v0 proposed in chat abc123\""
+    }
+  ],
+  "content": "\n\n# MCP Server\n\n## Overview\n\nThe v0 MCP server enables your IDE's AI assistant to:\n\n* Create and manage v0 chats\n* Access v0's code generation capabilities\n* Leverage v0's design and development expertise\n* Integrate v0 workflows into your development process\n\n## Supported IDEs\n\nThe v0 MCP server works with any IDE that supports the Model Context Protocol, including:\n\n* **Cursor** - AI-powered code editor\n* **Claude Desktop** - Anthropic's Claude desktop application\n* **VS Code** (with MCP extensions)\n* **Any MCP-compatible IDE**\n\n## Configuration\n\n### Prerequisites\n\nThe v0 MCP server authenticates with OAuth—you don't need a v0 API key. You'll need [Node.js](https://nodejs.org/) installed so your IDE can run `npx mcp-remote`.\n\n### IDE Configuration\n\nAdd the following configuration to your IDE's MCP settings. The first time your IDE connects, `mcp-remote` opens a browser so you can sign in to v0, choose the account or team the client should use, and approve the connection.\n\nThe MCP server uses OAuth for MCP clients. Do not put a v0 API key in your MCP client configuration.\n\n#### Cursor\n\nAdd to your Cursor settings (`~/.cursor/mcp.json`):\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}\n```\n\n#### Claude Desktop\n\nAdd to your Claude Desktop configuration (`~/.config/claude-desktop/config.json` on Linux/macOS or `%APPDATA%\\Claude Desktop\\config.json` on Windows):\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}\n```\n\n#### VS Code\n\nInstall an MCP extension and add the v0 server configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"v0\": {\n      \"command\": \"npx\",\n      \"args\": [\"mcp-remote\", \"https://v0.app/api/mcp\"]\n    }\n  }\n}\n```\n\n## Usage\n\nOnce configured, your IDE's AI assistant will have access to v0's MCP tools. You can:\n\n### Create Chats\n\nAsk your AI assistant to create new v0 chats with specific prompts:\n\n```\n\"Create a v0 chat for building a React dashboard component\"\n```\n\n### Access Chat Information\n\nGet details about existing chats:\n\n```\n\"Show me the details of v0 chat ID abc123\"\n```\n\n### Find Chats\n\nSearch through your v0 chats:\n\n```\n\"Find my v0 chats related to React components\"\n```\n\n### Send Messages\n\nContinue conversations in existing chats:\n\n```\n\"Send a message to chat abc123 asking to add dark mode support\"\n```\n\n### Resolve Tasks\n\nWhen v0 pauses for input—such as approving a plan, answering a question, or granting a permission—resolve the task to let it continue:\n\n```\n\"Approve the plan that v0 proposed in chat abc123\"\n```\n\n### Get Previews\n\nGet a preview URL for a chat's generated app:\n\n```\n\"Get the preview URL for chat abc123\"\n```\n\n## Troubleshooting\n\n### Common Issues\n\n**\"Command not found: npx\"**\n\n* Install Node.js and npm: [https://nodejs.org/](https://nodejs.org/)\n\n**\"Connection failed\"**\n\n* Check your internet connection\n* Verify the MCP server URL: `https://v0.app/api/mcp`\n* Ensure your firewall allows outbound connections\n\n**\"Authentication failed\"**\n\n* Reconnect the v0 MCP server in your client to restart the OAuth flow\n* If you need to switch accounts or teams, remove the existing v0 MCP connection in your client and connect again\n* If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request\n\n## Next Steps\n\nAfter configuring the MCP server, explore the [v0 API documentation](/docs/api/v1/quickstart) to understand the full range of capabilities available through v0's API.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/adapters/mcp-server",
+  "lastUpdated": "2026-07-30"
+}

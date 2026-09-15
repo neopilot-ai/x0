@@ -1,0 +1,28 @@
+{
+  "id": "docs-api-v1-reference-projects-assign",
+  "slug": "api/v1/reference/projects/assign",
+  "title": "Assign Project to Chat",
+  "section": "API Reference",
+  "category": "API · Projects",
+  "type": "reference",
+  "description": "Links an existing v0 project to a specific chat. Helps group conversations under a shared project context.",
+  "topics": [
+    "api",
+    "sharing"
+  ],
+  "related": [],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Usage",
+    "API Signature",
+    "Request",
+    "Response"
+  ],
+  "excerpt": "Deprecated**: v0 Projects are deprecated. To connect a chat to Vercel infrastructure, create a Vercel project for the chat with Create Vercel Project. Use Update Chat to group related chats using custom metadata.",
+  "snippets": [],
+  "content": "\n\n# Assign Project to Chat\n\n**Deprecated**: v0 Projects are deprecated. To connect a chat to Vercel infrastructure, create a Vercel project for the chat with [Create Vercel Project](/docs/api/v2/reference/chats/create-vercel-project). Use [Update Chat](/docs/api/v2/reference/chats/update-chat) to group related chats using custom metadata.\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.projects.assign({\nprojectId: '123',\nchatId: '123',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/projects/123/assign \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"chatId\": \"123\"\n}'`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"projectId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ID of the project to assign.\"\n}\n]}\n/>\n\n#### Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ID of the chat to assign the project to.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'project'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"assigned\",\n\"type\": \"'true'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/reference/projects/assign",
+  "lastUpdated": "2026-07-30"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "docs-databases",
+  "slug": "databases",
+  "title": "Databases",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Build full-stack applications with v0's database integrations.",
+  "topics": [
+    "databases",
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "external-apis",
+    "full-stack-apps",
+    "snowflake"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "Setting up a database",
+    "From settings",
+    "From a chat thread",
+    "Managing integrations"
+  ],
+  "excerpt": "When building applications, it can be useful to add data persistence to properly mock out more complex flows. v0 enables simple, one-click database integrations with popular providers, including Upstash, Neon, Supabase, and Vercel Blob.",
+  "snippets": [],
+  "content": "\n\n# Databases\n\nWhen building applications, it can be useful to add data persistence to properly mock out more complex flows. v0 enables simple, one-click database integrations with popular providers, including [Upstash](https://upstash.com/), [Neon](https://neon.com/), [Supabase](https://supabase.com/), and [Vercel Blob](https://vercel.com/docs/vercel-blob).\n\nFor data warehouse workflows, you can also connect [Snowflake](/docs/snowflake) to build data apps, query accessible tables, and deploy apps to Snowflake.\n\n## Setting up a database\n\nYou can connect a database to v0 from a chat thread or project.\n\n### From settings\n\nGo to **Project menu** `...` → **Settings** → **Integrations** to see available database options.\n\n* To reuse an existing database, click the arrow to select from previously created stores.\n* To add a new one, click **Create** to open the Marketplace and accept the provider's terms.\n\nOnce setup, newer generations in this project will be able to use the connected database.\n\n### From a chat thread\n\nYou can also connect a database directly from chat.\n\n* Click the suggested action, or\n* Ask v0 to add a database integration.\n\nEither path opens the Marketplace with click-through terms for supported providers.\n\n### Managing integrations\n\nAdding an integration provisions a new user account on that service and adds the necessary environment variables to your project. You can manage these integrations through the [Vercel Marketplace](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fintegrations\\&title=Go+to+Vercel+Marketplace).\n\nWhen you add an integration requiring an environment variable outside of general setup, you will be prompted in the chat to add the necessary variables. You can also add your own environment variables anytime from **Project menu** `...` → **Settings** → **Environment Variables**.\n\nFor SQL-based integrations, can generate and execute SQL. This lets you create, update, and drop tables.\n\nFor [AI models](/docs/ai-models), you can set spend limits, auto-top-ups, and other settings during setup. This allows you to control your usage and costs.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/databases",
+  "lastUpdated": "2026-08-19"
+}

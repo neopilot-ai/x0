@@ -1,0 +1,79 @@
+{
+  "id": "docs-api-v1-packages-react",
+  "slug": "api/v1/packages/react",
+  "title": "@v0-sdk/react",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "reference",
+  "description": "Headless React components for rendering v0 API content",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "api/v1/packages/v0-sdk",
+    "api/v1/guides/displaying-chat-messages"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Installation",
+    "Quick Start",
+    "Components",
+    "StreamingMessage",
+    "CodeBlock",
+    "ThinkingSection",
+    "TaskSection",
+    "Themes",
+    "Built-in Themes",
+    "Custom Themes",
+    "Hooks",
+    "useStreamingChat",
+    "useCodeHighlight",
+    "Styling",
+    "CSS Custom Properties",
+    "Tailwind CSS Classes",
+    "TypeScript Support",
+    "Requirements",
+    "Links"
+  ],
+  "excerpt": "Headless React components for rendering content from the v0 API. Provides components for streaming messages, code blocks, thinking sections, and more.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npm install @v0-sdk/react\n# or\npnpm add @v0-sdk/react\n# or\nyarn add @v0-sdk/react"
+    },
+    {
+      "language": "tsx",
+      "code": "import { StreamingMessage } from '@v0-sdk/react'\n\nfunction ChatInterface({ message }) {\n  return (\n    <StreamingMessage\n      message={message}\n      onComplete={(result) => {\n        console.log('Streaming complete:', result)\n      }}\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { StreamingMessage } from '@v0-sdk/react'\n\nfunction Chat() {\n  return (\n    <StreamingMessage\n      message={streamingData}\n      theme=\"elegant\"\n      className=\"my-message\"\n      onComplete={(result) => {\n        // Handle completion\n      }}\n      onError={(error) => {\n        // Handle errors\n      }}\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { CodeBlock } from '@v0-sdk/react'\n\nfunction CodeDisplay() {\n  return (\n    <CodeBlock\n      code={generatedCode}\n      language=\"typescript\"\n      showLineNumbers\n      copyable\n      theme=\"dark\"\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { ThinkingSection } from '@v0-sdk/react'\n\nfunction AIThinking() {\n  return (\n    <ThinkingSection\n      thoughts={aiThoughts}\n      isVisible={showThinking}\n      animated\n      collapsible\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { TaskSection } from '@v0-sdk/react'\n\nfunction TaskProgress() {\n  return (\n    <TaskSection\n      tasks={taskList}\n      showProgress\n      interactive\n      onTaskComplete={(task) => {\n        // Handle task completion\n      }}\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "// Elegant - Sophisticated design\n<StreamingMessage message={data} theme=\"elegant\" />\n\n// Minimal - Clean, distraction-free\n<StreamingMessage message={data} theme=\"minimal\" />\n\n// Neobrutalism - Bold, high-contrast\n<StreamingMessage message={data} theme=\"neobrutalism\" />\n\n// Terminal - Developer-focused\n<StreamingMessage message={data} theme=\"terminal\" />"
+    },
+    {
+      "language": "tsx",
+      "code": "const customTheme = {\n  primary: '#3b82f6',\n  background: '#f8fafc',\n  text: '#1e293b',\n  accent: '#06b6d4',\n  border: '#e2e8f0',\n}\n\n<StreamingMessage\n  message={data}\n  theme={customTheme}\n/>"
+    }
+  ],
+  "content": "\n\n# @v0-sdk/react\n\nHeadless React components for rendering content from the v0 API. Provides components for streaming messages, code blocks, thinking sections, and more.\n\n## Installation\n\n```bash\nnpm install @v0-sdk/react\n# or\npnpm add @v0-sdk/react\n# or\nyarn add @v0-sdk/react\n```\n\n## Quick Start\n\n```tsx\nimport { StreamingMessage } from '@v0-sdk/react'\n\nfunction ChatInterface({ message }) {\n  return (\n    <StreamingMessage\n      message={message}\n      onComplete={(result) => {\n        console.log('Streaming complete:', result)\n      }}\n    />\n  )\n}\n```\n\n## Components\n\n### StreamingMessage\n\nRenders streaming chat messages with real-time updates.\n\n```tsx\nimport { StreamingMessage } from '@v0-sdk/react'\n\nfunction Chat() {\n  return (\n    <StreamingMessage\n      message={streamingData}\n      theme=\"elegant\"\n      className=\"my-message\"\n      onComplete={(result) => {\n        // Handle completion\n      }}\n      onError={(error) => {\n        // Handle errors\n      }}\n    />\n  )\n}\n```\n\n#### Props\n\n* `message` - The streaming message data\n* `theme?` - Visual theme (`elegant`, `minimal`, `neobrutalism`, `terminal`)\n* `className?` - Additional CSS classes\n* `onComplete?` - Callback when streaming completes\n* `onError?` - Callback for error handling\n\n### CodeBlock\n\nSyntax-highlighted code blocks with copy functionality.\n\n```tsx\nimport { CodeBlock } from '@v0-sdk/react'\n\nfunction CodeDisplay() {\n  return (\n    <CodeBlock\n      code={generatedCode}\n      language=\"typescript\"\n      showLineNumbers\n      copyable\n      theme=\"dark\"\n    />\n  )\n}\n```\n\n#### Props\n\n* `code` - The code string to display\n* `language` - Programming language for syntax highlighting\n* `showLineNumbers?` - Display line numbers\n* `copyable?` - Show copy button\n* `theme?` - Color theme for syntax highlighting\n\n### ThinkingSection\n\nDisplays AI thinking process with animated indicators.\n\n```tsx\nimport { ThinkingSection } from '@v0-sdk/react'\n\nfunction AIThinking() {\n  return (\n    <ThinkingSection\n      thoughts={aiThoughts}\n      isVisible={showThinking}\n      animated\n      collapsible\n    />\n  )\n}\n```\n\n#### Props\n\n* `thoughts` - Array of thinking steps\n* `isVisible?` - Control visibility\n* `animated?` - Enable animations\n* `collapsible?` - Allow collapse/expand\n\n### TaskSection\n\nRenders task lists and progress indicators.\n\n```tsx\nimport { TaskSection } from '@v0-sdk/react'\n\nfunction TaskProgress() {\n  return (\n    <TaskSection\n      tasks={taskList}\n      showProgress\n      interactive\n      onTaskComplete={(task) => {\n        // Handle task completion\n      }}\n    />\n  )\n}\n```\n\n#### Props\n\n* `tasks` - Array of task objects\n* `showProgress?` - Display progress bar\n* `interactive?` - Allow user interaction\n* `onTaskComplete?` - Callback for task completion\n\n## Themes\n\n### Built-in Themes\n\n```tsx\n// Elegant - Sophisticated design\n<StreamingMessage message={data} theme=\"elegant\" />\n\n// Minimal - Clean, distraction-free\n<StreamingMessage message={data} theme=\"minimal\" />\n\n// Neobrutalism - Bold, high-contrast\n<StreamingMessage message={data} theme=\"neobrutalism\" />\n\n// Terminal - Developer-focused\n<StreamingMessage message={data} theme=\"terminal\" />\n```\n\n### Custom Themes\n\n```tsx\nconst customTheme = {\n  primary: '#3b82f6',\n  background: '#f8fafc',\n  text: '#1e293b',\n  accent: '#06b6d4',\n  border: '#e2e8f0',\n}\n\n<StreamingMessage\n  message={data}\n  theme={customTheme}\n/>\n```\n\n## Hooks\n\n### useStreamingChat\n\nHook for managing streaming chat state.\n\n```tsx\nimport { useStreamingChat } from '@v0-sdk/react'\n\nfunction ChatApp() {\n  const { messages, sendMessage, isLoading, error, clearMessages } =\n    useStreamingChat({\n      apiKey: process.env.V0_API_KEY,\n      onMessage: (message) => {\n        console.log('New message:', message)\n      },\n    })\n\n  return (\n    <div>\n      {messages.map((message, index) => (\n        <StreamingMessage key={index} message={message} />\n      ))}\n\n      <button onClick={() => sendMessage('Hello!')}>Send Message</button>\n    </div>\n  )\n}\n```\n\n### useCodeHighlight\n\nHook for syntax highlighting with custom themes.\n\n```tsx\nimport { useCodeHighlight } from '@v0-sdk/react'\n\nfunction CustomCodeBlock({ code, language }) {\n  const { highlightedCode, isLoading } = useCodeHighlight({\n    code,\n    language,\n    theme: 'github-dark',\n  })\n\n  if (isLoading) return <div>Loading...</div>\n\n  return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />\n}\n```\n\n## Styling\n\n### CSS Custom Properties\n\n```css\n:root {\n  --v0-primary: #3b82f6;\n  --v0-background: #ffffff;\n  --v0-text: #1e293b;\n  --v0-border: #e2e8f0;\n  --v0-accent: #06b6d4;\n}\n\n.dark {\n  --v0-primary: #60a5fa;\n  --v0-background: #0f172a;\n  --v0-text: #f1f5f9;\n  --v0-border: #334155;\n  --v0-accent: #22d3ee;\n}\n```\n\n### Tailwind CSS Classes\n\nThe components work seamlessly with Tailwind CSS:\n\n```tsx\n<StreamingMessage\n  message={data}\n  className=\"rounded-lg border border-gray-200 p-4 shadow-sm\"\n/>\n```\n\n## TypeScript Support\n\nFull TypeScript support with comprehensive type definitions:\n\n```tsx\nimport type {\n  StreamingMessageProps,\n  CodeBlockProps,\n  ThinkingSectionProps,\n  ChatMessage,\n  StreamingState,\n} from '@v0-sdk/react'\n\ninterface CustomChatProps {\n  messages: ChatMessage[]\n  onSendMessage: (message: string) => void\n}\n\nconst CustomChat: React.FC<CustomChatProps> = ({ messages, onSendMessage }) => {\n  // Component implementation\n}\n```\n\n## Requirements\n\n* React 18+ or React 19+\n* TypeScript 5.0+ (for TypeScript projects)\n\n## Links\n\n* [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/react)\n* [npm Package](https://www.npmjs.com/package/@v0-sdk/react)\n* [React Examples](/docs/api/v1/examples/react-components)\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v1/packages/react",
+  "lastUpdated": "2026-07-30"
+}

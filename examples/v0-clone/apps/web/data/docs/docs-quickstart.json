@@ -1,0 +1,41 @@
+{
+  "id": "docs-quickstart",
+  "slug": "quickstart",
+  "title": "Quickstart",
+  "section": "Getting Started",
+  "category": "Getting Started",
+  "type": "overview",
+  "description": "An overview of v0's features and workflows",
+  "topics": [
+    "design"
+  ],
+  "related": [
+    "text-prompting",
+    "code-editing",
+    "full-stack-apps"
+  ],
+  "requires": [],
+  "headings": [
+    "Prompt: Describe your idea",
+    "Iterate: Refine your application",
+    "Edit the Code",
+    "Design Mode",
+    "Integrate: Connect external services",
+    "Databases",
+    "AI Models",
+    "Payments",
+    "External APIs",
+    "Ship: Publish to production",
+    "Add a custom domain",
+    "Management and collaboration",
+    "Project Settings",
+    "Team collaboration",
+    "Next steps",
+    "Need help?"
+  ],
+  "excerpt": "Welcome to v0! This guide will walk you through v0's main features and workflows.",
+  "snippets": [],
+  "content": "\n\n# Quickstart\n\nWelcome to v0! This guide will walk you through v0's main features and workflows.\n\n1. **Visit [v0.app](https://v0.app)** and sign in\n2. **Start a new chat** or create a project\n3. **Describe your idea** in natural language\n4. **Review the generated app** and iterate as needed\n\n## Prompt: Describe your idea\n\nStart by describing what you want to build in your preferred language. v0 will generate a working application based on your description.\n\nTry these simple prompts to get started:\n\n* **\"A todo app with add, edit, and delete functionality\"**\n* **\"A landing page for a SaaS product with hero section and pricing\"**\n* **\"A dashboard showing user analytics with charts\"**\n* **\"A contact form that sends emails\"**\n\nLearn more about text prompting\n\n## Iterate: Refine your application\n\nOnce v0 generates your initial application, you can iterate and improve it through conversation.\n\n### Edit the Code\n\n1. **Switch to Code view** by selecting the **Code** tab in the preview toolbar\n2. **Make direct edits** to the generated code\n3. **Ask for changes** in natural language: \"Add a search bar to the product list\"\n\nLearn more about code editing\n\n### Design Mode\n\n1. **Open Design mode** by selecting the **Design** tab in the preview toolbar\n2. **Select elements** in the preview to tweak their styles visually or with natural-language instructions\n3. **Click Apply** to commit your edits back to your source code as a new chat version\n\nLearn more about design mode\n\n## Integrate: Connect external services\n\nAdd real functionality to your application by integrating with databases, APIs, and external services.\n\nOpen **Project menu** `...` → **Settings** → **Integrations** to install integrations, or prompt v0 directly: \"Connect a database to my app\".\n\n### Databases\n\nInstall database integrations from **Project menu** `...` → **Settings** → **Integrations**:\n\n* **Neon** - Serverless PostgreSQL\n* **Supabase** - PostgreSQL with auth and realtime\n* **Upstash for Redis** - Serverless Redis\n* **Blob** - File storage\n\nLearn more about database integrations\n\n### AI Models\n\nv0 includes [Vercel AI Gateway](https://vercel.com/ai-gateway) integration, which automatically configures your API key using your Vercel account. This gives you access to hundreds of AI models through a single endpoint.\n\nInstall AI providers from **Project menu** `...` → **Settings** → **Integrations** with one click:\n\n* **Grok** - xAI models\n* **fal** - Image generation\n* **Deep Infra** - Open source models\n\nYou can also use other third-party providers like OpenAI or Anthropic by prompting v0 and adding your API keys in **Vars**.\n\nLearn more about AI integrations\n\n### Payments\n\nAdd payment processing to your application:\n\n* **Stripe** - Accept payments and manage subscriptions\n\n### External APIs\n\n1. **Describe the integration**: \"Connect to Twilio for SMS notifications\"\n2. **v0 will generate** the necessary API calls and error handling\n3. **The integration wizard** will prompt you to add your API keys after generation\n4. **To edit or add keys manually**, open **Project menu** `...` → **Settings** → **Environment Variables**.\n\nLearn more about API integrations\n\n## Ship: Publish to production\n\nPublish your application with Vercel from the **Publish** control in the chat header.\n\nOn the first publish:\n\n1. Select **Publish**.\n2. Confirm the Vercel project name if v0 needs to create one.\n3. Choose the deployment visibility and domain.\n4. If **Commerce mode** appears, review any unclaimed Stripe test sandbox or Shopify development store.\n5. Select **Publish** and wait for the production deployment.\n\nAfter more changes, open **Publish** and select **Publish Changes** to update the same production URL. If the project is connected to GitHub, v0 creates or reuses a pull request, merges it into the base branch, and deploys the result while respecting repository rules.\n\nLearn more about deployments\n\n### Add a custom domain\n\nAdd a custom domain directly from v0:\n\n* **On first publish**: Select a domain in the **Domains** step\n* **From Settings**: Click **Project menu** `...` → **Settings** → **Domains**\n\nCustomize your default domain (your-domain.vercel.app) or connect a custom domain. You can also purchase domains via [Vercel Domains](https://vercel.com/domains).\n\nLearn more about custom domains\n\n## Management and collaboration\n\nManage your projects and collaborate with your team.\n\n### Project Settings\n\nUse **Project menu** `...` → **Settings** to manage your project:\n\n* **Vercel Project** - View your connected Vercel project and manage the visibility of Production deployments.\n* **Integrations** - Connect and manage your project's integrations.\n* **Environment Variables** - Manage your environment variables from Vercel.\n* **GitHub** - Create a GitHub repository for your project.\n* **Template** - Publish your project as a template.\n* **Domains** - Manage your project's domains.\n* **Analytics** - Enable Vercel analytics for project traffic insights.\n\nNote that project settings are shared between all chats under the same project.\n\nLearn more about projects\n\n### Team collaboration\n\nUse the **Invite** button in the chat header to open collaboration settings where you can:\n\n* **Invite** individual team members.\n* **Manage** team members' view and edit permissions.\n* **Share** your chat with your team or anyone else.\n\nLearn more about teams\n\nLearn more about pricing\n\n## Next steps\n\nNow that you understand the basics, try [building a simple app](https://v0.app) or explore the [community templates](https://v0.app/templates).\n\n## Need help?\n\n* **Community Forum**: Ask questions in the [community forum](https://community.vercel.com/tag/v0)\n* **Vercel Support**: Contact support at [vercel.com/help](https://vercel.com/help)\n* **X Community**: Join the [v0 community on X](https://x.com/i/communities/1863294272687980838)\n\nReady to start building?\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/quickstart",
+  "lastUpdated": "2026-09-02"
+}

@@ -49,4 +49,8 @@ export {
   Robot as AgentIcon,
   Star as StarIcon,
   StarFill as StarFillIcon,
+  FolderOpen as FolderOpenIcon,
+  FolderClosed as FolderClosedIcon,
+  FolderPlus as FolderPlusIcon,
+  FolderMinus as FolderMinusIcon,
 } from 'geist-icons'

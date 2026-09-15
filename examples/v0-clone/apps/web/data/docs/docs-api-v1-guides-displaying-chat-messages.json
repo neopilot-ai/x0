@@ -1,0 +1,85 @@
+{
+  "id": "docs-api-v1-guides-displaying-chat-messages",
+  "slug": "api/v1/guides/displaying-chat-messages",
+  "title": "Displaying Chat Messages",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "guide",
+  "description": "Learn how to render and format chat messages from the v0 API using @v0-sdk/react",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "api/v1/packages/react"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Installation",
+    "Quick Start",
+    "Basic Message Component",
+    "Fetching and Parsing Messages",
+    "Message Binary Format",
+    "Customizing Message Rendering",
+    "Using Custom Components",
+    "Custom Code Block Component",
+    "Custom Math Component",
+    "Complete Chat Interface",
+    "Streaming Messages",
+    "Headless Streaming Hook",
+    "Best Practices",
+    "1. Performance Optimization",
+    "2. Error Handling",
+    "3. Accessibility",
+    "4. Theme Support",
+    "Utilities",
+    "Time Formatting",
+    "Message Processing",
+    "Custom Hook for Message Management",
+    "Headless Architecture",
+    "Using Headless Hooks",
+    "Available Hooks",
+    "Next Steps"
+  ],
+  "excerpt": "Learn how to properly render chat messages from the v0 API using the **@v0-sdk/react** headless React library. This guide covers handling different message types, implementing streaming updates, and customizing message rendering.",
+  "snippets": [
+    {
+      "language": "bash",
+      "code": "npm install @v0-sdk/react v0-sdk\n# For math rendering support\nnpm install katex"
+    },
+    {
+      "language": "tsx",
+      "code": "// In your layout or main CSS file\nimport 'katex/dist/katex.min.css'"
+    },
+    {
+      "language": "tsx",
+      "code": "import { Message } from '@v0-sdk/react'\n\nfunction ChatMessage({ message }) {\n  return (\n    <Message\n      content={message.content} // Parsed MessageBinaryFormat from API\n      messageId={message.id}\n      role={message.role}\n      className=\"space-y-4\"\n    />\n  )\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0-sdk'\n\n// Get all messages from a chat using the default client\nconst messages = await v0.chats.findMessages({\n  chatId: 'your-chat-id',\n})\n\n// Parse the content for rendering\nconst parsedMessages = messages.data.map((msg) => ({\n  ...msg,\n  content: JSON.parse(msg.content), // Convert to MessageBinaryFormat\n}))"
+    },
+    {
+      "language": "typescript",
+      "code": "import { createClient } from 'v0-sdk'\n\nconst client = createClient({\n  apiKey: process.env.V0_API_KEY,\n  baseUrl: process.env.V0_API_URL, // optional custom base URL\n})\n\nconst messages = await client.chats.findMessages({\n  chatId: 'your-chat-id',\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "type MessageBinaryFormat = [number, ...any[]][]\n\n// Example structure:\n[\n  [0, [  // Type 0 = markdown/content data\n    ['p', {}, 'Hello world'],\n    ['h1', {}, 'Title'],\n    ['Codeblock', { lang: 'tsx' }, 'const x = 1']\n  ]],\n  [1, { context: [...] }],  // Type 1 = metadata\n  [2, 'x = \\\\frac{-b}{2a}'], // Type 2 = inline math\n  [3, 'e^{i\\\\pi} + 1 = 0']   // Type 3 = block math\n]"
+    },
+    {
+      "language": "tsx",
+      "code": "import { Message, CodeBlock, MathPart } from '@v0-sdk/react'\n\nfunction CustomChatMessage({ message }) {\n  return (\n    <Message\n      content={message.content}\n      messageId={message.id}\n      role={message.role}\n      className=\"space-y-4\"\n      components={{\n        // Custom component renderers\n        CodeBlock: MyCustomCodeBlock,\n        MathPart: MyCustomMathRenderer,\n        ThinkingSection: MyCustomThinkingSection,\n        TaskSection: MyCustomTaskSection,\n\n        // HTML element styling with className objects\n        p: { className: 'mb-4 text-gray-800 leading-relaxed' },\n        h1: { className: 'text-2xl font-bold text-gray-900 mb-4' },\n        h2: { className: 'text-xl font-semibold text-gray-900 mb-3' },\n        ul: { className: 'list-disc list-inside space-y-1 mb-4' },\n        code: { className: 'bg-gray-100 px-2 py-1 rounded text-sm' },\n        a: { className: 'text-blue-600 hover:text-blue-800 underline' },\n      }}\n    />\n  )\n}"
+    },
+    {
+      "language": "tsx",
+      "code": "import { useState } from 'react'\nimport { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'\nimport { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'\n\nfunction MyCustomCodeBlock({\n  language,\n  code,\n  className,\n}: {\n  language: string\n  code: string\n  className?: string\n}) {\n  const [copied, setCopied] = useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  return (\n    <div className={`relative rounded-lg overflow-hidden ${className}`}>\n      <div className=\"flex items-center justify-between bg-gray-800 px-4 py-2 text-sm text-gray-300\">\n        <span className=\"font-mono\">{language}</span>\n        <button\n          onClick={handleCopy}\n          className=\"hover:text-white transition-colors px-2 py-1 rounded\"\n        >\n          {copied ? '✓ Copied!' : 'Copy'}\n        </button>\n      </div>\n      <SyntaxHighlighter\n        language={language}\n        style={vscDarkPlus}\n        customStyle={{ margin: 0 }}\n        showLineNumbers\n      >\n        {code}\n      </SyntaxHighlighter>\n    </div>\n  )\n}"
+    }
+  ],
+  "content": "\n\n# Displaying Chat Messages\n\nLearn how to properly render chat messages from the v0 API using the **@v0-sdk/react** headless React library. This guide covers handling different message types, implementing streaming updates, and customizing message rendering.\n\n## Overview\n\nThe **@v0-sdk/react** library provides headless React components and hooks for rendering rich chat messages from the v0 API. It handles complex message formats including:\n\n* **Text content** - Plain text and markdown with custom styling\n* **Code blocks** - Syntax-highlighted code snippets with copy functionality\n* **Code projects** - Multi-file code projects with collapsible sections\n* **Math expressions** - LaTeX math rendering (inline and block)\n* **Thinking sections** - AI reasoning process with animated indicators\n* **Task sections** - Task execution steps with status tracking\n* **Streaming content** - Real-time message updates with loading states\n\n## Installation\n\nFirst, install the required packages:\n\n```bash\nnpm install @v0-sdk/react v0-sdk\n# For math rendering support\nnpm install katex\n```\n\nImport the required CSS in your app:\n\n```tsx\n// In your layout or main CSS file\nimport 'katex/dist/katex.min.css'\n```\n\n## Quick Start\n\n### Basic Message Component\n\nThe simplest way to render a message is using the `Message` component:\n\n```tsx\nimport { Message } from '@v0-sdk/react'\n\nfunction ChatMessage({ message }) {\n  return (\n    <Message\n      content={message.content} // Parsed MessageBinaryFormat from API\n      messageId={message.id}\n      role={message.role}\n      className=\"space-y-4\"\n    />\n  )\n}\n```\n\n### Fetching and Parsing Messages\n\nFirst, retrieve messages from a chat and parse the content:\n\n```typescript\nimport { v0 } from 'v0-sdk'\n\n// Get all messages from a chat using the default client\nconst messages = await v0.chats.findMessages({\n  chatId: 'your-chat-id',\n})\n\n// Parse the content for rendering\nconst parsedMessages = messages.data.map((msg) => ({\n  ...msg,\n  content: JSON.parse(msg.content), // Convert to MessageBinaryFormat\n}))\n```\n\nIf you need custom configuration (API key, base URL, etc.), use `createClient`:\n\n```typescript\nimport { createClient } from 'v0-sdk'\n\nconst client = createClient({\n  apiKey: process.env.V0_API_KEY,\n  baseUrl: process.env.V0_API_URL, // optional custom base URL\n})\n\nconst messages = await client.chats.findMessages({\n  chatId: 'your-chat-id',\n})\n```\n\n### Message Binary Format\n\nThe v0 API returns messages in a special binary format that encodes rich content:\n\n```typescript\ntype MessageBinaryFormat = [number, ...any[]][]\n\n// Example structure:\n[\n  [0, [  // Type 0 = markdown/content data\n    ['p', {}, 'Hello world'],\n    ['h1', {}, 'Title'],\n    ['Codeblock', { lang: 'tsx' }, 'const x = 1']\n  ]],\n  [1, { context: [...] }],  // Type 1 = metadata\n  [2, 'x = \\\\frac{-b}{2a}'], // Type 2 = inline math\n  [3, 'e^{i\\\\pi} + 1 = 0']   // Type 3 = block math\n]\n```\n\n## Customizing Message Rendering\n\n### Using Custom Components\n\nThe `Message` component accepts a `components` prop to customize how different elements are rendered:\n\n```tsx\nimport { Message, CodeBlock, MathPart } from '@v0-sdk/react'\n\nfunction CustomChatMessage({ message }) {\n  return (\n    <Message\n      content={message.content}\n      messageId={message.id}\n      role={message.role}\n      className=\"space-y-4\"\n      components={{\n        // Custom component renderers\n        CodeBlock: MyCustomCodeBlock,\n        MathPart: MyCustomMathRenderer,\n        ThinkingSection: MyCustomThinkingSection,\n        TaskSection: MyCustomTaskSection,\n\n        // HTML element styling with className objects\n        p: { className: 'mb-4 text-gray-800 leading-relaxed' },\n        h1: { className: 'text-2xl font-bold text-gray-900 mb-4' },\n        h2: { className: 'text-xl font-semibold text-gray-900 mb-3' },\n        ul: { className: 'list-disc list-inside space-y-1 mb-4' },\n        code: { className: 'bg-gray-100 px-2 py-1 rounded text-sm' },\n        a: { className: 'text-blue-600 hover:text-blue-800 underline' },\n      }}\n    />\n  )\n}\n```\n\n### Custom Code Block Component\n\nCreate a custom code block with additional features:\n\n```tsx\nimport { useState } from 'react'\nimport { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'\nimport { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'\n\nfunction MyCustomCodeBlock({\n  language,\n  code,\n  className,\n}: {\n  language: string\n  code: string\n  className?: string\n}) {\n  const [copied, setCopied] = useState(false)\n\n  const handleCopy = async () => {\n    await navigator.clipboard.writeText(code)\n    setCopied(true)\n    setTimeout(() => setCopied(false), 2000)\n  }\n\n  return (\n    <div className={`relative rounded-lg overflow-hidden ${className}`}>\n      <div className=\"flex items-center justify-between bg-gray-800 px-4 py-2 text-sm text-gray-300\">\n        <span className=\"font-mono\">{language}</span>\n        <button\n          onClick={handleCopy}\n          className=\"hover:text-white transition-colors px-2 py-1 rounded\"\n        >\n          {copied ? '✓ Copied!' : 'Copy'}\n        </button>\n      </div>\n      <SyntaxHighlighter\n        language={language}\n        style={vscDarkPlus}\n        customStyle={{ margin: 0 }}\n        showLineNumbers\n      >\n        {code}\n      </SyntaxHighlighter>\n    </div>\n  )\n}\n```\n\n### Custom Math Component\n\nCustomize math rendering with additional styling:\n\n```tsx\nimport 'katex/dist/katex.min.css'\n\nfunction MyCustomMathRenderer({\n  content,\n  inline = false,\n  className,\n}: {\n  content: string\n  inline?: boolean\n  className?: string\n}) {\n  // Use KaTeX or your preferred math renderer\n  const katex = require('katex')\n\n  const html = katex.renderToString(content, {\n    displayMode: !inline,\n    throwOnError: false,\n  })\n\n  return (\n    <span\n      className={`${inline ? 'inline-math' : 'block-math'} ${className}`}\n      dangerouslySetInnerHTML={{ __html: html }}\n    />\n  )\n}\n```\n\n## Complete Chat Interface\n\nHere's a complete chat interface using @v0-sdk/react:\n\n```tsx\nimport { Message } from '@v0-sdk/react'\nimport { formatTime } from '@/lib/utils'\n\nfunction ChatInterface({ messages }) {\n  return (\n    <div className=\"max-w-4xl mx-auto space-y-6 p-4\">\n      {messages.map((message) => (\n        <ChatMessage key={message.id} message={message} />\n      ))}\n    </div>\n  )\n}\n\nfunction ChatMessage({ message }) {\n  const isUser = message.role === 'user'\n\n  return (\n    <div className={`flex gap-4 ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>\n      {/* Avatar */}\n      <div\n        className={`\n        w-8 h-8 rounded-full flex items-center justify-center text-white font-semibold flex-shrink-0\n        ${isUser ? 'bg-blue-600' : 'bg-purple-600'}\n      `}\n      >\n        {isUser ? 'U' : 'AI'}\n      </div>\n\n      {/* Message bubble */}\n      <div\n        className={`\n        flex-1 max-w-[80%] rounded-2xl px-4 py-3\n        ${\n          isUser\n            ? 'bg-blue-600 text-white ml-12'\n            : 'bg-gray-100 text-gray-900 mr-12'\n        }\n      `",
+  "sourceUrl": "https://v0.app/docs/api/v1/guides/displaying-chat-messages",
+  "lastUpdated": "2026-09-11"
+}

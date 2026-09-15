@@ -1,0 +1,89 @@
+{
+  "id": "docs-api-v1-adapters-ai-tools",
+  "slug": "api/v1/adapters/ai-tools",
+  "title": "AI Tools",
+  "section": "API Reference",
+  "category": "API · V1",
+  "type": "integration",
+  "description": "Integrate v0 API with AI SDK to build autonomous agents and intelligent workflows",
+  "topics": [
+    "design",
+    "api",
+    "agents",
+    "permissions",
+    "integrations"
+  ],
+  "related": [
+    "api/v1/packages/ai-tools"
+  ],
+  "requires": [
+    "api/v1/quickstart"
+  ],
+  "headings": [
+    "Overview",
+    "Supported AI Frameworks",
+    "AI SDK (Vercel)",
+    "LangChain",
+    "OpenAI Functions",
+    "Installation",
+    "Configuration",
+    "Environment Variables",
+    "Tool Categories",
+    "Agent Patterns",
+    "Project Creation Agent",
+    "Development Workflow Agent",
+    "Deployment Management Agent",
+    "Advanced Workflows",
+    "Multi-Agent Collaboration",
+    "Conditional Logic",
+    "Error Recovery",
+    "Best Practices",
+    "1. Use Selective Tools",
+    "2. Set Execution Limits",
+    "3. Handle Errors Gracefully",
+    "4. Monitor Usage",
+    "Troubleshooting",
+    "Common Issues",
+    "Examples",
+    "Requirements",
+    "Links"
+  ],
+  "excerpt": "The AI Tools adapter enables AI agents to interact with the v0 API through the AI SDK, allowing for autonomous workflows, intelligent code generation, and automated project management.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { generateText } from 'ai'\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a React dashboard with charts',\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "import { ChatOpenAI } from 'langchain/chat_models/openai'\nimport { V0Tools } from '@v0-sdk/langchain-tools'\n\nconst model = new ChatOpenAI({\n  modelName: 'gpt-4o-mini',\n})\n\nconst tools = new V0Tools({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst agent = createReactAgent({\n  llm: model,\n  tools: tools.getTools(),\n})"
+    },
+    {
+      "language": "typescript",
+      "code": "import OpenAI from 'openai'\nimport { v0FunctionDefinitions } from '@v0-sdk/openai-functions'\n\nconst openai = new OpenAI()\n\nconst response = await openai.chat.completions.create({\n  model: 'gpt-4o-mini',\n  messages: [\n    {\n      role: 'user',\n      content: 'Build a todo app with React and deploy it',\n    },\n  ],\n  functions: v0FunctionDefinitions,\n  function_call: 'auto',\n})"
+    },
+    {
+      "language": "bash",
+      "code": "npm install @v0-sdk/ai-tools ai\n# or\npnpm add @v0-sdk/ai-tools ai"
+    },
+    {
+      "language": "bash",
+      "code": "# LangChain integration\nnpm install @v0-sdk/langchain-tools langchain\n\n# OpenAI Functions\nnpm install @v0-sdk/openai-functions openai"
+    },
+    {
+      "language": "bash",
+      "code": "V0_API_KEY=your_v0_api_key_here\nOPENAI_API_KEY=your_openai_api_key_here\n# or\nANTHROPIC_API_KEY=your_anthropic_api_key_here"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst tools = v0ToolsByCategory({\n  apiKey: process.env.V0_API_KEY,\n})\n\n// Use specific categories\nconst projectAndChatTools = {\n  ...tools.project,\n  ...tools.chat,\n}"
+    },
+    {
+      "language": "typescript",
+      "code": "const projectAgent = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `\n    Create a new project for a React e-commerce website.\n    The project should include:\n    - Product catalog\n    - Shopping cart\n    - Checkout process\n    - User authentication\n  `,\n  tools: {\n    ...tools.project,\n    ...tools.chat,\n  },\n})"
+    }
+  ],
+  "content": "\n\n# AI Tools\n\nThe AI Tools adapter enables AI agents to interact with the v0 API through the AI SDK, allowing for autonomous workflows, intelligent code generation, and automated project management.\n\n## Overview\n\nThe AI Tools adapter provides:\n\n* **Autonomous Agents**: AI agents that can independently manage v0 projects\n* **Intelligent Workflows**: Multi-step processes with AI decision-making\n* **Tool Integration**: Seamless integration with popular AI frameworks\n* **Context-Aware Operations**: AI agents understand project context and requirements\n\n## Supported AI Frameworks\n\n### AI SDK (Vercel)\n\nThe primary integration for building AI agents with v0 capabilities:\n\n```typescript\nimport { generateText } from 'ai'\nimport { v0Tools } from '@v0-sdk/ai-tools'\n\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a React dashboard with charts',\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n})\n```\n\n### LangChain\n\nIntegration with LangChain for complex agent workflows:\n\n```typescript\nimport { ChatOpenAI } from 'langchain/chat_models/openai'\nimport { V0Tools } from '@v0-sdk/langchain-tools'\n\nconst model = new ChatOpenAI({\n  modelName: 'gpt-4o-mini',\n})\n\nconst tools = new V0Tools({\n  apiKey: process.env.V0_API_KEY,\n})\n\nconst agent = createReactAgent({\n  llm: model,\n  tools: tools.getTools(),\n})\n```\n\n### OpenAI Functions\n\nDirect integration with OpenAI's function calling:\n\n```typescript\nimport OpenAI from 'openai'\nimport { v0FunctionDefinitions } from '@v0-sdk/openai-functions'\n\nconst openai = new OpenAI()\n\nconst response = await openai.chat.completions.create({\n  model: 'gpt-4o-mini',\n  messages: [\n    {\n      role: 'user',\n      content: 'Build a todo app with React and deploy it',\n    },\n  ],\n  functions: v0FunctionDefinitions,\n  function_call: 'auto',\n})\n```\n\n## Installation\n\n```bash\nnpm install @v0-sdk/ai-tools ai\n# or\npnpm add @v0-sdk/ai-tools ai\n```\n\nFor specific frameworks:\n\n```bash\n# LangChain integration\nnpm install @v0-sdk/langchain-tools langchain\n\n# OpenAI Functions\nnpm install @v0-sdk/openai-functions openai\n```\n\n## Configuration\n\n### Environment Variables\n\n```bash\nV0_API_KEY=your_v0_api_key_here\nOPENAI_API_KEY=your_openai_api_key_here\n# or\nANTHROPIC_API_KEY=your_anthropic_api_key_here\n```\n\n### Tool Categories\n\nChoose specific tool categories for better performance:\n\n```typescript\nimport { v0ToolsByCategory } from '@v0-sdk/ai-tools'\n\nconst tools = v0ToolsByCategory({\n  apiKey: process.env.V0_API_KEY,\n})\n\n// Use specific categories\nconst projectAndChatTools = {\n  ...tools.project,\n  ...tools.chat,\n}\n```\n\n## Agent Patterns\n\n### Project Creation Agent\n\n```typescript\nconst projectAgent = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `\n    Create a new project for a React e-commerce website.\n    The project should include:\n    - Product catalog\n    - Shopping cart\n    - Checkout process\n    - User authentication\n  `,\n  tools: {\n    ...tools.project,\n    ...tools.chat,\n  },\n})\n```\n\n### Development Workflow Agent\n\n```typescript\nconst developmentAgent = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `\n    I need to:\n    1. Create a new project\n    2. Start a development chat\n    3. Build the initial components\n    4. Deploy when ready\n\n    Project: Personal portfolio website with blog\n  `,\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n  stopWhen: stepCountIs(10),\n})\n```\n\n### Deployment Management Agent\n\n```typescript\nconst deploymentAgent = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Deploy project xyz123 and monitor its status',\n  tools: {\n    ...tools.deployment,\n    ...tools.project,\n  },\n})\n```\n\n## Advanced Workflows\n\n### Multi-Agent Collaboration\n\n```typescript\n// Project Manager Agent\nconst projectManager = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Plan and create a new SaaS dashboard project',\n  tools: tools.project,\n})\n\n// Development Agent\nconst developer = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `Build the dashboard components for project ${projectId}`,\n  tools: tools.chat,\n})\n\n// DevOps Agent\nconst devops = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `Deploy and monitor project ${projectId}`,\n  tools: tools.deployment,\n})\n```\n\n### Conditional Logic\n\n```typescript\nconst smartAgent = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: `\n    Check if project \"my-app\" exists.\n    If it exists, add a new feature.\n    If it doesn't exist, create it first.\n  `,\n  tools: v0Tools({\n    apiKey: process.env.V0_API_KEY,\n  }),\n})\n```\n\n### Error Recovery\n\n```typescript\ntry {\n  const result = await generateText({\n    model: openai('gpt-4o-mini'),\n    prompt: 'Deploy the latest version of my project',\n    tools: tools.deployment,\n  })\n} catch (error) {\n  // Retry with error context\n  const recovery = await generateText({\n    model: openai('gpt-4o-mini'),\n    prompt: `\n      Previous deployment failed with error: ${error.message}\n      Please diagnose and fix the issue, then retry deployment.\n    `,\n    tools: {\n      ...tools.deployment,\n      ...tools.project,\n    },\n  })\n}\n```\n\n## Best Practices\n\n### 1. Use Selective Tools\n\nOnly include the tool categories you need:\n\n```typescript\n// Good: Specific tools for the task\nconst tools = {\n  ...toolsByCategory.project,\n  ...toolsByCategory.chat,\n}\n\n// Avoid: All tools (high context overhead)\nconst allTools = v0Tools({ apiKey })\n```\n\n### 2. Set Execution Limits\n\nControl agent execution with step limits:\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Build and deploy a complete app',\n  tools: v0Tools({ apiKey }),\n  stopWhen: stepCountIs(15), // Prevent infinite loops\n})\n```\n\n### 3. Handle Errors Gracefully\n\n```typescript\nconst result = await generateText({\n  model: openai('gpt-4o-mini'),\n  prompt: 'Create a project',\n  tools: tools.project,\n  onError: (error) => {\n    console.error('Agent error:', error)\n    // Implement recovery logic\n  },\n})\n```\n\n### 4. Monitor Usage\n\nTrack API calls and costs:\n\n```typescript\nlet apiCallCount = 0\n\nconst monitoredTools = v0Tools({\n  apiKey: process.env.V0_API_KEY,\n  onApiCall: (endpoint, cost) => {\n    apiCallCount++\n    console.log(`API call ${apiCallCount}: ${endpoint} (cost: ${cost})`)\n  },\n})\n```\n\n## Troubleshooting\n\n### Common Issues\n\n**\"Tool not found\"**\n\n* Ensure you're using the correct tool category\n* Check that the tool is included in your tools object\n\n**\"Rate limit exceeded\"**\n\n* Implement delays between API calls\n* Use selective tools to reduce call frequency\n\n**\"Invalid API key\"**\n\n* Verify your v0 API key is correctly set\n* Check API key permissions and scope\n\n**\"Agent stuck in loop\"**\n\n* Use `stopWhen` conditions to limit execution\n* Add explicit termination criteria in prompts\n\n## Examples\n\nSee the complete [AI Tools Example](/docs/api/v1/examples/ai-tools) for detailed implementation examples and agent patterns.\n\n## Requirements\n\n* Node.js 22+\n* AI ",
+  "sourceUrl": "https://v0.app/docs/api/v1/adapters/ai-tools",
+  "lastUpdated": "2026-07-30"
+}

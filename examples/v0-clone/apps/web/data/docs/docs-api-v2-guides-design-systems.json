@@ -1,0 +1,38 @@
+{
+  "id": "docs-api-v2-guides-design-systems",
+  "slug": "api/v2/guides/design-systems",
+  "title": "Design Systems",
+  "section": "API Reference",
+  "category": "API · V2",
+  "type": "guide",
+  "description": "Learn how to use design system skills with the v0 API v2",
+  "topics": [
+    "design",
+    "api"
+  ],
+  "related": [
+    "design-systems-2",
+    "api/v2/reference/chats/create-chat",
+    "api/v2/reference/messages/send-message"
+  ],
+  "requires": [],
+  "headings": [
+    "Use a design system skill",
+    "Update a design system skill",
+    "How skills work"
+  ],
+  "excerpt": "Design systems work like other skills in the v0 API. You can mention one in a prompt and let the agent decide when it is relevant, or pass it in the skills field to make v0 load it for a request.",
+  "snippets": [
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst result = await v0.chats.create({\n  message: 'Build an analytics dashboard with filters and charts.',\n  skills: [\n    {\n      type: 'memory',\n      scope: 'team',\n      skillName: 'acme-ui',\n    },\n  ],\n})\n\nif (result.error) throw new Error(result.error.message)\n\nconsole.log('Created chat:', result.data.chat.id)"
+    },
+    {
+      "language": "typescript",
+      "code": "import { v0 } from 'v0'\n\nconst result = await v0.messages.send({\n  chatId: 'chat_abc123',\n  message: `Update Acme UI to v2.3.\n\nRelease notes: https://acme.example.com/ui/releases/v2.3\nMigration guide: https://acme.example.com/ui/migrate-to-v2.3\nThe Button component renamed its type prop to variant.`,\n  skills: [\n    {\n      type: 'memory',\n      scope: 'team',\n      skillName: 'acme-ui',\n    },\n  ],\n})\n\nif (result.error) throw new Error(result.error.message)"
+    }
+  ],
+  "content": "\n\n# Design Systems\n\nDesign systems work like other skills in the v0 API. You can mention one in a prompt and let the agent decide when it is relevant, or pass it in the `skills` field to make v0 load it for a request.\n\nDesign systems created with [Design Systems 2.0](/docs/design-systems-2) are saved as skills in your team or personal scope. They teach v0 about your components, props, tokens, setup, and starter app.\n\n## Use a design system skill\n\nAttach a saved design system when creating a chat so v0 can load its instructions and apply any starter setup before building the app:\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.chats.create({\n  message: 'Build an analytics dashboard with filters and charts.',\n  skills: [\n    {\n      type: 'memory',\n      scope: 'team',\n      skillName: 'acme-ui',\n    },\n  ],\n})\n\nif (result.error) throw new Error(result.error.message)\n\nconsole.log('Created chat:', result.data.chat.id)\n```\n\nDesign Systems 2.0 saves design systems as `memory` skills. Most API integrations use team-scoped skills, so `scope: 'team'` is the usual choice. Replace `acme-ui` with the saved skill's slug and use an API key that can access the team.\n\n`scope: 'user'` is also supported for a design system saved to a personal workspace, though this is less common for API integrations.\n\nThe same `skills` shape can be passed to `v0.messages.send()` when applying a design system skill to an existing chat.\n\n## Update a design system skill\n\nAsk v0 to update a saved design system skill in any chat. Pass the skill in `skills` so the agent loads the exact design system to edit, and include the new package version, updated GitHub sources, release notes, migration guide, and any breaking changes:\n\n```typescript\nimport { v0 } from 'v0'\n\nconst result = await v0.messages.send({\n  chatId: 'chat_abc123',\n  message: `Update Acme UI to v2.3.\n\nRelease notes: https://acme.example.com/ui/releases/v2.3\nMigration guide: https://acme.example.com/ui/migrate-to-v2.3\nThe Button component renamed its type prop to variant.`,\n  skills: [\n    {\n      type: 'memory',\n      scope: 'team',\n      skillName: 'acme-ui',\n    },\n  ],\n})\n\nif (result.error) throw new Error(result.error.message)\n```\n\nv0 updates the saved skill and re-checks its starter app so the change does not introduce a regression. The API key must have permission to edit the skill in its team or personal scope.\n\nUpdating the skill does not change existing projects. To bring an existing project up to date, continue its chat with the updated skill and describe the migration you want v0 to make.\n\nSee [Keep a design system up to date](/docs/design-systems-2#keep-a-design-system-up-to-date) for the complete Design Systems 2.0 workflow.\n\n## How skills work\n\nPass up to three skills when you [create a chat](/docs/api/v2/reference/chats/create-chat) or [send a message](/docs/api/v2/reference/messages/send-message). Passing a skill in `skills` loads it for that request instead of asking the agent to decide whether it is relevant.\n\nEach entry identifies where v0 should find the skill:\n\n| Type      | Shape                                  | Use                                                                           |\n| --------- | -------------------------------------- | ----------------------------------------------------------------------------- |\n| `memory`  | `` | A skill saved in team or personal memory, including Design Systems 2.0 skills |\n| `remote`  | ``               | A public skill from [skills.sh](https://skills.sh)                            |\n| `project` | ``       | A skill defined in the repository connected to the chat                       |\n\nSkills are not supported when authenticating with a Vercel OIDC project principal. Use a v0 API key scoped to the user or team that owns the skill.\n\nIf strict enforcement is not needed, omit `skills` and mention the design system in `message`. The agent can discover a matching skill in the current scope when relevant, but mentioning it does not force that skill to load.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/api/v2/guides/design-systems",
+  "lastUpdated": "2026-07-30"
+}

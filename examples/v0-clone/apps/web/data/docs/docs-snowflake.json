@@ -1,0 +1,64 @@
+{
+  "id": "docs-snowflake",
+  "slug": "snowflake",
+  "title": "Snowflake",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Connect v0 to Snowflake to build apps and dashboards with your warehouse data, query Snowflake, and deploy apps to Snowflake.",
+  "topics": [
+    "mcp",
+    "databases",
+    "deployment",
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "databases",
+    "deployments",
+    "MCP"
+  ],
+  "requires": [
+    "quickstart",
+    "databases"
+  ],
+  "headings": [
+    "Step 1: Prepare your Snowflake account",
+    "Enable App Runtime",
+    "Grant roles access to the Vercel integration",
+    "Step 2: Add Snowflake to your v0 team",
+    "Step 3: Connect your Snowflake user",
+    "Step 4: Build with Snowflake data",
+    "Explore tables and run SQL",
+    "Generate application code",
+    "Step 5: Deploy to Snowflake",
+    "Troubleshooting",
+    "Snowflake is not available",
+    "I cannot see the tables I expected",
+    "A teammate cannot preview my Snowflake app",
+    "Deployment keeps failing during build",
+    "Deployment fails after a Snowflake role change"
+  ],
+  "excerpt": "The Snowflake integration is currently in **beta**. A team owner must configure a Snowflake account for your v0 team before members can connect.",
+  "snippets": [
+    {
+      "language": "txt",
+      "code": "Inspect my Snowflake schemas and show me which tables look useful for a revenue dashboard."
+    },
+    {
+      "language": "txt",
+      "code": "Build an analytics dashboard from Snowflake. First inspect the table schemas and sample rows, then use the confirmed columns."
+    },
+    {
+      "language": "txt",
+      "code": "Create a report from MY_DATABASE.PUBLIC.ORDERS grouped by week. Validate the columns before writing the query."
+    },
+    {
+      "language": "txt",
+      "code": "My app is having an issue with deploying to Snowflake.\nUse \"snow app events\" to check for issues on the Snowflake deployment.\nMake changes needed to deploy the application."
+    }
+  ],
+  "content": "\n\n# Snowflake\n\nThe Snowflake integration is currently in **beta**. A team owner must configure a Snowflake account for your v0 team before members can connect.\n\nThe Snowflake integration lets you build data apps with the data your Snowflake role can access. After you connect Snowflake, v0 can inspect schemas, query tables, generate dashboards or reports, preview connected apps, and deploy apps to Snowflake.\n\n## Step 1: Prepare your Snowflake account\n\nBefore your team can connect v0 or deploy apps to Snowflake, a Snowflake account admin must enable the Snowflake App Runtime and grant the Vercel integration access to the roles that will use it.\n\n### Enable App Runtime\n\n1. In Snowsight, select your name in the lower-left corner, then **Settings**.\n2. Under **Account**, select **Apps**.\n3. If the page shows **App development is not set up**, click **Begin Setup** and complete the setup flow.\n\nAlternatively, see [Snowflake App Runtime account admin setup](https://docs.snowflake.com/en/developer-guide/snowflake-app-runtime/account-admin-setup) for full details.\n\n### Grant roles access to the Vercel integration\n\nThis step determines who on your team can use the v0 Snowflake integration. Only Snowflake users with one of the permitted roles will be able to connect. After enabling the App Runtime, the **Apps** page shows a **Defaults** tab where you can configure the destination database, schema, query warehouse, and which roles have access.\n\n1. On the **Apps** page, click the **Integrations** tab.\n2. Find the **Vercel** card. If it shows **Not created yet**, click **Setup**.\n3. In the **Setup Vercel** dialog, select the roles that should have access to the integration.\n4. Click **Setup**.\n\nThe Vercel card will update to show **Roles with access** and the selected roles. Use **Edit Roles** to change access or **Disable** to remove the integration.\n\n## Step 2: Add Snowflake to your v0 team\n\nTeam owners add the Snowflake account identifiers that members are allowed to connect. This makes those accounts available as options when members connect, but does not grant anyone access — that is controlled by the roles permitted in Step 1.\n\nAdding an account identifier does not sign in any team member, grant Snowflake data access, or change Snowflake permissions. Members whose Snowflake user does not have a role permitted in Step 1 cannot connect, even after this step is complete.\n\n1. Open your v0 team settings.\n2. Go to **Integrations**.\n3. Find **Snowflake**.\n4. Click **Add Account**.\n5. Enter the account identifier portion of your Snowflake URL — for example, `myorg-account123` from `https://myorg-account123.snowflakecomputing.com`. Do not include `https://` or `.snowflakecomputing.com`. See Snowflake's [Account identifiers](https://docs.snowflake.com/en/user-guide/admin-account-identifier) guide if needed.\n6. Optionally add a label, such as `Production` or `Analytics`.\n\n## Step 3: Connect your Snowflake user\n\nAfter a team owner configures an account, team members connect their own Snowflake user via OAuth. Each member connects independently — teammates do not inherit access from another member's connection.\n\nSnowflake access is entirely role-based (RBAC), not user-based. Your Snowflake user identity only determines which roles are available to choose from — all data access, read/write permissions, and visibility into databases, schemas, and tables are determined entirely by the selected role. Only roles that the Snowflake account admin permitted in Step 1 will appear in the OAuth flow.\n\n1. Open a chat in the v0 team.\n2. Ask v0 to create something with Snowflake, such as `Create an application using Snowflake that shows AI gateway usage by models`.\n3. When v0 shows the Snowflake card, click **Connect**.\n4. Select the Snowflake account for the chat.\n5. Complete the Snowflake OAuth flow and choose a role with access to the data you want v0 to use.\n\nBy connecting, you authorize v0 to access Snowflake through your selected role and allow v0 to send Snowflake integration usage information to Snowflake. That information is governed by your terms with Snowflake.\n\nYou can also connect manually from **Project menu** → **Settings** → **Integrations** by choosing **Snowflake**.\n\n## Step 4: Build with Snowflake data\n\nBefore writing any application code, it's worth exploring your data first. Use v0's data tools to browse what your role can actually see — this gives v0 the exact database, schema, table, and column names to use when generating code.\n\n### Explore tables and run SQL\n\nConnected Snowflake chats can use v0's data tools to:\n\n* Browse accessible databases, schemas, and tables.\n* Preview table rows with pagination.\n* Run custom SQL queries.\n* Use query results as context for future prompts.\n\nLarge warehouses and broad queries can be slow or expensive. Prefer targeted queries, explicit database and schema names, and `LIMIT` clauses while exploring data.\n\n### Generate application code\n\nAsk v0 to inspect your Snowflake data before generating application code. This helps v0 use the exact database, schema, table, and column names available to your role.\n\nExample prompts:\n\n```txt\nInspect my Snowflake schemas and show me which tables look useful for a revenue dashboard.\n```\n\n```txt\nBuild an analytics dashboard from Snowflake. First inspect the table schemas and sample rows, then use the confirmed columns.\n```\n\n```txt\nCreate a report from MY_DATABASE.PUBLIC.ORDERS grouped by week. Validate the columns before writing the query.\n```\n\nFor generated applications, Snowflake queries must run on the server. v0 handles the connected Snowflake credentials for preview and deployment, so avoid putting Snowflake tokens in client-side code.\n\n## Step 5: Deploy to Snowflake\n\nMake sure your chat is connected to Snowflake (Step 3) before deploying. When a chat is connected, v0 shows a Snowflake publish flow.\n\n1. Click **Publish**.\n2. Click **Deploy to Snowflake**.\n3. Wait for v0 to package, build, and deploy the app.\n4. Use the publish menu to visit the app or copy the app URL.\n\nAfter deployment, the app is hosted on Snowflake infrastructure. Deployment logs and details are available from the publish popover when Snowflake returns them.\n\n## Troubleshooting\n\n### Snowflake is not available\n\nIf you don't see the Snowflake option in your team, the integration may not be enabled for your team yet or no account identifier has been added. Contact your team owner and ask them to complete Step 1 and Step 2.\n\n### I cannot see the tables I expected\n\nv0 only sees the data available to your connected Snowflake role. Reconnect Snowflake and choose a role with the right warehouse, database, schema, and table permissions.\n\n### A teammate cannot preview my Snowflake app\n\nEach member connects their own Snowflake account. Ask them to connect Snowflake from the prompt shown in the preview or from **Project menu** → **Settings** → **Integrations**.\n\n### Deployment keeps failing during build\n\nIf a Snowflake deployment fails repeatedly, a",
+  "sourceUrl": "https://v0.app/docs/snowflake",
+  "lastUpdated": "2026-08-19"
+}

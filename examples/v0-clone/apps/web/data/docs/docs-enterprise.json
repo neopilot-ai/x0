@@ -1,0 +1,35 @@
+{
+  "id": "docs-enterprise",
+  "slug": "enterprise",
+  "title": "Enterprise",
+  "section": "Reference",
+  "category": "Reference",
+  "type": "guide",
+  "description": "Learn how to manage v0 seats, access, and more in your Vercel Enterprise account.",
+  "topics": [
+    "design",
+    "security",
+    "teams"
+  ],
+  "related": [
+    "teams",
+    "security",
+    "account"
+  ],
+  "requires": [],
+  "headings": [
+    "Managing seats and access",
+    "Assign or revoke access",
+    "Choosing the right role",
+    "Activating your account",
+    "Configuring single sign-on (SSO)",
+    "Configure Team Access and v0 roles in one Access Group",
+    "Privacy settings",
+    "Chats"
+  ],
+  "excerpt": "To manage v0 seats and grant access in your Vercel account, follow these steps.",
+  "snippets": [],
+  "content": "\n\n# Enterprise\n\n## Managing seats and access\n\nTo manage v0 seats and grant access in your Vercel account, follow these steps.\n\n1. Log in to your [v0 account](https://v0.app).\n2. Select your team from the scope selector on the top-left corner.\n3. Click on the scope selector again and select **Manage Members**. This navigates you to your Vercel team's members page.\n\nYou can grant v0 access to team members by clicking the three dots to the right of their role and selecting **Manage v0 role**.\n\n### Assign or revoke access\n\n* To assign access: Find the team member in the list and assign the desired v0 role.\n* To revoke access: Find the team member in the list and choose \"No v0 access\".\n\n### Choosing the right role\n\nv0 has a role and access control system that is separate from your team roles in Vercel:\n\n* **v0 Builder**: v0 Creator access + can create deployments and manage environment variables on any Vercel project that's connected to v0.\n* **v0 Creator**: Can create chats + projects, add sources, and build in v0.\n* **v0 Viewer**: View-only access to collaborate on chats with other users.\n\nThe v0 Builder role is **team-wide**: a Builder can create deployments and\nmanage environment variables on **every** Vercel project in the team that\nis connected to v0, not only projects they were explicitly added to.\nAssign v0 Builder only to users who should be able to act on all v0-connected\nprojects in the team.\n\nNote: Managing integrations requires the **Integrations Manager** permission, which is a separate team-level permission that can be selected separately when assigning members a v0 role. Members with the Vercel **Member** role inherently have this permission. To prevent integration access, assign the **Viewer** role on Vercel alongside the desired v0 role without **Integration Manager** selected.\n\nFor Vercel team management:\n\n* **Viewer**: Assign the Viewer role with v0 access for most users.\n* **Owner**: Use the Owner role only for admins who need full control.\n\nRead the Vercel docs to learn how to manage user permissions at a more granular level\n\n## Activating your account\n\nTo use v0 with your Enterprise plan:\n\nMake sure you're logged into the correct Vercel account before accepting the invite.\n\n1. Accept the invite.\n2. Switch to your Enterprise team on the v0 navigation bar.\n\n## Configuring single sign-on (SSO)\n\nOnce v0 is enabled for your team, **admins** can manage access using [Directory Sync](https://vercel.com/docs/directory-sync) and [Access Groups](https://vercel.com/docs/rbac/access-groups) to provision v0 roles from your identity provider (IdP).\n\n1. Create an **Access Group** with a v0 role from your from your team's [Access Group settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings%2Faccess-groups\\&title=Manage+Access+Groups).\n2. Map a **Directory Sync** group (e.g. from Okta SCIM) to the Access Group you created.\n3. Everyone in the synced group will automatically receive the v0 access configured in that Access Group.\n\n### Configure Team Access and v0 roles in one Access Group\n\nYou can assign **Team roles**, **Team permissions**, **Project roles**, and **v0 roles** in the same **Access Group** so that a single **IdP group** grants both team and v0 permissions. Team access defined within an Access Group applies when the Access Group is managed via **Directory Sync**.\n\n1. Create an Access Group from your from your team's [Access Group settings](https://vercel.com/d?to=%2F%5Bteam%5D%2F%7E%2Fsettings%2Faccess-groups\\&title=Manage+Access+Groups). Specify the required **Team Access** and **v0 Roles**.\n2. Map your IdP group to this Access Group via Directory Sync. Members mapped to the group default to **Contributor** unless another mapping assigns a different Team role.\n3. All members in the synced group will automatically receive the v0 access and team role configured in the Access Group.\n\nLearn more about Access Groups in Vercel\n\nLearn more about v0's enterprise security features\n\n## Privacy settings\n\n### Chats\n\nMembers can control chat visibility using **Only people with access**, **Everyone at \\[team-name]**, **Anyone with the link**, or **Anyone on the web**.\n\nOwners on v0 Enterprise teams can disable the **Anyone with the link** and **Anyone on the web** options using the **Restrict Chat Sharing** setting in [workspace settings](https://v0.app/settings/workspace).\n\n* **Only people with access**: Only the chat owner and individually invited team members can access the chat.\n* **Everyone at \\[team-name]**: Makes the chat available to the entire team. Turn on **View only** to prevent team members from editing it.\n* **Anyone with the link**: Anyone with the URL can access the chat. It will not be indexed by search engines.\n* **Anyone on the web**: Anyone can view the chat. It may be indexed by search engines and appear in public galleries.\n\nMembers with the Vercel **Owner** team role can view, edit, and archive every chat owned by the team, including teammate chats set to **Only people with access**, when they navigate to the chat directly. This is administrative access and is not surfaced in listings — Owners only see teammate chats they open by URL. See [Team Owner access](/docs/sharing#team-owner-access) for details.\n\nTeam members can also be added to the chat individually. Use this with **Only people with access** to configure chats that only a subset of team members can access.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/enterprise",
+  "lastUpdated": "2026-09-02"
+}

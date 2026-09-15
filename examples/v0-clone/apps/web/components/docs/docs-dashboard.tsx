@@ -76,8 +76,14 @@ export function DocsDashboard() {
             <Link href="/topics" className="hover:text-foreground">
               Topics
             </Link>
+            <Link href="/search" className="hover:text-foreground">
+              Search
+            </Link>
             <Link href="/admin" className="hover:text-foreground">
               Coverage
+            </Link>
+            <Link href="/about" className="hover:text-foreground">
+              About
             </Link>
             <Link
               href="/chats/new"
@@ -118,7 +124,7 @@ export function DocsDashboard() {
         {query && (
           <div className="mt-3 max-w-2xl rounded-2xl border border-border bg-card p-2 shadow-xl">
             {results.length ? (
-              results.slice(0, 5).map((doc) => (
+              results.slice(0, 5).map(({ doc }) => (
                 <Link
                   key={doc.id}
                   href={`/docs/${doc.slug}`}

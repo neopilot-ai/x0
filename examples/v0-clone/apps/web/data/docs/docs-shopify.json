@@ -1,0 +1,58 @@
+{
+  "id": "docs-shopify",
+  "slug": "shopify",
+  "title": "Shopify",
+  "section": "Integrations",
+  "category": "Integrations",
+  "type": "integration",
+  "description": "Connect a Shopify store to v0 and build storefronts that read live products, prices, and inventory from the Shopify Storefront and Admin APIs.",
+  "topics": [
+    "databases",
+    "deployment",
+    "design",
+    "integrations"
+  ],
+  "related": [
+    "deployments",
+    "databases",
+    "text-prompting"
+  ],
+  "requires": [
+    "quickstart"
+  ],
+  "headings": [
+    "What v0 builds with Shopify",
+    "Start building a store",
+    "The Shopify AI Toolkit",
+    "Go live with a paid store",
+    "Connect your Shopify account",
+    "Best practices",
+    "Troubleshooting",
+    "v0 asks me to connect my Shopify account",
+    "My storefront shows no products",
+    "Checkout shows a \"Password required\" page",
+    "Environment variables"
+  ],
+  "excerpt": "The Shopify integration lets you build online stores in v0 that are backed by a real Shopify store. When you describe an e-commerce app, v0 connects a Shopify store, creates your products and their images in Shopify, and generates a storefront that reads them live through the Shopify Storefront API.",
+  "snippets": [
+    {
+      "language": "txt",
+      "code": "Build an online store that sells handmade ceramic mugs. Create a few products with prices and images."
+    },
+    {
+      "language": "txt",
+      "code": "Add three more products to the store, each with an image and a short description."
+    },
+    {
+      "language": "txt",
+      "code": "Regenerate the image for the ceramic mug so it looks more minimal and studio-lit."
+    },
+    {
+      "language": "txt",
+      "code": "Create a \"Featured\" collection and show it on the homepage."
+    }
+  ],
+  "content": "\n\n# Shopify\n\nThe Shopify integration lets you build online stores in v0 that are backed by a real Shopify store. When you describe an e-commerce app, v0 connects a Shopify store, creates your products and their images in Shopify, and generates a storefront that reads them live through the Shopify Storefront API.\n\nBecause the storefront is a full app you generate, it isn't limited to a standard product grid. You can build any shopping experience on top of a real catalog. People have shipped everything from [a production sneaker store](https://x.com/foda/status/2065104948619079720) to [a storefront you play like a game](https://x.com/EstebanSuarez/status/2065541491355717761), where you walk around, step into shops, and buy real products.\n\n## What v0 builds with Shopify\n\nWhen Shopify is connected, v0 always generates a storefront application backed by your Shopify catalog. The storefront is the primary deliverable, and v0 wires it to your store end to end:\n\n* **Products live in Shopify, not in your code.** v0 creates products through the Shopify Admin API and adds them to the Vercel Storefront sales channel. It never hardcodes product names, prices, or descriptions into the app.\n* **Product images are generated and uploaded to Shopify.** v0 generates an image for each product and stores it on the product in Shopify, so your catalog stays the single source of truth.\n* **The storefront reads products at runtime.** The generated app fetches products from the Shopify Storefront API when it renders, so it stays in sync with your Shopify catalog as products change.\n\n## Start building a store\n\nv0 installs the Shopify integration automatically when your prompt describes an online store. Phrases like \"build a storefront\", \"build an online store\", or \"sell products online\" all trigger it.\n\n```txt\nBuild an online store that sells handmade ceramic mugs. Create a few products with prices and images.\n```\n\nv0 provisions a Shopify development store, creates your products in it, and connects it to your project so the storefront can read the catalog. You can start building right away without configuring anything in Shopify first.\n\n## The Shopify AI Toolkit\n\nv0 works with your store through the Shopify AI Toolkit, which uses two Shopify APIs:\n\n* **Admin API** for managing the store, including creating products, uploading product images, and managing collections.\n* **Storefront API** for reading the catalog and running cart and checkout in the generated app.\n\nYou interact with the toolkit through prompts. Ask v0 to add or change products and it makes the change in Shopify, then updates the storefront to match.\n\n## Go live with a paid store\n\nBy default your app uses a Shopify development store. Development stores are for building and testing, and they can't take real orders until you claim them and choose a Shopify plan.\n\nWhen you publish an app that's connected to an unclaimed development store, v0 adds a **Commerce mode** step to the publish flow. To go live with real orders and payments:\n\n1. Publish your app. When the app uses a development store, the publish flow shows a **Commerce mode** step.\n2. Under **Shopify Dev Mode**, select **Claim Store**. This opens Shopify in a new tab.\n3. Complete the claim on Shopify and choose a plan.\n\nYou can also select **Continue** to publish while keeping the development store. Until you claim it, the published app keeps using the development store and can't take real orders.\n\n## Connect your Shopify account\n\nAfter you claim a store, actions that v0 takes on your behalf through the Admin API, such as managing products and orders, require you to authorize your own Shopify account. When that authorization is needed, v0 shows a **Connect Shopify** card inline in the chat.\n\nSelect **Connect Shopify account** and complete the Shopify authorization. v0 continues the step once you're connected.\n\nIf v0 asks you to connect your Shopify account, use the inline **Connect Shopify account** button. You don't need to open Settings, disconnect and reconnect, start a new chat, or contact support.\n\n## Best practices\n\n* **Describe the store and its products.** v0 creates the products in Shopify for you, so tell it what you're selling instead of pasting placeholder data.\n* **Let v0 own the catalog.** Ask v0 to add or edit products rather than hardcoding them into the app, so the storefront and your Shopify store stay in sync.\n* **Iterate on the storefront and the catalog together.** You can change product details, add collections, and adjust the storefront layout in the same chat.\n\nExample prompts:\n\n```txt\nAdd three more products to the store, each with an image and a short description.\n```\n\n```txt\nRegenerate the image for the ceramic mug so it looks more minimal and studio-lit.\n```\n\n```txt\nCreate a \"Featured\" collection and show it on the homepage.\n```\n\n## Troubleshooting\n\n### v0 asks me to connect my Shopify account\n\nThis is expected for a claimed store. Some Admin API actions need per-user authorization. Select **Connect Shopify account** on the inline card and complete the Shopify authorization, then let v0 retry the step.\n\n### My storefront shows no products\n\nThe storefront reads products from Shopify at runtime, so it only shows products that exist in the store and are on the Vercel Storefront sales channel. Ask v0 to create the products, or confirm they're published to that sales channel in your Shopify admin.\n\n### Checkout shows a \"Password required\" page\n\nShopify development stores are password protected. v0 builds checkout links that open the online store checkout, so checkout works while the store is still protected. If you see a \"Password required\" page at checkout, ask v0 to rebuild the checkout link so it opens the online store checkout.\n\n## Environment variables\n\nWhen v0 connects a store, it sets these environment variables in your project. You don't need to configure them, v0 manages them for you.\n\n| Variable                          | Description                                                               |\n| --------------------------------- | ------------------------------------------------------------------------- |\n| `SHOPIFY_STORE_DOMAIN`            | The hostname of the connected Shopify store.                              |\n| `SHOPIFY_STOREFRONT_ACCESS_TOKEN` | The Storefront API access token the app uses to read products at runtime. |\n\nThe Storefront access token is scoped to public storefront reads. v0 handles Admin API operations (creating products, uploading images, managing collections) during generation, so keep admin credentials out of client-side code.\n\n---\n\n",
+  "sourceUrl": "https://v0.app/docs/shopify",
+  "lastUpdated": "2026-07-30"
+}
