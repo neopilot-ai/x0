@@ -1,321 +1,117 @@
 ---
 title: @v0-sdk/react
-description: Headless React components for rendering v0 API content
+description: React hooks and AI SDK transport for the v0 API
 product: v0 API
 type: reference
 prerequisites:
-  - /docs/api/v1/quickstart
+  - /docs/api/v2/quickstart
 related:
-  - /docs/api/v1/packages/v0-sdk
-  - /docs/api/v1/guides/displaying-chat-messages
+  - /docs/api/v2/guides/react-transport
+  - /docs/api/v2/guides/custom-chat-interface
 ---
 
 # @v0-sdk/react
 
-
-
-Headless React components for rendering content from the v0 API. Provides components for streaming messages, code blocks, thinking sections, and more.
+> **Note**: This page covers the v2 package. The v1 documentation referenced components like `StreamingMessage`, `CodeBlock`, `ThinkingSection`, and `TaskSection` which have been replaced by the `V0Transport` class and AI SDK integration. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2).
 
 ## Installation
 
 ```bash
-npm install @v0-sdk/react
-# or
-pnpm add @v0-sdk/react
-# or
-yarn add @v0-sdk/react
+npm install @v0-sdk/react v0 ai swr
 ```
 
 ## Quick Start
 
-```tsx
-import { StreamingMessage } from '@v0-sdk/react'
-
-function ChatInterface({ message }) {
-  return (
-    <StreamingMessage
-      message={message}
-      onComplete={(result) => {
-        console.log('Streaming complete:', result)
-      }}
-    />
-  )
-}
-```
-
-## Components
-
-### StreamingMessage
-
-Renders streaming chat messages with real-time updates.
+Use `V0Transport` with `@ai-sdk/react` `useChat`:
 
 ```tsx
-import { StreamingMessage } from '@v0-sdk/react'
+import { useChat } from '@ai-sdk/react'
+import { V0Transport } from '@v0-sdk/react'
 
 function Chat() {
-  return (
-    <StreamingMessage
-      message={streamingData}
-      theme="elegant"
-      className="my-message"
-      onComplete={(result) => {
-        // Handle completion
-      }}
-      onError={(error) => {
-        // Handle errors
-      }}
-    />
-  )
-}
-```
-
-#### Props
-
-* `message` - The streaming message data
-* `theme?` - Visual theme (`elegant`, `minimal`, `neobrutalism`, `terminal`)
-* `className?` - Additional CSS classes
-* `onComplete?` - Callback when streaming completes
-* `onError?` - Callback for error handling
-
-### CodeBlock
-
-Syntax-highlighted code blocks with copy functionality.
-
-```tsx
-import { CodeBlock } from '@v0-sdk/react'
-
-function CodeDisplay() {
-  return (
-    <CodeBlock
-      code={generatedCode}
-      language="typescript"
-      showLineNumbers
-      copyable
-      theme="dark"
-    />
-  )
-}
-```
-
-#### Props
-
-* `code` - The code string to display
-* `language` - Programming language for syntax highlighting
-* `showLineNumbers?` - Display line numbers
-* `copyable?` - Show copy button
-* `theme?` - Color theme for syntax highlighting
-
-### ThinkingSection
-
-Displays AI thinking process with animated indicators.
-
-```tsx
-import { ThinkingSection } from '@v0-sdk/react'
-
-function AIThinking() {
-  return (
-    <ThinkingSection
-      thoughts={aiThoughts}
-      isVisible={showThinking}
-      animated
-      collapsible
-    />
-  )
-}
-```
-
-#### Props
-
-* `thoughts` - Array of thinking steps
-* `isVisible?` - Control visibility
-* `animated?` - Enable animations
-* `collapsible?` - Allow collapse/expand
-
-### TaskSection
-
-Renders task lists and progress indicators.
-
-```tsx
-import { TaskSection } from '@v0-sdk/react'
-
-function TaskProgress() {
-  return (
-    <TaskSection
-      tasks={taskList}
-      showProgress
-      interactive
-      onTaskComplete={(task) => {
-        // Handle task completion
-      }}
-    />
-  )
-}
-```
-
-#### Props
-
-* `tasks` - Array of task objects
-* `showProgress?` - Display progress bar
-* `interactive?` - Allow user interaction
-* `onTaskComplete?` - Callback for task completion
-
-## Themes
-
-### Built-in Themes
-
-```tsx
-// Elegant - Sophisticated design
-<StreamingMessage message={data} theme="elegant" />
-
-// Minimal - Clean, distraction-free
-<StreamingMessage message={data} theme="minimal" />
-
-// Neobrutalism - Bold, high-contrast
-<StreamingMessage message={data} theme="neobrutalism" />
-
-// Terminal - Developer-focused
-<StreamingMessage message={data} theme="terminal" />
-```
-
-### Custom Themes
-
-```tsx
-const customTheme = {
-  primary: '#3b82f6',
-  background: '#f8fafc',
-  text: '#1e293b',
-  accent: '#06b6d4',
-  border: '#e2e8f0',
-}
-
-<StreamingMessage
-  message={data}
-  theme={customTheme}
-/>
-```
-
-## Hooks
-
-### useStreamingChat
-
-Hook for managing streaming chat state.
-
-```tsx
-import { useStreamingChat } from '@v0-sdk/react'
-
-function ChatApp() {
-  const { messages, sendMessage, isLoading, error, clearMessages } =
-    useStreamingChat({
-      apiKey: process.env.V0_API_KEY,
-      onMessage: (message) => {
-        console.log('New message:', message)
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    transport: new V0Transport({
+      urls: {
+        create: '/api/v0/chats/create',
+        send: (id) => `/api/v0/chats/${id}/send`,
+        resume: (id) => `/api/v0/chats/${id}/resume`,
       },
-    })
+    }),
+  })
 
   return (
     <div>
-      {messages.map((message, index) => (
-        <StreamingMessage key={index} message={message} />
-      ))}
-
-      <button onClick={() => sendMessage('Hello!')}>Send Message</button>
+      {messages.map((m) => <div key={m.id}>{m.parts.map(p => p.text)}</div>)}
+      <input value={input} onChange={handleInputChange} />
+      <button onClick={handleSubmit}>Send</button>
     </div>
   )
 }
 ```
 
-### useCodeHighlight
+## Core Exports
 
-Hook for syntax highlighting with custom themes.
+### V0Transport
 
-```tsx
-import { useCodeHighlight } from '@v0-sdk/react'
+AI SDK chat transport backed by caller-owned v0 proxy routes:
 
-function CustomCodeBlock({ code, language }) {
-  const { highlightedCode, isLoading } = useCodeHighlight({
-    code,
-    language,
-    theme: 'github-dark',
-  })
+```ts
+import { V0Transport } from '@v0-sdk/react'
 
-  if (isLoading) return <div>Loading...</div>
-
-  return <pre dangerouslySetInnerHTML={{ __html: highlightedCode }} />
-}
+const transport = new V0Transport({
+  urls: {
+    create: '/api/v0/chats/create',
+    send: (chatId) => `/api/v0/chats/${chatId}/send`,
+    resume: (chatId) => `/api/v0/chats/${chatId}/resume`,
+  },
+})
 ```
 
-## Styling
+### Request Utilities
 
-### CSS Custom Properties
+```ts
+import { requestV0Operation, V0ResponseError } from '@v0-sdk/react'
 
-```css
-:root {
-  --v0-primary: #3b82f6;
-  --v0-background: #ffffff;
-  --v0-text: #1e293b;
-  --v0-border: #e2e8f0;
-  --v0-accent: #06b6d4;
-}
-
-.dark {
-  --v0-primary: #60a5fa;
-  --v0-background: #0f172a;
-  --v0-text: #f1f5f9;
-  --v0-border: #334155;
-  --v0-accent: #22d3ee;
-}
+const result = await requestV0Operation<Data>(url, operation, input, options)
 ```
 
-### Tailwind CSS Classes
+### Message Utilities
 
-The components work seamlessly with Tailwind CSS:
+```ts
+import { toV0UIMessage, toV0UIMessages, getPendingV0Task } from '@v0-sdk/react'
 
-```tsx
-<StreamingMessage
-  message={data}
-  className="rounded-lg border border-gray-200 p-4 shadow-sm"
-/>
+const uiMessage = toV0UIMessage(v0Message)
+const task = getPendingV0Task(message)
 ```
 
-## TypeScript Support
+### Composition Utilities
 
-Full TypeScript support with comprehensive type definitions:
-
-```tsx
-import type {
-  StreamingMessageProps,
-  CodeBlockProps,
-  ThinkingSectionProps,
-  ChatMessage,
-  StreamingState,
-} from '@v0-sdk/react'
-
-interface CustomChatProps {
-  messages: ChatMessage[]
-  onSendMessage: (message: string) => void
-}
-
-const CustomChat: React.FC<CustomChatProps> = ({ messages, onSendMessage }) => {
-  // Component implementation
-}
+```ts
+import { shouldResumeV0Chat, getResumableV0Assistant, prependV0UIMessageHistory } from '@v0-sdk/react'
 ```
 
-## Requirements
+### SWR Hooks
 
-* React 18+ or React 19+
-* TypeScript 5.0+ (for TypeScript projects)
+```ts
+import { createV0Key } from '@v0-sdk/react/swr'
+```
 
-## Links
+### Types
 
-* [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/react)
-* [npm Package](https://www.npmjs.com/package/@v0-sdk/react)
-* [React Examples](/docs/api/v1/examples/react-components)
+```ts
+import type { V0UIMessage, V0UIMessageMetadata, V0UIDataTypes, V0RequestOptions, V0ResponseError } from '@v0-sdk/react'
+```
 
+## Migrate from v1
 
----
+| v1 (Deprecated) | v2 (Current) |
+|-----------------|--------------|
+| `<StreamingMessage>` | Use `useChat` with `V0Transport` |
+| `<CodeBlock>` | Use your own code display |
+| `<ThinkingSection>` | Use your own thinking display |
+| `<TaskSection>` | Use `getPendingV0Task()` |
+| `useStreamingChat` | `useChat` with `V0Transport` |
+| `useCodeHighlight` | Custom implementation |
+| `@v0-sdk/react` components | `@v0-sdk/react` transport + types |
 
-For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)
-
-For an index of all available documentation, see [/docs/llms.txt](/docs/llms.txt)
-
-For agent-facing discovery, including API and MCP surfaces, see [/docs/agents.md](/docs/agents.md)
+For a complete v2 guide, see [React Transport Guide](/docs/api/v2/guides/react-transport).
