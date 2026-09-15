@@ -1,0 +1,98 @@
+---
+title: Find Hooks
+description: Retrieves a list of existing hooks in your workspace. Useful for managing active webhooks tied to chat events or deployments.
+badge: "GET"
+product: v0 API
+type: reference
+prerequisites:
+  - /docs/api/v1/quickstart
+---
+
+# Find Hooks
+
+
+
+<EndpointDisplay method="get" path="/hooks" />
+
+## Usage
+
+<CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
+  <CodeVariant
+    language="TypeScript"
+    title="TypeScript Example"
+    code={`import { v0 } from 'v0-sdk'
+
+const result = await v0.hooks.find()
+
+console.log(result)`}
+  />
+
+  <CodeVariant
+    language="cURL"
+    title="cURL Example"
+    code={`curl -X GET https://api.v0.dev/v1/hooks \
+  -H "Authorization: Bearer $V0_API_KEY" \
+  -H "Content-Type: application/json"`}
+  />
+</CustomCodeBlock>
+
+### Response
+
+<APISignature
+  title=""
+  parameters={[
+  {
+    "name": "object",
+    "type": "'list'",
+    "required": true,
+    "description": "",
+    "deprecated": false
+  },
+  {
+    "name": "data",
+    "type": "object[]",
+    "required": true,
+    "description": "",
+    "deprecated": false,
+    "arrayItems": {
+      "name": "item",
+      "type": "object",
+      "required": true,
+      "description": "",
+      "deprecated": false,
+      "properties": [
+        {
+          "name": "id",
+          "type": "string",
+          "required": false,
+          "description": "A unique identifier for the webhook.",
+          "deprecated": false
+        },
+        {
+          "name": "object",
+          "type": "'hook'",
+          "required": false,
+          "description": "Fixed value identifying this object as a webhook.",
+          "deprecated": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": false,
+          "description": "A user-defined name to label the webhook.",
+          "deprecated": false
+        }
+      ]
+    }
+  }
+]}
+/>
+
+
+---
+
+For a semantic overview of all documentation, see [/docs/sitemap.md](/docs/sitemap.md)
+
+For an index of all available documentation, see [/docs/llms.txt](/docs/llms.txt)
+
+For agent-facing discovery, including API and MCP surfaces, see [/docs/agents.md](/docs/agents.md)
