@@ -16,15 +16,15 @@ The `v0-sdk` package provides streaming utilities for handling real-time chat re
 ## Installation
 
 ```bash
-npm install v0@canary
+npm install v0
 ```
 
 ## Importing
 
 ```ts
-import { readV0Stream, V0StreamError, V0StreamResult } from 'v0'
+import { readV0Stream, V0StreamError, type V0StreamResult } from 'v0'
 // or
-import { readV0Stream, V0StreamError, V0StreamResult } from 'v0/browser'
+import { readV0Stream, V0StreamError, type V0StreamResult } from 'v0/browser'
 ```
 
 ## V0StreamResult
@@ -93,10 +93,10 @@ try {
 
 ## diffpatch
 
-The `diffpatch.ts` module provides `diff()` and `patch()` functions for applying JSON patches to stream updates. This is used internally by the streaming system to apply incremental updates.
+The `diffpatch` utilities provide `diff()` and `patch()` functions for applying JSON patches to stream updates. This is used internally by the streaming system to apply incremental updates. See [Stream Diffpatch](/docs/api/v2/guides/stream-diffpatch).
 
 ```ts
-import { diff, patch } from 'v0/stream/diffpatch'
+import { diff, patch } from 'v0'
 
 const delta = diff(original, modified)
 const updated = patch(original, delta)
