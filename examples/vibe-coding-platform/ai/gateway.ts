@@ -1,4 +1,5 @@
 import { createGatewayProvider } from '@ai-sdk/gateway'
+import { createOpenAI } from '@ai-sdk/openai'
 import { Models } from './constants'
 import type { JSONValue } from 'ai'
 import type { OpenAIResponsesProviderOptions } from '@ai-sdk/openai'
@@ -12,6 +13,18 @@ const gateway = createGatewayProvider({
   },
 })
 
+const kiloGateway = process.env.KILO_API_KEY && process.env.KILO_GATEWAY_BASE_URL
+  ? createOpenAI({
+      baseURL: process.env.KILO_GATEWAY_BASE_URL,
+      apiKey: process.env.KILO_API_KEY,
+    })
+  : null
+
+export function getKiloModel(modelId: string): LanguageModelV3 | null {
+  if (!kiloGateway) return null
+  return kiloGateway.chat(modelId)
+}
+
 export interface ModelOptions {
   model: LanguageModelV3
   providerOptions?: Record<string, Record<string, JSONValue>>
@@ -22,6 +35,12 @@ export function getModelOptions(
   modelId: string,
   options?: { reasoningEffort?: 'low' | 'medium' | 'high' }
 ): ModelOptions {
+  if (modelId.startsWith('kilo-') && kiloGateway) {
+    return {
+      model: kiloGateway.chat(modelId.replace('kilo-', '')),
+    }
+  }
+
   if (modelId === Models.OpenAIGPT53Codex) {
     return {
       model: gateway(modelId),
