@@ -6,17 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Attach media, documents, code, and other supported assets to give v0 context or add them to your application.",
-  "topics": [
-    "design",
-    "streaming"
-  ],
-  "related": [
-    "screenshots",
-    "figma"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "streaming"],
+  "related": ["screenshots", "figma"],
+  "requires": ["quickstart"],
   "headings": [
     "Uploading files",
     "Using the attachment button",

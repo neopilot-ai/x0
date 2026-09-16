@@ -12,9 +12,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Displaying Chat Messages
-
-
 
 Learn how to properly render chat messages from the v0 API using the **@v0-sdk/react** headless React library. This guide covers handling different message types, implementing streaming updates, and customizing message rendering.
 
@@ -22,13 +21,13 @@ Learn how to properly render chat messages from the v0 API using the **@v0-sdk/r
 
 The **@v0-sdk/react** library provides headless React components and hooks for rendering rich chat messages from the v0 API. It handles complex message formats including:
 
-* **Text content** - Plain text and markdown with custom styling
-* **Code blocks** - Syntax-highlighted code snippets with copy functionality
-* **Code projects** - Multi-file code projects with collapsible sections
-* **Math expressions** - LaTeX math rendering (inline and block)
-* **Thinking sections** - AI reasoning process with animated indicators
-* **Task sections** - Task execution steps with status tracking
-* **Streaming content** - Real-time message updates with loading states
+- **Text content** - Plain text and markdown with custom styling
+- **Code blocks** - Syntax-highlighted code snippets with copy functionality
+- **Code projects** - Multi-file code projects with collapsible sections
+- **Math expressions** - LaTeX math rendering (inline and block)
+- **Thinking sections** - AI reasoning process with animated indicators
+- **Task sections** - Task execution steps with status tracking
+- **Streaming content** - Real-time message updates with loading states
 
 ## Installation
 
@@ -278,17 +277,11 @@ function ChatMessage({ message }) {
       <div
         className={`
         flex-1 max-w-[80%] rounded-2xl px-4 py-3
-        ${
-          isUser
-            ? 'bg-blue-600 text-white ml-12'
-            : 'bg-gray-100 text-gray-900 mr-12'
-        }
+        ${isUser ? 'bg-blue-600 text-white ml-12' : 'bg-gray-100 text-gray-900 mr-12'}
       `}
       >
         {/* Timestamp */}
-        <div
-          className={`text-xs mb-2 ${isUser ? 'text-blue-100' : 'text-gray-500'}`}
-        >
+        <div className={`text-xs mb-2 ${isUser ? 'text-blue-100' : 'text-gray-500'}`}>
           {formatTime(message.createdAt)}
         </div>
 
@@ -300,9 +293,7 @@ function ChatMessage({ message }) {
           components={{
             // Customize styling based on message role
             p: {
-              className: isUser
-                ? 'mb-2 text-white last:mb-0'
-                : 'mb-2 text-gray-900 last:mb-0',
+              className: isUser ? 'mb-2 text-white last:mb-0' : 'mb-2 text-gray-900 last:mb-0',
             },
             code: {
               className: isUser
@@ -373,9 +364,7 @@ function StreamingChatDemo() {
                 showLoadingIndicator={true}
                 loadingComponent={<TypingIndicator />}
                 errorComponent={(error) => (
-                  <div className="text-red-600 p-2 bg-red-50 rounded">
-                    Error: {error}
-                  </div>
+                  <div className="text-red-600 p-2 bg-red-50 rounded">Error: {error}</div>
                 )}
                 onComplete={(content) => {
                   console.log('Streaming complete:', content)
@@ -387,8 +376,7 @@ function StreamingChatDemo() {
                 components={{
                   p: { className: 'mb-2 text-gray-900 last:mb-0' },
                   code: {
-                    className:
-                      'bg-gray-200 text-gray-800 px-1 py-0.5 rounded text-sm',
+                    className: 'bg-gray-200 text-gray-800 px-1 py-0.5 rounded text-sm',
                   },
                 }}
               />
@@ -457,14 +445,13 @@ For more control, use the headless `useStreamingMessageData` hook:
 import { useStreamingMessageData } from '@v0-sdk/react'
 
 function CustomStreamingMessage({ stream }) {
-  const { content, isStreaming, error, chatData, messageData } =
-    useStreamingMessageData({
-      stream,
-      messageId: 'custom-stream',
-      onChunk: (chunk) => console.log('New chunk:', chunk),
-      onComplete: (finalContent) => console.log('Complete:', finalContent),
-      onError: (error) => console.error('Stream error:', error),
-    })
+  const { content, isStreaming, error, chatData, messageData } = useStreamingMessageData({
+    stream,
+    messageId: 'custom-stream',
+    onChunk: (chunk) => console.log('New chunk:', chunk),
+    onComplete: (finalContent) => console.log('Complete:', finalContent),
+    onError: (error) => console.error('Stream error:', error),
+  })
 
   if (error) {
     return <div className="text-red-600">Error: {error}</div>
@@ -559,9 +546,7 @@ class MessageErrorBoundary extends React.Component {
       return (
         <div className="text-red-600 p-3 bg-red-50 rounded border border-red-200">
           <p className="font-semibold">Failed to render message</p>
-          <p className="text-sm mt-1">
-            The message content could not be displayed properly.
-          </p>
+          <p className="text-sm mt-1">The message content could not be displayed properly.</p>
         </div>
       )
     }
@@ -574,11 +559,7 @@ class MessageErrorBoundary extends React.Component {
 function SafeChatMessage({ message }) {
   return (
     <MessageErrorBoundary>
-      <Message
-        content={message.content}
-        messageId={message.id}
-        role={message.role}
-      />
+      <Message content={message.content} messageId={message.id} role={message.role} />
     </MessageErrorBoundary>
   )
 }
@@ -632,8 +613,7 @@ function AccessibleChatMessage({ message, index, totalMessages }) {
               },
               // Make code blocks focusable for screen readers
               pre: {
-                className:
-                  'bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto',
+                className: 'bg-gray-900 text-gray-100 p-4 rounded overflow-x-auto',
                 tabIndex: 0,
                 role: 'region',
                 'aria-label': 'Code block',
@@ -727,9 +707,7 @@ function isMessageEmpty(content: MessageBinaryFormat): boolean {
         if (Array.isArray(element) && element.length > 2) {
           return element
             .slice(2)
-            .some((child) =>
-              typeof child === 'string' ? child.trim().length > 0 : true,
-            )
+            .some((child) => (typeof child === 'string' ? child.trim().length > 0 : true))
         }
         return false
       })
@@ -766,10 +744,7 @@ function extractTextContent(content: MessageBinaryFormat): string {
 }
 
 // Helper to get message preview for notifications
-function getMessagePreview(
-  content: MessageBinaryFormat,
-  maxLength = 100,
-): string {
+function getMessagePreview(content: MessageBinaryFormat, maxLength = 100): string {
   const text = extractTextContent(content)
   if (text.length <= maxLength) return text
   return text.slice(0, maxLength).trim() + '...'
@@ -796,14 +771,9 @@ export function useMessages() {
     setMessages((prev) => [...prev, message])
   }, [])
 
-  const updateMessage = useCallback(
-    (id: string, updates: Partial<ChatMessage>) => {
-      setMessages((prev) =>
-        prev.map((msg) => (msg.id === id ? { ...msg, ...updates } : msg)),
-      )
-    },
-    [],
-  )
+  const updateMessage = useCallback((id: string, updates: Partial<ChatMessage>) => {
+    setMessages((prev) => prev.map((msg) => (msg.id === id ? { ...msg, ...updates } : msg)))
+  }, [])
 
   const removeMessage = useCallback((id: string) => {
     setMessages((prev) => prev.filter((msg) => msg.id !== id))
@@ -860,20 +830,19 @@ function MyCustomRenderer({ message, stream }) {
 
 ### Available Hooks
 
-* **`useMessage`** - Process static message content into renderable data
-* **`useStreamingMessageData`** - Handle streaming messages with real-time updates
-* **`useCodeBlock`** - Process code block data for custom rendering
-* **`useMath`** - Process LaTeX math for custom rendering
-* **`useThinkingSection`** - Handle AI thinking sections
-* **`useTaskSection`** - Process task execution data
+- **`useMessage`** - Process static message content into renderable data
+- **`useStreamingMessageData`** - Handle streaming messages with real-time updates
+- **`useCodeBlock`** - Process code block data for custom rendering
+- **`useMath`** - Process LaTeX math for custom rendering
+- **`useThinkingSection`** - Handle AI thinking sections
+- **`useTaskSection`** - Process task execution data
 
 ## Next Steps
 
-* Explore the [v0-sdk GitHub repository](https://github.com/vercel/v0-sdk) for more examples
-* Check out the [React Components Example](/docs/api/v1/examples/react-components) for a complete implementation
-* Learn about [Lock Files from AI Changes](/docs/api/v1/guides/lock-files-from-ai-changes) to handle concurrent editing
-* Try different themes in the [v0-sdk-react-example](https://github.com/vercel/v0-sdk/tree/main/examples/v0-sdk-react-example) directory
-
+- Explore the [v0-sdk GitHub repository](https://github.com/vercel/v0-sdk) for more examples
+- Check out the [React Components Example](/docs/api/v1/examples/react-components) for a complete implementation
+- Learn about [Lock Files from AI Changes](/docs/api/v1/guides/lock-files-from-ai-changes) to handle concurrent editing
+- Try different themes in the [v0-sdk-react-example](https://github.com/vercel/v0-sdk/tree/main/examples/v0-sdk-react-example) directory
 
 ---
 

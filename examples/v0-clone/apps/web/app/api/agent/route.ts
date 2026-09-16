@@ -6,9 +6,21 @@ export const maxDuration = 30
 
 export async function POST(request: Request) {
   try {
-    const body = (await request.json()) as { messages?: UIMessage[]; prompt?: string; roles?: string[]; planOnly?: boolean }
+    const body = (await request.json()) as {
+      messages?: UIMessage[]
+      prompt?: string
+      roles?: string[]
+      planOnly?: boolean
+    }
     const parsed = agentRequestSchema.safeParse({
-      prompt: body.prompt ?? body.messages?.at(-1)?.parts?.filter((part) => part.type === 'text').map((part) => part.text).join(' ') ?? '',
+      prompt:
+        body.prompt ??
+        body.messages
+          ?.at(-1)
+          ?.parts?.filter((part) => part.type === 'text')
+          .map((part) => part.text)
+          .join(' ') ??
+        '',
       roles: body.roles,
       planOnly: body.planOnly,
     })
@@ -18,7 +30,11 @@ export async function POST(request: Request) {
     if (!process.env.AI_GATEWAY_API_KEY) {
       const hits = retrieve(parsed.data.prompt, 6)
       const fallback = extractiveAnswer(parsed.data.prompt, hits).join('\n')
-      return Response.json({ mode: 'indexed-fallback', sources: sourcesFrom(hits), text: `Indexed fallback (the AI Gateway is unavailable):\n\n${fallback}` })
+      return Response.json({
+        mode: 'indexed-fallback',
+        sources: sourcesFrom(hits),
+        text: `Indexed fallback (the AI Gateway is unavailable):\n\n${fallback}`,
+      })
     }
 
     const agent = createCoordinatorAgent()

@@ -21,9 +21,7 @@ export const useReasoningContext = () => {
 }
 
 export const Message = memo(function Message({ message }: Props) {
-  const [expandedReasoningIndex, setExpandedReasoningIndex] = useState<
-    number | null
-  >(null)
+  const [expandedReasoningIndex, setExpandedReasoningIndex] = useState<number | null>(null)
 
   const reasoningParts = message.parts
     .map((part, index) => ({ part, index }))
@@ -31,16 +29,13 @@ export const Message = memo(function Message({ message }: Props) {
 
   useEffect(() => {
     if (reasoningParts.length > 0) {
-      const latestReasoningIndex =
-        reasoningParts[reasoningParts.length - 1].index
+      const latestReasoningIndex = reasoningParts[reasoningParts.length - 1].index
       setExpandedReasoningIndex(latestReasoningIndex)
     }
   }, [reasoningParts])
 
   return (
-    <ReasoningContext.Provider
-      value={{ expandedReasoningIndex, setExpandedReasoningIndex }}
-    >
+    <ReasoningContext.Provider value={{ expandedReasoningIndex, setExpandedReasoningIndex }}>
       <div
         className={cn({
           'mr-20': message.role === 'assistant',

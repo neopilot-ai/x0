@@ -57,9 +57,10 @@ export function createScreenshotManager(chatId: string): ScreenshotManager {
         url: '',
         format: options?.format ?? defaultScreenshotConfig.defaultFormat,
         createdAt: new Date(),
-        dimensions: options?.width && options?.height
-          ? { width: options.width, height: options.height }
-          : undefined,
+        dimensions:
+          options?.width && options?.height
+            ? { width: options.width, height: options.height }
+            : undefined,
       }
       screenshots.push(result)
       return result

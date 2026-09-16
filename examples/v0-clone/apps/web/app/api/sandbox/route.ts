@@ -1,6 +1,8 @@
 import { z } from 'zod'
 
-const requestSchema = z.object({ action: z.enum(['status', 'start', 'stop', 'reset']).default('status') })
+const requestSchema = z.object({
+  action: z.enum(['status', 'start', 'stop', 'reset']).default('status'),
+})
 
 export async function POST(request: Request) {
   const parsed = requestSchema.safeParse(await request.json().catch(() => ({})))
@@ -17,5 +19,10 @@ export async function POST(request: Request) {
 }
 
 export async function GET() {
-  return Response.json({ status: 'ready', sandboxId: 'public-demo-sandbox', isolation: 'workspace-local, read-only simulation', surfaces: ['editor', 'preview', 'terminal', 'logs'] })
+  return Response.json({
+    status: 'ready',
+    sandboxId: 'public-demo-sandbox',
+    isolation: 'workspace-local, read-only simulation',
+    surfaces: ['editor', 'preview', 'terminal', 'logs'],
+  })
 }

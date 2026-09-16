@@ -1,37 +1,35 @@
 ---
 title: Delete Chat
 description: Deletes a chat and all its associated messages. The requester must have edit access to the chat.
-badge: "DEL"
+badge: 'DEL'
 ---
 
 # Delete Chat
-
-
 
 <EndpointDisplay method="delete" path="/chats/{chatId}" versionPrefix="/v2" />
 
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 const result = await v0.chats.delete({
-  chatId: 'chat_abc123',
+chatId: 'chat_abc123',
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X DELETE "https://api.v0.dev/v2/chats/chat_abc123" \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X DELETE "https://api.v0.dev/v2/chats/chat_abc123" \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -41,33 +39,32 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the chat.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat.",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The ID of the deleted chat.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The ID of the deleted chat.",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

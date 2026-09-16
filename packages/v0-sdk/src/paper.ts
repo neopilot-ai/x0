@@ -103,7 +103,10 @@ export function addPaperSection(document: PaperDocument, section: PaperSection):
   }
 }
 
-export function updatePaperConfig(document: PaperDocument, config: Partial<PaperConfig>): PaperDocument {
+export function updatePaperConfig(
+  document: PaperDocument,
+  config: Partial<PaperConfig>,
+): PaperDocument {
   return {
     ...document,
     config: { ...document.config, ...config },

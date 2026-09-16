@@ -6,17 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Turn a Figma file into a working app.",
-  "topics": [
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "design-mode",
-    "screenshots"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "integrations"],
+  "related": ["design-mode", "screenshots"],
+  "requires": ["quickstart"],
   "headings": [
     "Build more than one screen",
     "What v0 reads from your file",

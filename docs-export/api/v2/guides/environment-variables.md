@@ -11,8 +11,6 @@ related:
 
 # Environment Variables
 
-
-
 v0 uses your Vercel project's environment variables when generating code. The setup is:
 
 1. Ensure the chat has a Vercel project attached.
@@ -24,13 +22,13 @@ v0 uses your Vercel project's environment variables when generating code. The se
 Environment variables are stored on Vercel projects. Before adding them, make sure the chat has a `vercelProjectId`.
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 const chatResult = await v0.chats.get({
-  chatId: 'chat_123',
+chatId: 'chat_123',
 })
 
 if (chatResult.error) throw new Error(chatResult.error.message)
@@ -38,27 +36,28 @@ if (chatResult.error) throw new Error(chatResult.error.message)
 let vercelProjectId = chatResult.data.vercelProjectId
 
 if (!vercelProjectId) {
-  const projectResult = await v0.chats.createVercelProject({
-    chatId: 'chat_123',
-  })
+const projectResult = await v0.chats.createVercelProject({
+chatId: 'chat_123',
+})
 
-  if (projectResult.error) throw new Error(projectResult.error.message)
-  vercelProjectId = projectResult.data.vercelProjectId
+if (projectResult.error) throw new Error(projectResult.error.message)
+vercelProjectId = projectResult.data.vercelProjectId
 }`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`# Check if the chat has a Vercel project
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`# Check if the chat has a Vercel project
 curl -X GET "https://api.v0.dev/v2/chats/chat_123" \\
-  -H "Authorization: Bearer $V0_API_KEY"
+-H "Authorization: Bearer $V0_API_KEY"
 
 # If vercelProjectId is missing, create one
+
 curl -X POST "https://api.v0.dev/v2/chats/chat_123/vercel-project" \\
-  -H "Authorization: Bearer $V0_API_KEY" \\
-  -H "Content-Type: application/json"`}
-  />
+-H "Authorization: Bearer $V0_API_KEY" \\
+-H "Content-Type: application/json"`}
+/>
 </CustomCodeBlock>
 
 For more details, see [Create Vercel Project](/docs/api/v2/reference/chats/create-vercel-project).
@@ -69,22 +68,19 @@ Use the Vercel API to add environment variables to the project. This step happen
 
 ```typescript
 // Add environment variables to the Vercel project
-await fetch(
-  `https://api.vercel.com/v10/projects/${vercelProjectId}/env`,
-  {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      key: "DATABASE_URL",
-      value: "postgresql://user:pass@host:5432/db",
-      type: "encrypted",
-      target: ["production", "preview", "development"],
-    }),
-  }
-)
+await fetch(`https://api.vercel.com/v10/projects/${vercelProjectId}/env`, {
+  method: 'POST',
+  headers: {
+    Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    key: 'DATABASE_URL',
+    value: 'postgresql://user:pass@host:5432/db',
+    type: 'encrypted',
+    target: ['production', 'preview', 'development'],
+  }),
+})
 ```
 
 For the full Vercel API reference, see [Environment Variables](https://vercel.com/docs/rest-api/projects/create-one-or-more-environment-variables).
@@ -104,35 +100,34 @@ For example, if you add `DATABASE_URL` and then prompt v0 to build a database-co
 </Callout>
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 // After adding DATABASE_URL to the Vercel project...
 const result = await v0.messages.send({
-  chatId: 'chat_123',
-  message: 'Add a Postgres database connection using the DATABASE_URL',
+chatId: 'chat_123',
+message: 'Add a Postgres database connection using the DATABASE_URL',
 })
 
 if (result.error) throw new Error(result.error.message)
 
 // v0 generates code that uses process.env.DATABASE_URL`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`# After adding DATABASE_URL to the Vercel project...
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`# After adding DATABASE_URL to the Vercel project...
 curl -X POST "https://api.v0.dev/v2/chats/chat_123/messages" \\
   -H "Authorization: Bearer $V0_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
     "message": "Add a Postgres database connection using the DATABASE_URL"
   }'`}
-  />
+/>
 </CustomCodeBlock>
-
 
 ---
 

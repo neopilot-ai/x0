@@ -8,7 +8,8 @@ export function generateStaticParams() {
         ['Guides', 'Getting Started', 'Overview'].includes(doc.section) &&
         !['reference', 'integration'].includes(doc.type),
     )
-    .filter((doc) => doc.slug).map((doc) => ({ slug: doc.slug.split('/') }))
+    .filter((doc) => doc.slug)
+    .map((doc) => ({ slug: doc.slug.split('/') }))
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {

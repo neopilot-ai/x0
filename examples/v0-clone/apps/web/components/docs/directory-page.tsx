@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import { docs, searchDocs } from '@/lib/docs-data'
 
-type DirectoryKind = 'topics' | 'examples' | 'api-reference' | 'integrations' | 'tutorials' | 'troubleshooting'
+type DirectoryKind =
+  | 'topics'
+  | 'examples'
+  | 'api-reference'
+  | 'integrations'
+  | 'tutorials'
+  | 'troubleshooting'
 
 function filterFor(kind: DirectoryKind) {
   if (kind === 'api-reference') {
@@ -71,7 +77,7 @@ export function DirectoryPage({
           title: doc.title,
           eyebrow: kind === 'api-reference' ? doc.category.replace('API · ', '') : doc.section,
           description: doc.description,
-          codeLine: kind === 'examples' ? doc.snippets[0]?.code.split('\n')[0] ?? '' : undefined,
+          codeLine: kind === 'examples' ? (doc.snippets[0]?.code.split('\n')[0] ?? '') : undefined,
         }))
 
   return (

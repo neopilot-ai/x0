@@ -6,10 +6,7 @@ interface Params {
   cmdId: string
 }
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<Params> }
-) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<Params> }) {
   const logParams = await params
   const encoder = new TextEncoder()
   const sandbox = await Sandbox.get(logParams)
@@ -25,13 +22,13 @@ export async function GET(
                 data: logline.data,
                 stream: logline.stream,
                 timestamp: Date.now(),
-              }) + '\n'
-            )
+              }) + '\n',
+            ),
           )
         }
         controller.close()
       },
     }),
-    { headers: { 'Content-Type': 'application/x-ndjson' } }
+    { headers: { 'Content-Type': 'application/x-ndjson' } },
   )
 }

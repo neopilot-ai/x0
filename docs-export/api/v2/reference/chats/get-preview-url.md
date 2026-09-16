@@ -1,37 +1,35 @@
 ---
 title: Get Preview URL
 description: Returns the preview URL for a chat. If the preview isn't ready, the response is null. Poll this endpoint until the response is non-null.
-badge: "GET"
+badge: 'GET'
 ---
 
 # Get Preview URL
-
-
 
 <EndpointDisplay method="get" path="/chats/{chatId}/preview" versionPrefix="/v2" />
 
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 const result = await v0.chats.getPreview({
-  chatId: 'chat_abc123',
+chatId: 'chat_abc123',
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X GET "https://api.v0.dev/v2/chats/chat_abc123/preview" \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X GET "https://api.v0.dev/v2/chats/chat_abc123/preview" \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -41,47 +39,46 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the chat.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat.",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "url",
-    "type": "string",
-    "required": true,
-    "description": "The preview URL for this chat.",
-    "deprecated": false
-  },
-  {
-    "name": "token",
-    "type": "string",
-    "required": true,
-    "description": "A short-lived token for accessing the preview URL via the x-v0-preview-token header.",
-    "deprecated": false
-  },
-  {
-    "name": "expiresAt",
-    "type": "string",
-    "required": true,
-    "description": "The ISO timestamp when token expires.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "url",
+"type": "string",
+"required": true,
+"description": "The preview URL for this chat.",
+"deprecated": false
+},
+{
+"name": "token",
+"type": "string",
+"required": true,
+"description": "A short-lived token for accessing the preview URL via the x-v0-preview-token header.",
+"deprecated": false
+},
+{
+"name": "expiresAt",
+"type": "string",
+"required": true,
+"description": "The ISO timestamp when token expires.",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

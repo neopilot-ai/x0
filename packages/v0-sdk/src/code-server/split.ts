@@ -23,12 +23,22 @@ export async function splitViewHorizontal(
   leftFile: CodeServerFile,
   rightFile: CodeServerFile,
 ): Promise<SplitViewConfig> {
-  return createSplitView(leftFile, rightFile, { leftPath: leftFile.path, rightPath: rightFile.path, direction: 'horizontal', showDiff: false })
+  return createSplitView(leftFile, rightFile, {
+    leftPath: leftFile.path,
+    rightPath: rightFile.path,
+    direction: 'horizontal',
+    showDiff: false,
+  })
 }
 
 export async function splitViewVertical(
   leftFile: CodeServerFile,
   rightFile: CodeServerFile,
 ): Promise<SplitViewConfig> {
-  return createSplitView(leftFile, rightFile, { leftPath: leftFile.path, rightPath: rightFile.path, direction: 'vertical', showDiff: false })
+  return createSplitView(leftFile, rightFile, {
+    leftPath: leftFile.path,
+    rightPath: rightFile.path,
+    direction: 'vertical',
+    showDiff: false,
+  })
 }

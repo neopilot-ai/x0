@@ -49,15 +49,13 @@ export function buildFileTree(paths: string[]): FileNode[] {
     }
   }
 
-  const convertToArray = (obj: {
-    [key: string]: FileNodeBuilder
-  }): FileNode[] => {
+  const convertToArray = (obj: { [key: string]: FileNodeBuilder }): FileNode[] => {
     return Object.values(obj)
       .map(
         (node): FileNode => ({
           ...node,
           children: node.children ? convertToArray(node.children) : undefined,
-        })
+        }),
       )
       .sort((a, b) => {
         if (a.type !== b.type) {

@@ -6,23 +6,10 @@
   "category": "API · Projects",
   "type": "reference",
   "description": "Deletes multiple environment variables for a given project by their IDs.",
-  "topics": [
-    "design",
-    "api",
-    "environment-variables"
-  ],
-  "related": [
-    "api/v2/guides/environment-variables"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "topics": ["design", "api", "environment-variables"],
+  "related": ["api/v2/guides/environment-variables"],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To manage environment variables for a chat, see the Environment Variables guide.",
   "snippets": [],
   "content": "\n\n# Delete Environment Variables\n\n**Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To manage environment variables for a chat, see the [Environment Variables guide](/docs/api/v2/guides/environment-variables).\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.projects.deleteEnvVars({\nprojectId: 'project_abc123',\nenvironmentVariableIds: ['env_def456', 'env_ghi789'],\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X POST https://api.v0.dev/v1/projects/project_abc123/env-vars/delete \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\" \\\n-d '{\n\"environmentVariableIds\": [\n\"env_def456\",\n\"env_ghi789\"\n]\n}'`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"projectId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the project whose environment variables should be deleted.\"\n}\n]}\n/>\n\n#### Body\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"environmentVariableIds\",\n\"type\": \"string[]\",\n\"required\": true,\n\"description\": \"An array of environment variable IDs to delete.\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the environment variable to delete.\",\n\"deprecated\": false,\n\"properties\": []\n}\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'environment_variable'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"deleted\",\n\"type\": \"'true'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",

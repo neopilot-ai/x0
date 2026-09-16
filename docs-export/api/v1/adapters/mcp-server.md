@@ -12,27 +12,26 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # MCP Server
-
-
 
 ## Overview
 
 The v0 MCP server enables your IDE's AI assistant to:
 
-* Create and manage v0 chats
-* Access v0's code generation capabilities
-* Leverage v0's design and development expertise
-* Integrate v0 workflows into your development process
+- Create and manage v0 chats
+- Access v0's code generation capabilities
+- Leverage v0's design and development expertise
+- Integrate v0 workflows into your development process
 
 ## Supported IDEs
 
 The v0 MCP server works with any IDE that supports the Model Context Protocol, including:
 
-* **Cursor** - AI-powered code editor
-* **Claude Desktop** - Anthropic's Claude desktop application
-* **VS Code** (with MCP extensions)
-* **Any MCP-compatible IDE**
+- **Cursor** - AI-powered code editor
+- **Claude Desktop** - Anthropic's Claude desktop application
+- **VS Code** (with MCP extensions)
+- **Any MCP-compatible IDE**
 
 ## Configuration
 
@@ -151,24 +150,23 @@ Get a preview URL for a chat's generated app:
 
 **"Command not found: npx"**
 
-* Install Node.js and npm: [https://nodejs.org/](https://nodejs.org/)
+- Install Node.js and npm: [https://nodejs.org/](https://nodejs.org/)
 
 **"Connection failed"**
 
-* Check your internet connection
-* Verify the MCP server URL: `https://v0.app/api/mcp`
-* Ensure your firewall allows outbound connections
+- Check your internet connection
+- Verify the MCP server URL: `https://v0.app/api/mcp`
+- Ensure your firewall allows outbound connections
 
 **"Authentication failed"**
 
-* Reconnect the v0 MCP server in your client to restart the OAuth flow
-* If you need to switch accounts or teams, remove the existing v0 MCP connection in your client and connect again
-* If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request
+- Reconnect the v0 MCP server in your client to restart the OAuth flow
+- If you need to switch accounts or teams, remove the existing v0 MCP connection in your client and connect again
+- If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request
 
 ## Next Steps
 
 After configuring the MCP server, explore the [v0 API documentation](/docs/api/v1/quickstart) to understand the full range of capabilities available through v0's API.
-
 
 ---
 

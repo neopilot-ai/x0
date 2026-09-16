@@ -6,21 +6,14 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Learn how to use design system skills with the v0 API v2",
-  "topics": [
-    "design",
-    "api"
-  ],
+  "topics": ["design", "api"],
   "related": [
     "design-systems-2",
     "api/v2/reference/chats/create-chat",
     "api/v2/reference/messages/send-message"
   ],
   "requires": [],
-  "headings": [
-    "Use a design system skill",
-    "Update a design system skill",
-    "How skills work"
-  ],
+  "headings": ["Use a design system skill", "Update a design system skill", "How skills work"],
   "excerpt": "Design systems work like other skills in the v0 API. You can mention one in a prompt and let the agent decide when it is relevant, or pass it in the skills field to make v0 load it for a request.",
   "snippets": [
     {

@@ -80,6 +80,7 @@ Then follow up: "Add a shopping cart with localStorage persistence"
 Specify your preferred technologies, frameworks, and integrations. This helps v0 generate code that matches your existing stack or preferences.
 
 "Build a real-time chat app using:
+
 - Next.js 14 with App Router
 - Socket.io for messaging
 - MongoDB for storage
@@ -127,12 +128,15 @@ Start with core functionality and gradually add features. This approach ensures 
 Use these templates as starting points for common development patterns. Customize them based on your specific requirements.
 
 #### CRUD operations
+
 "Create a resource management interface with list view, add/edit forms, delete confirmation, and search/pagination"
 
 #### Authentication
+
 "Implement [auth method] with login/register forms, password reset, session management, and protected routes"
 
 #### Dashboards
+
 "Build a dashboard widget showing [metric] with current value, trend indicator, comparison data, and interactive chart"
 
 ## Complete example workflow
@@ -140,15 +144,19 @@ Use these templates as starting points for common development patterns. Customiz
 Here's how to build a customer support ticket system from start to finish. This example shows the progression from planning to a fully functional application:
 
 ### 1. Planning
+
 "Create a PRD for a customer support ticket system with agent dashboard and customer portal"
 
 ### 2. Core implementation
+
 "Build the ticket creation form with priority levels, categories, and file uploads"
 
 ### 3. Agent features
+
 "Add the agent dashboard with ticket list, status updates, and response interface"
 
 ### 4. Enhancements
+
 "Implement real-time notifications and email alerts for ticket updates"
 
 ## Prompt queuing

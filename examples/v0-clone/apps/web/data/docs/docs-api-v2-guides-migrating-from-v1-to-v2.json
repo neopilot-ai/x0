@@ -6,11 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Understand the major v0 API v2 changes before migrating from v1",
-  "topics": [
-    "design",
-    "api",
-    "streaming"
-  ],
+  "topics": ["design", "api", "streaming"],
   "related": [
     "api/v2/quickstart",
     "api/v2/guides/environment-variables",

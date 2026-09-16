@@ -5,11 +5,13 @@ A Next.js application showcasing the v0 Platform API. Build AI-powered apps with
 ## Setup
 
 1. Install dependencies:
+
    ```bash
    bun install
    ```
 
 2. Configure environment: Create a `.env.local` file in the root directory:
+
    ```
    V0_API_KEY=your_api_key_here
    # Optional: For rate limiting

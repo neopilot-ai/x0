@@ -64,9 +64,10 @@ export async function waitForPreview(
   const intervalMs = options?.intervalMs ?? 2000
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
     const result = await v0.chats.getPreview({ chatId })
-    const url = result.data && typeof result.data === 'object' && 'url' in result.data
-      ? (result.data as { url: string }).url
-      : null
+    const url =
+      result.data && typeof result.data === 'object' && 'url' in result.data
+        ? (result.data as { url: string }).url
+        : null
     if (url) return url
     await new Promise((resolve) => setTimeout(resolve, intervalMs))
   }

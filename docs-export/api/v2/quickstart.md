@@ -12,8 +12,6 @@ related:
 
 # Quickstart
 
-
-
 Build an app-generation experience where users can prompt, preview, and iterate on applications. Your frontend owns the experience; a small server layer keeps your v0 credentials private and forwards requests to the API.
 
 ```bash
@@ -146,12 +144,11 @@ This example waits for the first generation to finish. For a streaming interface
 
 ## Next steps
 
-* [Build a custom chat interface](/docs/api/v2/guides/custom-chat-interface) with React and AI SDK.
-* [Embed the live preview](/docs/api/v2/guides/accessing-previews) in your product.
-* [Use v0 from another agent](/docs/api/v2/guides/integrating-v0-into-agents) through MCP or AI SDK tools.
-* [Migrate an existing v1 integration](/docs/api/v2/guides/migrating-from-v1-to-v2).
-* Browse the [endpoint reference](/docs/api/v2/reference/chats/list-chats).
-
+- [Build a custom chat interface](/docs/api/v2/guides/custom-chat-interface) with React and AI SDK.
+- [Embed the live preview](/docs/api/v2/guides/accessing-previews) in your product.
+- [Use v0 from another agent](/docs/api/v2/guides/integrating-v0-into-agents) through MCP or AI SDK tools.
+- [Migrate an existing v1 integration](/docs/api/v2/guides/migrating-from-v1-to-v2).
+- Browse the [endpoint reference](/docs/api/v2/reference/chats/list-chats).
 
 ---
 

@@ -7,12 +7,12 @@ type: guide
 
 # FAQs
 
-*Last Updated: March 17, 2026*
-*Effective Date: March 31, 2026*
+_Last Updated: March 17, 2026_
+_Effective Date: March 31, 2026_
 
 ## New v0 Update
 
-*Released: February 4, 2026*
+_Released: February 4, 2026_
 
 **What's different about v0 now?**
 
@@ -245,7 +245,7 @@ Yes. v0 follows secure coding best practices, and deployed apps benefit from Ver
 v0 offers 5 plans:
 
 - **Free**: No cost. For people looking to explore.
-- **Premium**: $20/month. For higher limits and power users. *(Sunsetting — not available to new users)*
+- **Premium**: $20/month. For higher limits and power users. _(Sunsetting — not available to new users)_
 - **Plus**: $30/user/month. For fast moving teams and collaboration.
 - **Business**: $100/user/month. For privacy conscious teams.
 - **Enterprise**: For large companies that require additional security.

@@ -1,7 +1,7 @@
 ---
 title: Assign Project to Chat
 description: Links an existing v0 project to a specific chat. Helps group conversations under a shared project context.
-badge: "POST"
+badge: 'POST'
 product: v0 API
 type: reference
 prerequisites:
@@ -9,8 +9,6 @@ prerequisites:
 ---
 
 # Assign Project to Chat
-
-
 
 <EndpointDisplay method="post" path="/projects/{projectId}/assign" />
 
@@ -21,29 +19,29 @@ prerequisites:
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.projects.assign({
-  projectId: '123',
-  chatId: '123',
+projectId: '123',
+chatId: '123',
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X POST https://api.v0.dev/v1/projects/123/assign \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X POST https://api.v0.dev/v1/projects/123/assign \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "chatId": "123"
   }'`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -53,61 +51,60 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "projectId",
-    "type": "string",
-    "required": true,
-    "description": "The ID of the project to assign."
-  }
+title=""
+parameters={[
+{
+"name": "projectId",
+"type": "string",
+"required": true,
+"description": "The ID of the project to assign."
+}
 ]}
 />
 
 #### Body
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The ID of the chat to assign the project to.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The ID of the chat to assign the project to.",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "object",
-    "type": "'project'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "id",
-    "type": "string",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "assigned",
-    "type": "'true'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "object",
+"type": "'project'",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "assigned",
+"type": "'true'",
+"required": true,
+"description": "",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

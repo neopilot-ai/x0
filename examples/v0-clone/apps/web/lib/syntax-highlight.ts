@@ -60,7 +60,7 @@ const SPECIAL_PATHS: Record<string, Language> = {
   '.gitignore': 'plain',
   '.env': 'plain',
   '.env.local': 'plain',
-  'Dockerfile': 'plain',
+  Dockerfile: 'plain',
 }
 
 export function languageForPath(path: string): Language {
@@ -93,37 +93,165 @@ type ProgramOptions = {
 }
 
 const TS_KEYWORDS = new Set([
-  'abstract', 'as', 'asserts', 'async', 'await', 'break', 'case', 'catch', 'class', 'const',
-  'continue', 'debugger', 'declare', 'default', 'delete', 'do', 'else', 'enum', 'export',
-  'extends', 'finally', 'for', 'from', 'function', 'get', 'if', 'implements', 'import', 'in',
-  'infer', 'instanceof', 'interface', 'is', 'keyof', 'let', 'namespace', 'new', 'of',
-  'override', 'package', 'private', 'protected', 'public', 'readonly', 'return', 'satisfies',
-  'set', 'static', 'super', 'switch', 'this', 'throw', 'try', 'type', 'using', 'var', 'void',
-  'while', 'with', 'yield',
+  'abstract',
+  'as',
+  'asserts',
+  'async',
+  'await',
+  'break',
+  'case',
+  'catch',
+  'class',
+  'const',
+  'continue',
+  'debugger',
+  'declare',
+  'default',
+  'delete',
+  'do',
+  'else',
+  'enum',
+  'export',
+  'extends',
+  'finally',
+  'for',
+  'from',
+  'function',
+  'get',
+  'if',
+  'implements',
+  'import',
+  'in',
+  'infer',
+  'instanceof',
+  'interface',
+  'is',
+  'keyof',
+  'let',
+  'namespace',
+  'new',
+  'of',
+  'override',
+  'package',
+  'private',
+  'protected',
+  'public',
+  'readonly',
+  'return',
+  'satisfies',
+  'set',
+  'static',
+  'super',
+  'switch',
+  'this',
+  'throw',
+  'try',
+  'type',
+  'using',
+  'var',
+  'void',
+  'while',
+  'with',
+  'yield',
 ])
 const TS_TYPES = new Set([
-  'any', 'bigint', 'boolean', 'never', 'number', 'object', 'string', 'symbol', 'unknown',
+  'any',
+  'bigint',
+  'boolean',
+  'never',
+  'number',
+  'object',
+  'string',
+  'symbol',
+  'unknown',
 ])
 const TS_LITERALS = new Set(['true', 'false', 'null', 'undefined', 'NaN', 'Infinity'])
 
 const GO_KEYWORDS = new Set([
-  'break', 'case', 'chan', 'const', 'continue', 'default', 'defer', 'else', 'fallthrough',
-  'for', 'func', 'go', 'goto', 'if', 'import', 'interface', 'map', 'package', 'range',
-  'return', 'select', 'struct', 'switch', 'type', 'var',
+  'break',
+  'case',
+  'chan',
+  'const',
+  'continue',
+  'default',
+  'defer',
+  'else',
+  'fallthrough',
+  'for',
+  'func',
+  'go',
+  'goto',
+  'if',
+  'import',
+  'interface',
+  'map',
+  'package',
+  'range',
+  'return',
+  'select',
+  'struct',
+  'switch',
+  'type',
+  'var',
 ])
 const GO_LITERALS = new Set(['true', 'false', 'nil', 'iota'])
 
 const PYTHON_KEYWORDS = new Set([
-  'and', 'as', 'assert', 'async', 'await', 'break', 'case', 'class', 'continue', 'def',
-  'del', 'elif', 'else', 'except', 'finally', 'for', 'from', 'global', 'if', 'import', 'in',
-  'is', 'lambda', 'match', 'nonlocal', 'not', 'or', 'pass', 'raise', 'return', 'try',
-  'while', 'with', 'yield',
+  'and',
+  'as',
+  'assert',
+  'async',
+  'await',
+  'break',
+  'case',
+  'class',
+  'continue',
+  'def',
+  'del',
+  'elif',
+  'else',
+  'except',
+  'finally',
+  'for',
+  'from',
+  'global',
+  'if',
+  'import',
+  'in',
+  'is',
+  'lambda',
+  'match',
+  'nonlocal',
+  'not',
+  'or',
+  'pass',
+  'raise',
+  'return',
+  'try',
+  'while',
+  'with',
+  'yield',
 ])
 const PYTHON_LITERALS = new Set(['None', 'True', 'False'])
 
 const SHELL_KEYWORDS = new Set([
-  'case', 'do', 'done', 'elif', 'else', 'esac', 'fi', 'for', 'function', 'if', 'in',
-  'local', 'readonly', 'select', 'then', 'until', 'while',
+  'case',
+  'do',
+  'done',
+  'elif',
+  'else',
+  'esac',
+  'fi',
+  'for',
+  'function',
+  'if',
+  'in',
+  'local',
+  'readonly',
+  'select',
+  'then',
+  'until',
+  'while',
 ])
 const SHELL_LITERALS = new Set(['true', 'false'])
 
@@ -134,14 +262,21 @@ const PROGRAMS: Record<'ts' | 'go' | 'python' | 'shell' | 'json' | 'yaml', Progr
   ts: {
     lineComments: ['//'],
     blockComments: [{ open: '/*', close: '*/' }],
-    quotes: [{ open: '`', close: '`' }, { open: "'", close: "'" }, { open: '"', close: '"' }],
+    quotes: [
+      { open: '`', close: '`' },
+      { open: "'", close: "'" },
+      { open: '"', close: '"' },
+    ],
     keywords: new Set([...TS_KEYWORDS, ...TS_TYPES]),
     literals: TS_LITERALS,
   },
   go: {
     lineComments: ['//'],
     blockComments: [{ open: '/*', close: '*/' }],
-    quotes: [{ open: '`', close: '`' }, { open: '"', close: '"' }],
+    quotes: [
+      { open: '`', close: '`' },
+      { open: '"', close: '"' },
+    ],
     keywords: GO_KEYWORDS,
     literals: GO_LITERALS,
   },
@@ -160,7 +295,10 @@ const PROGRAMS: Record<'ts' | 'go' | 'python' | 'shell' | 'json' | 'yaml', Progr
   shell: {
     lineComments: ['#'],
     blockComments: [],
-    quotes: [{ open: "'", close: "'" }, { open: '"', close: '"' }],
+    quotes: [
+      { open: "'", close: "'" },
+      { open: '"', close: '"' },
+    ],
     keywords: SHELL_KEYWORDS,
     literals: SHELL_LITERALS,
     variablePrefixes: ['$'],
@@ -175,14 +313,16 @@ const PROGRAMS: Record<'ts' | 'go' | 'python' | 'shell' | 'json' | 'yaml', Progr
   yaml: {
     lineComments: ['#', '---'],
     blockComments: [],
-    quotes: [{ open: "'", close: "'" }, { open: '"', close: '"' }],
+    quotes: [
+      { open: "'", close: "'" },
+      { open: '"', close: '"' },
+    ],
     keywords: new Set(),
     literals: YAML_LITERALS,
   },
 }
 
-const NUMBER_PATTERN =
-  /(?:0[xXbB][0-9a-fA-F]+|(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)/
+const NUMBER_PATTERN = /(?:0[xXbB][0-9a-fA-F]+|(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?)/
 
 const WORD_START = /[A-Za-z$_]/
 const WORD_CHAR = /[A-Za-z0-9$_]/
@@ -344,9 +484,10 @@ function highlightCss(code: string): string {
     }
 
     if (/[0-9]/.test(ch)) {
-      const match = /^(?:\d+(?:\.\d+)?|\.\d+)(?:px|rem|em|%|vh|vw|vmin|vmax|s|ms|deg|rad|fr|ch|ex|cm|mm|in|pt|pc)?/.exec(
-        code.slice(i),
-      )
+      const match =
+        /^(?:\d+(?:\.\d+)?|\.\d+)(?:px|rem|em|%|vh|vw|vmin|vmax|s|ms|deg|rad|fr|ch|ex|cm|mm|in|pt|pc)?/.exec(
+          code.slice(i),
+        )
       if (match) {
         emit(match[0], 'tk-number')
         i += match[0].length

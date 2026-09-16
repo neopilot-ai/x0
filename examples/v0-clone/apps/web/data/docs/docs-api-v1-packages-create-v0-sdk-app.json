@@ -6,13 +6,8 @@
   "category": "API · V1",
   "type": "reference",
   "description": "Create v0 SDK-powered apps with one command",
-  "topics": [
-    "api",
-    "terminal"
-  ],
-  "related": [
-    "api/v1/packages/v0-sdk"
-  ],
+  "topics": ["api", "terminal"],
+  "related": ["api/v1/packages/v0-sdk"],
   "requires": [],
   "headings": [
     "Installation",

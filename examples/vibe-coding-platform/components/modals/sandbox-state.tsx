@@ -18,27 +18,21 @@ export function SandboxState() {
     return (
       <Dialog open>
         <DialogHeader className="sr-only">
-          <DialogTitle className="sr-only">
-            Sandbox max. duration reached
-          </DialogTitle>
+          <DialogTitle className="sr-only">Sandbox max. duration reached</DialogTitle>
           <DialogDescription className="sr-only">
-            The Vercel Sandbox is already stopped. You can start a new session
-            by clicking the button below.
+            The Vercel Sandbox is already stopped. You can start a new session by clicking the
+            button below.
           </DialogDescription>
         </DialogHeader>
         <DialogContent>
           Sandbox max. duration for this demo has been reached
-          <Button onClick={() => window.location.reload()}>
-            Start a new session
-          </Button>
+          <Button onClick={() => window.location.reload()}>Start a new session</Button>
         </DialogContent>
       </Dialog>
     )
   }
 
-  return sandboxId ? (
-    <DirtyChecker sandboxId={sandboxId} setStatus={setStatus} />
-  ) : null
+  return sandboxId ? <DirtyChecker sandboxId={sandboxId} setStatus={setStatus} /> : null
 }
 
 interface DirtyCheckerProps {
@@ -54,7 +48,7 @@ function DirtyChecker({ sandboxId, setStatus }: DirtyCheckerProps) {
       const { status } = await response.json()
       return status
     },
-    { refreshInterval: 1000 }
+    { refreshInterval: 1000 },
   )
 
   useEffect(() => {

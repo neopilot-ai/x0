@@ -6,18 +6,9 @@
   "category": "API · Chats",
   "type": "reference",
   "description": "Resolves a chat that's blocked waiting for user input and continues the conversation.",
-  "topics": [
-    "design",
-    "api",
-    "permissions",
-    "integrations"
-  ],
-  "related": [
-    "api/v1/guides/handling-integrations"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api", "permissions", "integrations"],
+  "related": ["api/v1/guides/handling-integrations"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Usage",
     "Before You Call It",

@@ -40,11 +40,15 @@ export interface VersionSnapshot {
   files: FileSnapshot[]
 }
 
-export function createVersionSnapshot(chatId: string, title?: string, metadata?: Record<string, string>): VersionSnapshot {
+export function createVersionSnapshot(
+  chatId: string,
+  title?: string,
+  metadata?: Record<string, string>,
+): VersionSnapshot {
   return {
     versionId: chatId,
     title: title ?? 'Untitled',
-    description: metadata && metadata["description"],
+    description: metadata && metadata['description'],
     createdAt: new Date(),
     files: [],
   }

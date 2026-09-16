@@ -12,38 +12,37 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Classic v0
-
-
 
 Build the iconic v0.dev experience with modern web technologies. This example shows you how to create the classic three-generation workflow using React, Next.js, and the v0 SDK.
 
 ## Features
 
-* **Classic v0 Interface**: Faithful recreation of the original v0.dev workflow
-* **Multiple Generations**: Creates 3 different variations (A, B, C) for each prompt
-* **Generation Selection**: Click between different generations to compare and choose
-* **Live Preview**: See your generated components in real-time via iframe
-* **Modern Stack**: Built with Next.js 15, React 19, TypeScript, and Tailwind CSS
-* **shadcn/ui Components**: Professional UI components for a polished interface
-* **Two-Stage Workflow**: Prompt input → Multiple generations → Selection and iteration
+- **Classic v0 Interface**: Faithful recreation of the original v0.dev workflow
+- **Multiple Generations**: Creates 3 different variations (A, B, C) for each prompt
+- **Generation Selection**: Click between different generations to compare and choose
+- **Live Preview**: See your generated components in real-time via iframe
+- **Modern Stack**: Built with Next.js 15, React 19, TypeScript, and Tailwind CSS
+- **shadcn/ui Components**: Professional UI components for a polished interface
+- **Two-Stage Workflow**: Prompt input → Multiple generations → Selection and iteration
 
 ## Technologies Used
 
-* **Frontend Framework**: Next.js 15 with App Router
-* **UI Library**: shadcn/ui + Radix UI primitives
-* **Styling**: Tailwind CSS
-* **AI Integration**: v0-sdk for chat and component generation
-* **Code Highlighting**: react-syntax-highlighter
-* **Icons**: Lucide React
+- **Frontend Framework**: Next.js 15 with App Router
+- **UI Library**: shadcn/ui + Radix UI primitives
+- **Styling**: Tailwind CSS
+- **AI Integration**: v0-sdk for chat and component generation
+- **Code Highlighting**: react-syntax-highlighter
+- **Icons**: Lucide React
 
 ## Getting Started
 
 ### Prerequisites
 
-* Node.js 22+
-* pnpm (recommended) or npm
-* v0 API key from [v0 settings](https://v0.app/settings/keys)
+- Node.js 22+
+- pnpm (recommended) or npm
+- v0 API key from [v0 settings](https://v0.app/settings/keys)
 
 ### Installation
 
@@ -84,26 +83,26 @@ Build the iconic v0.dev experience with modern web technologies. This example sh
 
 ### Example Prompts
 
-* "Create a responsive navbar with Tailwind CSS"
-* "Build a todo app with React hooks"
-* "Make a landing page for a coffee shop"
-* "Design a contact form with validation"
-* "Create a dashboard with charts"
+- "Create a responsive navbar with Tailwind CSS"
+- "Build a todo app with React hooks"
+- "Make a landing page for a coffee shop"
+- "Design a contact form with validation"
+- "Create a dashboard with charts"
 
 ## Interface Components
 
 ### Prompt Input Stage
 
-* **Main Prompt**: Large textarea for describing your UI
-* **Suggestions**: Quick-start prompts for inspiration
-* **Loading State**: Animated feedback while generating
+- **Main Prompt**: Large textarea for describing your UI
+- **Suggestions**: Quick-start prompts for inspiration
+- **Loading State**: Animated feedback while generating
 
 ### Generations View
 
-* **Generation Display**: Full-screen preview of selected generation
-* **Generation Selector**: A, B, C buttons to switch between options
-* **Navigation**: Back button to return to prompt input
-* **Headers**: Clean navigation with v0 branding
+- **Generation Display**: Full-screen preview of selected generation
+- **Generation Selector**: A, B, C buttons to switch between options
+- **Navigation**: Back button to return to prompt input
+- **Headers**: Clean navigation with v0 branding
 
 ## Environment Variables
 
@@ -114,7 +113,6 @@ Build the iconic v0.dev experience with modern web technologies. This example sh
 ## Source Code
 
 View the complete source code on GitHub: [v0-sdk/examples/classic-v0](https://github.com/vercel/v0-sdk/tree/main/examples/classic-v0)
-
 
 ---
 

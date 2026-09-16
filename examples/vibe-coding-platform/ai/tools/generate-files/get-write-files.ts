@@ -11,11 +11,7 @@ interface Params {
 }
 
 export function getWriteFiles({ sandbox, toolCallId, writer }: Params) {
-  return async function writeFiles(params: {
-    written: string[]
-    files: File[]
-    paths: string[]
-  }) {
+  return async function writeFiles(params: { written: string[]; files: File[]; paths: string[] }) {
     const paths = params.written.concat(params.files.map((file) => file.path))
     writer.write({
       id: toolCallId,
@@ -28,7 +24,7 @@ export function getWriteFiles({ sandbox, toolCallId, writer }: Params) {
         params.files.map((file) => ({
           content: Buffer.from(file.content, 'utf8'),
           path: file.path,
-        }))
+        })),
       )
     } catch (error) {
       const richError = getRichError({

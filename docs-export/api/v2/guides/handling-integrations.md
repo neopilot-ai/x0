@@ -11,8 +11,6 @@ related:
 
 # Handling Integrations
 
-
-
 Learn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:
 
 1. Prompt the agent.
@@ -29,8 +27,8 @@ Start or continue a chat with a request that depends on an integration.
 
 For example:
 
-* "Build a waiting list app with Neon."
-* "Create a dashboard that uses Supabase auth."
+- "Build a waiting list app with Neon."
+- "Create a dashboard that uses Supabase auth."
 
 If the agent can continue without extra setup, it will. If it needs an integration, it will stop and ask your app to handle it.
 
@@ -38,9 +36,9 @@ If the agent can continue without extra setup, it will. If it needs an integrati
 
 When a chat is blocked on integration setup, inspect the latest assistant message first. How you access it depends on the response mode:
 
-* **Synchronous**: The request returns the completed assistant message directly.
-* **Asynchronous**: The request returns a `messageId`. Poll `GET /v2/chats/{chatId}/messages/{messageId}` until `finishReason` is no longer `null`.
-* **Streaming**: Consume `result.stream` for updates, then inspect `result.final.parts` for the completed message parts.
+- **Synchronous**: The request returns the completed assistant message directly.
+- **Asynchronous**: The request returns a `messageId`. Poll `GET /v2/chats/{chatId}/messages/{messageId}` until `finishReason` is no longer `null`.
+- **Streaming**: Consume `result.stream` for updates, then inspect `result.final.parts` for the completed message parts.
 
 An integration request surfaces as an `agent-action` part in the message's `parts` array with `name: "get_or_request_integration"`. Its `data.requestedIntegrations` lists the integration names to install (for example, `["Neon"]`), and `data.requestedMcpPresets` lists any MCP presets. You pass these values back in step 4.
 
@@ -53,9 +51,7 @@ const message = await v0.messages.send({
 })
 
 const integrationRequest = message.parts.find(
-  (part) =>
-    part.type === 'agent-action' &&
-    part.name === 'get_or_request_integration',
+  (part) => part.type === 'agent-action' && part.name === 'get_or_request_integration',
 )
 ```
 
@@ -91,8 +87,8 @@ if (!vercelProjectId) {
 
 This step happens outside the v0 API. The exact Vercel API calls depend on your integration flow, but these docs are the relevant starting points:
 
-* [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)
-* [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)
+- [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)
+- [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)
 
 When you call the Vercel endpoint that connects a resource to a project, pass `vercelProjectId` from the chat.
 
@@ -144,10 +140,7 @@ const permissionRequest = message.parts.find(
   (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,
 )
 
-if (
-  permissionRequest?.type === 'tool-call' &&
-  permissionRequest.suggestedPermissions
-) {
+if (permissionRequest?.type === 'tool-call' && permissionRequest.suggestedPermissions) {
   await v0.messages.resolve({
     chatId: 'chat_abc123',
     task: {
@@ -172,7 +165,6 @@ Here is the full flow in plain English:
 6. Your backend passes those `suggestedPermissions` back in a `confirmed-permissions` task to approve.
 
 That is the complete pattern for handling integrations in the v0 API.
-
 
 ---
 

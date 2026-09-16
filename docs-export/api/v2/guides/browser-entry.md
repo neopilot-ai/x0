@@ -55,7 +55,10 @@ Point `readV0Stream` at a `Response` from your own streaming API route (which pr
 ```ts
 import { readV0Stream } from 'v0/browser'
 
-const response = await fetch('/api/v0/chats/stream', { method: 'POST', body: JSON.stringify({ message: 'Build a todo app' }) })
+const response = await fetch('/api/v0/chats/stream', {
+  method: 'POST',
+  body: JSON.stringify({ message: 'Build a todo app' }),
+})
 const result = readV0Stream(response)
 
 for await (const update of result.stream) {
@@ -71,7 +74,11 @@ for await (const update of result.stream) {
 import { createSandbox } from 'v0/browser'
 
 const sandbox = createSandbox(
-  { chats: { getPreview: ({ chatId }) => fetch(`/api/v0/chats/${chatId}/preview`).then((r) => r.json()) } },
+  {
+    chats: {
+      getPreview: ({ chatId }) => fetch(`/api/v0/chats/${chatId}/preview`).then((r) => r.json()),
+    },
+  },
   'chat_abc123',
 )
 const preview = await sandbox.getPreview()
@@ -80,6 +87,7 @@ const preview = await sandbox.getPreview()
 ## Security
 
 The browser entry point does not include:
+
 - `createV0Client` / `v0` — Use the main `v0` package instead
 - `vercelOidcAuth` — Use the main `v0` package instead
 - `fetchPreview` — Use the main `v0` package instead

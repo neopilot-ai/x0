@@ -6,14 +6,8 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Get started with the v0 API in minutes",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v1",
-    "api/v1/packages/v0-sdk"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v1", "api/v1/packages/v0-sdk"],
   "requires": [],
   "headings": [
     "v0 SDK",

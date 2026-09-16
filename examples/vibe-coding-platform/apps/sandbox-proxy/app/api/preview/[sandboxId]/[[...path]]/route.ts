@@ -38,14 +38,12 @@ async function handle(request: NextRequest, context: RouteContext) {
 
   let upstreamResponse: Response
   try {
-    upstreamResponse = await fetch(
-      upstream.toString(),
-      {
-        method: request.method,
-        headers: buildUpstreamHeaders(request, target),
-        body: request.method !== 'GET' && request.method !== 'HEAD' ? await request.text() : undefined,
-      },
-    )
+    upstreamResponse = await fetch(upstream.toString(), {
+      method: request.method,
+      headers: buildUpstreamHeaders(request, target),
+      body:
+        request.method !== 'GET' && request.method !== 'HEAD' ? await request.text() : undefined,
+    })
   } catch {
     return previewLoadingHtml(sandboxId, port)
   }

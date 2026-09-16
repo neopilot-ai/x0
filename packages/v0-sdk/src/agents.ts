@@ -1,6 +1,10 @@
-
-
-export type AgentType = 'code-generator' | 'designer' | 'data-analyst' | 'test-runner' | 'deployer' | 'custom'
+export type AgentType =
+  | 'code-generator'
+  | 'designer'
+  | 'data-analyst'
+  | 'test-runner'
+  | 'deployer'
+  | 'custom'
 
 export interface Agent {
   id: string
@@ -95,7 +99,8 @@ export const PRE_INSTALLED_AGENTS: PreInstalledAgent[] = [
     name: 'Code Generator',
     description: 'Generates high-quality code from natural language descriptions',
     category: 'development',
-    systemPrompt: 'You are a code generation expert. Write clean, efficient, and well-documented code.',
+    systemPrompt:
+      'You are a code generation expert. Write clean, efficient, and well-documented code.',
     tools: ['code-gen', 'code-review', 'debug'],
     enabled: true,
   },
@@ -146,6 +151,10 @@ export interface AgentActionResult {
 }
 
 export interface AgentExecutor {
-  execute(agentId: string, action: string, data: Record<string, unknown>): Promise<AgentActionResult>
+  execute(
+    agentId: string,
+    action: string,
+    data: Record<string, unknown>,
+  ): Promise<AgentActionResult>
   cancel(agentId: string): void
 }

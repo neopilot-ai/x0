@@ -6,15 +6,9 @@
   "category": "API · Reports",
   "type": "reference",
   "description": "Retrieves aggregated user activity data for team members, including chat counts, message counts, and activity timestamps. Shows the same data as displayed in the Usage settings for Enterprise teams. Only available for Enterprise teams with OWNER or BILLING role.",
-  "topics": [
-    "api",
-    "pricing",
-    "teams"
-  ],
+  "topics": ["api", "pricing", "teams"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Usage",
     "API Signature",

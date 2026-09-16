@@ -47,14 +47,14 @@ const { chats, messages, mcpServers, settings, usage, webhooks } = v0ToolsByCate
 
 One tool per API endpoint, named `<namespace><Operation>`:
 
-| Category | Tools include |
-| --- | --- |
-| `chats` | `chatsCreate`, `chatsCreateAsync`, `chatsCreateFromFiles`, `chatsCreateFromRepo`, `chatsCreateFromZip`, `chatsCreateStream`, `chatsCreateVercelProject`, `chatsDelete`, `chatsDeploy`, `chatsDownloadFiles`, `chatsDuplicate`, `chatsGet`, `chatsGetConnectStatus`, `chatsGetFiles`, `chatsGetPreview`, `chatsList`, `chatsRestoreMessage`, `chatsResume`, `chatsUpdate`, `chatsUpdateFiles` |
-| `messages` | `messagesGet`, `messagesList`, `messagesResolve`, `messagesResolveAsync`, `messagesResolveStream`, `messagesSend`, `messagesSendAsync`, `messagesSendStream`, `messagesStop` |
-| `mcpServers` | `mcpServersCreate`, `mcpServersDelete`, `mcpServersGet`, `mcpServersList`, `mcpServersUpdate` |
-| `settings` | `settingsGetPreviewHosts`, `settingsSetPreviewHosts` |
-| `usage` | `usageGetActivity`, `usageGetSummary`, `usageListEvents` |
-| `webhooks` | `webhooksCreate`, `webhooksDelete`, `webhooksGet`, `webhooksList`, `webhooksUpdate` |
+| Category     | Tools include                                                                                                                                                                                                                                                                                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chats`      | `chatsCreate`, `chatsCreateAsync`, `chatsCreateFromFiles`, `chatsCreateFromRepo`, `chatsCreateFromZip`, `chatsCreateStream`, `chatsCreateVercelProject`, `chatsDelete`, `chatsDeploy`, `chatsDownloadFiles`, `chatsDuplicate`, `chatsGet`, `chatsGetConnectStatus`, `chatsGetFiles`, `chatsGetPreview`, `chatsList`, `chatsRestoreMessage`, `chatsResume`, `chatsUpdate`, `chatsUpdateFiles` |
+| `messages`   | `messagesGet`, `messagesList`, `messagesResolve`, `messagesResolveAsync`, `messagesResolveStream`, `messagesSend`, `messagesSendAsync`, `messagesSendStream`, `messagesStop`                                                                                                                                                                                                                 |
+| `mcpServers` | `mcpServersCreate`, `mcpServersDelete`, `mcpServersGet`, `mcpServersList`, `mcpServersUpdate`                                                                                                                                                                                                                                                                                                |
+| `settings`   | `settingsGetPreviewHosts`, `settingsSetPreviewHosts`                                                                                                                                                                                                                                                                                                                                         |
+| `usage`      | `usageGetActivity`, `usageGetSummary`, `usageListEvents`                                                                                                                                                                                                                                                                                                                                     |
+| `webhooks`   | `webhooksCreate`, `webhooksDelete`, `webhooksGet`, `webhooksList`, `webhooksUpdate`                                                                                                                                                                                                                                                                                                          |
 
 ## Related
 

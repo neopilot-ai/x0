@@ -6,18 +6,9 @@
   "category": "Guides",
   "type": "conceptual",
   "description": "Projects in v0 are one app that is shared between many chats.",
-  "topics": [
-    "deployment",
-    "teams",
-    "sharing"
-  ],
-  "related": [
-    "teams",
-    "deployments"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["deployment", "teams", "sharing"],
+  "related": ["teams", "deployments"],
+  "requires": ["quickstart"],
   "headings": [
     "How chats connect to Projects",
     "Viewing your Projects",

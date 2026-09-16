@@ -40,7 +40,7 @@ function parseFrontmatter(body: string) {
       const [, key, raw] = match
       currentKey = key
       if (raw.startsWith('[')) {
-        meta[key] = [...raw.matchAll(/`?([^`\[\]",\s]+)`?/g)].map((m) => m[1])
+        meta[key] = [...raw.matchAll(/`?([^`[\]",\s]+)`?/g)].map((m) => m[1])
       } else if (raw) {
         meta[key] = raw
       } else {
@@ -97,7 +97,7 @@ function extractExcerpt(body: string) {
     .filter((l) => l && !/^#|^```/.test(l))
   for (const line of lines) {
     const candidate = line
-      .replace(/^[#>\-\*\d.]+\s*/, '')
+      .replace(/^[#>\-*\d.]+\s*/, '')
       .replace(/`/g, '')
       .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     if (candidate && candidate.length > 12) {
@@ -122,7 +122,10 @@ export async function POST(request: Request) {
   const rawUrl = typeof body?.url === 'string' ? body.url.trim() : ''
 
   if (!rawUrl) {
-    return Response.json({ ok: false, error: 'Provide a v0.app documentation URL.' }, { status: 400 })
+    return Response.json(
+      { ok: false, error: 'Provide a v0.app documentation URL.' },
+      { status: 400 },
+    )
   }
 
   let target: URL
@@ -132,7 +135,11 @@ export async function POST(request: Request) {
     return Response.json({ ok: false, error: 'Invalid URL.' }, { status: 400 })
   }
 
-  if (target.protocol !== 'https:' || target.hostname !== 'v0.app' || !target.pathname.startsWith('/docs/')) {
+  if (
+    target.protocol !== 'https:' ||
+    target.hostname !== 'v0.app' ||
+    !target.pathname.startsWith('/docs/')
+  ) {
     return Response.json(
       { ok: false, error: 'Only https://v0.app/docs/... URLs are allowed.' },
       { status: 403 },
@@ -193,7 +200,8 @@ export async function POST(request: Request) {
       doc,
     })
   } catch (error) {
-    const message = (error as Error).name === 'AbortError' ? 'Request timed out.' : (error as Error).message
+    const message =
+      (error as Error).name === 'AbortError' ? 'Request timed out.' : (error as Error).message
     return Response.json({ ok: false, error: message }, { status: 502 })
   } finally {
     clearTimeout(timer)

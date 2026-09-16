@@ -6,16 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Visually edit your app by selecting elements, tweaking styles, and applying the results back to your code.",
-  "topics": [
-    "design"
-  ],
-  "related": [
-    "code-editing",
-    "figma"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design"],
+  "related": ["code-editing", "figma"],
+  "requires": ["quickstart"],
   "headings": [
     "Enabling design mode",
     "Selecting elements",

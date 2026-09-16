@@ -6,16 +6,8 @@
   "category": "Reference",
   "type": "guide",
   "description": "Learn how to manage v0 seats, access, and more in your Vercel Enterprise account.",
-  "topics": [
-    "design",
-    "security",
-    "teams"
-  ],
-  "related": [
-    "teams",
-    "security",
-    "account"
-  ],
+  "topics": ["design", "security", "teams"],
+  "related": ["teams", "security", "account"],
   "requires": [],
   "headings": [
     "Managing seats and access",

@@ -6,13 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Build a React chat interface with v0 and AI SDK",
-  "topics": [
-    "design",
-    "api",
-    "streaming",
-    "previews",
-    "agents"
-  ],
+  "topics": ["design", "api", "streaming", "previews", "agents"],
   "related": [
     "api/v2/quickstart",
     "api/v2/guides/resuming-streams",

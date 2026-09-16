@@ -6,14 +6,8 @@
   "category": "Reference",
   "type": "reference",
   "description": "Learn about v0's security practices, threat modeling, and enterprise security features.",
-  "topics": [
-    "ai",
-    "security"
-  ],
-  "related": [
-    "enterprise",
-    "account"
-  ],
+  "topics": ["ai", "security"],
+  "related": ["enterprise", "account"],
   "requires": [],
   "headings": [
     "General security approach",

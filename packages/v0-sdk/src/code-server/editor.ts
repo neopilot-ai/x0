@@ -78,11 +78,23 @@ function computeDiffHunks(oldContent: string, newContent: string): import('./typ
     const oldLine = oldLines[i] ?? ''
     const newLine = newLines[i] ?? ''
     if (oldLine !== newLine) {
-      if (oldLine) { lines.push({ type: 'delete', content: oldLine }); oldCount++ }
-      if (newLine) { lines.push({ type: 'add', content: newLine }); newCount++ }
+      if (oldLine) {
+        lines.push({ type: 'delete', content: oldLine })
+        oldCount++
+      }
+      if (newLine) {
+        lines.push({ type: 'add', content: newLine })
+        newCount++
+      }
     } else {
       if (oldCount > 0 || newCount > 0) {
-        hunks.push({ oldStart, oldLines: oldCount, newStart, newLines: newCount, lines: [...lines] })
+        hunks.push({
+          oldStart,
+          oldLines: oldCount,
+          newStart,
+          newLines: newCount,
+          lines: [...lines],
+        })
         lines.length = 0
         oldCount = 0
         newCount = 0

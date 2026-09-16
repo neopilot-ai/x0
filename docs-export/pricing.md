@@ -13,27 +13,27 @@ related:
 v0 offers 5 plans:
 
 - **Free**: No cost. For people looking to explore.
-- **Premium**: $20/month. For higher limits and power users. *(Sunsetting — not available to new users)*
+- **Premium**: $20/month. For higher limits and power users. _(Sunsetting — not available to new users)_
 - **Plus**: $30/user/month. For fast moving teams and collaboration.
 - **Business**: $100/user/month. For privacy conscious teams.
 - **Enterprise**: For large companies that require additional security.
 
 ## Plan comparison
 
-| Feature | Free | Premium | Plus | Business | Enterprise |
-| --- | --- | --- | --- | --- | --- |
-| Price | $0/month | $20/month | $30/user/month | $100/user/month | Custom |
-| Monthly Credits | $5 | $20 | $30 per user | $30 per user | Custom |
-| Daily Message Limit | 7 messages | Credit-based | Credit-based | Credit-based | Credit-based |
-| Team Features | No | No | Yes | Yes | Advanced controls |
-| Shared Projects | No | No | Yes | Yes | Yes |
-| Shared Credit Pool | No | No | Yes | Yes | Yes |
-| Access Controls | No | No | Basic | Basic | RBAC |
-| Centralized Billing | No | No | Yes | Yes | Yes |
-| Usage Analytics | Basic | Basic | Team-wide | Team-wide | Advanced |
-| Data Opt-out | No | No | No | Yes | Yes |
-| SAML SSO | No | No | No | No | Yes |
-| Priority Access | No | No | No | No | Yes |
+| Feature             | Free       | Premium      | Plus           | Business        | Enterprise        |
+| ------------------- | ---------- | ------------ | -------------- | --------------- | ----------------- |
+| Price               | $0/month   | $20/month    | $30/user/month | $100/user/month | Custom            |
+| Monthly Credits     | $5         | $20          | $30 per user   | $30 per user    | Custom            |
+| Daily Message Limit | 7 messages | Credit-based | Credit-based   | Credit-based    | Credit-based      |
+| Team Features       | No         | No           | Yes            | Yes             | Advanced controls |
+| Shared Projects     | No         | No           | Yes            | Yes             | Yes               |
+| Shared Credit Pool  | No         | No           | Yes            | Yes             | Yes               |
+| Access Controls     | No         | No           | Basic          | Basic           | RBAC              |
+| Centralized Billing | No         | No           | Yes            | Yes             | Yes               |
+| Usage Analytics     | Basic      | Basic        | Team-wide      | Team-wide       | Advanced          |
+| Data Opt-out        | No         | No           | No             | Yes             | Yes               |
+| SAML SSO            | No         | No           | No             | No              | Yes               |
+| Priority Access     | No         | No           | No             | No              | Yes               |
 
 [Choose your plan →](https://v0.app/pricing)
 

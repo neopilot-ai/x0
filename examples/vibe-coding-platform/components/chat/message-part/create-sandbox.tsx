@@ -16,10 +16,7 @@ export function CreateSandbox({ message }: Props) {
         Create Sandbox
       </ToolHeader>
       <div className="relative pl-6 min-h-5">
-        <Spinner
-          className="absolute left-0 top-0"
-          loading={message.status === 'loading'}
-        >
+        <Spinner className="absolute left-0 top-0" loading={message.status === 'loading'}>
           {message.status === 'error' ? (
             <XIcon className="w-4 h-4 text-red-700" />
           ) : (

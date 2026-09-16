@@ -67,19 +67,50 @@ const webhookTools = v0ToolsByCategory.webhooks
 type V0ToolCategory = 'chats' | 'mcpServers' | 'messages' | 'settings' | 'usage' | 'webhooks'
 
 type V0ToolName =
-  | 'chatsCreate' | 'chatsCreateAsync' | 'chatsCreateFromFiles' | 'chatsCreateFromRepo'
-  | 'chatsCreateFromZip' | 'chatsCreateStream' | 'chatsCreateVercelProject'
-  | 'chatsDelete' | 'chatsDeploy' | 'chatsDownloadFiles' | 'chatsDuplicate'
-  | 'chatsGet' | 'chatsGetConnectStatus' | 'chatsGetFiles' | 'chatsGetPreview'
-  | 'chatsList' | 'chatsRestoreMessage' | 'chatsResume' | 'chatsUpdate'
+  | 'chatsCreate'
+  | 'chatsCreateAsync'
+  | 'chatsCreateFromFiles'
+  | 'chatsCreateFromRepo'
+  | 'chatsCreateFromZip'
+  | 'chatsCreateStream'
+  | 'chatsCreateVercelProject'
+  | 'chatsDelete'
+  | 'chatsDeploy'
+  | 'chatsDownloadFiles'
+  | 'chatsDuplicate'
+  | 'chatsGet'
+  | 'chatsGetConnectStatus'
+  | 'chatsGetFiles'
+  | 'chatsGetPreview'
+  | 'chatsList'
+  | 'chatsRestoreMessage'
+  | 'chatsResume'
+  | 'chatsUpdate'
   | 'chatsUpdateFiles'
-  | 'mcpServersCreate' | 'mcpServersDelete' | 'mcpServersGet' | 'mcpServersList' | 'mcpServersUpdate'
-  | 'messagesGet' | 'messagesList' | 'messagesResolve' | 'messagesResolveAsync'
-  | 'messagesResolveStream' | 'messagesSend' | 'messagesSendAsync' | 'messagesSendStream'
+  | 'mcpServersCreate'
+  | 'mcpServersDelete'
+  | 'mcpServersGet'
+  | 'mcpServersList'
+  | 'mcpServersUpdate'
+  | 'messagesGet'
+  | 'messagesList'
+  | 'messagesResolve'
+  | 'messagesResolveAsync'
+  | 'messagesResolveStream'
+  | 'messagesSend'
+  | 'messagesSendAsync'
+  | 'messagesSendStream'
   | 'messagesStop'
-  | 'settingsGetPreviewHosts' | 'settingsSetPreviewHosts'
-  | 'usageGetActivity' | 'usageGetSummary' | 'usageListEvents'
-  | 'webhooksCreate' | 'webhooksDelete' | 'webhooksGet' | 'webhooksList' | 'webhooksUpdate'
+  | 'settingsGetPreviewHosts'
+  | 'settingsSetPreviewHosts'
+  | 'usageGetActivity'
+  | 'usageGetSummary'
+  | 'usageListEvents'
+  | 'webhooksCreate'
+  | 'webhooksDelete'
+  | 'webhooksGet'
+  | 'webhooksList'
+  | 'webhooksUpdate'
 ```
 
 ## Tool Configuration
@@ -96,76 +127,76 @@ Pass the same configuration options as `createV0Client`, plus an optional `apiKe
 
 ### Chat Tools
 
-| Tool | Description |
-|------|-------------|
-| `chatsCreate` | Create a new chat from a prompt. Blocks until the model response is complete. |
-| `chatsCreateAsync` | Create a chat and process in background. Returns immediately with IDs. |
-| `chatsCreateFromFiles` | Create a chat from inline source files. |
-| `chatsCreateFromRepo` | Create a chat from a GitHub repository. |
-| `chatsCreateFromZip` | Create a chat from a zip archive. |
-| `chatsCreateStream` | Create a chat with SSE streaming. |
-| `chatsCreateVercelProject` | Create a Vercel project and attach it to the chat. |
-| `chatsDelete` | Delete a chat and all its messages. |
-| `chatsDeploy` | Trigger a Vercel deployment for a chat. |
-| `chatsDownloadFiles` | Download chat source files as a ZIP. |
-| `chatsDuplicate` | Duplicate an existing chat. |
-| `chatsGet` | Retrieve a chat by ID. |
-| `chatsGetConnectStatus` | Get Vercel Connect setup status. |
-| `chatsGetFiles` | Get the files for a chat. |
-| `chatsGetPreview` | Get the preview URL for a chat. |
-| `chatsList` | List chats with pagination. |
-| `chatsRestoreMessage` | Restore files from an assistant message. |
-| `chatsResume` | Resume a chat from a stopped task. |
-| `chatsUpdate` | Update chat metadata and title. |
-| `chatsUpdateFiles` | Create, update, or delete files in a chat. |
+| Tool                       | Description                                                                   |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `chatsCreate`              | Create a new chat from a prompt. Blocks until the model response is complete. |
+| `chatsCreateAsync`         | Create a chat and process in background. Returns immediately with IDs.        |
+| `chatsCreateFromFiles`     | Create a chat from inline source files.                                       |
+| `chatsCreateFromRepo`      | Create a chat from a GitHub repository.                                       |
+| `chatsCreateFromZip`       | Create a chat from a zip archive.                                             |
+| `chatsCreateStream`        | Create a chat with SSE streaming.                                             |
+| `chatsCreateVercelProject` | Create a Vercel project and attach it to the chat.                            |
+| `chatsDelete`              | Delete a chat and all its messages.                                           |
+| `chatsDeploy`              | Trigger a Vercel deployment for a chat.                                       |
+| `chatsDownloadFiles`       | Download chat source files as a ZIP.                                          |
+| `chatsDuplicate`           | Duplicate an existing chat.                                                   |
+| `chatsGet`                 | Retrieve a chat by ID.                                                        |
+| `chatsGetConnectStatus`    | Get Vercel Connect setup status.                                              |
+| `chatsGetFiles`            | Get the files for a chat.                                                     |
+| `chatsGetPreview`          | Get the preview URL for a chat.                                               |
+| `chatsList`                | List chats with pagination.                                                   |
+| `chatsRestoreMessage`      | Restore files from an assistant message.                                      |
+| `chatsResume`              | Resume a chat from a stopped task.                                            |
+| `chatsUpdate`              | Update chat metadata and title.                                               |
+| `chatsUpdateFiles`         | Create, update, or delete files in a chat.                                    |
 
 ### Message Tools
 
-| Tool | Description |
-|------|-------------|
-| `messagesSend` | Send a message to a chat. |
-| `messagesSendAsync` | Send a message asynchronously. |
-| `messagesSendStream` | Send a message with streaming. |
-| `messagesGet` | Get a specific message. |
-| `messagesList` | List messages in a chat. |
-| `messagesResolve` | Resolve a task with user input. |
-| `messagesResolveAsync` | Resolve a task asynchronously. |
-| `messagesResolveStream` | Resolve a task with streaming. |
-| `messagesStop` | Stop an active message generation. |
+| Tool                    | Description                        |
+| ----------------------- | ---------------------------------- |
+| `messagesSend`          | Send a message to a chat.          |
+| `messagesSendAsync`     | Send a message asynchronously.     |
+| `messagesSendStream`    | Send a message with streaming.     |
+| `messagesGet`           | Get a specific message.            |
+| `messagesList`          | List messages in a chat.           |
+| `messagesResolve`       | Resolve a task with user input.    |
+| `messagesResolveAsync`  | Resolve a task asynchronously.     |
+| `messagesResolveStream` | Resolve a task with streaming.     |
+| `messagesStop`          | Stop an active message generation. |
 
 ### MCP Server Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool               | Description                         |
+| ------------------ | ----------------------------------- |
 | `mcpServersCreate` | Create an MCP server configuration. |
-| `mcpServersUpdate` | Update an MCP server. |
-| `mcpServersGet` | Get an MCP server. |
-| `mcpServersList` | List all MCP servers. |
-| `mcpServersDelete` | Delete an MCP server. |
+| `mcpServersUpdate` | Update an MCP server.               |
+| `mcpServersGet`    | Get an MCP server.                  |
+| `mcpServersList`   | List all MCP servers.               |
+| `mcpServersDelete` | Delete an MCP server.               |
 
 ### Settings Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool                      | Description                |
+| ------------------------- | -------------------------- |
 | `settingsGetPreviewHosts` | Get trusted preview hosts. |
 | `settingsSetPreviewHosts` | Set trusted preview hosts. |
 
 ### Usage Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool               | Description         |
+| ------------------ | ------------------- |
 | `usageGetActivity` | Get usage activity. |
-| `usageGetSummary` | Get usage summary. |
-| `usageListEvents` | List usage events. |
+| `usageGetSummary`  | Get usage summary.  |
+| `usageListEvents`  | List usage events.  |
 
 ### Webhook Tools
 
-| Tool | Description |
-|------|-------------|
+| Tool             | Description       |
+| ---------------- | ----------------- |
 | `webhooksCreate` | Create a webhook. |
 | `webhooksUpdate` | Update a webhook. |
-| `webhooksGet` | Get a webhook. |
-| `webhooksList` | List webhooks. |
+| `webhooksGet`    | Get a webhook.    |
+| `webhooksList`   | List webhooks.    |
 | `webhooksDelete` | Delete a webhook. |
 
 ## Example: Building an Agent

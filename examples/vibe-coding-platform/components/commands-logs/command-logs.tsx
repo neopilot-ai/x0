@@ -40,9 +40,7 @@ export function CommandLogs({ command, onLog, onCompleted }: Props) {
   }, [])
 
   return (
-    <pre className={cn('whitespace-pre-wrap font-mono text-sm', {})}>
-      {logContent(command)}
-    </pre>
+    <pre className={cn('whitespace-pre-wrap font-mono text-sm', {})}>{logContent(command)}</pre>
   )
 }
 
@@ -66,10 +64,9 @@ const logSchema = z.object({
 })
 
 async function* getCommandLogs(sandboxId: string, cmdId: string) {
-  const response = await fetch(
-    `/api/sandboxes/${sandboxId}/cmds/${cmdId}/logs`,
-    { headers: { 'Content-Type': 'application/json' } }
-  )
+  const response = await fetch(`/api/sandboxes/${sandboxId}/cmds/${cmdId}/logs`, {
+    headers: { 'Content-Type': 'application/json' },
+  })
 
   const reader = response.body!.getReader()
   const decoder = new TextDecoder()

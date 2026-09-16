@@ -40,7 +40,7 @@ export function Chat({ className }: Props) {
         setInput('')
       }
     },
-    [sendMessage, modelId, setInput, reasoningEffort]
+    [sendMessage, modelId, setInput, reasoningEffort],
   )
 
   useEffect(() => {
@@ -61,9 +61,7 @@ export function Chat({ className }: Props) {
       {messages.length === 0 ? (
         <div className="flex-1 min-h-0">
           <div className="flex flex-col justify-center items-center h-full font-mono text-sm text-muted-foreground">
-            <p className="flex items-center font-semibold">
-              Click and try one of these prompts:
-            </p>
+            <p className="flex items-center font-semibold">Click and try one of these prompts:</p>
             <ul className="p-4 space-y-1 text-center">
               {TEST_PROMPTS.map((prompt, idx) => (
                 <li
@@ -105,7 +103,7 @@ export function Chat({ className }: Props) {
           value={input}
         />
         <Button type="submit" disabled={status !== 'ready' || !input.trim()}>
-        <SendIcon className="w-4 h-4" />
+          <SendIcon className="w-4 h-4" />
         </Button>
       </form>
     </Panel>

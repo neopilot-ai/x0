@@ -90,7 +90,13 @@ export function FileExplorer({
   const [contextMenu, setContextMenu] = useState<ContextMenu>(null)
 
   const tree = useMemo(
-    () => sortNodes(buildTree(files.map((file) => file.path), extraFolders)),
+    () =>
+      sortNodes(
+        buildTree(
+          files.map((file) => file.path),
+          extraFolders,
+        ),
+      ),
     [files, extraFolders],
   )
 

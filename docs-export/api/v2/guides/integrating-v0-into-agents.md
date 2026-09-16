@@ -11,8 +11,6 @@ related:
 
 # Integrate v0 with AI Agents
 
-
-
 v0 can act as a specialized app-building agent inside a larger agentic workflow. Your agent can delegate a build to v0, continue iterating in the same chat, resolve questions or approvals, and retrieve a preview or deployment when the app is ready.
 
 You can add v0 to an agent in three ways:
@@ -130,18 +128,12 @@ import { defineOpenAPIConnection } from 'eve/connections'
 export default defineOpenAPIConnection({
   spec: 'https://api.v0.dev/v2/openapi/json',
   baseUrl: 'https://api.v0.dev/v2',
-  description:
-    'Build and iterate on web apps with v0. Reuse one v0 chat per app-building task.',
+  description: 'Build and iterate on web apps with v0. Reuse one v0 chat per app-building task.',
   auth: {
     getToken: async () => ({ token: process.env.V0_API_KEY! }),
   },
   operations: {
-    allow: [
-      'chats_create',
-      'messages_send',
-      'messages_resolve',
-      'chats_getPreview',
-    ],
+    allow: ['chats_create', 'messages_send', 'messages_resolve', 'chats_getPreview'],
   },
 })
 ```
@@ -172,7 +164,6 @@ Use v0 to build a responsive customer analytics dashboard. Return the v0 chat UR
 ```
 
 Open **Agent Runs** in the Vercel dashboard to confirm that Eve discovered the `v0` connection and inspect its v0 tool calls. See [Eve's OpenAPI connections guide](https://eve.dev/docs/connections/openapi) for per-user credentials, custom headers, and operation filters.
-
 
 ---
 

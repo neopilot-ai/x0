@@ -6,12 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Let another agent use v0 through the v0 MCP server",
-  "topics": [
-    "mcp",
-    "design",
-    "api",
-    "agents"
-  ],
+  "topics": ["mcp", "design", "api", "agents"],
   "related": [
     "api/v2/guides/integrating-v0-into-agents",
     "api/v2/reference/mcp-servers/create-mcp-server",

@@ -6,14 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Learn how to protect files from AI modifications in v0 chats",
-  "topics": [
-    "design",
-    "api"
-  ],
+  "topics": ["design", "api"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Overview",
     "Setting File Locks During Initialization",

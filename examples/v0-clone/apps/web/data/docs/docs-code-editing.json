@@ -6,16 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Edit v0's code output directly in the browser.",
-  "topics": [
-    "design"
-  ],
-  "related": [
-    "text-prompting",
-    "design-mode"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design"],
+  "related": ["text-prompting", "design-mode"],
+  "requires": ["quickstart"],
   "headings": [
     "Basic editing",
     "Editor features",

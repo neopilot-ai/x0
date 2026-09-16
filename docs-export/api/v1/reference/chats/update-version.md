@@ -1,7 +1,7 @@
 ---
 title: Update Chat Version Files
 description: Updates the source files of a specific chat version (block) manually. This allows editing generated files directly through the API.
-badge: "PATCH"
+badge: 'PATCH'
 product: v0 API
 type: reference
 prerequisites:
@@ -11,32 +11,31 @@ prerequisites:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Update Chat Version Files
-
-
 
 <EndpointDisplay method="patch" path="/chats/{chatId}/versions/{versionId}" />
 
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.chats.updateVersion()
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X PATCH https://api.v0.dev/chats/{chatId}/versions/{versionId} \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X PATCH https://api.v0.dev/chats/{chatId}/versions/{versionId} \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -46,169 +45,168 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the chat containing the version to update. Provided as a path parameter."
-  },
-  {
-    "name": "versionId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the version (block) to update. Provided as a path parameter."
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat containing the version to update. Provided as a path parameter."
+},
+{
+"name": "versionId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the version (block) to update. Provided as a path parameter."
+}
 ]}
 />
 
 #### Body
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "files",
-    "type": "object[]",
-    "required": true,
-    "description": "Array of files to update with their new content",
-    "deprecated": false,
-    "arrayItems": {
-      "name": "item",
-      "type": "object",
-      "required": true,
-      "description": "",
-      "deprecated": false,
-      "properties": [
-        {
-          "name": "name",
-          "type": "string",
-          "required": true,
-          "description": "The full file path including extension (e.g., \"components/test.tsx\")",
-          "deprecated": false
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "The new content for the file",
-          "deprecated": false
-        },
-        {
-          "name": "locked",
-          "type": "boolean",
-          "required": false,
-          "description": "Whether to lock or unlock the file to prevent AI from overwriting it during generation",
-          "deprecated": false
-        }
-      ]
-    }
-  }
+title=""
+parameters={[
+{
+"name": "files",
+"type": "object[]",
+"required": true,
+"description": "Array of files to update with their new content",
+"deprecated": false,
+"arrayItems": {
+"name": "item",
+"type": "object",
+"required": true,
+"description": "",
+"deprecated": false,
+"properties": [
+{
+"name": "name",
+"type": "string",
+"required": true,
+"description": "The full file path including extension (e.g., \"components/test.tsx\")",
+"deprecated": false
+},
+{
+"name": "content",
+"type": "string",
+"required": true,
+"description": "The new content for the file",
+"deprecated": false
+},
+{
+"name": "locked",
+"type": "boolean",
+"required": false,
+"description": "Whether to lock or unlock the file to prevent AI from overwriting it during generation",
+"deprecated": false
+}
+]
+}
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "id",
-    "type": "string",
-    "required": true,
-    "description": "A unique identifier for the version.",
-    "deprecated": false
-  },
-  {
-    "name": "object",
-    "type": "'version'",
-    "required": true,
-    "description": "Fixed value identifying this object as a version.",
-    "deprecated": false
-  },
-  {
-    "name": "status",
-    "type": "'pending' | 'completed' | 'failed'",
-    "required": true,
-    "description": "The current status of the version generation process.",
-    "deprecated": false
-  },
-  {
-    "name": "demoUrl",
-    "type": "string",
-    "required": false,
-    "description": "Optional URL for previewing the generated output.",
-    "deprecated": false
-  },
-  {
-    "name": "screenshotUrl",
-    "type": "string",
-    "required": false,
-    "description": "An authenticated URL to retrieve a screenshot of this version. Fetching this URL requires the same Authorization: Bearer header as all other API calls — it cannot be used directly as an `<img>` `src`. To display it in a browser, proxy the request server-side and forward the Authorization header. Append `?ignoreCache=1` to bypass the one-week screenshot cache.",
-    "deprecated": false
-  },
-  {
-    "name": "createdAt",
-    "type": "string",
-    "required": true,
-    "description": "The date and time when the version was created, in ISO 8601 format.",
-    "deprecated": false
-  },
-  {
-    "name": "updatedAt",
-    "type": "string",
-    "required": false,
-    "description": "The date and time when the version was last updated, in ISO 8601 format.",
-    "deprecated": false
-  },
-  {
-    "name": "files",
-    "type": "object[]",
-    "required": true,
-    "description": "A list of files that were generated or included in this version.",
-    "deprecated": false,
-    "arrayItems": {
-      "name": "item",
-      "type": "object",
-      "required": true,
-      "description": "Detailed representation of a file, including its content and lock status.",
-      "deprecated": false,
-      "properties": [
-        {
-          "name": "object",
-          "type": "'file'",
-          "required": true,
-          "description": "Fixed value identifying this object as a file.",
-          "deprecated": false
-        },
-        {
-          "name": "name",
-          "type": "string",
-          "required": true,
-          "description": "The name of the file, including its extension.",
-          "deprecated": false
-        },
-        {
-          "name": "content",
-          "type": "string",
-          "required": true,
-          "description": "The full contents of the file as a raw string.",
-          "deprecated": false
-        },
-        {
-          "name": "locked",
-          "type": "boolean",
-          "required": true,
-          "description": "Whether the file is locked to prevent AI from overwriting it during new version generation.",
-          "deprecated": false
-        }
-      ]
-    }
-  }
+title=""
+parameters={[
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "A unique identifier for the version.",
+"deprecated": false
+},
+{
+"name": "object",
+"type": "'version'",
+"required": true,
+"description": "Fixed value identifying this object as a version.",
+"deprecated": false
+},
+{
+"name": "status",
+"type": "'pending' | 'completed' | 'failed'",
+"required": true,
+"description": "The current status of the version generation process.",
+"deprecated": false
+},
+{
+"name": "demoUrl",
+"type": "string",
+"required": false,
+"description": "Optional URL for previewing the generated output.",
+"deprecated": false
+},
+{
+"name": "screenshotUrl",
+"type": "string",
+"required": false,
+"description": "An authenticated URL to retrieve a screenshot of this version. Fetching this URL requires the same Authorization: Bearer header as all other API calls — it cannot be used directly as an `<img>` `src`. To display it in a browser, proxy the request server-side and forward the Authorization header. Append `?ignoreCache=1` to bypass the one-week screenshot cache.",
+"deprecated": false
+},
+{
+"name": "createdAt",
+"type": "string",
+"required": true,
+"description": "The date and time when the version was created, in ISO 8601 format.",
+"deprecated": false
+},
+{
+"name": "updatedAt",
+"type": "string",
+"required": false,
+"description": "The date and time when the version was last updated, in ISO 8601 format.",
+"deprecated": false
+},
+{
+"name": "files",
+"type": "object[]",
+"required": true,
+"description": "A list of files that were generated or included in this version.",
+"deprecated": false,
+"arrayItems": {
+"name": "item",
+"type": "object",
+"required": true,
+"description": "Detailed representation of a file, including its content and lock status.",
+"deprecated": false,
+"properties": [
+{
+"name": "object",
+"type": "'file'",
+"required": true,
+"description": "Fixed value identifying this object as a file.",
+"deprecated": false
+},
+{
+"name": "name",
+"type": "string",
+"required": true,
+"description": "The name of the file, including its extension.",
+"deprecated": false
+},
+{
+"name": "content",
+"type": "string",
+"required": true,
+"description": "The full contents of the file as a raw string.",
+"deprecated": false
+},
+{
+"name": "locked",
+"type": "boolean",
+"required": true,
+"description": "Whether the file is locked to prevent AI from overwriting it during new version generation.",
+"deprecated": false
+}
+]
+}
+}
 ]}
 />
-
 
 ---
 

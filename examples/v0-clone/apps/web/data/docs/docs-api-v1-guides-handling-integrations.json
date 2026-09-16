@@ -6,20 +6,13 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Learn how to handle integration requests and follow-up script permissions in the v0 API",
-  "topics": [
-    "design",
-    "api",
-    "permissions",
-    "integrations"
-  ],
+  "topics": ["design", "api", "permissions", "integrations"],
   "related": [
     "api/v1/reference/chats/resolve-task",
     "api/v1/reference/chats/get-by-id",
     "api/v1/reference/chats/get-message"
   ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "1. Prompt the agent",
     "2. Inspect the latest assistant message",

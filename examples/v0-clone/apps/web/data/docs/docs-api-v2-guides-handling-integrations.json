@@ -6,13 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Learn how to handle integration requests and follow-up script permissions in the v0 API",
-  "topics": [
-    "mcp",
-    "design",
-    "api",
-    "permissions",
-    "integrations"
-  ],
+  "topics": ["mcp", "design", "api", "permissions", "integrations"],
   "related": [
     "api/v2/guides/environment-variables",
     "api/v2/reference/mcp-servers/create-mcp-server",

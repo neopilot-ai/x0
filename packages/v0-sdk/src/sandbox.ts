@@ -34,7 +34,13 @@ export interface PreviewState {
 }
 
 export async function getSandboxPreview(
-  v0: { chats: { getPreview: (params: { chatId: string }) => Promise<{ data?: V0SandboxPreview; error?: Error }> } },
+  v0: {
+    chats: {
+      getPreview: (params: {
+        chatId: string
+      }) => Promise<{ data?: V0SandboxPreview; error?: Error }>
+    }
+  },
   chatId: string,
 ): Promise<V0SandboxPreview | null> {
   const result = await v0.chats.getPreview({ chatId })
@@ -42,7 +48,13 @@ export async function getSandboxPreview(
 }
 
 export function createSandbox(
-  v0: { chats: { getPreview: (params: { chatId: string }) => Promise<{ data?: V0SandboxPreview; error?: Error }> } },
+  v0: {
+    chats: {
+      getPreview: (params: {
+        chatId: string
+      }) => Promise<{ data?: V0SandboxPreview; error?: Error }>
+    }
+  },
   chatId: string,
 ): V0Sandbox {
   let preview: V0SandboxPreview | null = null

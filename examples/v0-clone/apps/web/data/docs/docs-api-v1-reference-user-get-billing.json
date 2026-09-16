@@ -6,21 +6,10 @@
   "category": "API · User",
   "type": "reference",
   "description": "Fetches billing usage and quota information for the authenticated user. Can be scoped to a specific context (e.g. project or namespace).",
-  "topics": [
-    "api",
-    "authentication",
-    "pricing"
-  ],
+  "topics": ["api", "authentication", "pricing"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Get Billing\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.user.getBilling()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/user/billing \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"scope\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Filters billing data by a specific scope, such as a project ID or slug.\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"billingType\",\n\"type\": \"'legacy'\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"remaining\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"reset\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"limit\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n}\n]}\n/>\n\n---\n\n",

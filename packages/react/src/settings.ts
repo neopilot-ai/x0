@@ -32,15 +32,21 @@ export function usePreviewHosts(): UsePreviewHostsReturn {
     }
   }, [])
 
-  const addHost = useCallback(async (host: string) => {
-    if (hosts.includes(host)) return
-    await setHosts([...hosts, host])
-  }, [hosts])
+  const addHost = useCallback(
+    async (host: string) => {
+      if (hosts.includes(host)) return
+      await setHosts([...hosts, host])
+    },
+    [hosts],
+  )
 
-  const removeHost = useCallback(async (host: string) => {
-    const newHosts = hosts.filter((h) => h !== host)
-    await setHosts(newHosts)
-  }, [hosts])
+  const removeHost = useCallback(
+    async (host: string) => {
+      const newHosts = hosts.filter((h) => h !== host)
+      await setHosts(newHosts)
+    },
+    [hosts],
+  )
 
   return {
     hosts,

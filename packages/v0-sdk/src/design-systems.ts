@@ -31,7 +31,10 @@ export interface ProjectSkillAttachment {
 export type SkillAttachment = MemorySkillAttachment | RemoteSkillAttachment | ProjectSkillAttachment
 
 /** Build a `memory` skill attachment for a saved design system. */
-export function memorySkill(skillName: string, scope: MemorySkillScope = 'team'): MemorySkillAttachment {
+export function memorySkill(
+  skillName: string,
+  scope: MemorySkillScope = 'team',
+): MemorySkillAttachment {
   return { type: 'memory', scope, skillName }
 }
 
@@ -86,7 +89,10 @@ export function validateV0Json(value: unknown): string | null {
     return 'referenceWorkspace.sources must be an array of at most 3 sources'
   }
   const starter = v['starter'] as { source?: unknown } | undefined
-  if (starter !== undefined && !['skill-directory', 'empty', 'v0-default'].includes(starter.source as string)) {
+  if (
+    starter !== undefined &&
+    !['skill-directory', 'empty', 'v0-default'].includes(starter.source as string)
+  ) {
     return 'starter.source must be skill-directory, empty, or v0-default'
   }
   return null
@@ -104,7 +110,9 @@ export interface DesignSystemAppearance {
 
 /** Build the `SKILL.md` frontmatter metadata for a design system skill. */
 export function designSystemFrontmatter(appearance: DesignSystemAppearance): {
-  metadata: { v0: { kind: 'design-system'; 'design-system': { appearance: DesignSystemAppearance } } }
+  metadata: {
+    v0: { kind: 'design-system'; 'design-system': { appearance: DesignSystemAppearance } }
+  }
 } {
   return { metadata: { v0: { kind: 'design-system', 'design-system': { appearance } } } }
 }

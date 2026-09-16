@@ -181,16 +181,16 @@ import { Chats, Messages, McpServers, Webhooks } from 'v0/browser'
 
 ## Migrate from v1
 
-| v1 (Deprecated) | v2 (Current) |
-|-----------------|--------------|
-| `npm install v0-sdk` | `npm install v0@canary` |
-| `new V0({ apiKey })` | `createV0Client({ auth })` |
-| `v0.chats.init()` | `v0.chats.create()` |
-| `v0.chats.create({ initialMessage })` | `v0.chats.create({ message })` |
-| `v0.chats.sendMessage(chatId, msg)` | `v0.messages.send({ chatId, message })` |
-| `v0.chats.find()` | `v0.chats.list()` |
-| `v0.projects` | Not available |
-| `v0.deployments` | `v0.chats.deploy()` |
-| `v0.user` | Not available |
+| v1 (Deprecated)                       | v2 (Current)                            |
+| ------------------------------------- | --------------------------------------- |
+| `npm install v0-sdk`                  | `npm install v0@canary`                 |
+| `new V0({ apiKey })`                  | `createV0Client({ auth })`              |
+| `v0.chats.init()`                     | `v0.chats.create()`                     |
+| `v0.chats.create({ initialMessage })` | `v0.chats.create({ message })`          |
+| `v0.chats.sendMessage(chatId, msg)`   | `v0.messages.send({ chatId, message })` |
+| `v0.chats.find()`                     | `v0.chats.list()`                       |
+| `v0.projects`                         | Not available                           |
+| `v0.deployments`                      | `v0.chats.deploy()`                     |
+| `v0.user`                             | Not available                           |
 
 For a complete v2 guide, see [v0 SDK Guide](/docs/api/v2/guides/v0-sdk).

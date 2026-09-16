@@ -6,19 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Build full-stack apps with v0.",
-  "topics": [
-    "databases",
-    "deployment",
-    "design"
-  ],
-  "related": [
-    "databases",
-    "external-apis",
-    "deployments"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["databases", "deployment", "design"],
+  "related": ["databases", "external-apis", "deployments"],
+  "requires": ["quickstart"],
   "headings": [
     "Integrations",
     "Supported integrations",

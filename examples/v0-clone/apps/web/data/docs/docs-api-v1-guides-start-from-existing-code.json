@@ -6,17 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Learn how to start v0 chats from existing codebases, repositories, and file structures",
-  "topics": [
-    "github",
-    "design",
-    "api"
-  ],
-  "related": [
-    "git-import"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["github", "design", "api"],
+  "related": ["git-import"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Overview",
     "Importing from GitHub Repositories",

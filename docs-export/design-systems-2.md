@@ -77,9 +77,7 @@ A design system `v0.json` follows this shape:
     ]
   },
   "environment": {
-    "providers": [
-      { "type": "shared-env-vars", "ids": ["env_var_id"] }
-    ]
+    "providers": [{ "type": "shared-env-vars", "ids": ["env_var_id"] }]
   },
   "starter": {
     "source": "skill-directory",
@@ -131,11 +129,11 @@ metadata:
   v0.design-system:
     appearance:
       light:
-        background: "#E6F4FF"
-        foreground: "#002A3A"
+        background: '#E6F4FF'
+        foreground: '#002A3A'
       dark:
-        background: "#004052"
-        foreground: "#E6F4FF"
+        background: '#004052'
+        foreground: '#E6F4FF'
 ```
 
 Choose colors that complement the logo and keep the design system name easy to read in light and dark mode. These colors identify the design system in v0; they do not change the color tokens in apps you build with it.

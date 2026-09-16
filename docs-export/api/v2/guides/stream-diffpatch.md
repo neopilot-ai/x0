@@ -48,6 +48,7 @@ const updated = patch(original, delta)
 ## V0StreamDelta
 
 The delta type is either:
+
 - `JsonDiffPatchDelta` — Standard JSON diff patch
 - `V0StringAppendDelta` — Array string append delta `[[...number[], string], 9, 9]`
 

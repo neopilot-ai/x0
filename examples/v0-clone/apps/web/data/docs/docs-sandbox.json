@@ -6,20 +6,9 @@
   "category": "Guides",
   "type": "conceptual",
   "description": "VM-backed chats run your project inside an isolated Vercel Sandbox that hosts your code, dev server, terminal, and agent tools.",
-  "topics": [
-    "security",
-    "agents",
-    "terminal"
-  ],
-  "related": [
-    "terminal-commands",
-    "pre-installed-agents",
-    "security",
-    "agentic-features"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["security", "agents", "terminal"],
+  "related": ["terminal-commands", "pre-installed-agents", "security", "agentic-features"],
+  "requires": ["quickstart"],
   "headings": [
     "What the sandbox is",
     "Where you see the sandbox",

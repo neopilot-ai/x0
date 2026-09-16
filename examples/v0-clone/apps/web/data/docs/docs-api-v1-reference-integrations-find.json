@@ -6,20 +6,10 @@
   "category": "API · Integrations",
   "type": "reference",
   "description": "Retrieves Vercel projects available to the authenticated user or team scope.",
-  "topics": [
-    "api",
-    "authentication",
-    "integrations",
-    "teams"
-  ],
+  "topics": ["api", "authentication", "integrations", "teams"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "Response"],
   "excerpt": "Deprecated**: This method is deprecated. Use the Vercel API directly to list Vercel projects.",
   "snippets": [],
   "content": "\n\n# Find Vercel Projects\n\n**Deprecated**: This method is deprecated. Use the [Vercel API](https://docs.vercel.com/docs/rest-api/reference/endpoints/projects/retrieve-a-list-of-projects) directly to list Vercel projects.\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.integrations.vercel.projects.find()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/integrations/vercel/projects \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A unique identifier for the linked Vercel project.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'vercel_project'\",\n\"required\": false,\n\"description\": \"Fixed value identifying this object as a Vercel project.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The name of the Vercel project.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",

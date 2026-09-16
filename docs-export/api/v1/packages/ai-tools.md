@@ -125,17 +125,17 @@ const result = await generateText({
 
 ## Migrate from v1
 
-| v1 (Deprecated) | v2 (Current) |
-|-----------------|--------------|
-| `v0ToolsByCategory({ apiKey })` (function) | `v0ToolsByCategory` (object) |
-| `tools.project` | Does not exist |
-| `tools.chat` | `v0ToolsByCategory.chats` |
-| `tools.deployment` | Does not exist |
-| `tools.user` | Does not exist |
-| `tools.hook` | `v0ToolsByCategory.webhooks` |
-| `createProject`, `findProjects` | Use `chatsCreate`, `chatsList` |
-| `createDeployment`, `findDeployments` | Use `chatsDeploy`, `chatsGetPreview` |
-| `getUser`, `getUserBilling` | Not available |
-| `createHook`, `findHooks` | `webhooksCreate`, `webhooksList` |
+| v1 (Deprecated)                            | v2 (Current)                         |
+| ------------------------------------------ | ------------------------------------ |
+| `v0ToolsByCategory({ apiKey })` (function) | `v0ToolsByCategory` (object)         |
+| `tools.project`                            | Does not exist                       |
+| `tools.chat`                               | `v0ToolsByCategory.chats`            |
+| `tools.deployment`                         | Does not exist                       |
+| `tools.user`                               | Does not exist                       |
+| `tools.hook`                               | `v0ToolsByCategory.webhooks`         |
+| `createProject`, `findProjects`            | Use `chatsCreate`, `chatsList`       |
+| `createDeployment`, `findDeployments`      | Use `chatsDeploy`, `chatsGetPreview` |
+| `getUser`, `getUserBilling`                | Not available                        |
+| `createHook`, `findHooks`                  | `webhooksCreate`, `webhooksList`     |
 
 For a complete v2 guide, see [AI Tools Guide](/docs/api/v2/guides/ai-tools-guide).

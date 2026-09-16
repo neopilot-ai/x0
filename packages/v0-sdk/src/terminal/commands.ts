@@ -19,7 +19,9 @@ export async function executeBash(
   }
 }
 
-export async function getBashHistory(): Promise<Array<{ command: string; output: string; exitCode: number | null }>> {
+export async function getBashHistory(): Promise<
+  Array<{ command: string; output: string; exitCode: number | null }>
+> {
   try {
     const response = await fetch('/api/sandbox/commands')
     return await response.json()

@@ -6,21 +6,14 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Configure OAuth-authenticated MCP servers with the v0 API",
-  "topics": [
-    "mcp",
-    "design",
-    "api",
-    "authentication"
-  ],
+  "topics": ["mcp", "design", "api", "authentication"],
   "related": [
     "api/v1/reference/mcp-servers/create",
     "api/v1/reference/mcp-servers/create-oauth-authorization-url",
     "api/v1/reference/mcp-servers/update",
     "api/v1/reference/chats/create"
   ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "1. Register the OAuth client",
     "2. Create the MCP server",

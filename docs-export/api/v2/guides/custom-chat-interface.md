@@ -13,8 +13,6 @@ related:
 
 # Build a Custom Chat Interface
 
-
-
 Build a custom React chat interface with the v0 React SDK and AI SDK. The React SDK handles message history and translates v0's stream into the message format expected by AI SDK's `useChat`.
 
 ## High level
@@ -104,6 +102,7 @@ A custom chat has three layers:
         </p>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -140,12 +139,7 @@ The following component supports both new and existing chats. For an existing ch
 'use client'
 
 import { useChat } from '@ai-sdk/react'
-import {
-  shouldResumeV0Chat,
-  toV0UIMessages,
-  V0Transport,
-  type V0UIMessage,
-} from '@v0-sdk/react'
+import { shouldResumeV0Chat, toV0UIMessages, V0Transport, type V0UIMessage } from '@v0-sdk/react'
 import { useMessages } from '@v0-sdk/react/swr'
 import { useState } from 'react'
 import type { MessagesListResponse } from 'v0'
@@ -153,10 +147,7 @@ import type { MessagesListResponse } from 'v0'
 const emptyHistory: MessagesListResponse['messages'] = []
 
 export function Chat({ chatId }: { chatId?: string }) {
-  const history = useMessages(
-    chatId ? `/api/v0/chats/${chatId}/messages` : null,
-    { limit: 50 },
-  )
+  const history = useMessages(chatId ? `/api/v0/chats/${chatId}/messages` : null, { limit: 50 })
 
   if (chatId && history.isLoading) {
     return <p>Loading…</p>
@@ -352,10 +343,7 @@ A single route can handle both operations because `useMessages` sends a `GET`, w
 ```typescript title="app/api/v0/chats/[chatId]/messages/route.ts"
 import { v0, type MessagesSendStreamData } from 'v0'
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ chatId: string }> },
-) {
+export async function GET(request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = await params
   const cursor = new URL(request.url).searchParams.get('cursor')
   const result = await v0.messages.list({
@@ -369,10 +357,7 @@ export async function GET(
   })
 }
 
-export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ chatId: string }> },
-) {
+export async function POST(request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = await params
   const body = (await request.json()) as MessagesSendStreamData['body']
   const result = await v0.messages.sendStream({ chatId, ...body })
@@ -388,10 +373,7 @@ v0 returns persisted history newest first. Keep that order in the backend respon
 ```typescript title="app/api/v0/chats/[chatId]/resume/route.ts"
 import { v0 } from 'v0'
 
-export async function POST(
-  _request: Request,
-  { params }: { params: Promise<{ chatId: string }> },
-) {
+export async function POST(_request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = await params
   const result = await v0.chats.resume({ chatId })
 
@@ -404,7 +386,6 @@ export async function POST(
 ## Show the generated app
 
 The interface above renders the conversation. To embed the generated application beside it, follow [Accessing Previews](/docs/api/v2/guides/accessing-previews) and apply the same authentication and `chatId` authorization rules to the preview route.
-
 
 ---
 

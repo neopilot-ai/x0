@@ -20,18 +20,17 @@ interface BodyData {
 }
 
 export async function POST(req: Request) {
-  const [checkResult, { messages, modelId = DEFAULT_MODEL, reasoningEffort }] =
-    await Promise.all([checkBotId(), req.json() as Promise<BodyData>])
+  const [checkResult, { messages, modelId = DEFAULT_MODEL, reasoningEffort }] = await Promise.all([
+    checkBotId(),
+    req.json() as Promise<BodyData>,
+  ])
 
   if (checkResult.isBot) {
     return NextResponse.json({ error: `Bot detected` }, { status: 403 })
   }
 
   if (!SUPPORTED_MODELS.includes(modelId)) {
-    return NextResponse.json(
-      { error: `Model ${modelId} not found.` },
-      { status: 400 }
-    )
+    return NextResponse.json({ error: `Model ${modelId} not found.` }, { status: 400 })
   }
 
   return createUIMessageStreamResponse({
@@ -60,7 +59,7 @@ export async function POST(req: Request) {
                 return part
               })
               return message
-            })
+            }),
           ),
           stopWhen: stepCountIs(20),
           tools: tools({ modelId, writer }),
@@ -77,9 +76,9 @@ export async function POST(req: Request) {
             messageMetadata: () => ({
               model: MODEL_NAMES[modelId] ?? modelId,
             }),
-          })
+          }),
         )
       },
     }),
-  });
+  })
 }

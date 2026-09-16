@@ -1,14 +1,7 @@
 'use client'
 
 import { type Line } from './schemas'
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useTransition,
-} from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useTransition } from 'react'
 import { getSummary } from './get-summary'
 import { useChat } from '@ai-sdk/react'
 import { useCommandErrorsLogs } from '@/app/state'
@@ -45,14 +38,11 @@ export function ErrorMonitor({ children, debounceTimeMs = 10000 }: Props) {
     chatStatus !== 'ready' || fixErrors === false
       ? 'disabled'
       : pending || scheduled
-      ? 'pending'
-      : 'ready'
+        ? 'pending'
+        : 'ready'
 
   const getErrorKey = (error: Line) => {
-    return `${error.command}-${error.args.join(' ')}-${error.data.slice(
-      0,
-      100
-    )}`
+    return `${error.command}-${error.args.join(' ')}-${error.data.slice(0, 100)}`
   }
 
   const handleErrors = (errors: Line[], prev: Line[]) => {

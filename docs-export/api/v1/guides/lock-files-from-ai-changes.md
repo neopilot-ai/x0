@@ -10,9 +10,8 @@ prerequisites:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Lock Files from AI Changes
-
-
 
 File locks allow you to protect specific files from AI modifications during code generation, giving you precise control over which parts of your codebase can be changed.
 
@@ -20,10 +19,10 @@ File locks allow you to protect specific files from AI modifications during code
 
 File locks in v0 protect specific files from AI modifications during generation. This is useful when you want to:
 
-* **Preserve configuration files** - Keep package.json, tsconfig.json unchanged
-* **Protect existing code** - Prevent AI from modifying working components
-* **Maintain file structure** - Lock files that shouldn't be altered
-* **Control AI scope** - Direct AI attention to specific files only
+- **Preserve configuration files** - Keep package.json, tsconfig.json unchanged
+- **Protect existing code** - Prevent AI from modifying working components
+- **Maintain file structure** - Lock files that shouldn't be altered
+- **Control AI scope** - Direct AI attention to specific files only
 
 ## Setting File Locks During Initialization
 
@@ -284,20 +283,19 @@ await v0.chats.updateVersion({
 
 When files are locked:
 
-* ✅ **AI will not modify** the file content during generation
-* ✅ **File remains available** for reference and context
-* ✅ **You can still manually update** locked files via API
-* ✅ **Lock status persists** across chat sessions
+- ✅ **AI will not modify** the file content during generation
+- ✅ **File remains available** for reference and context
+- ✅ **You can still manually update** locked files via API
+- ✅ **Lock status persists** across chat sessions
 
 When files are unlocked:
 
-* ⚠️ **AI can freely modify** the file content
-* ⚠️ **Changes may overwrite** your existing code
-* ✅ **AI uses file for context** when generating other files
-* ✅ **You can lock again** at any time
+- ⚠️ **AI can freely modify** the file content
+- ⚠️ **Changes may overwrite** your existing code
+- ✅ **AI uses file for context** when generating other files
+- ✅ **You can lock again** at any time
 
 File locks give you precise control over what the AI can and cannot change, ensuring your important code stays protected while still allowing AI assistance where you need it.
-
 
 ---
 

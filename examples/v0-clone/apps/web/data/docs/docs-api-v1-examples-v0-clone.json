@@ -6,18 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "A full-featured v0 clone with authentication and multi-tenant support",
-  "topics": [
-    "design",
-    "api",
-    "authentication"
-  ],
-  "related": [
-    "api/v1/packages/v0-sdk",
-    "api/v1/packages/react"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api", "authentication"],
+  "related": ["api/v1/packages/v0-sdk", "api/v1/packages/react"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Deploy Your Own",
     "Features",

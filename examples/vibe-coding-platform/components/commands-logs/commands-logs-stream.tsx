@@ -5,10 +5,7 @@ import { useSandboxStore } from '@/app/state'
 import stripAnsi from 'strip-ansi'
 import z from 'zod/v3'
 
-type StreamingCommandLogs = Record<
-  string,
-  Awaited<ReturnType<typeof getCommandLogs>>
->
+type StreamingCommandLogs = Record<string, Awaited<ReturnType<typeof getCommandLogs>>>
 
 export function CommandLogsStream() {
   const { sandboxId, commands, addLog, upsertCommand } = useSandboxStore()
@@ -16,9 +13,7 @@ export function CommandLogsStream() {
 
   useEffect(() => {
     if (sandboxId) {
-      for (const command of commands.filter(
-        (command) => typeof command.exitCode === 'undefined'
-      )) {
+      for (const command of commands.filter((command) => typeof command.exitCode === 'undefined')) {
         if (!ref.current[command.cmdId]) {
           const iterator = getCommandLogs(sandboxId, command.cmdId)
           ref.current[command.cmdId] = iterator
@@ -55,10 +50,9 @@ const logSchema = z.object({
 })
 
 async function* getCommandLogs(sandboxId: string, cmdId: string) {
-  const response = await fetch(
-    `/api/sandboxes/${sandboxId}/cmds/${cmdId}/logs`,
-    { headers: { 'Content-Type': 'application/json' } }
-  )
+  const response = await fetch(`/api/sandboxes/${sandboxId}/cmds/${cmdId}/logs`, {
+    headers: { 'Content-Type': 'application/json' },
+  })
 
   const reader = response.body!.getReader()
   const decoder = new TextDecoder()

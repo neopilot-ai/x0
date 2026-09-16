@@ -6,17 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Capture client and emulated server console output from an API v1 preview iframe",
-  "topics": [
-    "design",
-    "api",
-    "previews"
-  ],
-  "related": [
-    "api/v1/quickstart"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api", "previews"],
+  "related": ["api/v1/quickstart"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Install the channel package",
     "Connect to the preview",

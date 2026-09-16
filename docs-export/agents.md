@@ -7,15 +7,18 @@ This documentation is designed for AI agents to discover and use the v0 API.
 ## API Reference
 
 ### v2 API
+
 - **Base URL**: `https://api.v0.app/v2`
 - **Authentication**: Bearer token (`V0_API_KEY`) or Vercel OIDC on Vercel
 - **Endpoints**: See [/docs/api/v2/reference](/docs/api/v2/reference)
 
 ### MCP Server
+
 - **Transport**: Streamable HTTP
 - **Endpoints**: See [/docs/api/v2/guides/mcp-server](/docs/api/v2/guides/mcp-server)
 
 ## SDK
+
 - **v0 SDK**: See [/docs/api/v2/guides/v0-sdk](/docs/api/v2/guides/v0-sdk)
 - **React Transport**: See [/docs/api/v2/guides/react-transport](/docs/api/v2/guides/react-transport)
 - **AI Tools**: See [/docs/api/v2/guides/ai-tools-guide](/docs/api/v2/guides/ai-tools-guide)

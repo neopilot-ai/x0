@@ -14,11 +14,7 @@ export function V0SandboxPreview({
   return <V0SandboxPreviewBase chatId={chatId} className={className} style={style} />
 }
 
-export function V0ConsolePanel({
-  activeTab = 'logs',
-}: {
-  activeTab?: 'logs' | 'terminal'
-}) {
+export function V0ConsolePanel({ activeTab = 'logs' }: { activeTab?: 'logs' | 'terminal' }) {
   return (
     <div className="v0-console-panel">
       <div className="v0-console-panel__tabs">

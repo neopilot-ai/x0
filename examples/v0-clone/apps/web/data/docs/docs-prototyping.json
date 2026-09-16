@@ -6,17 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Accelerate your product development lifecycle with interactive prototypes.",
-  "topics": [
-    "design"
-  ],
-  "related": [
-    "design-mode",
-    "figma",
-    "text-prompting"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design"],
+  "related": ["design-mode", "figma", "text-prompting"],
+  "requires": ["quickstart"],
   "headings": [
     "The standard product development process",
     "Accelerating product development with v0"

@@ -16,10 +16,7 @@ export const useWelcomeStore = create<State>((set) => ({
   setOpen: (open) => set({ open }),
 }))
 
-export function Welcome(props: {
-  onDismissAction(): void
-  defaultOpen: boolean
-}) {
+export function Welcome(props: { onDismissAction(): void; defaultOpen: boolean }) {
   const { open, setOpen } = useWelcomeStore()
 
   useEffect(() => {
@@ -51,30 +48,19 @@ export function Welcome(props: {
               OSS Vibe Coding Platform
             </h1>
             <p className="text-base text-primary">
-              This is a <strong>demo</strong> of an end-to-end coding platform
-              where the user can enter text prompts, and the agent will create a
-              full stack application.
+              This is a <strong>demo</strong> of an end-to-end coding platform where the user can
+              enter text prompts, and the agent will create a full stack application.
             </p>
             <p className="text-base text-secondary-foreground">
               It uses Vercel&apos;s AI Cloud services like{' '}
-              <ExternalLink href="https://vercel.com/docs/vercel-sandbox">
-                Sandbox
-              </ExternalLink>{' '}
-              for secure code execution,{' '}
-              <ExternalLink href="https://vercel.com/docs/ai-gateway">
-                AI Gateway
-              </ExternalLink>{' '}
-              for Claude, GPT, and Grok model support,{' '}
-              <ExternalLink href="https://vercel.com/fluid">
-                Fluid Compute
-              </ExternalLink>{' '}
-              for efficient rendering and streaming, and it&apos;s built with{' '}
-              <ExternalLink href="https://nextjs.org/">Next.js</ExternalLink>{' '}
-              and the{' '}
-              <ExternalLink href="https://ai-sdk.dev/docs/introduction">
-                AI SDK
-              </ExternalLink>
-              .
+              <ExternalLink href="https://vercel.com/docs/vercel-sandbox">Sandbox</ExternalLink> for
+              secure code execution,{' '}
+              <ExternalLink href="https://vercel.com/docs/ai-gateway">AI Gateway</ExternalLink> for
+              Claude, GPT, and Grok model support,{' '}
+              <ExternalLink href="https://vercel.com/fluid">Fluid Compute</ExternalLink> for
+              efficient rendering and streaming, and it&apos;s built with{' '}
+              <ExternalLink href="https://nextjs.org/">Next.js</ExternalLink> and the{' '}
+              <ExternalLink href="https://ai-sdk.dev/docs/introduction">AI SDK</ExternalLink>.
             </p>
           </div>
           <footer className="bg-secondary flex justify-end p-4 border-t border-border">
@@ -91,24 +77,13 @@ export function Welcome(props: {
 export function ToggleWelcome() {
   const { open, setOpen } = useWelcomeStore()
   return (
-    <Button
-      className="cursor-pointer"
-      onClick={() => setOpen(!open)}
-      variant="outline"
-      size="sm"
-    >
+    <Button className="cursor-pointer" onClick={() => setOpen(!open)} variant="outline" size="sm">
       <InfoIcon /> <span className="hidden lg:inline">What&apos;s this?</span>
     </Button>
   )
 }
 
-function ExternalLink({
-  children,
-  href,
-}: {
-  children: ReactNode
-  href: string
-}) {
+function ExternalLink({ children, href }: { children: ReactNode; href: string }) {
   return (
     <a
       className="underline underline-offset-3 text-primary"

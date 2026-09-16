@@ -1,5 +1,12 @@
 import { AppLayout } from '@/components/layout/app-layout'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 
@@ -73,7 +80,9 @@ export default function DesignDemoPage() {
                 <p className="text-sm font-medium text-foreground">New project created</p>
                 <p className="text-xs text-muted-foreground">2 minutes ago</p>
               </div>
-              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">Active</span>
+              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                Active
+              </span>
             </div>
             <Separator />
             <div className="flex items-center justify-between">
@@ -81,7 +90,9 @@ export default function DesignDemoPage() {
                 <p className="text-sm font-medium text-foreground">Deploy completed</p>
                 <p className="text-xs text-muted-foreground">1 hour ago</p>
               </div>
-              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">Success</span>
+              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                Success
+              </span>
             </div>
             <Separator />
             <div className="flex items-center justify-between">
@@ -89,7 +100,9 @@ export default function DesignDemoPage() {
                 <p className="text-sm font-medium text-foreground">New team member</p>
                 <p className="text-xs text-muted-foreground">3 hours ago</p>
               </div>
-              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">Pending</span>
+              <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
+                Pending
+              </span>
             </div>
           </CardContent>
         </Card>

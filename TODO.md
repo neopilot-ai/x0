@@ -1,6 +1,7 @@
 # TODO: Find Gaps & Implement Code Following Docs
 
 ## Status
+
 - ✅ Analysis complete
 - ✅ All docs populated (205 docs, 0 empty)
 - ✅ v1 docs deprecated (72 files)
@@ -23,6 +24,7 @@
 - ✅ Sandbox SDK integration created (code-server.ts, sdk.ts, index.ts)
 
 ## Code Changes Made
+
 - `packages/v0-sdk/src/code-server/` — New code-server package (6 files)
 - `packages/v0-sdk/src/terminal/` — New terminal module (5 files)
 - `packages/v0-sdk/src/sandbox/code-server.ts` — Sandbox code-server integration
@@ -43,10 +45,12 @@
 - `docs-export/agents.md` — Updated with code editing, terminal commands, platform API
 
 ## Pre-existing Errors
+
 - `src/preview-proxy.test.ts(1,38): error TS2307: Cannot find module 'bun:test'`
 - `tests/surface.types.ts(4,15): error TS2305: Module has no exported member 'ChatsGetResponse'`
 
 ## Files Created
+
 - `docs-export/code-editing.md` — Full code editing guide
 - `docs-export/sandbox.md` — Full sandbox guide (Vercel Sandbox, Firecracker)
 - `docs-export/terminal-commands.md` — Full terminal commands guide
@@ -78,6 +82,7 @@
 - `docs-export/` — Complete isolated docs export (205 markdown files)
 
 ## Architecture
+
 ```
 v0.app
 ├── Vercel Sandbox (Firecracker microVMs)

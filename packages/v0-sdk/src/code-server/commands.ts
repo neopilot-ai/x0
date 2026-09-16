@@ -29,18 +29,21 @@ const BUILTIN_ALLOW: string[] = [
   'wget',
 ]
 
-const BUILTIN_DENY: string[] = [
-  'rm -rf',
-  'sudo',
-  'shutdown',
-  'reboot',
-  'format',
-  'mkfs',
-]
+const BUILTIN_DENY: string[] = ['rm -rf', 'sudo', 'shutdown', 'reboot', 'format', 'mkfs']
 
 const DEFAULT_RULES: PermissionRule[] = [
-  ...BUILTIN_ALLOW.map(pattern => ({ pattern, type: 'allow' as const, scope: 'user' as const, createdAt: new Date() })),
-  ...BUILTIN_DENY.map(pattern => ({ pattern, type: 'deny' as const, scope: 'user' as const, createdAt: new Date() })),
+  ...BUILTIN_ALLOW.map((pattern) => ({
+    pattern,
+    type: 'allow' as const,
+    scope: 'user' as const,
+    createdAt: new Date(),
+  })),
+  ...BUILTIN_DENY.map((pattern) => ({
+    pattern,
+    type: 'deny' as const,
+    scope: 'user' as const,
+    createdAt: new Date(),
+  })),
 ]
 
 export async function executeCommand(
@@ -69,7 +72,9 @@ export async function executeCommand(
   }
 }
 
-export async function getCommandHistory(): Promise<Array<{ command: string; output: string; exitCode: number | null }>> {
+export async function getCommandHistory(): Promise<
+  Array<{ command: string; output: string; exitCode: number | null }>
+> {
   try {
     const response = await fetch('/api/sandbox/commands')
     return await response.json()
@@ -104,11 +109,17 @@ export async function evaluateCommand(command: string, mode: PermissionMode): Pr
     if (command.includes(denyPattern)) return false
   }
   if (mode === 'auto') {
-    return BUILTIN_ALLOW.some(pattern => command.includes(pattern))
+    return BUILTIN_ALLOW.some((pattern) => command.includes(pattern))
   }
   return true
 }
 
-export function getBuiltinAllow(): string[] { return [...BUILTIN_ALLOW] }
-export function getBuiltinDeny(): string[] { return [...BUILTIN_DENY] }
-export function getDefaultRules(): PermissionRule[] { return [...DEFAULT_RULES] }
+export function getBuiltinAllow(): string[] {
+  return [...BUILTIN_ALLOW]
+}
+export function getBuiltinDeny(): string[] {
+  return [...BUILTIN_DENY]
+}
+export function getDefaultRules(): PermissionRule[] {
+  return [...DEFAULT_RULES]
+}

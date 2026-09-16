@@ -14,34 +14,26 @@ export const runCommand = ({ writer }: Params) =>
   tool({
     description,
     inputSchema: z.object({
-      sandboxId: z
-        .string()
-        .describe('The ID of the Vercel Sandbox to run the command in'),
+      sandboxId: z.string().describe('The ID of the Vercel Sandbox to run the command in'),
       command: z
         .string()
         .describe(
-          "The base command to run (e.g., 'npm', 'node', 'python', 'ls', 'cat'). Do NOT include arguments here. IMPORTANT: Each command runs independently in a fresh shell session - there is no persistent state between commands. You cannot use 'cd' to change directories for subsequent commands."
+          "The base command to run (e.g., 'npm', 'node', 'python', 'ls', 'cat'). Do NOT include arguments here. IMPORTANT: Each command runs independently in a fresh shell session - there is no persistent state between commands. You cannot use 'cd' to change directories for subsequent commands.",
         ),
       args: z
         .array(z.string())
         .optional()
         .describe(
-          "Array of arguments for the command. Each argument should be a separate string (e.g., ['install', '--verbose'] for npm install --verbose, or ['src/index.js'] to run a file, or ['-la', './src'] to list files). IMPORTANT: Use relative paths (e.g., 'src/file.js') or absolute paths instead of trying to change directories with 'cd' first, since each command runs in a fresh shell session."
+          "Array of arguments for the command. Each argument should be a separate string (e.g., ['install', '--verbose'] for npm install --verbose, or ['src/index.js'] to run a file, or ['-la', './src'] to list files). IMPORTANT: Use relative paths (e.g., 'src/file.js') or absolute paths instead of trying to change directories with 'cd' first, since each command runs in a fresh shell session.",
         ),
-      sudo: z
-        .boolean()
-        .optional()
-        .describe('Whether to run the command with sudo'),
+      sudo: z.boolean().optional().describe('Whether to run the command with sudo'),
       wait: z
         .boolean()
         .describe(
-          'Whether to wait for the command to finish before returning. If true, the command will block until it completes, and you will receive its output.'
+          'Whether to wait for the command to finish before returning. If true, the command will block until it completes, and you will receive its output.',
         ),
     }),
-    execute: async (
-      { sandboxId, command, sudo, wait, args = [] },
-      { toolCallId }
-    ) => {
+    execute: async ({ sandboxId, command, sudo, wait, args = [] }, { toolCallId }) => {
       writer.write({
         id: toolCallId,
         type: 'data-run-command',
@@ -131,7 +123,7 @@ export const runCommand = ({ writer }: Params) =>
         })
 
         return `The command \`${command} ${args.join(
-          ' '
+          ' ',
         )}\` has been started in the background in the sandbox with ID \`${sandboxId}\` with the commandId ${
           cmd.cmdId
         }.`
@@ -151,10 +143,7 @@ export const runCommand = ({ writer }: Params) =>
 
       const done = await cmd.wait()
       try {
-        const [stdout, stderr] = await Promise.all([
-          done.stdout(),
-          done.stderr(),
-        ])
+        const [stdout, stderr] = await Promise.all([done.stdout(), done.stderr()])
 
         writer.write({
           id: toolCallId,
@@ -171,7 +160,7 @@ export const runCommand = ({ writer }: Params) =>
 
         return (
           `The command \`${command} ${args.join(
-            ' '
+            ' ',
           )}\` has finished with exit code ${done.exitCode}.` +
           `Stdout of the command was: \n` +
           `\`\`\`\n${stdout}\n\`\`\`\n` +

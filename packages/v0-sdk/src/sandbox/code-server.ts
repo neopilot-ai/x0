@@ -12,9 +12,7 @@ export interface CodeServerSandboxConnection {
   files: Map<string, string>
 }
 
-export async function connectToSandbox(
-  chatId: string,
-): Promise<CodeServerSandboxConnection> {
+export async function connectToSandbox(chatId: string): Promise<CodeServerSandboxConnection> {
   const codeServerUrl = `https://${chatId}.sandbox.vercel.app`
   return {
     chatId,

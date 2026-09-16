@@ -27,9 +27,7 @@ import { v0 } from 'v0'
 
 const result = await v0.chats.create({
   message: 'Build a dashboard with custom components',
-  skills: [
-    { type: 'remote', name: 'acme-dashboard', source: 'skills.sh' },
-  ],
+  skills: [{ type: 'remote', name: 'acme-dashboard', source: 'skills.sh' }],
 })
 ```
 
@@ -45,9 +43,7 @@ Skills from the skills.sh registry:
 const result = await v0.messages.send({
   chatId: 'chat_abc123',
   message: 'Use the acme-dashboard skill',
-  skills: [
-    { type: 'remote', name: 'acme-dashboard', source: 'skills.sh' },
-  ],
+  skills: [{ type: 'remote', name: 'acme-dashboard', source: 'skills.sh' }],
 })
 ```
 
@@ -59,9 +55,7 @@ User or team memory skills (including design-system skills):
 const result = await v0.messages.send({
   chatId: 'chat_abc123',
   message: 'Use the acme-ui design system',
-  skills: [
-    { type: 'memory', name: 'acme-ui', scope: 'team' },
-  ],
+  skills: [{ type: 'memory', name: 'acme-ui', scope: 'team' }],
 })
 ```
 
@@ -73,9 +67,7 @@ Skills defined in the chat repo:
 const result = await v0.messages.send({
   chatId: 'chat_abc123',
   message: 'Use project-specific instructions',
-  skills: [
-    { type: 'project', name: 'my-project-skill' },
-  ],
+  skills: [{ type: 'project', name: 'my-project-skill' }],
 })
 ```
 

@@ -14,9 +14,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Handling Integrations
-
-
 
 Learn how to handle integration requests when a v0 chat pauses and needs input from your app. The short version is:
 
@@ -34,8 +33,8 @@ Start or continue a chat with a request that depends on an integration.
 
 For example:
 
-* "Build a waiting list app with Neon."
-* "Create a dashboard that uses Supabase auth."
+- "Build a waiting list app with Neon."
+- "Create a dashboard that uses Supabase auth."
 
 If the agent can continue without extra setup, it will. If it needs an integration, it will stop and ask your app to handle it.
 
@@ -43,15 +42,15 @@ If the agent can continue without extra setup, it will. If it needs an integrati
 
 When a chat is blocked on integration setup, inspect the latest assistant message first. The blocked task is exposed in `experimental_content` on:
 
-* `GET /v1/chats/{chatId}`
-* `GET /v1/chats/{chatId}/messages/{messageId}`
+- `GET /v1/chats/{chatId}`
+- `GET /v1/chats/{chatId}/messages/{messageId}`
 
 If you use `GET /v1/chats/{chatId}`, read the last assistant message in the `messages` array. Chat messages are returned oldest to newest.
 
 For integration requests, you will typically see an assistant message part with:
 
-* stop reason `user-input-required`
-* type `task-get-or-request-integration-v1`
+- stop reason `user-input-required`
+- type `task-get-or-request-integration-v1`
 
 Inside that message content, you'll usually see a request telling you which integration to install, such as `Neon` or `Supabase`.
 
@@ -81,8 +80,8 @@ const vercelProjectId = chat.vercelProjectId
 
 This step happens outside the v0 API. The exact Vercel API calls depend on your integration flow, but these docs are the relevant starting points:
 
-* [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)
-* [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)
+- [Create Integration Store Free and Paid Plans](https://vercel.com/docs/rest-api/integrations/create-integration-store-free-and-paid-plans)
+- [Connect Integration Resource to Project](https://vercel.com/docs/rest-api/integrations/connect-integration-resource-to-project)
 
 When you call the Vercel endpoint that connects a resource to a project, pass `vercelProjectId` from the chat.
 
@@ -123,8 +122,8 @@ After the integration is connected, the assistant may ask for permission to run 
 
 When that happens, inspect the latest assistant message again. For permission requests, you will typically see:
 
-* stop reason `permissions`
-* a `suggestedPermissions` payload in the blocked assistant message
+- stop reason `permissions`
+- a `suggestedPermissions` payload in the blocked assistant message
 
 To approve the request, call `resolve-task` with `task.type: "confirmed-permissions"` and send back the `suggestedPermissions` objects from the latest blocked assistant message.
 
@@ -162,7 +161,6 @@ Here is the full flow in plain English:
 6. Your backend reads `suggestedPermissions` from the latest assistant message and sends them back with `confirmed-permissions`.
 
 That is the complete pattern for handling integrations in the v0 API.
-
 
 ---
 

@@ -6,17 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Using v0-sdk with AI SDK for programmatic interaction",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v1/adapters/ai-tools",
-    "api/v1/packages/ai-tools"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v1/adapters/ai-tools", "api/v1/packages/ai-tools"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Setup",
     "Examples",

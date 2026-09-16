@@ -6,22 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Teach v0 to build with your team's components, tokens, and design system conventions.",
-  "topics": [
-    "design",
-    "api",
-    "authentication",
-    "teams"
-  ],
-  "related": [
-    "figma",
-    "design-mode",
-    "instructions",
-    "teams",
-    "api/v2/guides/design-systems"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "api", "authentication", "teams"],
+  "related": ["figma", "design-mode", "instructions", "teams", "api/v2/guides/design-systems"],
+  "requires": ["quickstart"],
   "headings": [
     "Before you begin",
     "Import a design system",

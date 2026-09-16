@@ -12,20 +12,19 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Capturing Preview Console Logs
-
-
 
 API v1 previews use v0's next-lite runtime. Next-lite runs both client code and emulated Next.js server code in the browser, inside the preview iframe. You can capture that code's console output in the application embedding the iframe.
 
 The preview forwards these console methods:
 
-* `console.log`
-* `console.info`
-* `console.warn`
-* `console.error`
-* `console.debug`
-* Uncaught errors and unhandled promise rejections
+- `console.log`
+- `console.info`
+- `console.warn`
+- `console.error`
+- `console.debug`
+- Uncaught errors and unhandled promise rejections
 
 Each event includes a formatted message, an ISO timestamp, the console method, and an `isServer` flag indicating whether the log came from emulated server code.
 
@@ -81,18 +80,12 @@ function isPreviewConsoleLog(value: unknown): value is PreviewConsoleLog {
   )
 }
 
-function isConsoleCall(
-  value: unknown,
-): value is { method: 'sendConsoleLog'; args: [unknown] } {
+function isConsoleCall(value: unknown): value is { method: 'sendConsoleLog'; args: [unknown] } {
   if (!value || typeof value !== 'object') return false
 
   const call = value as { method?: unknown; args?: unknown }
 
-  return (
-    call.method === 'sendConsoleLog' &&
-    Array.isArray(call.args) &&
-    call.args.length > 0
-  )
+  return call.method === 'sendConsoleLog' && Array.isArray(call.args) && call.args.length > 0
 }
 
 export function connectPreviewConsole(
@@ -128,10 +121,7 @@ The following client component embeds the API's `demoUrl`, keeps the latest 500 
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import {
-  connectPreviewConsole,
-  type PreviewConsoleLog,
-} from './preview-console'
+import { connectPreviewConsole, type PreviewConsoleLog } from './preview-console'
 
 const MAX_LOGS = 500
 
@@ -196,16 +186,15 @@ Some internal framework messages are filtered to reduce noise. This channel is i
 
 Generated previews and their log events are untrusted input:
 
-* Render `message` as text. Do not pass it to `dangerouslySetInnerHTML` or `eval`.
-* Do not trigger privileged actions based on a log message.
-* Limit retained events and redact sensitive values before sending logs to your own backend.
-* Keep the preview on its v0-provided, cross-origin `demoUrl` and use an iframe sandbox. Add permissions such as `allow-popups` or `allow-downloads` only if the generated application needs them.
-* Never put secrets in next-lite server code. Although that code uses server APIs, it executes in the browser.
+- Render `message` as text. Do not pass it to `dangerouslySetInnerHTML` or `eval`.
+- Do not trigger privileged actions based on a log message.
+- Limit retained events and redact sensitive values before sending logs to your own backend.
+- Keep the preview on its v0-provided, cross-origin `demoUrl` and use an iframe sandbox. Add permissions such as `allow-popups` or `allow-downloads` only if the generated application needs them.
+- Never put secrets in next-lite server code. Although that code uses server APIs, it executes in the browser.
 
 <Callout type="warn">
   This guide applies to next-lite previews created with API v1. API v2 uses VM-backed previews and does not expose console output through this next-lite channel.
 </Callout>
-
 
 ---
 

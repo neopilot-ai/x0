@@ -6,18 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Add custom domains to your v0 deployments to give your applications a professional, branded URL.",
-  "topics": [
-    "deployment",
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "deployments",
-    "vercel-integration"
-  ],
-  "requires": [
-    "deployments"
-  ],
+  "topics": ["deployment", "design", "integrations"],
+  "related": ["deployments", "vercel-integration"],
+  "requires": ["deployments"],
   "headings": [
     "Step 1: Access the Domains menu",
     "Step 2: Choose your domain option",

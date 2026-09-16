@@ -28,10 +28,7 @@ export function SyntaxHighlighter(props: { path: string; code: string }) {
 
 function detectLanguageFromFilename(path: string): string {
   const pathParts = path.split('/')
-  const extension = pathParts[pathParts.length - 1]
-    ?.split('.')
-    .pop()
-    ?.toLowerCase()
+  const extension = pathParts[pathParts.length - 1]?.split('.').pop()?.toLowerCase()
 
   const extensionMap: Record<string, string> = {
     // JavaScript/TypeScript

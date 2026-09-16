@@ -11,15 +11,13 @@ related:
 
 # Handling Agent Interactions
 
-
-
 The v0 agent may pause when it needs a decision from the user. Your app should show that request, collect the user's response, and resolve the task so the agent can continue.
 
 This guide covers:
 
-* Reviewing a proposed plan
-* Answering agent questions
-* Granting tool permissions
+- Reviewing a proposed plan
+- Answering agent questions
+- Granting tool permissions
 
 For integration setup, see [Handling Integrations](/docs/api/v2/guides/handling-integrations).
 
@@ -35,9 +33,9 @@ Pending interactions appear in the latest assistant message's `parts` array:
 
 How you get the message depends on the response mode:
 
-* **Synchronous:** The request returns the completed assistant message.
-* **Asynchronous:** The request returns a `messageId`. Poll `GET /v2/chats/{chatId}/messages/{messageId}` until `finishReason` is no longer `null`.
-* **Streaming:** Consume `result.stream`, then inspect `(await result.final).parts`.
+- **Synchronous:** The request returns the completed assistant message.
+- **Asynchronous:** The request returns a `messageId`. Poll `GET /v2/chats/{chatId}/messages/{messageId}` until `finishReason` is no longer `null`.
+- **Streaming:** Consume `result.stream`, then inspect `(await result.final).parts`.
 
 Use the latest blocked assistant message only. If the chat has moved on or the submitted task type does not match the pending interaction, `resolve` returns `409 Conflict`.
 
@@ -47,8 +45,7 @@ When the agent finishes planning, the message includes an `agent-action` part wi
 
 ```typescript
 const planRequest = message.parts.find(
-  (part) =>
-    part.type === 'agent-action' && part.name === 'exit_plan_mode',
+  (part) => part.type === 'agent-action' && part.name === 'exit_plan_mode',
 )
 
 console.log(planRequest?.data)
@@ -77,8 +74,7 @@ Questions appear in an `agent-action` part with `name: "ask_user_questions"`. Th
 
 ```typescript
 const questionRequest = message.parts.find(
-  (part) =>
-    part.type === 'agent-action' && part.name === 'ask_user_questions',
+  (part) => part.type === 'agent-action' && part.name === 'ask_user_questions',
 )
 
 console.log(questionRequest?.data)
@@ -117,10 +113,7 @@ const permissionRequest = message.parts.find(
   (part) => part.type === 'tool-call' && part.suggestedPermissions?.length,
 )
 
-if (
-  permissionRequest?.type === 'tool-call' &&
-  permissionRequest.suggestedPermissions
-) {
+if (permissionRequest?.type === 'tool-call' && permissionRequest.suggestedPermissions) {
   await v0.messages.resolve({
     chatId: 'chat_abc123',
     task: {
@@ -140,7 +133,6 @@ To reject a permission request, send a regular follow-up message instead. You ca
 `v0.messages.resolve()` waits for the agent and returns the next assistant message. Inspect that message too: resolving one interaction may lead to another.
 
 Use `v0.messages.resolveAsync()` when you want the agent to continue in the background, or `v0.messages.resolveStream()` when you want to stream its response.
-
 
 ---
 

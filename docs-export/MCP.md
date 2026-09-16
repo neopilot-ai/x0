@@ -90,11 +90,11 @@ Disabling an integration takes precedence because its MCP tools are not added to
 
 Native integrations display three Remote MCP settings:
 
-| Setting | Current behavior |
-| --- | --- |
-| Disabled | The integration stays installed, but its MCP server is inactive and its tools are not made available to v0. |
-| Ask for Approval (Manual) | The MCP server is active and its tools are available. This is the default setting for new integrations. |
-| Always Run (Auto) | The MCP server is active and its tools are available. |
+| Setting                   | Current behavior                                                                                            |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Disabled                  | The integration stays installed, but its MCP server is inactive and its tools are not made available to v0. |
+| Ask for Approval (Manual) | The MCP server is active and its tools are available. This is the default setting for new integrations.     |
+| Always Run (Auto)         | The MCP server is active and its tools are available.                                                       |
 
 Manual and Auto are enabled states. In the current runtime, those labels do not override the chat's global permission mode or its Agent Permissions rules.
 
@@ -104,11 +104,11 @@ For a custom MCP server, its enabled or disabled state serves the same availabil
 
 After an MCP tool is available, the global mode applies:
 
-| Global mode | MCP tool behavior |
-| --- | --- |
-| Ask | Calls matched by an `allow` rule run, calls matched by a `deny` rule are blocked, and calls marked `ask` or not matched by a rule require confirmation. |
-| Auto | `allow`, `ask`, and `deny` rules still apply. Unmatched calls generally run automatically; the runtime can request confirmation for tool names its risk check classifies as potentially destructive. |
-| Full | Tool approval evaluation is skipped, so MCP calls run without checking user or team `allow`, `ask`, and `deny` rules. |
+| Global mode | MCP tool behavior                                                                                                                                                                                    |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ask         | Calls matched by an `allow` rule run, calls matched by a `deny` rule are blocked, and calls marked `ask` or not matched by a rule require confirmation.                                              |
+| Auto        | `allow`, `ask`, and `deny` rules still apply. Unmatched calls generally run automatically; the runtime can request confirmation for tool names its risk check classifies as potentially destructive. |
+| Full        | Tool approval evaluation is skipped, so MCP calls run without checking user or team `allow`, `ask`, and `deny` rules.                                                                                |
 
 There is no separate five-second cancellation window after an MCP call. A potentially destructive operation is also not guaranteed to require approval: an `allow` rule or Full mode can let it run without confirmation.
 

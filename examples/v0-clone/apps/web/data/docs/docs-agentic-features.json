@@ -6,22 +6,9 @@
   "category": "Guides",
   "type": "conceptual",
   "description": "v0's intelligent agent capabilities for web search, browser use, terminal commands, error fixing, and external tool integration.",
-  "topics": [
-    "mcp",
-    "security",
-    "agents",
-    "terminal",
-    "integrations"
-  ],
-  "related": [
-    "terminal-commands",
-    "pre-installed-agents",
-    "MCP",
-    "sandbox"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["mcp", "security", "agents", "terminal", "integrations"],
+  "related": ["terminal-commands", "pre-installed-agents", "MCP", "sandbox"],
+  "requires": ["quickstart"],
   "headings": [
     "Core Agent Capabilities",
     "Web search",

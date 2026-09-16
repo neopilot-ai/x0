@@ -35,25 +35,15 @@ export function SettingsSection({
                   </>
                 ) : (
                   <div className="flex flex-col gap-1">
-                    <label className="text-heading-16 font-medium text-v0-gray-1000">
-                      {title}
-                    </label>
-                    <p className="text-label-14 text-v0-gray-900 text-pretty">
-                      {description}
-                    </p>
+                    <label className="text-heading-16 font-medium text-v0-gray-1000">{title}</label>
+                    <p className="text-label-14 text-v0-gray-900 text-pretty">{description}</p>
                   </div>
                 )}
               </div>
-              {!isLoading && headerExtra && (
-                <div className="shrink-0">{headerExtra}</div>
-              )}
+              {!isLoading && headerExtra && <div className="shrink-0">{headerExtra}</div>}
               {!isLoading && !headerExtra && <div className="shrink-0" />}
             </div>
-            {isLoading ? (
-              <Skeleton className="h-[120px] w-full" />
-            ) : (
-              children
-            )}
+            {isLoading ? <Skeleton className="h-[120px] w-full" /> : children}
           </div>
           <div className="flex items-center gap-2 justify-between bg-v0-background-200 w-full border-t border-v0-gray-200! h-14 px-3">
             <div className="flex min-w-0 items-center gap-2">
@@ -70,11 +60,7 @@ export function SettingsSection({
 }
 
 function Skeleton({ className = '' }: { className?: string }) {
-  return (
-    <div
-      className={`animate-pulse bg-v0-gray-200 rounded-md ${className}`}
-    />
-  )
+  return <div className={`animate-pulse bg-v0-gray-200 rounded-md ${className}`} />
 }
 
 export function SettingsSectionContent({ children }: { children: ReactNode }) {

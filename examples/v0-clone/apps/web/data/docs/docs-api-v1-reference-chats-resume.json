@@ -6,20 +6,10 @@
   "category": "API · Chats",
   "type": "reference",
   "description": "Reconnects to an active assistant message stream in a chat.",
-  "topics": [
-    "api",
-    "streaming"
-  ],
+  "topics": ["api", "streaming"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "Use this endpoint when a client disconnects while an assistant message is still",
   "snippets": [],
   "content": "\n\n# Resume Message\n\n## Usage\n\nUse this endpoint when a client disconnects while an assistant message is still\ngenerating, such as after a page refresh. The endpoint reconnects to the\ncurrently running stream for the specified assistant message.\n\nThis endpoint does not restart a stopped or completed generation. After calling\nthe stop endpoint, start a new message instead of calling resume.\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst stream = await v0.chats.resume({\nchatId: 'chat_123',\nmessageId: 'msg_123',\n})\n\nfor await (const event of stream) {\nconsole.log(event)\n}`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -N -X POST https://api.v0.dev/v1/chats//messages//resume \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Accept: text/event-stream\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat containing the message to resume. Provided as a path parameter.\"\n},\n{\n\"name\": \"messageId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The identifier of the specific message to resume. Provided as a path parameter.\"\n}\n]}\n/>\n\n### Response\n\nReturns `text/event-stream`. Each event is sent as `data: \\n\\n`.\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The chat or message identifier for the event.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'chat' | 'chat.title' | 'chat.name' | 'message.experimental_content.chunk'\",\n\"required\": true,\n\"description\": \"The event type. Chat events contain the current chat state; title/name events contain title deltas; message chunk events contain content deltas.\",\n\"deprecated\": false\n},\n{\n\"name\": \"delta\",\n\"type\": \"string | object\",\n\"required\": false,\n\"description\": \"The incremental payload for title/name and message chunk events.\",\n\"deprecated\": false\n},\n{\n\"name\": \"error\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"An error message if the stream failed while reconnecting.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

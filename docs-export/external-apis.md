@@ -23,10 +23,10 @@ Follow **Project menu** `...` → **Settings** → **Environment Variables** to 
 
 When adding a variable, you can choose which environments it applies to. This lets you use different API keys for testing vs production, or enable features only in certain environments.
 
-| Environment | Description |
-| --- | --- |
-| **Production** | Applied to your live, published app |
-| **Preview** | Applied to preview deployments (non-production branches) |
-| **Development** | Applied to the v0 preview panel or when running locally |
+| Environment     | Description                                              |
+| --------------- | -------------------------------------------------------- |
+| **Production**  | Applied to your live, published app                      |
+| **Preview**     | Applied to preview deployments (non-production branches) |
+| **Development** | Applied to the v0 preview panel or when running locally  |
 
 Environment variables are encrypted and stored securely on Vercel. Once added, you can instruct v0 to use them in your API calls.

@@ -1,35 +1,33 @@
 ---
 title: List Chats
 description: Lists chats accessible to the authenticated user. Use metadata[key]=value style query parameters to filter by metadata.
-badge: "GET"
+badge: 'GET'
 ---
 
 # List Chats
-
-
 
 <EndpointDisplay method="get" path="/chats" versionPrefix="/v2" />
 
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 const result = await v0.chats.list()
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X GET "https://api.v0.dev/v2/chats" \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X GET "https://api.v0.dev/v2/chats" \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -39,140 +37,139 @@ console.log(result)`}
 #### Query Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "limit",
-    "type": "integer",
-    "required": false,
-    "description": "Maximum number of chats to return (1-100, default 20).",
-    "deprecated": false
-  },
-  {
-    "name": "cursor",
-    "type": "string",
-    "required": false,
-    "description": "Pagination cursor returned from a previous response.",
-    "deprecated": false
-  },
-  {
-    "name": "authorId",
-    "type": "string",
-    "required": false,
-    "description": "Restrict results to chats created by this user. Must be a member of the calling scope.",
-    "deprecated": false
-  },
-  {
-    "name": "vercelProjectId",
-    "type": "string",
-    "required": false,
-    "description": "Restrict results to chats associated with this Vercel project.",
-    "deprecated": false
-  },
-  {
-    "name": "metadata",
-    "type": "Record<string, string>",
-    "required": false,
-    "description": "Filter by metadata, e.g. metadata[environment]=production. Returns chats matching all supplied key-value pairs.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "limit",
+"type": "integer",
+"required": false,
+"description": "Maximum number of chats to return (1-100, default 20).",
+"deprecated": false
+},
+{
+"name": "cursor",
+"type": "string",
+"required": false,
+"description": "Pagination cursor returned from a previous response.",
+"deprecated": false
+},
+{
+"name": "authorId",
+"type": "string",
+"required": false,
+"description": "Restrict results to chats created by this user. Must be a member of the calling scope.",
+"deprecated": false
+},
+{
+"name": "vercelProjectId",
+"type": "string",
+"required": false,
+"description": "Restrict results to chats associated with this Vercel project.",
+"deprecated": false
+},
+{
+"name": "metadata",
+"type": "Record<string, string>",
+"required": false,
+"description": "Filter by metadata, e.g. metadata[environment]=production. Returns chats matching all supplied key-value pairs.",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chats",
-    "type": "object[]",
-    "required": true,
-    "description": "The chats in this page.",
-    "deprecated": false,
-    "arrayItems": {
-      "name": "item",
-      "type": "object",
-      "required": true,
-      "description": "",
-      "deprecated": false,
-      "properties": [
-        {
-          "name": "id",
-          "type": "string",
-          "required": true,
-          "description": "Unique chat identifier.",
-          "deprecated": false
-        },
-        {
-          "name": "title",
-          "type": "string",
-          "required": false,
-          "description": "Chat title, if generated.",
-          "deprecated": false
-        },
-        {
-          "name": "privacy",
-          "type": "'public' | 'private' | 'team' | 'team-edit' | 'unlisted'",
-          "required": true,
-          "description": "Visibility setting of the chat.",
-          "deprecated": false
-        },
-        {
-          "name": "createdAt",
-          "type": "string",
-          "required": true,
-          "description": "ISO timestamp of when the chat was created.",
-          "deprecated": false
-        },
-        {
-          "name": "updatedAt",
-          "type": "string",
-          "required": false,
-          "description": "ISO timestamp of when the chat was last updated.",
-          "deprecated": false
-        },
-        {
-          "name": "authorId",
-          "type": "string",
-          "required": true,
-          "description": "ID of the user who created the chat.",
-          "deprecated": false
-        },
-        {
-          "name": "vercelProjectId",
-          "type": "string",
-          "required": false,
-          "description": "Associated Vercel project ID, if any.",
-          "deprecated": false
-        },
-        {
-          "name": "metadata",
-          "type": "Record<string, string>",
-          "required": true,
-          "description": "User-defined key-value metadata.",
-          "deprecated": false
-        },
-        {
-          "name": "writePermission",
-          "type": "boolean",
-          "required": true,
-          "description": "Whether the caller has write access to this chat.",
-          "deprecated": false
-        }
-      ]
-    }
-  },
-  {
-    "name": "cursor",
-    "type": "string | null",
-    "required": true,
-    "description": "Cursor to fetch the next page, or null if there are no more chats.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chats",
+"type": "object[]",
+"required": true,
+"description": "The chats in this page.",
+"deprecated": false,
+"arrayItems": {
+"name": "item",
+"type": "object",
+"required": true,
+"description": "",
+"deprecated": false,
+"properties": [
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "Unique chat identifier.",
+"deprecated": false
+},
+{
+"name": "title",
+"type": "string",
+"required": false,
+"description": "Chat title, if generated.",
+"deprecated": false
+},
+{
+"name": "privacy",
+"type": "'public' | 'private' | 'team' | 'team-edit' | 'unlisted'",
+"required": true,
+"description": "Visibility setting of the chat.",
+"deprecated": false
+},
+{
+"name": "createdAt",
+"type": "string",
+"required": true,
+"description": "ISO timestamp of when the chat was created.",
+"deprecated": false
+},
+{
+"name": "updatedAt",
+"type": "string",
+"required": false,
+"description": "ISO timestamp of when the chat was last updated.",
+"deprecated": false
+},
+{
+"name": "authorId",
+"type": "string",
+"required": true,
+"description": "ID of the user who created the chat.",
+"deprecated": false
+},
+{
+"name": "vercelProjectId",
+"type": "string",
+"required": false,
+"description": "Associated Vercel project ID, if any.",
+"deprecated": false
+},
+{
+"name": "metadata",
+"type": "Record<string, string>",
+"required": true,
+"description": "User-defined key-value metadata.",
+"deprecated": false
+},
+{
+"name": "writePermission",
+"type": "boolean",
+"required": true,
+"description": "Whether the caller has write access to this chat.",
+"deprecated": false
+}
+]
+}
+},
+{
+"name": "cursor",
+"type": "string | null",
+"required": true,
+"description": "Cursor to fetch the next page, or null if there are no more chats.",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

@@ -1,6 +1,7 @@
 # v0 Documentation Sitemap
 
 ## Product
+
 - [/docs](/) - What is v0
 - [/docs/quickstart](quickstart) - Quickstart
 - [/docs/ai-models](ai-models) - AI Models
@@ -47,6 +48,7 @@
 - [/docs/MCP](MCP) - MCP Integrations
 
 ## API v2
+
 - [/docs/api/v2](api/v2) - API Overview
 - [/docs/api/v2/quickstart](api/v2/quickstart) - Quickstart
 - [/docs/api/v2/guides](api/v2/guides) - Guides (21 guides)
@@ -58,15 +60,18 @@
 - [/docs/api/v2/reference/usage](api/v2/reference/usage) - 3 usage endpoints
 
 ## API v1 (Deprecated)
+
 - [/docs/api/v1](api/v1) - v1 Overview
 
 ## SDK Documentation
+
 - [/docs/api/v2/guides/browser-entry](api/v2/guides/browser-entry) - Browser Entry
 - [/docs/api/v2/guides/streaming-result](api/v2/guides/streaming-result) - Streaming Result
 - [/docs/api/v2/guides/stream-diffpatch](api/v2/guides/stream-diffpatch) - Stream Diffpatch
 - [/docs/api/v2/guides/skills-sh](api/v2/guides/skills-sh) - Skills.sh Integration
 
 ## Platform API
+
 - [/docs/api/platform/overview](api/platform/overview) - Platform API Overview
 - [/docs/api/platform/packages/v0-sdk](api/platform/packages/v0-sdk) - v0 SDK
 - [/docs/api/platform/packages/create-v0-sdk-app](api/platform/packages/create-v0-sdk-app) - create-v0-sdk-app
@@ -76,6 +81,7 @@
 - [/docs/api/platform/adapters/ai-tools](api/platform/adapters/ai-tools) - AI Tools Adapter
 
 ## Compare
+
 - [/docs/compare/v0-vs-base44](compare/v0-vs-base44)
 - [/docs/compare/v0-vs-bolt](compare/v0-vs-bolt)
 - [/docs/compare/v0-vs-figma-make](compare/v0-vs-figma-make)

@@ -6,12 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Build your first app-generation interface with the v0 API",
-  "topics": [
-    "design",
-    "api",
-    "previews",
-    "agents"
-  ],
+  "topics": ["design", "api", "previews", "agents"],
   "related": [
     "api/v2/guides/custom-chat-interface",
     "api/v2/guides/accessing-previews",

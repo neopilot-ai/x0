@@ -23,7 +23,9 @@ function streamBody(
   return new ReadableStream({
     async start(controller) {
       try {
-        controller.enqueue(encoder.encode(JSON.stringify({ id: meta.id, mode, sources: meta.sources }) + '\n'))
+        controller.enqueue(
+          encoder.encode(JSON.stringify({ id: meta.id, mode, sources: meta.sources }) + '\n'),
+        )
         for await (const chunk of produceContent()) {
           controller.enqueue(encoder.encode(chunk))
         }

@@ -121,6 +121,7 @@ console.log(await result.final)
 ```
 
 The `V0StreamResult` exposes:
+
 - `stream` - An `AsyncIterable<V0StreamUpdate>` of streaming updates
 - `final` - A `Promise<V0StreamFinal>` with the completed snapshot
 - `toResponse()` - Converts the stream to a `Response` for proxy forwarding

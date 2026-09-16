@@ -6,17 +6,10 @@
   "category": "API · Webhooks",
   "type": "",
   "description": "Retrieves a list of all webhooks in your workspace.",
-  "topics": [
-    "api"
-  ],
+  "topics": ["api"],
   "related": [],
   "requires": [],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# List Webhooks\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.webhooks.list()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/hooks\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"items\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The name of the webhook.\",\n\"deprecated\": false\n}\n]\n}\n]}\n/>\n\n---\n\n",

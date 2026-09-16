@@ -93,9 +93,12 @@ export function MiniMarkdown({ text }: { text: string }) {
       flush(index)
       rendered.push(
         <ul key={`ul-${index}`} className="my-1 list-disc space-y-1 pl-5 text-sm leading-6">
-          {trimmed.replace(/^[-*] /, '').split(/  \n?/).map((item, i) => (
-            <li key={i}>{inline(item)}</li>
-          ))}
+          {trimmed
+            .replace(/^[-*] /, '')
+            .split(/  \n?/)
+            .map((item, i) => (
+              <li key={i}>{inline(item)}</li>
+            ))}
         </ul>,
       )
       return

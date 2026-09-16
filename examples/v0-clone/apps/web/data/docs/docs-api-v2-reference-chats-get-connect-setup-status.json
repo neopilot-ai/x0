@@ -6,19 +6,10 @@
   "category": "API · Chats",
   "type": "",
   "description": "Polls the status of a Vercel Connect connector setup started by a `configure_vercel_connect` agent action. Open the `setupUrl` from the agent action data in a browser, then poll this endpoint every few seconds while `pending`. When it returns `ready`, resolve the chat with a `vercel-connect-setup` task to resume generation.",
-  "topics": [
-    "api",
-    "agents",
-    "permissions"
-  ],
+  "topics": ["api", "agents", "permissions"],
   "related": [],
   "requires": [],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Get Connect Setup Status\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.chats.getConnectStatus({\nchatId: 'chat_abc123',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/chats/chat_abc123/connect/status\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat.\",\n\"deprecated\": false\n}\n]}\n/>\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"requestId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The `requestId` from the `configure_vercel_connect` agent action data.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"status\",\n\"type\": \"'pending'\",\n\"required\": true,\n\"description\": \"Setup is still in progress.\",\n\"deprecated\": false\n},\n{\n\"name\": \"progress\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"Current setup progress.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

@@ -69,29 +69,36 @@ export function SearchClient({ initialQuery }: { initialQuery?: string }) {
         />
       </form>
       <div className="mt-8 flex items-center justify-between text-xs text-muted-foreground">
-        <span>{loading ? 'Searching…' : query.trim() ? `${data.total} result${data.total === 1 ? '' : 's'}` : 'Type a query to begin.'}</span>
+        <span>
+          {loading
+            ? 'Searching…'
+            : query.trim()
+              ? `${data.total} result${data.total === 1 ? '' : 's'}`
+              : 'Type a query to begin.'}
+        </span>
       </div>
       <div className="mt-4 flex flex-col gap-3">
-        {query.trim() && data.hits.map((hit) => (
-          <Link
-            key={hit.id}
-            href={`/docs/${hit.slug}`}
-            className="rounded-xl border border-border p-5 transition hover:bg-card"
-          >
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-medium">{hit.title}</h2>
-              <span className="text-xs text-muted-foreground">
-                {hit.section} · {hit.category}
-              </span>
-            </div>
-            {hit.snippet && (
-              <p className="mt-3 rounded-lg bg-muted/40 px-3 py-2 text-sm leading-6 text-muted-foreground">
-                {hit.snippet}
-              </p>
-            )}
-            <p className="mt-2 line-clamp-1 text-sm text-muted-foreground">{hit.description}</p>
-          </Link>
-        ))}
+        {query.trim() &&
+          data.hits.map((hit) => (
+            <Link
+              key={hit.id}
+              href={`/docs/${hit.slug}`}
+              className="rounded-xl border border-border p-5 transition hover:bg-card"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <h2 className="font-medium">{hit.title}</h2>
+                <span className="text-xs text-muted-foreground">
+                  {hit.section} · {hit.category}
+                </span>
+              </div>
+              {hit.snippet && (
+                <p className="mt-3 rounded-lg bg-muted/40 px-3 py-2 text-sm leading-6 text-muted-foreground">
+                  {hit.snippet}
+                </p>
+              )}
+              <p className="mt-2 line-clamp-1 text-sm text-muted-foreground">{hit.description}</p>
+            </Link>
+          ))}
         {query.trim() && !loading && !data.hits.length && (
           <p className="rounded-xl border border-border p-5 text-sm text-muted-foreground">
             No indexed documentation matched “{query}”.

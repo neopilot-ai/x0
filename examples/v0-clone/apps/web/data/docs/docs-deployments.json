@@ -6,23 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Preview and publish v0 projects on Vercel, then manage domains, visibility, and production updates.",
-  "topics": [
-    "github",
-    "deployment",
-    "design",
-    "previews",
-    "integrations",
-    "sharing"
-  ],
-  "related": [
-    "custom-domains",
-    "vercel-integration",
-    "github",
-    "projects"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["github", "deployment", "design", "previews", "integrations", "sharing"],
+  "related": ["custom-domains", "vercel-integration", "github", "projects"],
+  "requires": ["quickstart"],
   "headings": [
     "Preview and production deployments",
     "First publish",

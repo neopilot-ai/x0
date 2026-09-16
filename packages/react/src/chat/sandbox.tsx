@@ -89,11 +89,7 @@ export interface V0SandboxProviderProps {
   }) => React.ReactNode
 }
 
-export function V0SandboxProvider({
-  chatId,
-  options,
-  children,
-}: V0SandboxProviderProps) {
+export function V0SandboxProvider({ chatId, options, children }: V0SandboxProviderProps) {
   const sandbox = useV0Sandbox(chatId, options)
   return <>{children({ ...sandbox })}</>
 }

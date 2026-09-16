@@ -11,8 +11,6 @@ related:
 
 # Accessing Previews
 
-
-
 Use [`chats.getPreview`](/docs/api/v2/reference/chats/get-preview-url) to display the live preview for a chat in your own product.
 
 Preview access is designed to go through your backend. The API returns a preview URL and a short-lived preview token. Browsers cannot attach that token as a custom header when loading an iframe, so point the iframe at a proxy that you control instead of directly at the preview URL. Run this proxy on a preview-only origin whose site is different from your host application.
@@ -74,16 +72,9 @@ async function getPreview(chatId: string) {
   return preview
 }
 
-export async function proxyPreviewRequest(
-  request: Request,
-  chatId: string,
-  path: string[],
-) {
+export async function proxyPreviewRequest(request: Request, chatId: string, path: string[]) {
   const preview = await getPreview(chatId)
-  const fallbackUrl = new URL(
-    `/api/v0-preview/${encodeURIComponent(chatId)}/loading`,
-    request.url,
-  )
+  const fallbackUrl = new URL(`/api/v0-preview/${encodeURIComponent(chatId)}/loading`, request.url)
 
   return fetchPreview({
     request,
@@ -141,10 +132,7 @@ When `chats.getPreview` returns `null`, or when v0 reports that cached preview d
 
 ```typescript
 // app/api/v0-preview/[chatId]/loading/route.ts
-export async function GET(
-  _request: Request,
-  { params }: { params: Promise<{ chatId: string }> },
-) {
+export async function GET(_request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = await params
   const previewPath = `/api/v0-preview/${encodeURIComponent(chatId)}`
 
@@ -200,8 +188,7 @@ export function proxy(request: NextRequest) {
   if (!chatId) return NextResponse.next()
 
   const proxyUrl = request.nextUrl.clone()
-  proxyUrl.pathname =
-    `/api/v0-preview/${chatId}${request.nextUrl.pathname}`
+  proxyUrl.pathname = `/api/v0-preview/${chatId}${request.nextUrl.pathname}`
 
   return NextResponse.redirect(proxyUrl, 307)
 }
@@ -225,8 +212,8 @@ The iframe sandbox must include both `allow-scripts` and `allow-same-origin`:
 />
 ```
 
-* `allow-scripts` lets the generated application run JavaScript and hydrate.
-* `allow-same-origin` lets the document keep the isolated proxy's origin instead of receiving an opaque origin. This is required for origin-sensitive runtime behavior such as HMR, cookies, and browser storage.
+- `allow-scripts` lets the generated application run JavaScript and hydrate.
+- `allow-same-origin` lets the document keep the isolated proxy's origin instead of receiving an opaque origin. This is required for origin-sensitive runtime behavior such as HMR, cookies, and browser storage.
 
 There is no `allow-cross-origin` iframe sandbox token. `allow-same-origin` preserves the isolated proxy origin; it does not make the iframe same-origin with the parent page.
 
@@ -247,7 +234,6 @@ Preview cookies are scoped to the proxy origin because that is the origin the br
 <Callout type="warn">
   Do not serve generated previews from your host application's origin or another origin on the same site. Combining `allow-scripts` and `allow-same-origin` with a same-origin iframe allows preview code to access the parent page, while a same-site origin can still receive parent-domain cookies.
 </Callout>
-
 
 ---
 

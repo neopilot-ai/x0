@@ -3,13 +3,7 @@ import { MessageSpinner } from '../message-spinner'
 import { useReasoningContext } from '../message'
 import { Streamdown } from 'streamdown'
 
-export function Reasoning({
-  part,
-  partIndex,
-}: {
-  part: ReasoningUIPart
-  partIndex: number
-}) {
+export function Reasoning({ part, partIndex }: { part: ReasoningUIPart; partIndex: number }) {
   const context = useReasoningContext()
   const isExpanded = context?.expandedReasoningIndex === partIndex
 

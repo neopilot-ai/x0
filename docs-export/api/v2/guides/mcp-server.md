@@ -11,8 +11,6 @@ related:
 
 # Use v0 from an MCP Client
 
-
-
 The v0 MCP server lets another agent use v0. Connect it to an IDE, desktop assistant, or agent runtime to create chats, inspect and continue app builds, resolve pending tasks, and get preview URLs from an MCP client.
 
 To give v0 access to an external service's tools instead, [create an MCP server](/docs/api/v2/reference/mcp-servers/create-mcp-server).
@@ -60,13 +58,13 @@ The first connection starts an OAuth flow. Sign in to v0, choose the account or 
 
 The v0 MCP server exposes tools backed by these v0 API endpoints:
 
-* Create chat: `POST /v2/chats`
-* List chats: `GET /v2/chats`
-* Get chat: `GET /v2/chats/{chatId}`
-* List messages: `GET /v2/chats/{chatId}/messages`
-* Send message: `POST /v2/chats/{chatId}/messages`
-* Resolve task: `POST /v2/chats/{chatId}/messages/resolve`
-* Get preview: `GET /v2/chats/{chatId}/preview`
+- Create chat: `POST /v2/chats`
+- List chats: `GET /v2/chats`
+- Get chat: `GET /v2/chats/{chatId}`
+- List messages: `GET /v2/chats/{chatId}/messages`
+- Send message: `POST /v2/chats/{chatId}/messages`
+- Resolve task: `POST /v2/chats/{chatId}/messages/resolve`
+- Get preview: `GET /v2/chats/{chatId}/preview`
 
 Tools that return a chat (such as create chat and get chat) include a ready-to-open `url` for the chat, scoped to the account or team you connected, so you don't have to construct it yourself.
 
@@ -126,19 +124,18 @@ If the client loses access, reconnect the v0 MCP server from your MCP client. If
 
 **Connection failed**
 
-* Verify the MCP server URL is `https://v0.app/api/mcp`.
-* Make sure your MCP client supports remote MCP servers or is configured through `mcp-remote`.
+- Verify the MCP server URL is `https://v0.app/api/mcp`.
+- Make sure your MCP client supports remote MCP servers or is configured through `mcp-remote`.
 
 **Authentication failed**
 
-* Reconnect the v0 MCP server in your client.
-* If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request.
+- Reconnect the v0 MCP server in your client.
+- If your team requires SSO, complete the re-authentication link returned by the tool response, then retry the request.
 
 **Tool is missing**
 
-* Restart or reconnect your MCP client so it refreshes the server's tool list.
-* Check the v0 API v2 reference for the resource you expect the MCP server to use.
-
+- Restart or reconnect your MCP client so it refreshes the server's tool list.
+- Check the v0 API v2 reference for the resource you expect the MCP server to use.
 
 ---
 

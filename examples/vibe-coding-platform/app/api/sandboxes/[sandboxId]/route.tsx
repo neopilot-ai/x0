@@ -8,7 +8,7 @@ import { Sandbox } from '@vercel/sandbox'
  */
 export async function GET(
   _request: NextRequest,
-  { params }: { params: Promise<{ sandboxId: string }> }
+  { params }: { params: Promise<{ sandboxId: string }> },
 ) {
   const { sandboxId } = await params
   try {
@@ -19,10 +19,7 @@ export async function GET(
     })
     return NextResponse.json({ status: 'running' })
   } catch (error) {
-    if (
-      error instanceof APIError &&
-      error.json.error.code === 'sandbox_stopped'
-    ) {
+    if (error instanceof APIError && error.json.error.code === 'sandbox_stopped') {
       return NextResponse.json({ status: 'stopped' })
     } else {
       throw error

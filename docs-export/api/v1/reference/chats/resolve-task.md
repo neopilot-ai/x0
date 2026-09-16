@@ -1,7 +1,7 @@
 ---
 title: Resolve Task
 description: Resolves a chat that's blocked waiting for user input and continues the conversation.
-badge: "POST"
+badge: 'POST'
 product: v0 API
 type: reference
 prerequisites:
@@ -13,9 +13,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Resolve Task
-
-
 
 <EndpointDisplay method="post" path="/chats/{chatId}/tasks/resolve" />
 
@@ -28,27 +27,27 @@ The submitted `task.type` must match the blocked task from the most recent assis
 If a task payload is structurally valid but empty in a way that would not carry meaningful user intent, the endpoint returns `422 Unprocessable Entity`. For example, blank `plan-exit-response.content`, empty `answered-questions.answers`, and empty `confirmed-permissions.permissions` are rejected.
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.chats.resolveTask({
-  chatId: '123',
-  task: {
-    type: 'plan-exit-response',
-    status: 'approved',
-    content: 'Proceed with the implementation.',
-  },
+chatId: '123',
+task: {
+type: 'plan-exit-response',
+status: 'approved',
+content: 'Proceed with the implementation.',
+},
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X POST https://api.v0.dev/v1/chats/123/tasks/resolve \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X POST https://api.v0.dev/v1/chats/123/tasks/resolve \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -58,15 +57,15 @@ console.log(result)`}
       "content": "Proceed with the implementation."
     }
   }'`}
-  />
+/>
 </CustomCodeBlock>
 
 ## Before You Call It
 
 Inspect the latest assistant message first. The blocked task is exposed in `experimental_content` on:
 
-* `GET /v1/chats/{chatId}`
-* `GET /v1/chats/{chatId}/messages/{messageId}`
+- `GET /v1/chats/{chatId}`
+- `GET /v1/chats/{chatId}/messages/{messageId}`
 
 Submit the matching resolution payload for the latest blocked task only.
 
@@ -150,59 +149,58 @@ Use when the assistant is blocked on tool or environment variable approval. The 
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-    {
-      "name": "chatId",
-      "type": "string",
-      "required": true,
-      "description": "The unique identifier of the chat containing the pending task. Provided as a path parameter."
-    }
-  ]}
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat containing the pending task. Provided as a path parameter."
+}
+]}
 />
 
 #### Body
 
 <APISignature
-  title=""
-  parameters={[
-    {
-      "name": "task",
-      "type": "object",
-      "required": true,
-      "description": "The task resolution payload. The latest message in the active chat fork must be an assistant message blocked on the matching task type.",
-      "deprecated": false,
-      "properties": [
-        {
-          "name": "type",
-          "type": "'confirmed-steps' | 'plan-exit-response' | 'answered-questions' | 'confirmed-permissions'",
-          "required": true,
-          "description": "The blocked task type being resolved.",
-          "deprecated": false
-        }
-      ]
-    },
-    {
-      "name": "responseMode",
-      "type": "'sync' | 'async' | 'experimental_stream'",
-      "required": false,
-      "description": "Controls how the response is delivered.",
-      "deprecated": false
-    },
-    {
-      "name": "modelConfiguration",
-      "type": "object",
-      "required": false,
-      "description": "Overrides for the model behavior.",
-      "deprecated": false
-    }
-  ]}
+title=""
+parameters={[
+{
+"name": "task",
+"type": "object",
+"required": true,
+"description": "The task resolution payload. The latest message in the active chat fork must be an assistant message blocked on the matching task type.",
+"deprecated": false,
+"properties": [
+{
+"name": "type",
+"type": "'confirmed-steps' | 'plan-exit-response' | 'answered-questions' | 'confirmed-permissions'",
+"required": true,
+"description": "The blocked task type being resolved.",
+"deprecated": false
+}
+]
+},
+{
+"name": "responseMode",
+"type": "'sync' | 'async' | 'experimental_stream'",
+"required": false,
+"description": "Controls how the response is delivered.",
+"deprecated": false
+},
+{
+"name": "modelConfiguration",
+"type": "object",
+"required": false,
+"description": "Overrides for the model behavior.",
+"deprecated": false
+}
+]}
 />
 
 ### Response
 
 Returns the updated chat object, using the same response shape as `GET /v1/chats/{chatId}`.
-
 
 ---
 

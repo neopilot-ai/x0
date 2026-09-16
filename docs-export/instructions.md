@@ -53,18 +53,18 @@ const prompt = manager.getEffectivePrompt('Build a todo app')
 
 Use predefined instruction templates for common project types:
 
-| Template | ID | Description |
-|----------|-----|-------------|
-| Next.js App | `nextjs-app` | Next.js App Router with TypeScript and Tailwind |
-| React Components | `react-components` | React components with shadcn/ui |
-| Full-Stack App | `fullstack-app` | Full-stack application with backend |
-| Data Dashboard | `data-dashboard` | Dashboard with data visualization |
-| E-commerce Store | `ecommerce` | E-commerce storefront with Stripe |
+| Template         | ID                 | Description                                     |
+| ---------------- | ------------------ | ----------------------------------------------- |
+| Next.js App      | `nextjs-app`       | Next.js App Router with TypeScript and Tailwind |
+| React Components | `react-components` | React components with shadcn/ui                 |
+| Full-Stack App   | `fullstack-app`    | Full-stack application with backend             |
+| Data Dashboard   | `data-dashboard`   | Dashboard with data visualization               |
+| E-commerce Store | `ecommerce`        | E-commerce storefront with Stripe               |
 
 ```typescript
 import { INSTRUCTION_TEMPLATES } from 'v0'
 
-const nextjsTemplate = INSTRUCTION_TEMPLATES.find(t => t.id === 'nextjs-app')
+const nextjsTemplate = INSTRUCTION_TEMPLATES.find((t) => t.id === 'nextjs-app')
 const manager = createInstructionsManager({
   systemPrompt: nextjsTemplate.systemPrompt,
   framework: 'next.js',

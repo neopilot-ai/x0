@@ -6,20 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Connect a Shopify store to v0 and build storefronts that read live products, prices, and inventory from the Shopify Storefront and Admin APIs.",
-  "topics": [
-    "databases",
-    "deployment",
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "deployments",
-    "databases",
-    "text-prompting"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["databases", "deployment", "design", "integrations"],
+  "related": ["deployments", "databases", "text-prompting"],
+  "requires": ["quickstart"],
   "headings": [
     "What v0 builds with Shopify",
     "Start building a store",

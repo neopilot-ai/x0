@@ -6,8 +6,7 @@ function errorsToText(data: DataPart['report-errors']): string {
     `There are errors in the generated code. This is the summary of the errors we have:\n` +
     `\`\`\`${data.summary}\`\`\`\n` +
     (data.paths?.length
-      ? `The following files may contain errors:\n` +
-        `\`\`\`${data.paths.join('\n')}\`\`\`\n`
+      ? `The following files may contain errors:\n` + `\`\`\`${data.paths.join('\n')}\`\`\`\n`
       : '') +
     `Fix the errors reported.`
   )
@@ -20,10 +19,9 @@ function errorsToText(data: DataPart['report-errors']): string {
 export function toModelMessages(messages: ChatUIMessage[]): ChatUIMessage[] {
   return messages.map((message) => ({
     ...message,
-    parts: message.parts.map((part): ChatUIMessagePart =>
-      part.type === 'data-report-errors'
-        ? { type: 'text', text: errorsToText(part.data) }
-        : part
+    parts: message.parts.map(
+      (part): ChatUIMessagePart =>
+        part.type === 'data-report-errors' ? { type: 'text', text: errorsToText(part.data) } : part,
     ),
   }))
 }

@@ -58,13 +58,13 @@ const TOPIC_HINTS = [
 
 const SECTION_OVERRIDES = {
   '': 'Overview',
-  'quickstart': 'Getting Started',
-  'faqs': 'FAQs',
-  'enterprise': 'Reference',
-  'pricing': 'Reference',
-  'security': 'Reference',
-  'account': 'Reference',
-  'teams': 'Reference',
+  quickstart: 'Getting Started',
+  faqs: 'FAQs',
+  enterprise: 'Reference',
+  pricing: 'Reference',
+  security: 'Reference',
+  account: 'Reference',
+  teams: 'Reference',
   'usage-dashboard': 'Reference',
 }
 
@@ -93,7 +93,7 @@ function parseFrontmatter(body) {
       currentKey = key.startsWith(' ') ? key.slice(1) : key
       while (currentKey.startsWith(' ')) currentKey = currentKey.slice(1)
       if (raw.startsWith('[')) {
-        meta[currentKey] = [...raw.matchAll(/`?([^`\[\]",\s]+)`?/g)].map((m) => m[1])
+        meta[currentKey] = [...raw.matchAll(/`?([^`[\]",\s]+)`?/g)].map((m) => m[1])
       } else if (raw) {
         meta[currentKey] = raw
       } else {
@@ -103,7 +103,8 @@ function parseFrontmatter(body) {
     }
     const item = /^\s*-\s*(.+)$/.exec(line)
     if (item && currentKey) {
-      if (!Array.isArray(meta[currentKey])) meta[currentKey] = meta[currentKey] ? [meta[currentKey]] : []
+      if (!Array.isArray(meta[currentKey]))
+        meta[currentKey] = meta[currentKey] ? [meta[currentKey]] : []
       meta[currentKey].push(item[1].trim())
     }
   }
@@ -149,8 +150,12 @@ function normalizeBody(raw) {
     if (
       /^import\s/.test(trimmed) ||
       /^export\s/.test(trimmed) ||
-      /^\s*<(Video|Image|Figure|img|DocsCardList|LearnMore)\s*\/?\s*>?$/i.test(trimmed.replace(/\{$.*$/s, '')) ||
-      /^<\/?(Video|Image|figure|Callout|Card|CardHeader|CardContent|CardTitle|CardDescription)\s*>?$/i.test(trimmed)
+      /^\s*<(Video|Image|Figure|img|DocsCardList|LearnMore)\s*\/?\s*>?$/i.test(
+        trimmed.replace(/\{$.*$/s, ''),
+      ) ||
+      /^<\/?(Video|Image|figure|Callout|Card|CardHeader|CardContent|CardTitle|CardDescription)\s*>?$/i.test(
+        trimmed,
+      )
     ) {
       continue
     }
@@ -158,13 +163,16 @@ function normalizeBody(raw) {
       out.push('')
       continue
     }
-    if (/^!\[/.test(trimmed) && !trimmed.includes(' ')) {
+    if (trimmed.startsWith('![') && !trimmed.includes(' ')) {
       continue
     }
     const cleaned = stripJsx(rawLine).trim()
     out.push(cleaned)
   }
-  return out.join('\n').replace(/!\[[^\]]*\]\([^)]*\)/g, '').replace(/\n{3,}/g, '\n\n')
+  return out
+    .join('\n')
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\n{3,}/g, '\n\n')
 }
 
 function extractHeadings(body) {
@@ -195,7 +203,10 @@ function extractExcerpt(body) {
     .filter((l) => l && !/^#|^```/.test(l))
   let excerpt = ''
   for (const line of lines) {
-    const candidate = line.replace(/^[#>\-\*\d.]+\s*/, '').replace(/`/g, '').replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
+    const candidate = line
+      .replace(/^[#>\-*\d.]+\s*/, '')
+      .replace(/`/g, '')
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
     if (candidate && candidate.length > 12) {
       excerpt = candidate
       break
@@ -227,7 +238,8 @@ function pickCategory(url, section) {
   const segments = path.split('/').filter(Boolean)
   if (segments.length >= 3 && segments[0] === 'api') {
     const area = segments[2] || segments[1]
-    if (area === 'reference') return segments[3] ? `API · ${capitalize(segments[3])}` : 'API Reference'
+    if (area === 'reference')
+      return segments[3] ? `API · ${capitalize(segments[3])}` : 'API Reference'
     return `API · ${capitalize(segments[1])}`
   }
   return 'API Reference'
@@ -238,7 +250,8 @@ function capitalize(value) {
 }
 
 function pickTopics(slug, title, description, type, url, related) {
-  const haystack = `${slug} ${title} ${description} ${type} ${url} ${related.join(' ')}`.toLowerCase()
+  const haystack =
+    `${slug} ${title} ${description} ${type} ${url} ${related.join(' ')}`.toLowerCase()
   const found = []
   for (const [topic, ...hints] of TOPIC_HINTS) {
     if (hints.some((hint) => haystack.includes(hint.toLowerCase()))) found.push(topic)
@@ -324,7 +337,9 @@ async function crawlSite() {
   const xml = await sitemapRes.text()
   const urls = [...xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/g)].map((m) => m[1])
   const lastmods = {}
-  for (const m of xml.matchAll(/<loc>\s*([^<]+?)\s*<\/loc>\s*<lastmod>\s*([^<]+?)\s*<\/lastmod>/gs)) {
+  for (const m of xml.matchAll(
+    /<loc>\s*([^<]+?)\s*<\/loc>\s*<lastmod>\s*([^<]+?)\s*<\/lastmod>/gs,
+  )) {
     lastmods[m[1]] = m[2]
   }
   const unique = [...new Set(urls)].filter((u) => u.startsWith(HOST))
@@ -378,7 +393,17 @@ function buildTaxonomy(docs) {
   }
 }
 
-const sectionOrder = ['Overview', 'Getting Started', 'Guides', 'Integrations', 'API Reference', 'Compare', 'FAQs', 'Troubleshooting', 'Reference']
+const sectionOrder = [
+  'Overview',
+  'Getting Started',
+  'Guides',
+  'Integrations',
+  'API Reference',
+  'Compare',
+  'FAQs',
+  'Troubleshooting',
+  'Reference',
+]
 const orderOf = (section) => {
   const i = sectionOrder.indexOf(section)
   return i === -1 ? sectionOrder.length : i
@@ -406,7 +431,9 @@ async function main() {
   await writeFile(join(DATA_DIR, 'docs-manifest.json'), JSON.stringify(manifest, null, 2))
   await writeFile(join(DOCS_DIR, 'index.json'), JSON.stringify(manifest, null, 2))
   await Promise.all(
-    manifest.docs.map((doc) => writeFile(join(DOCS_DIR, `${doc.id}.json`), JSON.stringify(doc, null, 2))),
+    manifest.docs.map((doc) =>
+      writeFile(join(DOCS_DIR, `${doc.id}.json`), JSON.stringify(doc, null, 2)),
+    ),
   )
   await writeFile(join(DATA_DIR, 'taxonomy.json'), JSON.stringify(taxonomy, null, 2))
 
@@ -419,8 +446,21 @@ async function main() {
     console.log('Failed URLs:')
     for (const f of report.failed_urls.slice(0, 10)) console.log(`  - ${f.url} (${f.error})`)
   }
-  console.log('Coverage:', docs.length, 'docs |', snippetCount, 'with code |', apiCount, 'API |', integrationCount, 'integrations')
-  console.log('Sections:', Object.entries(taxonomy.sections.reduce((a, s) => ((a[s.name] = s.count), a), {})).join(', '))
+  console.log(
+    'Coverage:',
+    docs.length,
+    'docs |',
+    snippetCount,
+    'with code |',
+    apiCount,
+    'API |',
+    integrationCount,
+    'integrations',
+  )
+  console.log(
+    'Sections:',
+    Object.entries(taxonomy.sections.reduce((a, s) => ((a[s.name] = s.count), a), {})).join(', '),
+  )
   console.log('Wrote', DATA_DIR)
 }
 

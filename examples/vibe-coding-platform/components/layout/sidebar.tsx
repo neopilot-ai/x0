@@ -26,9 +26,7 @@ export function Sidebar({ open, onToggle }: SidebarProps) {
           <div className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <span className="font-bold text-sm">V</span>
           </div>
-          {open && (
-            <span className="text-sm font-semibold text-foreground">Vercel v0</span>
-          )}
+          {open && <span className="text-sm font-semibold text-foreground">Vercel v0</span>}
         </div>
         <Button
           variant="ghost"

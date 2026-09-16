@@ -20,7 +20,10 @@ export default async function DocsPage({
       </p>
 
       {activeSection && (
-        <Link href="/docs" className="mt-4 inline-block text-sm text-muted-foreground hover:text-foreground">
+        <Link
+          href="/docs"
+          className="mt-4 inline-block text-sm text-muted-foreground hover:text-foreground"
+        >
           ← All sections
         </Link>
       )}
@@ -28,7 +31,9 @@ export default async function DocsPage({
         {sections.map((section) => (
           <Link
             key={section}
-            href={section === activeSection ? '/docs' : `/docs?section=${encodeURIComponent(section)}`}
+            href={
+              section === activeSection ? '/docs' : `/docs?section=${encodeURIComponent(section)}`
+            }
             className={`inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-sm transition ${
               section === activeSection
                 ? 'border-foreground/40 bg-card text-foreground'

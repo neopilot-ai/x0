@@ -20,12 +20,12 @@ Connect a v0 project to GitHub to keep its code in a repository, work on isolate
 
 When a chat is connected to GitHub, it starts from the base branch you selected. When v0 has a code change to push, it creates a working branch from that base. Generated code changes are then committed and pushed to the working branch automatically.
 
-| Branch | How v0 uses it |
-| --- | --- |
-| **Default branch** | The repository's default branch on GitHub. v0 selects it initially unless you choose another branch. |
-| **Base branch** | The branch a chat starts from and the branch its pull request targets. |
-| **Working branch** | The branch v0 creates for a chat. v0 pushes generated changes here instead of pushing directly to the base branch. |
-| **Production branch** | The branch configured on the linked Vercel project to create production deployments. |
+| Branch                | How v0 uses it                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Default branch**    | The repository's default branch on GitHub. v0 selects it initially unless you choose another branch.               |
+| **Base branch**       | The branch a chat starts from and the branch its pull request targets.                                             |
+| **Working branch**    | The branch v0 creates for a chat. v0 pushes generated changes here instead of pushing directly to the base branch. |
+| **Production branch** | The branch configured on the linked Vercel project to create production deployments.                               |
 
 After a successful publish, v0 returns the chat to its updated base branch. The next code change starts a new working branch, so you can continue in the same chat and publish again.
 

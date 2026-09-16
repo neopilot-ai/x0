@@ -6,17 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Share your v0 creations with the community by publishing them as templates. Templates appear in your public profile and can be forked by other users.",
-  "topics": [
-    "deployment",
-    "design",
-    "sharing"
-  ],
-  "related": [
-    "sharing"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["deployment", "design", "sharing"],
+  "related": ["sharing"],
+  "requires": ["quickstart"],
   "headings": [
     "Publishing a template",
     "Template details",

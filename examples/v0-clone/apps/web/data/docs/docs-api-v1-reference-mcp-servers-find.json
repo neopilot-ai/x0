@@ -6,19 +6,10 @@
   "category": "API · Mcp-servers",
   "type": "reference",
   "description": "Retrieves a list of MCP servers configured for your account. Returns all servers with their connection details, authentication type, and enabled status.",
-  "topics": [
-    "mcp",
-    "api",
-    "authentication"
-  ],
+  "topics": ["mcp", "api", "authentication"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Find MCP Servers\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.mcpServers.find()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/mcp-servers \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A unique identifier for the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'mcp_server'\",\n\"required\": true,\n\"description\": \"Fixed value identifying this object as an MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A human-readable name for the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The URL of the MCP server endpoint.\",\n\"deprecated\": false\n},\n{\n\"name\": \"description\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"An optional description of the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"enabled\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Whether the MCP server is currently enabled.\",\n\"deprecated\": false\n},\n{\n\"name\": \"auth\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"The authentication configuration. Only the type is returned; sensitive values are redacted.\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"type\",\n\"type\": \"'none' | 'bearer' | 'custom-headers' | 'oauth'\",\n\"required\": true,\n\"description\": \"The authentication method used by the server.\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"scope\",\n\"type\": \"'user' | 'team'\",\n\"required\": true,\n\"description\": \"Whether the server is scoped to the user or a team.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO 8601 timestamp when the server was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"The ISO 8601 timestamp when the server was last updated.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",

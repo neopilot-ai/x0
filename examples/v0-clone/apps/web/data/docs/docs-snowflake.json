@@ -6,22 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Connect v0 to Snowflake to build apps and dashboards with your warehouse data, query Snowflake, and deploy apps to Snowflake.",
-  "topics": [
-    "mcp",
-    "databases",
-    "deployment",
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "databases",
-    "deployments",
-    "MCP"
-  ],
-  "requires": [
-    "quickstart",
-    "databases"
-  ],
+  "topics": ["mcp", "databases", "deployment", "design", "integrations"],
+  "related": ["databases", "deployments", "MCP"],
+  "requires": ["quickstart", "databases"],
   "headings": [
     "Step 1: Prepare your Snowflake account",
     "Enable App Runtime",

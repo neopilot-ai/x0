@@ -28,7 +28,7 @@ interface SandboxStore {
 function getBackgroundCommandErrorLines(commands: Command[]) {
   return commands
     .flatMap(({ command, args, background, logs = [] }) =>
-      logs.map((log) => ({ command, args, background, ...log }))
+      logs.map((log) => ({ command, args, background, ...log })),
     )
     .sort((logA, logB) => logA.timestamp - logB.timestamp)
     .filter((log) => log.stream === 'stderr' && log.background)
@@ -36,10 +36,7 @@ function getBackgroundCommandErrorLines(commands: Command[]) {
 
 export function useCommandErrorsLogs() {
   const { commands } = useSandboxStore()
-  const errors = useMemo(
-    () => getBackgroundCommandErrorLines(commands),
-    [commands]
-  )
+  const errors = useMemo(() => getBackgroundCommandErrorLines(commands), [commands])
   return { errors }
 }
 
@@ -63,17 +60,14 @@ export const useSandboxStore = create<SandboxStore>()((set) => ({
       return { commands: updatedCmds }
     })
   },
-  addPaths: (paths) =>
-    set((state) => ({ paths: [...new Set([...state.paths, ...paths])] })),
+  addPaths: (paths) => set((state) => ({ paths: [...new Set([...state.paths, ...paths])] })),
   chatStatus: 'ready',
   clearGeneratedFiles: () => set(() => ({ generatedFiles: new Set<string>() })),
   commands: [],
   generatedFiles: new Set<string>(),
   paths: [],
   setChatStatus: (status) =>
-    set((state) =>
-      state.chatStatus === status ? state : { chatStatus: status }
-    ),
+    set((state) => (state.chatStatus === status ? state : { chatStatus: status })),
   setSandboxId: (sandboxId) =>
     set(() => ({
       sandboxId,
@@ -115,8 +109,7 @@ export const useFileExplorerStore = create<FileExplorerStore>()((set) => ({
 }))
 
 export function useDataStateMapper() {
-  const { addPaths, setSandboxId, setUrl, upsertCommand, addGeneratedFiles } =
-    useSandboxStore()
+  const { addPaths, setSandboxId, setUrl, upsertCommand, addGeneratedFiles } = useSandboxStore()
   const { errors } = useCommandErrorsLogs()
   const { setCursor } = useMonitorState()
 

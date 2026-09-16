@@ -49,9 +49,9 @@ const transport = new V0Transport({
 
 ```ts
 interface V0TransportUrls {
-  create: string                    // URL for creating a new chat
-  send: V0TransportChatUrl          // URL for sending messages (can be a function)
-  resume: V0TransportChatUrl        // URL for resuming a chat
+  create: string // URL for creating a new chat
+  send: V0TransportChatUrl // URL for sending messages (can be a function)
+  resume: V0TransportChatUrl // URL for resuming a chat
 }
 
 type V0TransportChatUrl = string | ((chatId: string) => string)
@@ -75,7 +75,7 @@ interface V0TransportOptions {
 
 ```ts
 interface V0TransportStreamControls {
-  stop: () => void  // Stops the active transport stream
+  stop: () => void // Stops the active transport stream
 }
 ```
 
@@ -99,7 +99,7 @@ function Chat() {
   return (
     <div>
       {messages.map((m) => (
-        <div key={m.id}>{m.parts.map(p => p.text)}</div>
+        <div key={m.id}>{m.parts.map((p) => p.text)}</div>
       ))}
       <input value={input} onChange={handleInputChange} />
       <button onClick={handleSubmit}>Send</button>
@@ -139,8 +139,8 @@ const result = await requestV0Operation<Data, ErrorBody>(
 ```ts
 interface V0Operation<Data> {
   id: string
-  method: V0HttpMethod  // 'get' | 'post' | 'patch' | 'delete' | 'put'
-  response: V0ResponseKind  // 'json' | 'stream' | 'blob'
+  method: V0HttpMethod // 'get' | 'post' | 'patch' | 'delete' | 'put'
+  response: V0ResponseKind // 'json' | 'stream' | 'blob'
   transform?: V0ResponseTransformer<Data>
   invalidates?: readonly string[]
 }
@@ -170,7 +170,11 @@ The `@v0-sdk/react` package also exports SWR hooks generated from the OpenAPI sc
 
 ```ts
 import { createV0Key } from '@v0-sdk/react/swr'
-import type { V0QueryConfiguration, V0MutationConfiguration, V0InfiniteConfiguration } from '@v0-sdk/react/swr'
+import type {
+  V0QueryConfiguration,
+  V0MutationConfiguration,
+  V0InfiniteConfiguration,
+} from '@v0-sdk/react/swr'
 ```
 
 The generated SWR hooks provide `useQuery`, `useMutation`, and `useInfiniteQuery` wrappers for all v0 API endpoints.

@@ -6,17 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Share your v0 chat with others to showcase your prompt history or to collaborate on generating components. This allows for seamless teamwork and feedback.",
-  "topics": [
-    "design",
-    "teams",
-    "sharing"
-  ],
-  "related": [
-    "templates"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "teams", "sharing"],
+  "related": ["templates"],
+  "requires": ["quickstart"],
   "headings": [
     "How to share a chat",
     "Sharing options",

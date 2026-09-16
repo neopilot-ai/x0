@@ -1,7 +1,14 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Textarea } from '@/components/ui/textarea'
@@ -38,24 +45,27 @@ export function ModelManagement() {
   const [error, setError] = useState<string | null>(null)
   const [saved, setSaved] = useState(false)
 
-  const handleImport = useCallback((text: string) => {
-    try {
-      setError(null)
-      let parsed: ModelConfig
-      if (activeTab === 'yaml') {
-        parsed = yaml.load(text) as ModelConfig
-      } else {
-        parsed = JSON.parse(text) as ModelConfig
+  const handleImport = useCallback(
+    (text: string) => {
+      try {
+        setError(null)
+        let parsed: ModelConfig
+        if (activeTab === 'yaml') {
+          parsed = yaml.load(text) as ModelConfig
+        } else {
+          parsed = JSON.parse(text) as ModelConfig
+        }
+        if (!parsed.providers || !Array.isArray(parsed.providers)) {
+          throw new Error('Invalid config: missing providers array')
+        }
+        setConfig(parsed)
+        setSaved(false)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to parse config')
       }
-      if (!parsed.providers || !Array.isArray(parsed.providers)) {
-        throw new Error('Invalid config: missing providers array')
-      }
-      setConfig(parsed)
-      setSaved(false)
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to parse config')
-    }
-  }, [activeTab])
+    },
+    [activeTab],
+  )
 
   const handleExport = useCallback(() => {
     let text: string
@@ -102,10 +112,7 @@ export function ModelManagement() {
   const handleAddProvider = useCallback(() => {
     setConfig((prev) => ({
       ...prev,
-      providers: [
-        ...prev.providers,
-        { name: 'New Provider', apiKey: '', baseURL: '', models: [] },
-      ],
+      providers: [...prev.providers, { name: 'New Provider', apiKey: '', baseURL: '', models: [] }],
     }))
   }, [])
 
@@ -113,12 +120,10 @@ export function ModelManagement() {
     (index: number, field: keyof ModelProvider, value: string) => {
       setConfig((prev) => ({
         ...prev,
-        providers: prev.providers.map((p, i) =>
-          i === index ? { ...p, [field]: value } : p
-        ),
+        providers: prev.providers.map((p, i) => (i === index ? { ...p, [field]: value } : p)),
       }))
     },
-    []
+    [],
   )
 
   const handleUpdateModel = useCallback(
@@ -131,11 +136,11 @@ export function ModelManagement() {
                 ...p,
                 models: p.models.map((m, j) => (j === modelIndex ? { ...m, [field]: value } : m)),
               }
-            : p
+            : p,
         ),
       }))
     },
-    []
+    [],
   )
 
   const handleAddModel = useCallback((providerIndex: number) => {
@@ -144,7 +149,7 @@ export function ModelManagement() {
       providers: prev.providers.map((p, i) =>
         i === providerIndex
           ? { ...p, models: [...p.models, { id: '', name: '', provider: p.name }] }
-          : p
+          : p,
       ),
     }))
   }, [])
@@ -160,9 +165,7 @@ export function ModelManagement() {
     <Card className="bg-card border-border">
       <CardHeader>
         <CardTitle className="text-foreground">AI Model Configuration</CardTitle>
-        <CardDescription>
-          Manage AI model providers with YAML or JSON configuration
-        </CardDescription>
+        <CardDescription>Manage AI model providers with YAML or JSON configuration</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex items-center gap-2">
@@ -222,17 +225,13 @@ export function ModelManagement() {
                       className="bg-background border border-border rounded px-2 py-1 text-xs text-foreground outline-none focus:border-primary flex-1"
                       placeholder="Model ID"
                       value={model.id}
-                      onChange={(e) =>
-                        handleUpdateModel(index, modelIndex, 'id', e.target.value)
-                      }
+                      onChange={(e) => handleUpdateModel(index, modelIndex, 'id', e.target.value)}
                     />
                     <input
                       className="bg-background border border-border rounded px-2 py-1 text-xs text-foreground outline-none focus:border-primary flex-1"
                       placeholder="Model Name"
                       value={model.name}
-                      onChange={(e) =>
-                        handleUpdateModel(index, modelIndex, 'name', e.target.value)
-                      }
+                      onChange={(e) => handleUpdateModel(index, modelIndex, 'name', e.target.value)}
                     />
                   </div>
                 ))}

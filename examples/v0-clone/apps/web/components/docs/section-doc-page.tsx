@@ -92,7 +92,10 @@ export function SectionDocPage({
           {doc.headings.map((heading) => (
             <a
               key={heading}
-              href={`#${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`}
+              href={`#${heading
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '')}`}
               className="block hover:text-foreground"
             >
               {heading}

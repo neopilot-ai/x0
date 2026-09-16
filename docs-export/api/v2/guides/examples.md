@@ -27,6 +27,7 @@ bun run basic/chats/sync.ts
 **Use case**: Quick integration test, understanding the v0 SDK basics.
 
 **Features**:
+
 - Synchronous chat creation
 - Streaming chat creation
 - Minimal setup
@@ -42,12 +43,14 @@ bun run dev
 **Use case**: Building a custom chat interface with React.
 
 **Features**:
+
 - AI SDK `useChat` integration
 - `V0Transport` for streaming
 - Preview proxy routes
 - Next.js App Router
 
 **Project structure**:
+
 - `app/` - Chat page and layout
 - `lib/proxy.ts` - v0 proxy route
 - `app/api/v0/chats/stream/route.ts` - Stream endpoint
@@ -63,6 +66,7 @@ bun run dev
 **Use case**: Complete application reference implementation.
 
 **Features**:
+
 - Full chat interface with live previews
 - AI SDK `useChat` with `V0Transport`
 - Preview proxy
@@ -71,6 +75,7 @@ bun run dev
 - Vercel deployment
 
 **Project structure**:
+
 - `apps/web/` - Main Next.js application
 - `apps/web/components/agent/` - Agent builder component
 - `apps/web/lib/` - v0 client, proxy, and utilities

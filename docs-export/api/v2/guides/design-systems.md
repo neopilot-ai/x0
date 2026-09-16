@@ -79,11 +79,11 @@ Pass up to three skills when you [create a chat](/docs/api/v2/reference/chats/cr
 
 Each entry identifies where v0 should find the skill:
 
-| Type | Shape | Use |
-|------|-------|-----|
-| `memory` | `{ type: 'memory', scope, skillName }` | A skill saved in team or personal memory, including Design Systems 2.0 skills |
-| `remote` | `{ type: 'remote', id }` | A public skill from [skills.sh](https://skills.sh) |
-| `project` | `{ type: 'project', skillName }` | A skill defined in the repository connected to the chat |
+| Type      | Shape                                  | Use                                                                           |
+| --------- | -------------------------------------- | ----------------------------------------------------------------------------- |
+| `memory`  | `{ type: 'memory', scope, skillName }` | A skill saved in team or personal memory, including Design Systems 2.0 skills |
+| `remote`  | `{ type: 'remote', id }`               | A public skill from [skills.sh](https://skills.sh)                            |
+| `project` | `{ type: 'project', skillName }`       | A skill defined in the repository connected to the chat                       |
 
 > **Skills are not supported when authenticating with a Vercel OIDC project principal.** Use a v0 API key scoped to the user or team that owns the skill.
 

@@ -9,12 +9,12 @@ const fileSchema = z.object({
   path: z
     .string()
     .describe(
-      "Path to the file in the Vercel Sandbox (relative paths from sandbox root, e.g., 'src/main.js', 'package.json', 'components/Button.tsx')"
+      "Path to the file in the Vercel Sandbox (relative paths from sandbox root, e.g., 'src/main.js', 'package.json', 'components/Button.tsx')",
     ),
   content: z
     .string()
     .describe(
-      'The content of the file as a utf8 string (complete file contents that will replace any existing file at this path)'
+      'The content of the file as a utf8 string (complete file contents that will replace any existing file at this path)',
     ),
 })
 
@@ -30,9 +30,7 @@ interface FileContentChunk {
   written: string[]
 }
 
-export async function* getContents(
-  params: Params
-): AsyncGenerator<FileContentChunk> {
+export async function* getContents(params: Params): AsyncGenerator<FileContentChunk> {
   const generated: z.infer<typeof fileSchema>[] = []
   const deferred = new Deferred<void>()
   const result = streamText({
@@ -45,7 +43,7 @@ export async function* getContents(
       {
         role: 'user',
         content: `Generate the content of the following files according to the conversation: ${params.paths.map(
-          (path) => `\n - ${path}`
+          (path) => `\n - ${path}`,
         )}`,
       },
     ],
@@ -66,7 +64,7 @@ export async function* getContents(
     const paths = written.concat(
       items.files
         .slice(generated.length, items.files.length - 1)
-        .flatMap((f) => (f?.path ? [f.path] : []))
+        .flatMap((f) => (f?.path ? [f.path] : [])),
     )
 
     const files = items.files

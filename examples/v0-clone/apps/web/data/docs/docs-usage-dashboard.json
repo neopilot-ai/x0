@@ -6,19 +6,9 @@
   "category": "Reference",
   "type": "guide",
   "description": "Track your credit consumption and activity, or review usage across your team.",
-  "topics": [
-    "design",
-    "pricing",
-    "teams"
-  ],
-  "related": [
-    "pricing",
-    "teams",
-    "account"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "pricing", "teams"],
+  "related": ["pricing", "teams", "account"],
+  "requires": ["quickstart"],
   "headings": [
     "What you see on the page",
     "Selecting a date range",

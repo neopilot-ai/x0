@@ -6,13 +6,8 @@
   "category": "Reference",
   "type": "reference",
   "description": "Understand the v0 plans, pricing, and usage limits.",
-  "topics": [
-    "pricing"
-  ],
-  "related": [
-    "account",
-    "enterprise"
-  ],
+  "topics": ["pricing"],
+  "related": ["account", "enterprise"],
   "requires": [],
   "headings": [
     "Plan comparison",

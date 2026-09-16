@@ -6,19 +6,13 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Reconnect to an active v0 generation after a client disconnects",
-  "topics": [
-    "design",
-    "api",
-    "streaming"
-  ],
+  "topics": ["design", "api", "streaming"],
   "related": [
     "api/v2/guides/custom-chat-interface",
     "api/v2/reference/chats/resume-chat-stream",
     "api/v2/reference/messages/list-messages"
   ],
-  "requires": [
-    "api/v2"
-  ],
+  "requires": ["api/v2"],
   "headings": [
     "Install the SDK",
     "Resume with @v0-sdk/react",

@@ -6,19 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "How v0 and Vercel work in tandem.",
-  "topics": [
-    "github",
-    "deployment",
-    "integrations"
-  ],
-  "related": [
-    "deployments",
-    "github",
-    "custom-domains"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["github", "deployment", "integrations"],
+  "related": ["deployments", "github", "custom-domains"],
+  "requires": ["quickstart"],
   "headings": [
     "How do v0 and Vercel accounts differ?",
     "What is a Vercel Project, and how does v0 connect to it?",

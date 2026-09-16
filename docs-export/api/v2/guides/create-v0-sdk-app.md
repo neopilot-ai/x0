@@ -33,16 +33,16 @@ create-v0-sdk-app [directory] [options]
 
 ### Options
 
-| Option | Description |
-|--------|-------------|
+| Option                 | Description                                |
+| ---------------------- | ------------------------------------------ |
 | `-e, --example <name>` | Example to bootstrap (default: `v0-clone`) |
-| `--use-pnpm` | Use pnpm as package manager |
-| `--use-npm` | Use npm as package manager |
-| `--use-yarn` | Use Yarn as package manager |
-| `--use-bun` | Use Bun as package manager |
-| `--skip-install` | Skip installing packages |
-| `-h, --help` | Display help message |
-| `-v, --version` | Output the current version |
+| `--use-pnpm`           | Use pnpm as package manager                |
+| `--use-npm`            | Use npm as package manager                 |
+| `--use-yarn`           | Use Yarn as package manager                |
+| `--use-bun`            | Use Bun as package manager                 |
+| `--skip-install`       | Skip installing packages                   |
+| `-h, --help`           | Display help message                       |
+| `-v, --version`        | Output the current version                 |
 
 ### Examples
 
@@ -53,6 +53,7 @@ npx create-v0-sdk-app my-app --example v0-clone
 ```
 
 The `v0-clone` example creates a full-featured v0 clone built with the v0 SDK, including:
+
 - A complete chat interface with live previews
 - AI SDK `useChat` integration with `V0Transport`
 - Preview proxy routes
@@ -61,6 +62,7 @@ The `v0-clone` example creates a full-featured v0 clone built with the v0 SDK, i
 ## Generated Project Structure
 
 The bootstrapped project includes:
+
 - `app/` - Next.js app directory with chat pages
 - `lib/` - v0 client, proxy, and utility code
 - `components/` - UI components for the chat interface

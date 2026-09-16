@@ -6,20 +6,10 @@
   "category": "API · Chats",
   "type": "reference",
   "description": "Download all files for a specific chat version as a zip or tarball archive. Use includeDefaultFiles=true to include all deployment files (package.json, configuration files, etc.) or false/omitted to return only the generated source files.",
-  "topics": [
-    "deployment",
-    "api",
-    "versions"
-  ],
+  "topics": ["deployment", "api", "versions"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Download version files\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.chats.downloadVersion({\nchatId: '123',\nversionId: '456',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v1/chats/123/versions/456/download\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-o \"version-files.zip\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat containing the version. Provided as a path parameter.\"\n},\n{\n\"name\": \"versionId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the version to download. Provided as a path parameter.\"\n}\n]}\n/>\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"format\",\n\"type\": \"'zip' | 'tarball'\",\n\"required\": false,\n\"description\": \"The archive format for the download. Choose \\\"zip\\\" for broad compatibility or \\\"tarball\\\" for Unix/Linux systems.\"\n},\n{\n\"name\": \"includeDefaultFiles\",\n\"type\": \"'true' | 'false'\",\n\"required\": false,\n\"description\": \"When true, includes all default files (package.json, configuration files, etc.) that would be part of a complete deployment. When false or omitted, returns only the generated source files.\"\n}\n]}\n/>\n\n---\n\n",

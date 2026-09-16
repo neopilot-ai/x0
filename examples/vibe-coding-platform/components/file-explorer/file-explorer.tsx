@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  ChevronRightIcon,
-  ChevronDownIcon,
-  FolderIcon,
-  FileIcon,
-} from 'lucide-react'
+import { ChevronRightIcon, ChevronDownIcon, FolderIcon, FileIcon } from 'lucide-react'
 import { FileContent } from '@/components/file-explorer/file-content'
 import { Panel, PanelHeader } from '@/components/panels/panels'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -70,19 +65,15 @@ export const FileExplorer = memo(function FileExplorer({
         />
       ))
     },
-    [selected, toggleFolder, selectFile]
+    [selected, toggleFolder, selectFile],
   )
 
   return (
     <Panel className={className}>
       <PanelHeader>
         <FileIcon className="w-4 mr-2" />
-        <span className="font-mono uppercase font-semibold">
-          Sandbox Remote Filesystem
-        </span>
-        {selected && !disabled && (
-          <span className="ml-auto text-gray-500">{selected.path}</span>
-        )}
+        <span className="font-mono uppercase font-semibold">Sandbox Remote Filesystem</span>
+        {selected && !disabled && <span className="ml-auto text-gray-500">{selected.path}</span>}
       </PanelHeader>
 
       <div className="flex text-sm h-[calc(100%-2rem-1px)]">
@@ -91,10 +82,7 @@ export const FileExplorer = memo(function FileExplorer({
         </ScrollArea>
         {selected && sandboxId && !disabled && (
           <ScrollArea className="w-3/4 flex-shrink-0">
-            <FileContent
-              sandboxId={sandboxId}
-              path={selected.path.substring(1)}
-            />
+            <FileContent sandboxId={sandboxId} path={selected.path.substring(1)} />
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         )}
@@ -130,10 +118,9 @@ const FileTreeNode = memo(function FileTreeNode({
   return (
     <div>
       <div
-        className={cn(
-          `flex items-center py-0.5 px-1 hover:bg-gray-100 cursor-pointer`,
-          { 'bg-gray-200/80': selected?.path === node.path }
-        )}
+        className={cn(`flex items-center py-0.5 px-1 hover:bg-gray-100 cursor-pointer`, {
+          'bg-gray-200/80': selected?.path === node.path,
+        })}
         style={{ paddingLeft: `${depth * 16 + 8}px` }}
         onClick={handleClick}
       >

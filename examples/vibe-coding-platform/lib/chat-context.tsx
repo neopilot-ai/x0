@@ -31,12 +31,10 @@ export function ChatProvider({ children }: { children: ReactNode }) {
           console.error('Error sending message:', error)
         },
       }),
-    []
+    [],
   )
 
-  return (
-    <ChatContext.Provider value={{ chat }}>{children}</ChatContext.Provider>
-  )
+  return <ChatContext.Provider value={{ chat }}>{children}</ChatContext.Provider>
 }
 
 export function useSharedChatContext() {

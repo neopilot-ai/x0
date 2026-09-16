@@ -6,18 +6,9 @@
   "category": "Reference",
   "type": "guide",
   "description": "Manage your account and billing information.",
-  "topics": [
-    "design",
-    "pricing",
-    "teams"
-  ],
-  "related": [
-    "pricing",
-    "teams"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design", "pricing", "teams"],
+  "related": ["pricing", "teams"],
+  "requires": ["quickstart"],
   "headings": [
     "Billing",
     "Cancelling your subscription",

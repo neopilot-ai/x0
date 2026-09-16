@@ -6,18 +6,12 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Learn how to manage environment variables and configuration in v0 projects",
-  "topics": [
-    "design",
-    "api",
-    "environment-variables"
-  ],
+  "topics": ["design", "api", "environment-variables"],
   "related": [
     "api/v1/reference/projects/create-env-vars",
     "api/v1/reference/projects/find-env-vars"
   ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Overview",
     "Managing Environment Variables",

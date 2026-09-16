@@ -6,22 +6,10 @@
   "category": "API · Projects",
   "type": "reference",
   "description": "Retrieves a specific environment variable for a given project by its ID, including its value.",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v2/guides/environment-variables"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v2/guides/environment-variables"],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To read environment variables for a chat, see the Environment Variables guide.",
   "snippets": [],
   "content": "\n\n# Get Environment Variable\n\n**Deprecated**: v1 environment variables were connected to v0 Projects, which are deprecated. To read environment variables for a chat, see the [Environment Variables guide](/docs/api/v2/guides/environment-variables).\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.projects.getEnvVar({\nprojectId: 'project_abc123',\nenvironmentVariableId: 'env_def456',\ndecrypted: 'true',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/projects/project_abc123/env-vars/env_def456?decrypted=true \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"projectId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the project that owns the environment variable.\"\n},\n{\n\"name\": \"environmentVariableId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the environment variable to retrieve.\"\n}\n]}\n/>\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"decrypted\",\n\"type\": \"'true' | 'false'\",\n\"required\": false,\n\"description\": \"Whether to return decrypted values. Defaults to false (encrypted).\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'environment_variable'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

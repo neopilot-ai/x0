@@ -13,9 +13,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # AI Tools Example
-
-
 
 Learn how to build AI agents that can autonomously interact with the v0 platform using `@v0-sdk/ai-tools` and the AI SDK for complex workflows and automation.
 
@@ -36,8 +35,8 @@ Learn how to build AI agents that can autonomously interact with the v0 platform
    ```
 
 3. **Get your API keys:**
-   * **v0 API Key**: Get from [v0.dev](https://v0.dev) account settings
-   * **AI Gateway API Key**: Get from [vercel.com](https://vercel.com) AI Gateway settings
+   - **v0 API Key**: Get from [v0.dev](https://v0.dev) account settings
+   - **AI Gateway API Key**: Get from [vercel.com](https://vercel.com) AI Gateway settings
 
 ## Examples
 
@@ -102,11 +101,11 @@ const result = await generateText({
 
 ### 3. Available Tool Categories
 
-* **`tools.chat`** - Create, manage, and interact with v0 chats
-* **`tools.project`** - Create and manage v0 projects
-* **`tools.deployment`** - Handle deployments and logs
-* **`tools.user`** - Get user information and billing details
-* **`tools.hook`** - Manage webhooks for events
+- **`tools.chat`** - Create, manage, and interact with v0 chats
+- **`tools.project`** - Create and manage v0 projects
+- **`tools.deployment`** - Handle deployments and logs
+- **`tools.user`** - Get user information and billing details
+- **`tools.hook`** - Manage webhooks for events
 
 ## Agent Patterns
 
@@ -114,33 +113,33 @@ The `dev:agent` example demonstrates advanced AI agent patterns:
 
 ### 1. Multi-Step Agent with `stopWhen`
 
-* Autonomous agents that can plan and execute complex workflows
-* Uses `stepCountIs()` to control execution length
-* Structured answers with answer tools
+- Autonomous agents that can plan and execute complex workflows
+- Uses `stepCountIs()` to control execution length
+- Structured answers with answer tools
 
 ### 2. Sequential Processing (Chains)
 
-* Step-by-step workflows where each step builds on the previous
-* Quality checks and iterative improvement
-* Requirements analysis → Project creation → Validation
+- Step-by-step workflows where each step builds on the previous
+- Quality checks and iterative improvement
+- Requirements analysis → Project creation → Validation
 
 ### 3. Routing Agent
 
-* Intelligent request classification and routing
-* Dynamic model selection based on complexity
-* Context-aware tool selection
+- Intelligent request classification and routing
+- Dynamic model selection based on complexity
+- Context-aware tool selection
 
 ### 4. Parallel Processing
 
-* Independent tasks executed simultaneously
-* Efficient resource utilization
-* Result synthesis from multiple analyses
+- Independent tasks executed simultaneously
+- Efficient resource utilization
+- Result synthesis from multiple analyses
 
 ### 5. Evaluator-Optimizer
 
-* Feedback loops for continuous improvement
-* Quality assessment and iterative refinement
-* Self-improving workflows
+- Feedback loops for continuous improvement
+- Quality assessment and iterative refinement
+- Self-improving workflows
 
 ## Tips
 
@@ -151,14 +150,13 @@ The `dev:agent` example demonstrates advanced AI agent patterns:
 
 ## Troubleshooting
 
-* **"Invalid API key"**: Check your `.env` file and API key validity
-* **"Tool not found"**: Ensure you're using the correct tool category
-* **Rate limits**: Both v0 and AI Gateway have rate limits - add delays if needed
+- **"Invalid API key"**: Check your `.env` file and API key validity
+- **"Tool not found"**: Ensure you're using the correct tool category
+- **Rate limits**: Both v0 and AI Gateway have rate limits - add delays if needed
 
 ## Source Code
 
 View the complete source code on GitHub: [v0-sdk/examples/ai-tools-example](https://github.com/vercel/v0-sdk/tree/main/examples/ai-tools-example)
-
 
 ---
 

@@ -6,13 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Add environment variables to a v0 chat",
-  "topics": [
-    "deployment",
-    "design",
-    "api",
-    "environment-variables",
-    "integrations"
-  ],
+  "topics": ["deployment", "design", "api", "environment-variables", "integrations"],
   "related": [
     "api/v2/guides/handling-integrations",
     "api/v2/reference/chats/create-vercel-project",

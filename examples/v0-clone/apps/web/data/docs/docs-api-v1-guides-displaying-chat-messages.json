@@ -6,16 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Learn how to render and format chat messages from the v0 API using @v0-sdk/react",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v1/packages/react"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v1/packages/react"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Overview",
     "Installation",

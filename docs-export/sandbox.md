@@ -72,10 +72,10 @@ The sandbox filesystem persists between sessions within the lifetime of the chat
 
 ## Sandbox vs Preview
 
-| Feature | Sandbox | Preview |
-|---------|---------|---------|
-| Environment | Vercel Sandbox (microVM) | Standalone deployment |
-| Access | Code editor, Terminal, Console | iframe URL |
-| Isolation | Per-chat | Per-deployment |
-| Persistence | Filesystem between sessions | Read-only |
-| Execution | Running dev server | Built static site |
+| Feature     | Sandbox                        | Preview               |
+| ----------- | ------------------------------ | --------------------- |
+| Environment | Vercel Sandbox (microVM)       | Standalone deployment |
+| Access      | Code editor, Terminal, Console | iframe URL            |
+| Isolation   | Per-chat                       | Per-deployment        |
+| Persistence | Filesystem between sessions    | Read-only             |
+| Execution   | Running dev server             | Built static site     |

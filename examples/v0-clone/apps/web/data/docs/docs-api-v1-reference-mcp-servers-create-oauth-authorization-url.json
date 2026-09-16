@@ -6,26 +6,10 @@
   "category": "API · Mcp-servers",
   "type": "reference",
   "description": "Creates an OAuth authorization URL for an OAuth MCP server. Redirect the user to the returned URL to complete authorization without visiting v0.app.",
-  "topics": [
-    "mcp",
-    "design",
-    "api",
-    "authentication"
-  ],
-  "related": [
-    "api/v1/guides/oauth-mcp-servers",
-    "api/v1/reference/mcp-servers/create"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response",
-    "OAuth Callback"
-  ],
+  "topics": ["mcp", "design", "api", "authentication"],
+  "related": ["api/v1/guides/oauth-mcp-servers", "api/v1/reference/mcp-servers/create"],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response", "OAuth Callback"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [
     {

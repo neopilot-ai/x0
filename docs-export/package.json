@@ -2,21 +2,27 @@
   "name": "v0-docs",
   "version": "2.0.0",
   "description": "v0 documentation export matching https://v0.app/docs/*",
+  "keywords": [
+    "api",
+    "docs",
+    "documentation",
+    "sdk",
+    "v0"
+  ],
+  "homepage": "https://v0.app/docs",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vercel/v0-docs"
+  },
+  "files": [
+    "**/*.md",
+    "**/*.txt"
+  ],
   "main": "index.md",
   "scripts": {
     "build": "echo 'Docs are already built'",
     "serve": "npx serve . -p 3000",
     "lint": "echo 'No linting needed for markdown docs'"
-  },
-  "keywords": ["v0", "documentation", "docs", "api", "sdk"],
-  "license": "MIT",
-  "files": [
-    "**/*.md",
-    "**/*.txt"
-  ],
-  "homepage": "https://v0.app/docs",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/vercel/v0-docs"
   }
 }

@@ -15,10 +15,10 @@ The v2 API has been significantly redesigned. This guide covers the key changes 
 
 ## Package Changes
 
-| v1 | v2 |
-|----|----|
-| `v0-sdk` | `v0` |
-| `@v0-sdk/react` | `@v0-sdk/react` (different API) |
+| v1                 | v2                                 |
+| ------------------ | ---------------------------------- |
+| `v0-sdk`           | `v0`                               |
+| `@v0-sdk/react`    | `@v0-sdk/react` (different API)    |
 | `@v0-sdk/ai-tools` | `@v0-sdk/ai-tools` (different API) |
 
 ## Install
@@ -179,6 +179,7 @@ const tools = v0Tools({ apiKey: process.env.V0_API_KEY })
 ## Key Removals
 
 The following v1 APIs do not exist in v2:
+
 - `v0.projects` - No longer a separate resource
 - `v0.deployments` - Replaced by `v0.chats.deploy()`
 - `v0.user` - Not available
@@ -214,7 +215,11 @@ import { useChat } from '@ai-sdk/react'
 import { V0Transport } from '@v0-sdk/react'
 
 const transport = new V0Transport({
-  urls: { create: '/api/v0/chats/create', send: (id) => `/api/v0/chats/${id}/send`, resume: (id) => `/api/v0/chats/${id}/resume` },
+  urls: {
+    create: '/api/v0/chats/create',
+    send: (id) => `/api/v0/chats/${id}/send`,
+    resume: (id) => `/api/v0/chats/${id}/resume`,
+  },
 })
 const { messages, input, handleInputChange, handleSubmit } = useChat({ transport })
 

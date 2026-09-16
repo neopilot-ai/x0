@@ -6,20 +6,10 @@
   "category": "API · Deployments",
   "type": "reference",
   "description": "Retrieves logs for a specific deployment. Supports filtering by timestamp to fetch only recent logs.",
-  "topics": [
-    "deployment",
-    "api"
-  ],
+  "topics": ["deployment", "api"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "Deprecated**: This method is deprecated. Use the Vercel API directly to inspect deployment logs.",
   "snippets": [],
   "content": "\n\n# Find Deployment Logs\n\n**Deprecated**: This method is deprecated. Use the [Vercel API](https://docs.vercel.com/docs/rest-api/reference/endpoints/deployments/get-deployment-events) directly to inspect deployment logs.\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.deployments.findLogs({\ndeploymentId: '123',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/deployments/123/logs \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"deploymentId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the deployment to retrieve logs for. Provided as a path parameter.\"\n}\n]}\n/>\n\n#### Query Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"since\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"A UNIX timestamp (in seconds) used to filter logs. Returns only log entries generated after the specified time.\"\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"logs\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"Array of log entries.\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Log creation timestamp.\",\n\"deprecated\": false\n},\n{\n\"name\": \"deploymentId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Deployment ID.\",\n\"deprecated\": false\n},\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Log entry ID.\",\n\"deprecated\": false\n},\n{\n\"name\": \"text\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Log message content.\",\n\"deprecated\": false\n},\n{\n\"name\": \"type\",\n\"type\": \"'stdout' | 'stderr'\",\n\"required\": true,\n\"description\": \"Output stream type.\",\n\"deprecated\": false\n},\n{\n\"name\": \"level\",\n\"type\": \"'error' | 'warning' | 'info'\",\n\"required\": false,\n\"description\": \"Log severity level.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'deployment_log'\",\n\"required\": true,\n\"description\": \"Object type identifier.\",\n\"deprecated\": false\n}\n]\n}\n},\n{\n\"name\": \"nextSince\",\n\"type\": \"number\",\n\"required\": false,\n\"description\": \"Timestamp for pagination.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"Object type identifier.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

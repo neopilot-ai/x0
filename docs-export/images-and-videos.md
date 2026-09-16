@@ -40,18 +40,18 @@ Copy images from any application and paste with `Cmd` + `V` (Mac) or `Ctrl` + `V
 
 ## Supported file types
 
-| Category | Supported formats |
-| --- | --- |
-| Images | PNG, JPEG/JPG, WebP, GIF, SVG, ICO, AVIF |
-| Video | MP4, WebM, OGG, MOV/QuickTime |
-| Audio | MP3/MPEG, WAV, OGG |
-| Documents | PDF, DOCX, XLSX |
-| 3D and model assets | GLB, glTF, OBJ |
+| Category             | Supported formats                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------- |
+| Images               | PNG, JPEG/JPG, WebP, GIF, SVG, ICO, AVIF                                                     |
+| Video                | MP4, WebM, OGG, MOV/QuickTime                                                                |
+| Audio                | MP3/MPEG, WAV, OGG                                                                           |
+| Documents            | PDF, DOCX, XLSX                                                                              |
+| 3D and model assets  | GLB, glTF, OBJ                                                                               |
 | Text, code, and data | Plain text and `text/*`; JSON, TypeScript, JavaScript, YAML, SQL, XML, shell, PHP, Ruby, AWK |
-| Archives | ZIP, GZIP/GZ |
-| Fonts | WOFF, WOFF2, TTF |
-| Email | EML |
-| Rive assets | RIV |
+| Archives             | ZIP, GZIP/GZ                                                                                 |
+| Fonts                | WOFF, WOFF2, TTF                                                                             |
+| Email                | EML                                                                                          |
+| Rive assets          | RIV                                                                                          |
 
 File acceptance is based primarily on the detected MIME type. DOCX and XLSX files are available in VM-backed chats, where v0 materializes and reads them in the sandbox. Legacy DOC and XLS files are not supported.
 
@@ -64,10 +64,10 @@ File acceptance is based primarily on the detected MIME type. DOCX and XLSX file
 
 ## Limits
 
-| Upload type | Free users | Paid users |
-| --- | --- | --- |
-| Chat attachments | 5 MB | 20 MB |
-| ZIP file uploads | 10 MB | 50 MB |
+| Upload type      | Free users | Paid users |
+| ---------------- | ---------- | ---------- |
+| Chat attachments | 5 MB       | 20 MB      |
+| ZIP file uploads | 10 MB      | 50 MB      |
 
 ## Best practices
 

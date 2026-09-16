@@ -6,16 +6,9 @@
   "category": "API · V1",
   "type": "reference",
   "description": "AI SDK tools for the v0 API",
-  "topics": [
-    "api"
-  ],
-  "related": [
-    "api/v1/adapters/ai-tools",
-    "api/v1/packages/v0-sdk"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["api"],
+  "related": ["api/v1/adapters/ai-tools", "api/v1/packages/v0-sdk"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Installation",
     "Quick Start",

@@ -6,18 +6,10 @@
   "category": "API · Mcp-servers",
   "type": "",
   "description": "Retrieves a specific MCP server by ID.",
-  "topics": [
-    "mcp",
-    "api"
-  ],
+  "topics": ["mcp", "api"],
   "related": [],
   "requires": [],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Get MCP Server\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.mcpServers.get({\nmcpServerId: 'srv_jkl345',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/mcp-servers/chat_abc123\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"mcpServerId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the MCP server.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Unique identifier for the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Display name of the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"URL endpoint of the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"description\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"Optional description of the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"createdAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ISO timestamp of when the server was created.\",\n\"deprecated\": false\n},\n{\n\"name\": \"updatedAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ISO timestamp of the last update.\",\n\"deprecated\": false\n},\n{\n\"name\": \"userId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"ID of the user who created the server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"enabled\",\n\"type\": \"boolean\",\n\"required\": true,\n\"description\": \"Whether the MCP server is enabled.\",\n\"deprecated\": false\n},\n{\n\"name\": \"auth\",\n\"type\": \"'none' | 'bearer' | 'custom-headers' | 'oauth'\",\n\"required\": true,\n\"description\": \"Authentication configuration for the MCP server.\",\n\"deprecated\": false\n},\n{\n\"name\": \"scope\",\n\"type\": \"'user' | 'team'\",\n\"required\": true,\n\"description\": \"Scope of the MCP server configuration.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

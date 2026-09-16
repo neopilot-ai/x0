@@ -8,10 +8,7 @@ interface Props {
   path: string
 }
 
-export const FileContent = memo(function FileContent({
-  sandboxId,
-  path,
-}: Props) {
+export const FileContent = memo(function FileContent({ sandboxId, path }: Props) {
   const searchParams = new URLSearchParams({ path })
   const content = useSWR(
     `/api/sandboxes/${sandboxId}/files?${searchParams.toString()}`,
@@ -20,7 +17,7 @@ export const FileContent = memo(function FileContent({
       const text = await response.text()
       return text
     },
-    { refreshInterval: 1000 }
+    { refreshInterval: 1000 },
   )
 
   if (content.isLoading || !content.data) {

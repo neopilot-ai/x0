@@ -44,14 +44,14 @@ const { chats, messages, mcpServers, settings, usage, webhooks } = v0ToolsByCate
 
 ## Tool categories
 
-| Category | Tools include |
-| --- | --- |
-| `chats` | `chatsCreate`, `chatsCreateAsync`, `chatsCreateFromFiles`, `chatsCreateFromRepo`, `chatsCreateFromZip`, `chatsCreateStream`, `chatsCreateVercelProject`, `chatsDelete`, `chatsDeploy`, `chatsDownloadFiles`, `chatsDuplicate`, `chatsGet`, … |
-| `messages` | `messagesSend`, `messagesSendStream`, `messagesResolve`, `messagesList`, `messagesGet`, `messagesStop`, … |
-| `mcpServers` | `mcpServersCreate`, `mcpServersList`, `mcpServersGet`, `mcpServersUpdate`, `mcpServersDelete` |
-| `settings` | `settingsGetPreviewHosts`, `settingsSetPreviewHosts` |
-| `usage` | `usageGetActivity`, `usageGetSummary`, `usageListEvents` |
-| `webhooks` | `webhooksCreate`, `webhooksList`, `webhooksGet`, `webhooksUpdate`, `webhooksDelete` |
+| Category     | Tools include                                                                                                                                                                                                                                |
+| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `chats`      | `chatsCreate`, `chatsCreateAsync`, `chatsCreateFromFiles`, `chatsCreateFromRepo`, `chatsCreateFromZip`, `chatsCreateStream`, `chatsCreateVercelProject`, `chatsDelete`, `chatsDeploy`, `chatsDownloadFiles`, `chatsDuplicate`, `chatsGet`, … |
+| `messages`   | `messagesSend`, `messagesSendStream`, `messagesResolve`, `messagesList`, `messagesGet`, `messagesStop`, …                                                                                                                                    |
+| `mcpServers` | `mcpServersCreate`, `mcpServersList`, `mcpServersGet`, `mcpServersUpdate`, `mcpServersDelete`                                                                                                                                                |
+| `settings`   | `settingsGetPreviewHosts`, `settingsSetPreviewHosts`                                                                                                                                                                                         |
+| `usage`      | `usageGetActivity`, `usageGetSummary`, `usageListEvents`                                                                                                                                                                                     |
+| `webhooks`   | `webhooksCreate`, `webhooksList`, `webhooksGet`, `webhooksUpdate`, `webhooksDelete`                                                                                                                                                          |
 
 Chat-creation tools accept the same fields as the API, including `message`, `systemPrompt`, `modelConfiguration`, `attachments`, `mcpServerIds`, and `skills`.
 

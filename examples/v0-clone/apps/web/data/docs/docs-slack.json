@@ -6,19 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Add v0 to your Slack workspace so your whole team can contribute to production.",
-  "topics": [
-    "github",
-    "integrations",
-    "teams"
-  ],
-  "related": [
-    "github",
-    "vercel-integration"
-  ],
-  "requires": [
-    "quickstart",
-    "github"
-  ],
+  "topics": ["github", "integrations", "teams"],
+  "related": ["github", "vercel-integration"],
+  "requires": ["quickstart", "github"],
   "headings": [
     "Get started",
     "How it works",

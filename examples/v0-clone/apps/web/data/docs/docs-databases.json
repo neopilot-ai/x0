@@ -6,19 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Build full-stack applications with v0's database integrations.",
-  "topics": [
-    "databases",
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "external-apis",
-    "full-stack-apps",
-    "snowflake"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["databases", "design", "integrations"],
+  "related": ["external-apis", "full-stack-apps", "snowflake"],
+  "requires": ["quickstart"],
   "headings": [
     "Setting up a database",
     "From settings",

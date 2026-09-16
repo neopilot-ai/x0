@@ -6,23 +6,14 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Give your agents v0's app-building capabilities",
-  "topics": [
-    "mcp",
-    "design",
-    "api",
-    "agents"
-  ],
+  "topics": ["mcp", "design", "api", "agents"],
   "related": [
     "api/v2/guides/mcp-server",
     "api/v2/reference/chats/create-chat",
     "api/v2/reference/messages/send-message"
   ],
   "requires": [],
-  "headings": [
-    "Use the v0 MCP server",
-    "Use v0 tools with AI SDK",
-    "Use v0 from an Eve agent"
-  ],
+  "headings": ["Use the v0 MCP server", "Use v0 tools with AI SDK", "Use v0 from an Eve agent"],
   "excerpt": "v0 can act as a specialized app-building agent inside a larger agentic workflow. Your agent can delegate a build to v0, continue iterating in the same chat, resolve questions or approvals, and retrieve a preview or deployment when the app is ready.",
   "snippets": [
     {

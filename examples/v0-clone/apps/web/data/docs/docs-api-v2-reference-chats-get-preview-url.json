@@ -6,18 +6,10 @@
   "category": "API · Chats",
   "type": "",
   "description": "Returns the preview URL for a chat. If the preview isn't ready, the response is null. Poll this endpoint until the response is non-null.",
-  "topics": [
-    "api",
-    "previews"
-  ],
+  "topics": ["api", "previews"],
   "related": [],
   "requires": [],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Get Preview URL\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.chats.getPreview({\nchatId: 'chat_abc123',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET \"https://api.v0.dev/v2/chats/chat_abc123/preview\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"chatId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the chat.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"url\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The preview URL for this chat.\",\n\"deprecated\": false\n},\n{\n\"name\": \"token\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"A short-lived token for accessing the preview URL via the x-v0-preview-token header.\",\n\"deprecated\": false\n},\n{\n\"name\": \"expiresAt\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The ISO timestamp when token expires.\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

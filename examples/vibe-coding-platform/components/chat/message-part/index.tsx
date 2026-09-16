@@ -16,10 +16,7 @@ interface Props {
   partIndex: number
 }
 
-export const MessagePart = memo(function MessagePart({
-  part,
-  partIndex,
-}: Props) {
+export const MessagePart = memo(function MessagePart({ part, partIndex }: Props) {
   if (part.type === 'data-generating-files') {
     return <GenerateFiles message={part.data} />
   } else if (part.type === 'data-create-sandbox') {

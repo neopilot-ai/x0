@@ -13,18 +13,12 @@ export interface PreviewTarget {
   sandboxId: string
 }
 
-export async function getPreviewTarget(
-  sandboxId: string,
-  port: number
-): Promise<PreviewTarget> {
+export async function getPreviewTarget(sandboxId: string, port: number): Promise<PreviewTarget> {
   const origin = process.env.PREVIEW_ORIGIN || `http://localhost:${port}`
   return { origin, port, sandboxId }
 }
 
-export function buildUpstreamHeaders(
-  request: NextRequest,
-  target: PreviewTarget
-): Headers {
+export function buildUpstreamHeaders(request: NextRequest, target: PreviewTarget): Headers {
   const headers = new Headers(request.headers)
   headers.set('x-forwarded-host', target.origin)
   headers.set('x-forwarded-proto', target.origin.startsWith('https') ? 'https' : 'http')
@@ -33,7 +27,7 @@ export function buildUpstreamHeaders(
 
 export function buildUpstreamResponse(
   upstreamResponse: Response,
-  target: PreviewTarget
+  target: PreviewTarget,
 ): NextResponse {
   const responseHeaders = new Headers(upstreamResponse.headers)
   responseHeaders.set('x-preview-proxy', 'true')

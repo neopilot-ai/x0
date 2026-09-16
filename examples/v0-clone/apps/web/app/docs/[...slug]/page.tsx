@@ -29,7 +29,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
           {doc.section && (
             <>
               <span>/</span>
-              <Link href={`/docs?section=${encodeURIComponent(doc.section)}`} className="hover:text-foreground">
+              <Link
+                href={`/docs?section=${encodeURIComponent(doc.section)}`}
+                className="hover:text-foreground"
+              >
                 {doc.section}
               </Link>
             </>
@@ -58,9 +61,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
         <div className="mt-8 rounded-xl border border-border bg-muted/30 p-4 text-sm leading-6 text-muted-foreground">
           <p>
-            <span className="font-medium text-foreground">Provenance.</span> This page renders indexed
-            material from the official v0 documentation. The application may surface structured
-            views, excerpts, and related links, but the authoritative text lives at the source.
+            <span className="font-medium text-foreground">Provenance.</span> This page renders
+            indexed material from the official v0 documentation. The application may surface
+            structured views, excerpts, and related links, but the authoritative text lives at the
+            source.
           </p>
         </div>
 
@@ -85,7 +89,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
               {doc.headings.map((heading) => (
                 <li key={heading}>
                   <Link
-                    href={`${doc.sourceUrl}#${heading.toLowerCase().replace(/[^a-z0-9 -]/g, '').replaceAll(' ', '-')}`}
+                    href={`${doc.sourceUrl}#${heading
+                      .toLowerCase()
+                      .replace(/[^a-z0-9 -]/g, '')
+                      .replaceAll(' ', '-')}`}
                     target="_blank"
                     className="hover:text-foreground"
                   >
@@ -110,7 +117,9 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
                   className="rounded-xl border border-border p-4 hover:border-foreground/30 hover:bg-card"
                 >
                   <p className="font-medium">{item.title}</p>
-                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">{item.description}</p>
+                  <p className="mt-1 line-clamp-2 text-sm text-muted-foreground">
+                    {item.description}
+                  </p>
                 </Link>
               ))}
             </div>
@@ -123,7 +132,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
 
         <div className="mt-12 flex flex-col gap-3 border-t border-border pt-8 text-sm sm:flex-row sm:items-center sm:justify-between">
           {prev ? (
-            <Link href={`/docs/${prev.slug}`} className="group text-muted-foreground hover:text-foreground">
+            <Link
+              href={`/docs/${prev.slug}`}
+              className="group text-muted-foreground hover:text-foreground"
+            >
               <span className="block text-xs text-muted-foreground/70">Previous</span>
               <span className="font-medium group-hover:underline">{prev.title}</span>
             </Link>
@@ -162,7 +174,10 @@ export default async function DocPage({ params }: { params: Promise<{ slug: stri
             doc.headings.map((heading) => (
               <a
                 key={heading}
-                href={`${doc.sourceUrl}#${heading.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`}
+                href={`${doc.sourceUrl}#${heading
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-')
+                  .replace(/^-+|-+$/g, '')}`}
                 target="_blank"
                 className="block hover:text-foreground"
               >

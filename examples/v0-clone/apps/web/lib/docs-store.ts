@@ -64,10 +64,7 @@ export function searchDocsFull(query: string, limit = 12): SearchHit[] {
       const content = getDocBySlug(hit.doc.slug)?.content ?? ''
       const index = content.toLowerCase().indexOf(primaryTerm)
       const contentScore = index !== -1 ? 2 : 0
-      const snippet =
-        index !== -1
-          ? excerpt(content, index, primaryTerm.length)
-          : hit.doc.excerpt
+      const snippet = index !== -1 ? excerpt(content, index, primaryTerm.length) : hit.doc.excerpt
       return { ...hit, score: hit.score + contentScore, snippet }
     })
     .sort((a, b) => b.score - a.score)

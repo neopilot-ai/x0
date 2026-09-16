@@ -1,7 +1,7 @@
 ---
 title: Delete Environment Variables
 description: Deletes multiple environment variables for a given project by their IDs.
-badge: "POST"
+badge: 'POST'
 product: v0 API
 type: reference
 prerequisites:
@@ -12,8 +12,6 @@ related:
 
 # Delete Environment Variables
 
-
-
 <EndpointDisplay method="post" path="/projects/{projectId}/env-vars/delete" />
 
 <Callout type="warning">
@@ -23,23 +21,23 @@ related:
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.projects.deleteEnvVars({
-  projectId: 'project_abc123',
-  environmentVariableIds: ['env_def456', 'env_ghi789'],
+projectId: 'project_abc123',
+environmentVariableIds: ['env_def456', 'env_ghi789'],
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X POST https://api.v0.dev/v1/projects/project_abc123/env-vars/delete \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X POST https://api.v0.dev/v1/projects/project_abc123/env-vars/delete \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -48,7 +46,7 @@ console.log(result)`}
       "env_ghi789"
     ]
   }'`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -58,92 +56,91 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "projectId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the project whose environment variables should be deleted."
-  }
+title=""
+parameters={[
+{
+"name": "projectId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the project whose environment variables should be deleted."
+}
 ]}
 />
 
 #### Body
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "environmentVariableIds",
-    "type": "string[]",
-    "required": true,
-    "description": "An array of environment variable IDs to delete.",
-    "deprecated": false,
-    "arrayItems": {
-      "name": "item",
-      "type": "string",
-      "required": true,
-      "description": "The unique identifier of the environment variable to delete.",
-      "deprecated": false,
-      "properties": []
-    }
-  }
+title=""
+parameters={[
+{
+"name": "environmentVariableIds",
+"type": "string[]",
+"required": true,
+"description": "An array of environment variable IDs to delete.",
+"deprecated": false,
+"arrayItems": {
+"name": "item",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the environment variable to delete.",
+"deprecated": false,
+"properties": []
+}
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "object",
-    "type": "'list'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "data",
-    "type": "object[]",
-    "required": true,
-    "description": "",
-    "deprecated": false,
-    "arrayItems": {
-      "name": "item",
-      "type": "object",
-      "required": true,
-      "description": "",
-      "deprecated": false,
-      "properties": [
-        {
-          "name": "id",
-          "type": "string",
-          "required": true,
-          "description": "",
-          "deprecated": false
-        },
-        {
-          "name": "object",
-          "type": "'environment_variable'",
-          "required": true,
-          "description": "",
-          "deprecated": false
-        },
-        {
-          "name": "deleted",
-          "type": "'true'",
-          "required": true,
-          "description": "",
-          "deprecated": false
-        }
-      ]
-    }
-  }
+title=""
+parameters={[
+{
+"name": "object",
+"type": "'list'",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "data",
+"type": "object[]",
+"required": true,
+"description": "",
+"deprecated": false,
+"arrayItems": {
+"name": "item",
+"type": "object",
+"required": true,
+"description": "",
+"deprecated": false,
+"properties": [
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "object",
+"type": "'environment_variable'",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "deleted",
+"type": "'true'",
+"required": true,
+"description": "",
+"deprecated": false
+}
+]
+}
+}
 ]}
 />
-
 
 ---
 

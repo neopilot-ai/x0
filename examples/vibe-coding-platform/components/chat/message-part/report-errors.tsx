@@ -4,11 +4,7 @@ import { ToolHeader } from '../tool-header'
 import { ToolMessage } from '../tool-message'
 import { Streamdown } from 'streamdown'
 
-export function ReportErrors({
-  message,
-}: {
-  message: DataPart['report-errors']
-}) {
+export function ReportErrors({ message }: { message: DataPart['report-errors'] }) {
   return (
     <ToolMessage>
       <ToolHeader>

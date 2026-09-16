@@ -52,7 +52,10 @@ export async function connectToSandbox(sandboxId: string): Promise<VercelSandbox
   }
 }
 
-export async function executeCommand(sandboxId: string, command: string): Promise<{ output: string; exitCode: number }> {
+export async function executeCommand(
+  sandboxId: string,
+  command: string,
+): Promise<{ output: string; exitCode: number }> {
   const response = await fetch(`/api/sandbox/${sandboxId}/execute`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -99,7 +102,9 @@ export async function restoreSnapshot(snapshotId: string): Promise<void> {
   await fetch(`/api/sandbox/snapshot/${snapshotId}`, { method: 'POST' })
 }
 
-export async function getIsolationInfo(sandboxId: string): Promise<{ isolation: string; networkPolicy: string }> {
+export async function getIsolationInfo(
+  sandboxId: string,
+): Promise<{ isolation: string; networkPolicy: string }> {
   const response = await fetch(`/api/sandbox/${sandboxId}/isolation`)
   return await response.json()
 }

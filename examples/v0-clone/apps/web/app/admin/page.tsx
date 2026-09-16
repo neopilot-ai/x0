@@ -58,7 +58,10 @@ export default function AdminPage() {
           </Link>
           <div className="mt-6 space-y-2 text-sm">
             {Object.entries(stats.bySection).map(([section, count]) => (
-              <div key={section} className="flex items-center justify-between text-muted-foreground">
+              <div
+                key={section}
+                className="flex items-center justify-between text-muted-foreground"
+              >
                 <span>{section}</span>
                 <span className="font-medium text-foreground">{count as number}</span>
               </div>

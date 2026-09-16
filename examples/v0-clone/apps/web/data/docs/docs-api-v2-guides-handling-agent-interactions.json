@@ -6,14 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Learn how to handle plan reviews, questions, and permission requests from the v0 agent",
-  "topics": [
-    "design",
-    "api",
-    "agents",
-    "permissions",
-    "integrations",
-    "pricing"
-  ],
+  "topics": ["design", "api", "agents", "permissions", "integrations", "pricing"],
   "related": [
     "api/v2/reference/messages/resolve-task",
     "api/v2/reference/messages/get-message",

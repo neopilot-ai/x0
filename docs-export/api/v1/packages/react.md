@@ -41,7 +41,9 @@ function Chat() {
 
   return (
     <div>
-      {messages.map((m) => <div key={m.id}>{m.parts.map(p => p.text)}</div>)}
+      {messages.map((m) => (
+        <div key={m.id}>{m.parts.map((p) => p.text)}</div>
+      ))}
       <input value={input} onChange={handleInputChange} />
       <button onClick={handleSubmit}>Send</button>
     </div>
@@ -87,7 +89,11 @@ const task = getPendingV0Task(message)
 ### Composition Utilities
 
 ```ts
-import { shouldResumeV0Chat, getResumableV0Assistant, prependV0UIMessageHistory } from '@v0-sdk/react'
+import {
+  shouldResumeV0Chat,
+  getResumableV0Assistant,
+  prependV0UIMessageHistory,
+} from '@v0-sdk/react'
 ```
 
 ### SWR Hooks
@@ -99,19 +105,25 @@ import { createV0Key } from '@v0-sdk/react/swr'
 ### Types
 
 ```ts
-import type { V0UIMessage, V0UIMessageMetadata, V0UIDataTypes, V0RequestOptions, V0ResponseError } from '@v0-sdk/react'
+import type {
+  V0UIMessage,
+  V0UIMessageMetadata,
+  V0UIDataTypes,
+  V0RequestOptions,
+  V0ResponseError,
+} from '@v0-sdk/react'
 ```
 
 ## Migrate from v1
 
-| v1 (Deprecated) | v2 (Current) |
-|-----------------|--------------|
-| `<StreamingMessage>` | Use `useChat` with `V0Transport` |
-| `<CodeBlock>` | Use your own code display |
-| `<ThinkingSection>` | Use your own thinking display |
-| `<TaskSection>` | Use `getPendingV0Task()` |
-| `useStreamingChat` | `useChat` with `V0Transport` |
-| `useCodeHighlight` | Custom implementation |
+| v1 (Deprecated)            | v2 (Current)                      |
+| -------------------------- | --------------------------------- |
+| `<StreamingMessage>`       | Use `useChat` with `V0Transport`  |
+| `<CodeBlock>`              | Use your own code display         |
+| `<ThinkingSection>`        | Use your own thinking display     |
+| `<TaskSection>`            | Use `getPendingV0Task()`          |
+| `useStreamingChat`         | `useChat` with `V0Transport`      |
+| `useCodeHighlight`         | Custom implementation             |
 | `@v0-sdk/react` components | `@v0-sdk/react` transport + types |
 
 For a complete v2 guide, see [React Transport Guide](/docs/api/v2/guides/react-transport).

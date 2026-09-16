@@ -6,18 +6,10 @@
   "category": "API · Hooks",
   "type": "reference",
   "description": "Retrieves a list of existing hooks in your workspace. Useful for managing active webhooks tied to chat events or deployments.",
-  "topics": [
-    "deployment",
-    "api"
-  ],
+  "topics": ["deployment", "api"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Find Hooks\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.hooks.find()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/hooks \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'list'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"data\",\n\"type\": \"object[]\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"arrayItems\": {\n\"name\": \"item\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"id\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A unique identifier for the webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"object\",\n\"type\": \"'hook'\",\n\"required\": false,\n\"description\": \"Fixed value identifying this object as a webhook.\",\n\"deprecated\": false\n},\n{\n\"name\": \"name\",\n\"type\": \"string\",\n\"required\": false,\n\"description\": \"A user-defined name to label the webhook.\",\n\"deprecated\": false\n}\n]\n}\n}\n]}\n/>\n\n---\n\n",

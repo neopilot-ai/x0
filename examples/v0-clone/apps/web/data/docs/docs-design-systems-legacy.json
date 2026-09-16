@@ -6,16 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Create a custom registry to use your design system with v0 and Shadcn.",
-  "topics": [
-    "design"
-  ],
-  "related": [
-    "figma",
-    "design-mode"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["design"],
+  "related": ["figma", "design-mode"],
+  "requires": ["quickstart"],
   "headings": [
     "Tailwind config",
     "Shadcn components",

@@ -21,12 +21,7 @@ Wire the AI SDK `useChat` hook to v0 with `V0Transport`, and convert API history
 
 ```tsx
 import { useChat as useAIChat } from '@ai-sdk/react'
-import {
-  V0Transport,
-  toV0UIMessages,
-  shouldResumeV0Chat,
-  type V0UIMessage,
-} from '@v0-sdk/react'
+import { V0Transport, toV0UIMessages, shouldResumeV0Chat, type V0UIMessage } from '@v0-sdk/react'
 
 const transport = new V0Transport({
   chatId: initialChatId,
@@ -81,9 +76,15 @@ function CustomPreview({ chatId }: { chatId: string }) {
 
 ```tsx
 import {
-  V0CodeEditor, V0DiffView, V0SplitView, V0FileExplorer,
-  V0Terminal, V0PermissionGuard, V0CommandHistory,
-  V0ConsolePanel, V0CodeEditorTab,
+  V0CodeEditor,
+  V0DiffView,
+  V0SplitView,
+  V0FileExplorer,
+  V0Terminal,
+  V0PermissionGuard,
+  V0CommandHistory,
+  V0ConsolePanel,
+  V0CodeEditorTab,
 } from '@v0-sdk/react'
 ```
 

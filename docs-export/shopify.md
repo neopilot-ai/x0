@@ -100,9 +100,9 @@ Shopify development stores are password protected. v0 builds checkout links that
 
 When v0 connects a store, it sets these environment variables in your project. You don't need to configure them, v0 manages them for you.
 
-| Variable | Description |
-| --- | --- |
-| `SHOPIFY_STORE_DOMAIN` | The hostname of the connected Shopify store. |
+| Variable                          | Description                                                               |
+| --------------------------------- | ------------------------------------------------------------------------- |
+| `SHOPIFY_STORE_DOMAIN`            | The hostname of the connected Shopify store.                              |
 | `SHOPIFY_STOREFRONT_ACCESS_TOKEN` | The Storefront API access token the app uses to read products at runtime. |
 
 The Storefront access token is scoped to public storefront reads. v0 handles Admin API operations during generation, so keep admin credentials out of client-side code.

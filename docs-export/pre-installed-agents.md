@@ -13,13 +13,13 @@ v0 includes pre-configured agents for common tasks. Each agent has a specialized
 
 Pre-installed agents provide specialized capabilities for different domains like data analysis, design, and development.
 
-| Agent | ID | Description | Category | Tools |
-|-------|-----|-------------|----------|-------|
-| Code Generator | `code-generator` | Generates high-quality code from natural language descriptions | development | code-gen, code-review, debug |
-| Designer | `designer` | Creates UI designs and visual layouts | design | design-gen, style-guide, color-palette |
-| Data Analyst | `data-analyst` | Analyzes data and generates visualizations | data | data-query, visualization, report |
-| Test Runner | `test-runner` | Creates and runs tests for generated code | testing | test-gen, test-run, test-coverage |
-| Deployer | `deployer` | Deploys applications to Vercel | deployment | deploy, rollback, monitor |
+| Agent          | ID               | Description                                                    | Category    | Tools                                  |
+| -------------- | ---------------- | -------------------------------------------------------------- | ----------- | -------------------------------------- |
+| Code Generator | `code-generator` | Generates high-quality code from natural language descriptions | development | code-gen, code-review, debug           |
+| Designer       | `designer`       | Creates UI designs and visual layouts                          | design      | design-gen, style-guide, color-palette |
+| Data Analyst   | `data-analyst`   | Analyzes data and generates visualizations                     | data        | data-query, visualization, report      |
+| Test Runner    | `test-runner`    | Creates and runs tests for generated code                      | testing     | test-gen, test-run, test-coverage      |
+| Deployer       | `deployer`       | Deploys applications to Vercel                                 | deployment  | deploy, rollback, monitor              |
 
 ## Using Pre-Installed Agents
 
@@ -31,7 +31,7 @@ import { createAgentManager, PRE_INSTALLED_AGENTS } from 'v0'
 const manager = createAgentManager()
 
 // Register a pre-installed agent
-const codeGenerator = PRE_INSTALLED_AGENTS.find(a => a.id === 'code-generator')
+const codeGenerator = PRE_INSTALLED_AGENTS.find((a) => a.id === 'code-generator')
 if (codeGenerator) {
   manager.register(codeGenerator)
 }

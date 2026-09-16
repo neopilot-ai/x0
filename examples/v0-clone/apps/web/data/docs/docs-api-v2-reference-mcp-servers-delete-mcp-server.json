@@ -6,19 +6,10 @@
   "category": "API · Mcp-servers",
   "type": "",
   "description": "Deletes an MCP server and cleans up associated OAuth tokens. This action is irreversible.",
-  "topics": [
-    "mcp",
-    "api",
-    "authentication"
-  ],
+  "topics": ["mcp", "api", "authentication"],
   "related": [],
   "requires": [],
-  "headings": [
-    "Usage",
-    "API Signature",
-    "Request",
-    "Response"
-  ],
+  "headings": ["Usage", "API Signature", "Request", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Delete MCP Server\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0'\n\nconst result = await v0.mcpServers.delete({\nmcpServerId: 'srv_jkl345',\n})\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X DELETE \"https://api.v0.dev/v2/mcp-servers/chat_abc123\" \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n## API Signature\n\n### Request\n\n#### Path Parameters\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"mcpServerId\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"The unique identifier of the MCP server to delete.\",\n\"deprecated\": false\n}\n]}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"success\",\n\"type\": \"'true'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]}\n/>\n\n---\n\n",

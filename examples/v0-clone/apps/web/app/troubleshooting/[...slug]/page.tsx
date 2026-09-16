@@ -10,7 +10,8 @@ export function generateStaticParams() {
           /troubleshoot|common issues|debug|error|fix|\bfaq\b/i.test(value),
         ),
     )
-    .filter((doc) => doc.slug).map((doc) => ({ slug: doc.slug.split('/') }))
+    .filter((doc) => doc.slug)
+    .map((doc) => ({ slug: doc.slug.split('/') }))
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string[] }> }) {

@@ -17,16 +17,14 @@ export const resultSchema = z.object({
   shouldBeFixed: z
     .boolean()
     .describe(
-      'Whether the logs contain actionable errors that require code fixes (not just warnings or info messages)'
+      'Whether the logs contain actionable errors that require code fixes (not just warnings or info messages)',
     ),
   summary: z
     .string()
     .describe(
-      'A summary of actionable errors found in the logs, including error types, affected files, and specific failure reasons. Empty if no actionable errors found. It can be Markdown for better readability.'
+      'A summary of actionable errors found in the logs, including error types, affected files, and specific failure reasons. Empty if no actionable errors found. It can be Markdown for better readability.',
     ),
-  paths: z.array(
-    z.string().describe('List of file paths that contain actionable errors.')
-  ),
+  paths: z.array(z.string().describe('List of file paths that contain actionable errors.')),
 })
 
 export type Line = z.infer<typeof lineSchema>

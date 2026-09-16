@@ -7,7 +7,6 @@
     "examples/v0-clone/apps/*"
   ],
   "type": "module",
-  "packageManager": "bun@1.2.20",
   "scripts": {
     "generate": "bun --filter '*' generate",
     "build": "bun --filter './packages/*' build",
@@ -21,5 +20,6 @@
   "devDependencies": {
     "oxfmt": "^0.55.0",
     "oxlint": "^1.70.0"
-  }
+  },
+  "packageManager": "bun@1.2.20"
 }

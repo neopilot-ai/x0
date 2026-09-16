@@ -13,9 +13,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Environment Variables
-
-
 
 Learn how to securely manage environment variables and configuration settings in your v0 projects. Environment variables are tied to projects, making them available across all chats in that project.
 
@@ -23,9 +22,9 @@ Learn how to securely manage environment variables and configuration settings in
 
 Environment variables in v0 provide a secure way to manage:
 
-* **API keys and secrets** - Database connections, third-party services
-* **Configuration settings** - Feature flags, deployment settings
-* **Build-time variables** - Framework configurations, asset paths
+- **API keys and secrets** - Database connections, third-party services
+- **Configuration settings** - Feature flags, deployment settings
+- **Build-time variables** - Framework configurations, asset paths
 
 Environment variables are **project-scoped**, meaning all chats in a project have access to the same environment variables.
 
@@ -198,7 +197,6 @@ const environmentVariables = {
   },
 }
 ```
-
 
 ---
 

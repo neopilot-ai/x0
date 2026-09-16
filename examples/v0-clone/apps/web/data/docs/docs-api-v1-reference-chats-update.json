@@ -6,14 +6,9 @@
   "category": "API · Chats",
   "type": "reference",
   "description": "Updates the metadata of an existing chat using its `chatId`. Supports changes to the chat name, privacy setting, and custom metadata.",
-  "topics": [
-    "security",
-    "api"
-  ],
+  "topics": ["security", "api"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Usage",
     "Metadata Management",

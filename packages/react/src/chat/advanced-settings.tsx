@@ -1,14 +1,8 @@
 'use client'
 
 import { useState, useCallback, useEffect, useTransition } from 'react'
-import {
-  getAgentPermissions,
-  setAgentPermissions,
-} from 'v0'
-import {
-  getNetworkPolicy,
-  setNetworkPolicy,
-} from 'v0/sandbox'
+import { getAgentPermissions, setAgentPermissions } from 'v0'
+import { getNetworkPolicy, setNetworkPolicy } from 'v0/sandbox'
 
 export type PermissionMode = 'ask' | 'auto' | 'full'
 
@@ -79,7 +73,7 @@ export function useAdvancedSettings(): UseAdvancedSettingsReturn {
         Promise.resolve(getNetworkPolicy('')),
       ])
 
-      setData(prev => ({
+      setData((prev) => ({
         ...prev,
         agentPermissions: {
           ...prev.agentPermissions,
@@ -105,40 +99,46 @@ export function useAdvancedSettings(): UseAdvancedSettingsReturn {
     refresh()
   }, [refresh])
 
-  const updateAgentPermissions = useCallback(async (updates: Partial<AgentPermissionsState>) => {
-    startSaving(async () => {
-      try {
-        const next = { ...data.agentPermissions, ...updates }
-        await setAgentPermissions(next)
-        setData(prev => ({
-          ...prev,
-          agentPermissions: next,
-        }))
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error(String(err)))
-      }
-    })
-  }, [data.agentPermissions])
+  const updateAgentPermissions = useCallback(
+    async (updates: Partial<AgentPermissionsState>) => {
+      startSaving(async () => {
+        try {
+          const next = { ...data.agentPermissions, ...updates }
+          await setAgentPermissions(next)
+          setData((prev) => ({
+            ...prev,
+            agentPermissions: next,
+          }))
+        } catch (err) {
+          setError(err instanceof Error ? err : new Error(String(err)))
+        }
+      })
+    },
+    [data.agentPermissions],
+  )
 
-  const updateNetworkPolicy = useCallback(async (updates: Partial<NetworkPolicyState>) => {
-    startSaving(async () => {
-      try {
-        const next = { ...data.networkPolicy, ...updates }
-        await setNetworkPolicy('', next.policy)
-        setData(prev => ({
-          ...prev,
-          networkPolicy: next,
-        }))
-      } catch (err) {
-        setError(err instanceof Error ? err : new Error(String(err)))
-      }
-    })
-  }, [data.networkPolicy])
+  const updateNetworkPolicy = useCallback(
+    async (updates: Partial<NetworkPolicyState>) => {
+      startSaving(async () => {
+        try {
+          const next = { ...data.networkPolicy, ...updates }
+          await setNetworkPolicy('', next.policy)
+          setData((prev) => ({
+            ...prev,
+            networkPolicy: next,
+          }))
+        } catch (err) {
+          setError(err instanceof Error ? err : new Error(String(err)))
+        }
+      })
+    },
+    [data.networkPolicy],
+  )
 
   const updateCustomInstructions = useCallback(async (instructions: string) => {
     startSaving(async () => {
       try {
-        setData(prev => ({
+        setData((prev) => ({
           ...prev,
           customInstructions: { instructions, isDirty: true },
         }))
@@ -161,28 +161,14 @@ export function useAdvancedSettings(): UseAdvancedSettingsReturn {
 }
 
 function Skeleton({ className = '' }: { className?: string }) {
-  return (
-    <div
-      className={`animate-pulse bg-v0-gray-200 rounded-md ${className}`}
-    />
-  )
+  return <div className={`animate-pulse bg-v0-gray-200 rounded-md ${className}`} />
 }
 
-function SectionHeader({
-  title,
-  description,
-}: {
-  title: string
-  description: string
-}) {
+function SectionHeader({ title, description }: { title: string; description: string }) {
   return (
     <div className="flex flex-col gap-1">
-      <label className="text-heading-16 font-medium text-v0-gray-1000">
-        {title}
-      </label>
-      <p className="text-label-14 text-v0-gray-900 text-pretty">
-        {description}
-      </p>
+      <label className="text-heading-16 font-medium text-v0-gray-1000">{title}</label>
+      <p className="text-label-14 text-v0-gray-900 text-pretty">{description}</p>
     </div>
   )
 }
@@ -267,9 +253,7 @@ export function AgentPermissionsSection({
             )}
           </div>
           <div className="ml-auto flex items-center gap-2">
-            {isLoading ? (
-              <Skeleton className="h-8 w-16" />
-            ) : null}
+            {isLoading ? <Skeleton className="h-8 w-16" /> : null}
           </div>
         </div>
       </div>
@@ -321,9 +305,7 @@ export function SandboxNetworkPolicySection({
             )}
           </div>
           <div className="ml-auto flex items-center gap-2">
-            {isLoading ? (
-              <Skeleton className="h-8 w-16" />
-            ) : null}
+            {isLoading ? <Skeleton className="h-8 w-16" /> : null}
           </div>
         </div>
       </div>
@@ -400,17 +382,23 @@ interface AdvancedSettingsProps {
 }
 
 export function AdvancedSettings({ className }: AdvancedSettingsProps) {
-  const { data, isLoading, isSaving, error, updateAgentPermissions, updateNetworkPolicy, updateCustomInstructions, refresh } = useAdvancedSettings()
+  const {
+    data,
+    isLoading,
+    isSaving,
+    error,
+    updateAgentPermissions,
+    updateNetworkPolicy,
+    updateCustomInstructions,
+    refresh,
+  } = useAdvancedSettings()
 
   if (error) {
     return (
       <div className="flex flex-col gap-2">
         <div className="bg-v0-background-100 rounded-lg overflow-hidden border border-v0-gray-200 divide-y divide-v0-gray-200 p-4">
           <p className="text-v0-gray-900">Error loading settings</p>
-          <button
-            onClick={() => refresh()}
-            className="text-v0-blue-800 hover:underline"
-          >
+          <button onClick={() => refresh()} className="text-v0-blue-800 hover:underline">
             Retry
           </button>
         </div>

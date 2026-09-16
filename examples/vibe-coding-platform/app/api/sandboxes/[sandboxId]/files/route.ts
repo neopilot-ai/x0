@@ -9,7 +9,7 @@ const FileParamsSchema = z.object({
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ sandboxId: string }> }
+  { params }: { params: Promise<{ sandboxId: string }> },
 ) {
   const { sandboxId } = await params
   const fileParams = FileParamsSchema.safeParse({
@@ -20,17 +20,14 @@ export async function GET(
   if (fileParams.success === false) {
     return NextResponse.json(
       { error: 'Invalid parameters. You must pass a `path` as query' },
-      { status: 400 }
+      { status: 400 },
     )
   }
 
   const sandbox = await Sandbox.get(fileParams.data)
   const stream = await sandbox.readFile(fileParams.data)
   if (!stream) {
-    return NextResponse.json(
-      { error: 'File not found in the Sandbox' },
-      { status: 404 }
-    )
+    return NextResponse.json({ error: 'File not found in the Sandbox' }, { status: 404 })
   }
 
   return new NextResponse(
@@ -41,6 +38,6 @@ export async function GET(
         }
         controller.close()
       },
-    })
+    }),
   )
 }

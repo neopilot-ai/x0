@@ -12,9 +12,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # AI Tools
-
-
 
 The AI Tools adapter enables AI agents to interact with the v0 API through the AI SDK, allowing for autonomous workflows, intelligent code generation, and automated project management.
 
@@ -22,10 +21,10 @@ The AI Tools adapter enables AI agents to interact with the v0 API through the A
 
 The AI Tools adapter provides:
 
-* **Autonomous Agents**: AI agents that can independently manage v0 projects
-* **Intelligent Workflows**: Multi-step processes with AI decision-making
-* **Tool Integration**: Seamless integration with popular AI frameworks
-* **Context-Aware Operations**: AI agents understand project context and requirements
+- **Autonomous Agents**: AI agents that can independently manage v0 projects
+- **Intelligent Workflows**: Multi-step processes with AI decision-making
+- **Tool Integration**: Seamless integration with popular AI frameworks
+- **Context-Aware Operations**: AI agents understand project context and requirements
 
 ## Supported AI Frameworks
 
@@ -328,23 +327,23 @@ const monitoredTools = v0Tools({
 
 **"Tool not found"**
 
-* Ensure you're using the correct tool category
-* Check that the tool is included in your tools object
+- Ensure you're using the correct tool category
+- Check that the tool is included in your tools object
 
 **"Rate limit exceeded"**
 
-* Implement delays between API calls
-* Use selective tools to reduce call frequency
+- Implement delays between API calls
+- Use selective tools to reduce call frequency
 
 **"Invalid API key"**
 
-* Verify your v0 API key is correctly set
-* Check API key permissions and scope
+- Verify your v0 API key is correctly set
+- Check API key permissions and scope
 
 **"Agent stuck in loop"**
 
-* Use `stopWhen` conditions to limit execution
-* Add explicit termination criteria in prompts
+- Use `stopWhen` conditions to limit execution
+- Add explicit termination criteria in prompts
 
 ## Examples
 
@@ -352,16 +351,15 @@ See the complete [AI Tools Example](/docs/api/v1/examples/ai-tools) for detailed
 
 ## Requirements
 
-* Node.js 22+
-* AI SDK 5.0+ or compatible AI framework
-* v0 API key from [v0 settings](https://v0.app/settings/keys)
+- Node.js 22+
+- AI SDK 5.0+ or compatible AI framework
+- v0 API key from [v0 settings](https://v0.app/settings/keys)
 
 ## Links
 
-* [AI Tools Package](/docs/api/v1/packages/ai-tools)
-* [AI Tools Example](/docs/api/v1/examples/ai-tools)
-* [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/ai-tools)
-
+- [AI Tools Package](/docs/api/v1/packages/ai-tools)
+- [AI Tools Example](/docs/api/v1/examples/ai-tools)
+- [GitHub Repository](https://github.com/vercel/v0-sdk/tree/main/packages/ai-tools)
 
 ---
 

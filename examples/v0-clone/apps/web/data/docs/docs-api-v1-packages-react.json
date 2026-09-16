@@ -6,17 +6,9 @@
   "category": "API · V1",
   "type": "reference",
   "description": "Headless React components for rendering v0 API content",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v1/packages/v0-sdk",
-    "api/v1/guides/displaying-chat-messages"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v1/packages/v0-sdk", "api/v1/guides/displaying-chat-messages"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Installation",
     "Quick Start",

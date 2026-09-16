@@ -11,12 +11,7 @@ export function Spinner({
   children?: React.ReactNode
 }) {
   return (
-    <span
-      className={cn(
-        'inline-flex items-center justify-center w-5 h-5',
-        className
-      )}
-    >
+    <span className={cn('inline-flex items-center justify-center w-5 h-5', className)}>
       {loading ? <Loader /> : children}
     </span>
   )

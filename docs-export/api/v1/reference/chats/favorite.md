@@ -1,7 +1,7 @@
 ---
 title: Favorite Chat
 description: Marks or unmarks a chat as a favorite using its `chatId`. This helps with organizing and quickly accessing important chats.
-badge: "PUT"
+badge: 'PUT'
 product: v0 API
 type: reference
 prerequisites:
@@ -9,8 +9,6 @@ prerequisites:
 ---
 
 # Favorite Chat
-
-
 
 <EndpointDisplay method="put" path="/chats/{chatId}/favorite" />
 
@@ -21,29 +19,29 @@ prerequisites:
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.chats.favorite({
-  chatId: '123',
-  isFavorite: true,
+chatId: '123',
+isFavorite: true,
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X POST https://api.v0.dev/v1/chats/123/favorite \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X POST https://api.v0.dev/v1/chats/123/favorite \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "isFavorite": true
   }'`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -53,61 +51,60 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the chat to update. Provided as a path parameter."
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat to update. Provided as a path parameter."
+}
 ]}
 />
 
 #### Body
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "isFavorite",
-    "type": "boolean",
-    "required": true,
-    "description": "Specifies whether the chat should be marked as a favorite.\n\n- `\"true\"`: mark as favorite\n- `\"false\"`: remove from favorites",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "isFavorite",
+"type": "boolean",
+"required": true,
+"description": "Specifies whether the chat should be marked as a favorite.\n\n- `\"true\"`: mark as favorite\n- `\"false\"`: remove from favorites",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "id",
-    "type": "string",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "object",
-    "type": "'chat'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "favorited",
-    "type": "boolean",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "object",
+"type": "'chat'",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "favorited",
+"type": "boolean",
+"required": true,
+"description": "",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

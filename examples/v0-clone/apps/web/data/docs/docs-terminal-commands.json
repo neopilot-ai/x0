@@ -6,20 +6,9 @@
   "category": "Guides",
   "type": "conceptual",
   "description": "v0 can run bash commands in your project sandbox to test, debug, and use platform CLIs. Control its autonomy with three permission modes (Ask, Auto, Full).",
-  "topics": [
-    "security",
-    "agents",
-    "terminal",
-    "permissions"
-  ],
-  "related": [
-    "agentic-features",
-    "pre-installed-agents",
-    "security"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["security", "agents", "terminal", "permissions"],
+  "related": ["agentic-features", "pre-installed-agents", "security"],
+  "requires": ["quickstart"],
   "headings": [
     "What v0 can do in the terminal",
     "Common use cases",

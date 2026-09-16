@@ -20,7 +20,7 @@ export function ModelSelector({ className }: { className?: string }) {
   const { models: available, isLoading, error } = useAvailableModels()
   const models = useMemo(
     () => available?.sort((a, b) => a.label.localeCompare(b.label)) || [],
-    [available]
+    [available],
   )
 
   return (

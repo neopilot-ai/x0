@@ -11,8 +11,6 @@ related:
 
 # Quickstart
 
-
-
 Welcome to v0! This guide will walk you through v0's main features and workflows.
 
 1. **Visit [v0.app](https://v0.app)** and sign in
@@ -26,10 +24,10 @@ Start by describing what you want to build in your preferred language. v0 will g
 
 Try these simple prompts to get started:
 
-* **"A todo app with add, edit, and delete functionality"**
-* **"A landing page for a SaaS product with hero section and pricing"**
-* **"A dashboard showing user analytics with charts"**
-* **"A contact form that sends emails"**
+- **"A todo app with add, edit, and delete functionality"**
+- **"A landing page for a SaaS product with hero section and pricing"**
+- **"A dashboard showing user analytics with charts"**
+- **"A contact form that sends emails"**
 
 <LearnMore href="/docs/text-prompting" icon="arrow">
   Learn more about text prompting
@@ -69,10 +67,10 @@ Open **Project menu** `...` → **Settings** → **Integrations** to install int
 
 Install database integrations from **Project menu** `...` → **Settings** → **Integrations**:
 
-* **Neon** - Serverless PostgreSQL
-* **Supabase** - PostgreSQL with auth and realtime
-* **Upstash for Redis** - Serverless Redis
-* **Blob** - File storage
+- **Neon** - Serverless PostgreSQL
+- **Supabase** - PostgreSQL with auth and realtime
+- **Upstash for Redis** - Serverless Redis
+- **Blob** - File storage
 
 <LearnMore href="/docs/databases" icon="arrow">
   Learn more about database integrations
@@ -84,9 +82,9 @@ v0 includes [Vercel AI Gateway](https://vercel.com/ai-gateway) integration, whic
 
 Install AI providers from **Project menu** `...` → **Settings** → **Integrations** with one click:
 
-* **Grok** - xAI models
-* **fal** - Image generation
-* **Deep Infra** - Open source models
+- **Grok** - xAI models
+- **fal** - Image generation
+- **Deep Infra** - Open source models
 
 You can also use other third-party providers like OpenAI or Anthropic by prompting v0 and adding your API keys in **Vars**.
 
@@ -98,7 +96,7 @@ You can also use other third-party providers like OpenAI or Anthropic by prompti
 
 Add payment processing to your application:
 
-* **Stripe** - Accept payments and manage subscriptions
+- **Stripe** - Accept payments and manage subscriptions
 
 ### External APIs
 
@@ -133,8 +131,8 @@ After more changes, open **Publish** and select **Publish Changes** to update th
 
 Add a custom domain directly from v0:
 
-* **On first publish**: Select a domain in the **Domains** step
-* **From Settings**: Click **Project menu** `...` → **Settings** → **Domains**
+- **On first publish**: Select a domain in the **Domains** step
+- **From Settings**: Click **Project menu** `...` → **Settings** → **Domains**
 
 Customize your default domain (your-domain.vercel.app) or connect a custom domain. You can also purchase domains via [Vercel Domains](https://vercel.com/domains).
 
@@ -150,13 +148,13 @@ Manage your projects and collaborate with your team.
 
 Use **Project menu** `...` → **Settings** to manage your project:
 
-* **Vercel Project** - View your connected Vercel project and manage the visibility of Production deployments.
-* **Integrations** - Connect and manage your project's integrations.
-* **Environment Variables** - Manage your environment variables from Vercel.
-* **GitHub** - Create a GitHub repository for your project.
-* **Template** - Publish your project as a template.
-* **Domains** - Manage your project's domains.
-* **Analytics** - Enable Vercel analytics for project traffic insights.
+- **Vercel Project** - View your connected Vercel project and manage the visibility of Production deployments.
+- **Integrations** - Connect and manage your project's integrations.
+- **Environment Variables** - Manage your environment variables from Vercel.
+- **GitHub** - Create a GitHub repository for your project.
+- **Template** - Publish your project as a template.
+- **Domains** - Manage your project's domains.
+- **Analytics** - Enable Vercel analytics for project traffic insights.
 
 Note that project settings are shared between all chats under the same project.
 
@@ -168,9 +166,9 @@ Note that project settings are shared between all chats under the same project.
 
 Use the **Invite** button in the chat header to open collaboration settings where you can:
 
-* **Invite** individual team members.
-* **Manage** team members' view and edit permissions.
-* **Share** your chat with your team or anyone else.
+- **Invite** individual team members.
+- **Manage** team members' view and edit permissions.
+- **Share** your chat with your team or anyone else.
 
 <LearnMore href="/docs/teams" icon="arrow">
   Learn more about teams
@@ -186,14 +184,13 @@ Now that you understand the basics, try [building a simple app](https://v0.app) 
 
 ## Need help?
 
-* **Community Forum**: Ask questions in the [community forum](https://community.vercel.com/tag/v0)
-* **Vercel Support**: Contact support at [vercel.com/help](https://vercel.com/help)
-* **X Community**: Join the [v0 community on X](https://x.com/i/communities/1863294272687980838)
+- **Community Forum**: Ask questions in the [community forum](https://community.vercel.com/tag/v0)
+- **Vercel Support**: Contact support at [vercel.com/help](https://vercel.com/help)
+- **X Community**: Join the [v0 community on X](https://x.com/i/communities/1863294272687980838)
 
 <LearnMore href="https://v0.app" icon="arrow">
   Ready to start building?
 </LearnMore>
-
 
 ---
 

@@ -1,6 +1,7 @@
 # Implementation Plan: Code-Server, Sandbox & Terminal Commands
 
 ## Objective
+
 Expand thin docs and implement code-server integration for v0.app's code editing, sandbox, and terminal command features.
 
 ---
@@ -13,6 +14,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Target state**: Full-featured code editor guide matching `https://v0.app/docs/code-editing`
 
 **Actions**:
+
 - [ ] Rewrite `docs-export/code-editing.md` with full content:
   - Basic editing (Code tab, Cmd+S/Ctrl+S)
   - Editor features (syntax highlighting, line numbers, find/replace, global search, file explorer)
@@ -32,6 +34,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Target state**: Full VM-backed sandbox guide matching `https://v0.app/docs/sandbox`
 
 **Actions**:
+
 - [ ] Rewrite `docs-export/sandbox.md` with full content:
   - What the sandbox is (Vercel Sandbox, Firecracker microVM)
   - Where you see the sandbox (Preview tab, Console panel, Code editor)
@@ -50,6 +53,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Target state**: Full terminal commands guide matching `https://v0.app/docs/terminal-commands`
 
 **Actions**:
+
 - [ ] Rewrite `docs-export/terminal-commands.md` with full content:
   - Bash tool description
   - Common use cases (browser testing, git history, unit tests, platform CLIs)
@@ -69,6 +73,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 1.4 Create Platform API docs
 
 **Actions**:
+
 - [ ] Create `docs-export/api/platform/overview.md` — Platform API overview
 - [ ] Create `docs-export/api/platform/packages/v0-sdk.md` — v0 SDK package
 - [ ] Create `docs-export/api/platform/packages/create-v0-sdk-app.md` — CLI tool
@@ -86,6 +91,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Goal**: Create a `@v0-sdk/code-server` package that wraps code-server for browser-based code editing inside Vercel Sandbox
 
 **Actions**:
+
 - [ ] Create `packages/v0-sdk/src/code-server/` directory
 - [ ] Create `packages/v0-sdk/src/code-server/index.ts` — Main exports
 - [ ] Create `packages/v0-sdk/src/code-server/types.ts` — Type definitions
@@ -121,6 +127,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Goal**: Integrate code-server with Vercel Sandbox for browser-based code editing
 
 **Actions**:
+
 - [ ] Create `packages/v0-sdk/src/sandbox/code-server.ts` — Sandbox code-server integration
   - `connectToSandbox()` — Connect to Vercel Sandbox
   - `startCodeServer()` — Start code-server in sandbox
@@ -137,6 +144,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Goal**: Create React components for the code editor, diff view, and split view
 
 **Actions**:
+
 - [ ] Create `packages/react/src/chat/code-editor.tsx` — Main code editor component
   - `V0CodeEditor` — Full code editor with syntax highlighting
   - `V0DiffView` — Diff view component
@@ -158,6 +166,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Goal**: Implement the Bash tool with permission modes and rule system
 
 **Actions**:
+
 - [ ] Create `packages/v0-sdk/src/terminal/commands.ts` — Command execution
   - `executeBash()` — Execute a bash command
   - `getBashHistory()` — Get command history
@@ -189,6 +198,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 **Goal**: Integrate `@vercel/sandbox` SDK with the v0 SDK
 
 **Actions**:
+
 - [ ] Create `packages/v0-sdk/src/sandbox/sdk.ts` — Vercel Sandbox SDK wrapper
   - `createSandbox()` — Create a Vercel Sandbox
   - `connectToSandbox()` — Connect to an existing sandbox
@@ -213,6 +223,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 4.1 Platform API Overview
 
 **Actions**:
+
 - [ ] Create `docs-export/api/platform/overview.md` — Platform API overview
   - v0 Platform API description
   - Projects, Chats, Deployments, Integrations, Hooks, Rate limits, User
@@ -232,6 +243,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 5.1 Update llms.txt, sitemap.md, agents.md
 
 **Actions**:
+
 - [ ] Add code-editing, sandbox, terminal-commands to llms.txt
 - [ ] Add platform API docs to sitemap.md
 - [ ] Update agents.md with code-server, terminal commands info
@@ -239,6 +251,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 5.2 Update ANALYSIS_PLAN.md and TODO.md
 
 **Actions**:
+
 - [ ] Update with code-server implementation plan
 - [ ] Update TODO.md with remaining tasks
 
@@ -249,6 +262,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 6.1 TypeScript Compilation
 
 **Actions**:
+
 - [ ] Run `bun run typecheck` for all packages
 - [ ] Fix any compilation errors
 - [ ] Verify all new exports are properly typed
@@ -256,6 +270,7 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ### 6.2 Documentation Verification
 
 **Actions**:
+
 - [ ] Verify all docs have proper frontmatter
 - [ ] Verify no empty docs remain
 - [ ] Verify all media file references are documented
@@ -266,36 +281,38 @@ Expand thin docs and implement code-server integration for v0.app's code editing
 ## Summary
 
 ### Documentation Changes
-| File | Action | Lines |
-|------|--------|-------|
-| `docs-export/code-editing.md` | Rewrite | 40 → 100+ |
-| `docs-export/sandbox.md` | Rewrite | 80 → 150+ |
-| `docs-export/terminal-commands.md` | Rewrite | 60 → 200+ |
-| `docs-export/api/platform/*.md` | Create | 8 new files |
-| `docs-export/llms.txt` | Update | Add new sections |
-| `docs-export/sitemap.md` | Update | Add new sections |
-| `docs-export/agents.md` | Update | Add code-server info |
+
+| File                               | Action  | Lines                |
+| ---------------------------------- | ------- | -------------------- |
+| `docs-export/code-editing.md`      | Rewrite | 40 → 100+            |
+| `docs-export/sandbox.md`           | Rewrite | 80 → 150+            |
+| `docs-export/terminal-commands.md` | Rewrite | 60 → 200+            |
+| `docs-export/api/platform/*.md`    | Create  | 8 new files          |
+| `docs-export/llms.txt`             | Update  | Add new sections     |
+| `docs-export/sitemap.md`           | Update  | Add new sections     |
+| `docs-export/agents.md`            | Update  | Add code-server info |
 
 ### Code Changes
-| File | Action |
-|------|--------|
-| `packages/v0-sdk/src/code-server/index.ts` | Create |
-| `packages/v0-sdk/src/code-server/types.ts` | Create |
-| `packages/v0-sdk/src/code-server/editor.ts` | Create |
-| `packages/v0-sdk/src/code-server/split.ts` | Create |
-| `packages/v0-sdk/src/code-server/fileManager.ts` | Create |
-| `packages/v0-sdk/src/code-server/commands.ts` | Create |
-| `packages/v0-sdk/src/sandbox/code-server.ts` | Create |
-| `packages/v0-sdk/src/sandbox/sdk.ts` | Create |
-| `packages/v0-sdk/src/sandbox/lifecycle.ts` | Create |
-| `packages/v0-sdk/src/sandbox/isolation.ts` | Create |
-| `packages/v0-sdk/src/terminal/commands.ts` | Create |
-| `packages/v0-sdk/src/terminal/permissions.ts` | Create |
-| `packages/v0-sdk/src/terminal/built-in-rules.ts` | Create |
-| `packages/v0-sdk/src/terminal/settings.ts` | Create |
-| `packages/react/src/chat/code-editor.tsx` | Create |
-| `packages/react/src/chat/terminal.tsx` | Create |
-| `packages/react/src/chat/sandbox-ui.tsx` | Create |
-| `packages/v0-sdk/src/index.ts` | Update exports |
-| `packages/react/src/chat/index.ts` | Update exports |
-| `packages/react/src/index.ts` | Update exports |
+
+| File                                             | Action         |
+| ------------------------------------------------ | -------------- |
+| `packages/v0-sdk/src/code-server/index.ts`       | Create         |
+| `packages/v0-sdk/src/code-server/types.ts`       | Create         |
+| `packages/v0-sdk/src/code-server/editor.ts`      | Create         |
+| `packages/v0-sdk/src/code-server/split.ts`       | Create         |
+| `packages/v0-sdk/src/code-server/fileManager.ts` | Create         |
+| `packages/v0-sdk/src/code-server/commands.ts`    | Create         |
+| `packages/v0-sdk/src/sandbox/code-server.ts`     | Create         |
+| `packages/v0-sdk/src/sandbox/sdk.ts`             | Create         |
+| `packages/v0-sdk/src/sandbox/lifecycle.ts`       | Create         |
+| `packages/v0-sdk/src/sandbox/isolation.ts`       | Create         |
+| `packages/v0-sdk/src/terminal/commands.ts`       | Create         |
+| `packages/v0-sdk/src/terminal/permissions.ts`    | Create         |
+| `packages/v0-sdk/src/terminal/built-in-rules.ts` | Create         |
+| `packages/v0-sdk/src/terminal/settings.ts`       | Create         |
+| `packages/react/src/chat/code-editor.tsx`        | Create         |
+| `packages/react/src/chat/terminal.tsx`           | Create         |
+| `packages/react/src/chat/sandbox-ui.tsx`         | Create         |
+| `packages/v0-sdk/src/index.ts`                   | Update exports |
+| `packages/react/src/chat/index.ts`               | Update exports |
+| `packages/react/src/index.ts`                    | Update exports |

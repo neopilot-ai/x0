@@ -6,19 +6,10 @@
   "category": "API · User",
   "type": "reference",
   "description": "Returns the current subscription plan for the authenticated user, including tier details and feature limits.",
-  "topics": [
-    "api",
-    "authentication",
-    "pricing"
-  ],
+  "topics": ["api", "authentication", "pricing"],
   "related": [],
-  "requires": [
-    "api/v1/quickstart"
-  ],
-  "headings": [
-    "Usage",
-    "Response"
-  ],
+  "requires": ["api/v1/quickstart"],
+  "headings": ["Usage", "Response"],
   "excerpt": "language=\"TypeScript\"",
   "snippets": [],
   "content": "\n\n# Get Plan\n\n## Usage\n\n<CodeVariant\nlanguage=\"TypeScript\"\ntitle=\"TypeScript Example\"\ncode={`import  from 'v0-sdk'\n\nconst result = await v0.user.getPlan()\n\nconsole.log(result)`}\n/>\n\n<CodeVariant\nlanguage=\"cURL\"\ntitle=\"cURL Example\"\ncode={`curl -X GET https://api.v0.dev/v1/user/plan \\\n-H \"Authorization: Bearer $V0_API_KEY\" \\\n-H \"Content-Type: application/json\"`}\n/>\n\n### Response\n\n<APISignature\ntitle=\"\"\nparameters={[\n{\n\"name\": \"object\",\n\"type\": \"'plan'\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"plan\",\n\"type\": \"string\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"billingCycle\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"start\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"end\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n},\n{\n\"name\": \"balance\",\n\"type\": \"object\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false,\n\"properties\": [\n{\n\"name\": \"remaining\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n},\n{\n\"name\": \"total\",\n\"type\": \"number\",\n\"required\": true,\n\"description\": \"\",\n\"deprecated\": false\n}\n]\n}\n]}\n/>\n\n---\n\n",

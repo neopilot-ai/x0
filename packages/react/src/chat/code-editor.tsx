@@ -23,16 +23,14 @@ export function V0CodeEditor({
       </div>
       <div className="v0-code-editor__body">
         <div className="v0-code-editor__file-explorer">
-          {files.map(file => (
+          {files.map((file) => (
             <div key={file.path} className="v0-code-editor__file-entry">
               {file.name}
             </div>
           ))}
         </div>
         <div className="v0-code-editor__editor">
-          {activeFile && (
-            <pre className="v0-code-editor__code" />
-          )}
+          {activeFile && <pre className="v0-code-editor__code" />}
         </div>
       </div>
     </div>
@@ -86,8 +84,12 @@ export function V0FileExplorer({
 }) {
   return (
     <div className="v0-file-explorer">
-      {files.map(file => (
-        <div key={file.path} className="v0-file-explorer__entry" onClick={() => onSelect(file.path)}>
+      {files.map((file) => (
+        <div
+          key={file.path}
+          className="v0-file-explorer__entry"
+          onClick={() => onSelect(file.path)}
+        >
           {file.name}
         </div>
       ))}
@@ -95,7 +97,10 @@ export function V0FileExplorer({
   )
 }
 
-function computeDiff(original: string, modified: string): Array<{ lines: Array<{ type: string; content: string }> }> {
+function computeDiff(
+  original: string,
+  modified: string,
+): Array<{ lines: Array<{ type: string; content: string }> }> {
   const oldLines = original.split('\n')
   const newLines = modified.split('\n')
   const result: Array<{ lines: Array<{ type: string; content: string }> }> = []
@@ -107,7 +112,10 @@ function computeDiff(original: string, modified: string): Array<{ lines: Array<{
       if (oldLine) lines.push({ type: 'delete', content: oldLine })
       if (newLine) lines.push({ type: 'add', content: newLine })
     } else {
-      if (lines.length > 0) { result.push({ lines: [...lines] }); lines.length = 0 }
+      if (lines.length > 0) {
+        result.push({ lines: [...lines] })
+        lines.length = 0
+      }
       lines.push({ type: 'context', content: oldLine })
     }
   }

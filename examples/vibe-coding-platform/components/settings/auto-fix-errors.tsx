@@ -21,9 +21,7 @@ export function AutoFixErrors() {
         id="auto-fix"
         className="ml-3 pointer-events-none"
         checked={fixErrors}
-        onCheckedChange={(checked) =>
-          setFixErrors(checked === 'indeterminate' ? false : checked)
-        }
+        onCheckedChange={(checked) => setFixErrors(checked === 'indeterminate' ? false : checked)}
       />
     </div>
   )

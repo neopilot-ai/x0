@@ -6,10 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Learn how to use the v0 API with Vercel Organizations to offer v0-style chat experiences to your customers.",
-  "topics": [
-    "design",
-    "api"
-  ],
+  "topics": ["design", "api"],
   "related": [],
   "requires": [],
   "headings": [

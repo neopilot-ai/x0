@@ -9,14 +9,15 @@ Body content is at parity (all three were expanded from these same pages earlier
 Remaining gaps are frontmatter metadata and two dropped elements in
 full-stack-apps:
 
-| # | File | Gap | Severity |
-|---|------|-----|----------|
-| 1 | all three | Frontmatter missing `prerequisites: [/docs/quickstart]` and `related: [...]` that live pages carry | medium — frontmatter drives related-links Waves/navigation |
-| 2 | full-stack-apps.md | Missing `## Solutions` section (3 links: AI Website Builder, AI Code Generator, AI UI Design Generator) | medium — dead-end page without next steps |
-| 3 | full-stack-apps.md | Missing `<PromptLink text="Create a modern task management dashboard..." />` under "Start with UI" | low — interactive prompt chip |
-| 4 | full-stack-apps.md | Extra line not in live ("Deploy full-stack apps to Vercel with one click") | keep — accurate, links Deployments |
+| #   | File               | Gap                                                                                                     | Severity                                                   |
+| --- | ------------------ | ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| 1   | all three          | Frontmatter missing `prerequisites: [/docs/quickstart]` and `related: [...]` that live pages carry      | medium — frontmatter drives related-links Waves/navigation |
+| 2   | full-stack-apps.md | Missing `## Solutions` section (3 links: AI Website Builder, AI Code Generator, AI UI Design Generator) | medium — dead-end page without next steps                  |
+| 3   | full-stack-apps.md | Missing `<PromptLink text="Create a modern task management dashboard..." />` under "Start with UI"      | low — interactive prompt chip                              |
+| 4   | full-stack-apps.md | Extra line not in live ("Deploy full-stack apps to Vercel with one click")                              | keep — accurate, links Deployments                         |
 
 Live `related` values:
+
 - full-stack-apps: `/docs/databases`, `/docs/external-apis`, `/docs/deployments`
 - prototyping: `/docs/design-mode`, `/docs/figma`, `/docs/text-prompting`
 - prd-design: `/docs/prototyping`, `/docs/text-prompting`

@@ -18,10 +18,7 @@ interface Props {
   onModelChange: (modelId: string) => void
 }
 
-export const ModelSelector = memo(function ModelSelector({
-  modelId,
-  onModelChange,
-}: Props) {
+export const ModelSelector = memo(function ModelSelector({ modelId, onModelChange }: Props) {
   const { models, isLoading, error } = useAvailableModels()
   return (
     <Select

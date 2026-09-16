@@ -56,7 +56,11 @@ export function getDoc(slug: string): DocSummary | undefined {
   if (!slug) return undefined
   const direct = slugIndex.get(slug.toLowerCase())
   if (direct) return direct
-  return docs.find((doc) => doc.id.toLowerCase() === `docs-${slug}`.toLowerCase() || doc.id.toLowerCase() === slug.toLowerCase())
+  return docs.find(
+    (doc) =>
+      doc.id.toLowerCase() === `docs-${slug}`.toLowerCase() ||
+      doc.id.toLowerCase() === slug.toLowerCase(),
+  )
 }
 
 export function getSectionDocs(section: string): DocSummary[] {
@@ -122,49 +126,55 @@ export function searchDocs(query: string, limit = 20): SearchHit[] {
   const queryTokens = tokenize(normalized)
   if (!queryTokens.length) return []
 
-  const hits: SearchHit[] = docs.map((doc) => {
-    let score = 0
-    const reasons: string[] = []
-    const title = doc.title.toLowerCase()
-    const description = doc.description.toLowerCase()
-    const section = doc.section.toLowerCase()
-    const category = doc.category.toLowerCase()
-    const headings = doc.headings.join('  ').toLowerCase()
-    const topicsJoined = doc.topics.join(' ').toLowerCase()
-    const all = `${title} ${description} ${headings} ${topicsJoined} ${section} ${category} ${doc.slug}`
+  const hits: SearchHit[] = docs
+    .map((doc) => {
+      let score = 0
+      const reasons: string[] = []
+      const title = doc.title.toLowerCase()
+      const description = doc.description.toLowerCase()
+      const section = doc.section.toLowerCase()
+      const category = doc.category.toLowerCase()
+      const headings = doc.headings.join('  ').toLowerCase()
+      const topicsJoined = doc.topics.join(' ').toLowerCase()
+      const all = `${title} ${description} ${headings} ${topicsJoined} ${section} ${category} ${doc.slug}`
 
-    for (const token of queryTokens) {
-      if (title.includes(token)) score += 6
-      if (headings.includes(token)) score += 3
-      if (topicsJoined.includes(token)) score += 3
-      if (description.includes(token)) score += 3
-      if (doc.slug.includes(token)) score += 2
-      if (category.includes(token) || section.includes(token)) score += 1.5
-      if (all.includes(token)) score += 1
-    }
-    if (!score) return undefined
+      for (const token of queryTokens) {
+        if (title.includes(token)) score += 6
+        if (headings.includes(token)) score += 3
+        if (topicsJoined.includes(token)) score += 3
+        if (description.includes(token)) score += 3
+        if (doc.slug.includes(token)) score += 2
+        if (category.includes(token) || section.includes(token)) score += 1.5
+        if (all.includes(token)) score += 1
+      }
+      if (!score) return undefined
 
-    const exactPhrase = normalized.toLowerCase()
-    if (title.includes(exactPhrase)) {
-      score += 12
-      reasons.push('Title match')
-    } else if (description.includes(exactPhrase)) {
-      reasons.push('Description match')
-    } else if (headings.includes(exactPhrase)) {
-      score += 4
-      reasons.push('Heading match')
-    } else if (topicsJoined.includes(exactPhrase)) {
-      reasons.push('Topic match')
-    } else {
-      reasons.push('Keyword match')
-    }
-    return { doc, score, reasons: reasons.length ? reasons : ['Keyword match'] }
-  }).filter((hit): hit is SearchHit => Boolean(hit))
+      const exactPhrase = normalized.toLowerCase()
+      if (title.includes(exactPhrase)) {
+        score += 12
+        reasons.push('Title match')
+      } else if (description.includes(exactPhrase)) {
+        reasons.push('Description match')
+      } else if (headings.includes(exactPhrase)) {
+        score += 4
+        reasons.push('Heading match')
+      } else if (topicsJoined.includes(exactPhrase)) {
+        reasons.push('Topic match')
+      } else {
+        reasons.push('Keyword match')
+      }
+      return { doc, score, reasons: reasons.length ? reasons : ['Keyword match'] }
+    })
+    .filter((hit): hit is SearchHit => Boolean(hit))
 
   return hits.sort((a, b) => b.score - a.score).slice(0, limit)
 }
 
-export function searchDocsFull(query: string, contentGetter: (slug: string) => string, limit = 12): SearchHit[] {
+export function searchDocsFull(
+  query: string,
+  contentGetter: (slug: string) => string,
+  limit = 12,
+): SearchHit[] {
   const hits = searchDocs(query, Math.max(limit * 3, 30))
   const normalized = query.trim().toLowerCase()
   const primaryTerm = tokenize(normalized)[0]
@@ -176,7 +186,11 @@ export function searchDocsFull(query: string, contentGetter: (slug: string) => s
     const lower = content.toLowerCase()
     const contentScore = primaryTerm && lower.includes(primaryTerm) ? 2 : 0
     if (contentScore) {
-      contentHits.push({ ...hit, score: hit.score + contentScore, snippet: excerptAround(content, primaryTerm) })
+      contentHits.push({
+        ...hit,
+        score: hit.score + contentScore,
+        snippet: excerptAround(content, primaryTerm),
+      })
     } else {
       contentHits.push({ ...hit, snippet: hit.doc.excerpt })
     }
@@ -188,7 +202,9 @@ export function searchDocsFull(query: string, contentGetter: (slug: string) => s
 
 export function coverageStats() {
   const total = docs.length
-  const bySection = Object.fromEntries(sections.map((section) => [section, getSectionDocs(section).length]))
+  const bySection = Object.fromEntries(
+    sections.map((section) => [section, getSectionDocs(section).length]),
+  )
   const withCode = docs.filter((doc) => doc.snippets.length > 0).length
   const withApi = docs.filter((doc) => doc.section === 'API Reference').length
   const integrations = docs.filter((doc) => doc.section === 'Integrations').length

@@ -6,19 +6,9 @@
   "category": "API · V1",
   "type": "integration",
   "description": "Integrate v0 API with AI SDK to build autonomous agents and intelligent workflows",
-  "topics": [
-    "design",
-    "api",
-    "agents",
-    "permissions",
-    "integrations"
-  ],
-  "related": [
-    "api/v1/packages/ai-tools"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api", "agents", "permissions", "integrations"],
+  "related": ["api/v1/packages/ai-tools"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Overview",
     "Supported AI Frameworks",

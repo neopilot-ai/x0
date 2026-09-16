@@ -64,22 +64,22 @@ You can control who has access to your chats using the Invite dialog.
 
 #### Visibility options
 
-| Option | Description |
-| --- | --- |
-| Only people with access | Only you and invited users can access |
+| Option                  | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| Only people with access | Only you and invited users can access                                       |
 | Everyone at [team-name] | All members of your team can access; turn on **View only** to prevent edits |
-| Anyone with the link | Anyone with the URL can access |
-| Anyone on the web | Public, discoverable, and accessible by anyone |
+| Anyone with the link    | Anyone with the URL can access                                              |
+| Anyone on the web       | Public, discoverable, and accessible by anyone                              |
 
 #### Default chat visibility
 
 New chats created in a team workspace are available to the team by default. Team Owners can change this default under **Settings → Workspace → Default Chat Visibility**:
 
-| Default | Who can access a new chat |
-| --- | --- |
-| Private | Only people with access |
+| Default       | Who can access a new chat                                            |
+| ------------- | -------------------------------------------------------------------- |
+| Private       | Only people with access                                              |
 | Team can view | Team members can view; editing remains limited to people with access |
-| Team can edit | Team members can view and edit |
+| Team can edit | Team members can view and edit                                       |
 
 Changing the workspace default affects only new chats. Existing chats keep their current visibility, and chat creators can override the default for an individual chat from its **Invite** dialog.
 
@@ -129,12 +129,12 @@ If you'd prefer to allow team members to collaborate on chats without connecting
 
 ### Collaboration
 
-| Feature | Description | Availability |
-| --- | --- | --- |
-| Shared Chat History | Access conversation context across team | Plus, Business, and Enterprise |
-| Version History | Track changes and revert when needed | Plus, Business, and Enterprise |
-| Team Templates | Create and share reusable templates | Plus, Business, and Enterprise |
-| Role-based Access | Assign Builder, Creator, or Viewer roles | Enterprise only |
+| Feature             | Description                              | Availability                   |
+| ------------------- | ---------------------------------------- | ------------------------------ |
+| Shared Chat History | Access conversation context across team  | Plus, Business, and Enterprise |
+| Version History     | Track changes and revert when needed     | Plus, Business, and Enterprise |
+| Team Templates      | Create and share reusable templates      | Plus, Business, and Enterprise |
+| Role-based Access   | Assign Builder, Creator, or Viewer roles | Enterprise only                |
 
 ### Enterprise
 

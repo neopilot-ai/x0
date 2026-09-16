@@ -39,15 +39,13 @@ export async function deleteFile(
   return session.files.delete(path)
 }
 
-export async function createFolder(
-  path: string,
-): Promise<FileExplorerEntry> {
+export async function createFolder(path: string): Promise<FileExplorerEntry> {
   return { name: path.split('/').pop() ?? path, path, type: 'folder', modified: new Date() }
 }
 
-export async function getFileExplorer(
-  session: { files: Map<string, CodeServerFile> },
-): Promise<FileExplorerEntry[]> {
+export async function getFileExplorer(session: {
+  files: Map<string, CodeServerFile>
+}): Promise<FileExplorerEntry[]> {
   const entries: FileExplorerEntry[] = []
   for (const file of session.files.values()) {
     entries.push({

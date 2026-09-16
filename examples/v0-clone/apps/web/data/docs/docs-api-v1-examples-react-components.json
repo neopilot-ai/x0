@@ -6,17 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "Using v0-sdk React components for streaming UI responses",
-  "topics": [
-    "design",
-    "api",
-    "streaming"
-  ],
-  "related": [
-    "api/v1/packages/react"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api", "streaming"],
+  "related": ["api/v1/packages/react"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Features",
     "Design Themes",

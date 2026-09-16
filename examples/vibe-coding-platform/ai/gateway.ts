@@ -13,12 +13,13 @@ const gateway = createGatewayProvider({
   },
 })
 
-const kiloGateway = process.env.KILO_API_KEY && process.env.KILO_GATEWAY_BASE_URL
-  ? createOpenAI({
-      baseURL: process.env.KILO_GATEWAY_BASE_URL,
-      apiKey: process.env.KILO_API_KEY,
-    })
-  : null
+const kiloGateway =
+  process.env.KILO_API_KEY && process.env.KILO_GATEWAY_BASE_URL
+    ? createOpenAI({
+        baseURL: process.env.KILO_GATEWAY_BASE_URL,
+        apiKey: process.env.KILO_API_KEY,
+      })
+    : null
 
 export function getKiloModel(modelId: string): LanguageModelV3 | null {
   if (!kiloGateway) return null
@@ -33,7 +34,7 @@ export interface ModelOptions {
 
 export function getModelOptions(
   modelId: string,
-  options?: { reasoningEffort?: 'low' | 'medium' | 'high' }
+  options?: { reasoningEffort?: 'low' | 'medium' | 'high' },
 ): ModelOptions {
   if (modelId.startsWith('kilo-') && kiloGateway) {
     return {
@@ -55,10 +56,7 @@ export function getModelOptions(
     }
   }
 
-  if (
-    modelId === Models.AnthropicClaudeSonnet46 ||
-    modelId === Models.AnthropicClaudeOpus46
-  ) {
+  if (modelId === Models.AnthropicClaudeSonnet46 || modelId === Models.AnthropicClaudeOpus46) {
     return {
       model: gateway(modelId),
       headers: { 'anthropic-beta': 'fine-grained-tool-streaming-2025-05-14' },

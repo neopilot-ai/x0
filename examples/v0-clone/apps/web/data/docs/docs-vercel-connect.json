@@ -6,21 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Connect your v0 apps and agents to third-party services – no API keys required.",
-  "topics": [
-    "databases",
-    "design",
-    "authentication",
-    "agents",
-    "integrations"
-  ],
-  "related": [
-    "external-apis",
-    "databases",
-    "full-stack-apps"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["databases", "design", "authentication", "agents", "integrations"],
+  "related": ["external-apis", "databases", "full-stack-apps"],
+  "requires": ["quickstart"],
   "headings": [
     "Connect vs. environment variables",
     "What you can build",

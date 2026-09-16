@@ -6,16 +6,9 @@
   "category": "Guides",
   "type": "conceptual",
   "description": "",
-  "topics": [
-    "versions"
-  ],
-  "related": [
-    "code-editing",
-    "projects"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["versions"],
+  "related": ["code-editing", "projects"],
+  "requires": ["quickstart"],
   "headings": [],
   "excerpt": "Each time v0 updates a code block from a message, it creates a new version. Non-message actions (such as editing code or modifying files directly) do not generate new versions.",
   "snippets": [],

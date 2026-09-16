@@ -6,12 +6,7 @@
   "category": "API · V2",
   "type": "guide",
   "description": "Display a v0 chat preview in your application",
-  "topics": [
-    "design",
-    "security",
-    "api",
-    "previews"
-  ],
+  "topics": ["design", "security", "api", "previews"],
   "related": [
     "api/v2/guides/custom-chat-interface",
     "api/v2/reference/chats/get-preview-url",

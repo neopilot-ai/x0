@@ -6,19 +6,9 @@
   "category": "Guides",
   "type": "guide",
   "description": "Import an existing GitHub repository into v0, connect its Vercel project, and work from an isolated branch.",
-  "topics": [
-    "github",
-    "design",
-    "integrations"
-  ],
-  "related": [
-    "github",
-    "vercel-integration",
-    "projects"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["github", "design", "integrations"],
+  "related": ["github", "vercel-integration", "projects"],
+  "requires": ["quickstart"],
   "headings": [
     "Before you import",
     "Import a repository",

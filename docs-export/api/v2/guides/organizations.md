@@ -6,8 +6,6 @@ type: guide
 
 # Organizations
 
-
-
 This guide explains how a platform customer can use the **v0 API** with **Vercel Organizations** to offer v0-style chat experiences to their own customers.
 
 <Callout type="info">
@@ -32,13 +30,13 @@ Before using this flow:
 
 1. The parent team must be on **Enterprise Flex Commit**.
 2. The parent team owner must have the **v0 Builder** role.
-   * Can be granted at `vercel.com/team-slug/~/settings/members`
+   - Can be granted at `vercel.com/team-slug/~/settings/members`
 3. Recommended: use a dedicated Vercel system user for organization automation.
-   * Create the Vercel API token and parent v0 API key as this same user.
-   * Use those credentials to create the organization, create child teams, create child-team API keys, and manage spend limits.
-   * Add this user to the parent team and grant it `OrgAdmin`.
+   - Create the Vercel API token and parent v0 API key as this same user.
+   - Use those credentials to create the organization, create child teams, create child-team API keys, and manage spend limits.
+   - Add this user to the parent team and grant it `OrgAdmin`.
 4. Create a Vercel API token at [vercel.com/account/settings/tokens](https://vercel.com/account/settings/tokens) with **Full Account** scope.
-   * This should be done by the system user or parent team owner that will manage organization automation.
+   - This should be done by the system user or parent team owner that will manage organization automation.
 5. The parent team must be allowlisted for Organizations and v0 API access.
 
 ## Setup flow
@@ -48,15 +46,15 @@ Before using this flow:
 Create a Vercel Organization attached to the Enterprise Flex Commit parent team.
 
 ```typescript
-const organization = await fetch("https://api.vercel.com/v1/organizations", {
-  method: "POST",
+const organization = await fetch('https://api.vercel.com/v1/organizations', {
+  method: 'POST',
   headers: {
     Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    teamId: "team_parent",
-    slug: "acme-platform",
+    teamId: 'team_parent',
+    slug: 'acme-platform',
   }),
 }).then((res) => res.json())
 ```
@@ -73,8 +71,8 @@ Create a parent-team API key at [v0.app/settings/keys](https://v0.app/settings/k
 
 Use this key to:
 
-* Create API keys for child teams
-* Set organization and child-team spend limits
+- Create API keys for child teams
+- Set organization and child-team spend limits
 
 <Callout type="warn">
   Store the key immediately. v0 only stores a hash, so lost keys cannot be recovered.
@@ -85,16 +83,16 @@ Use this key to:
 For each customer, create a new Vercel team under the organization.
 
 ```typescript
-const customerTeam = await fetch("https://api.vercel.com/v1/teams", {
-  method: "POST",
+const customerTeam = await fetch('https://api.vercel.com/v1/teams', {
+  method: 'POST',
   headers: {
     Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     organizationId: organization.organizationId,
-    slug: "acme-customer-123",
-    name: "Acme Customer 123",
+    slug: 'acme-customer-123',
+    name: 'Acme Customer 123',
   }),
 }).then((res) => res.json())
 ```
@@ -109,13 +107,13 @@ Use the parent v0 API key to create an API key scoped to the child team.
 const childApiKey = await fetch(
   `https://api.v0.dev/v2/organizations/${organization.organizationId}/teams/${customerTeam.id}/api-keys`,
   {
-    method: "POST",
+    method: 'POST',
     headers: {
       Authorization: `Bearer ${process.env.PARENT_V0_API_KEY}`,
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      name: "Production Key",
+      name: 'Production Key',
     }),
   },
 ).then((res) => res.json())
@@ -147,11 +145,11 @@ Chat and message responses include usage data. Use the returned usage payload fo
 
 ## Billing and spend limits
 
-* Child-team invoices roll up to the parent team.
-* Organization-level spend limits apply by default to child teams.
-* Team-level spend limits override the organization-level limit.
-* Limits reset monthly.
-* There are no separate usage endpoints. Usage is returned directly in chat and message responses.
+- Child-team invoices roll up to the parent team.
+- Organization-level spend limits apply by default to child teams.
+- Team-level spend limits override the organization-level limit.
+- Limits reset monthly.
+- There are no separate usage endpoints. Usage is returned directly in chat and message responses.
 
 Use organization-level limits for broad guardrails and team-level limits for customer-specific caps.
 
@@ -177,10 +175,9 @@ Store these values securely:
 
 ## Important notes
 
-* Do **not** use the Vercel invite API for this flow. Usage should be attributed to teams, not individual invited users.
-* Keep the parent team separate from internal-use teams when possible.
-* Treat API keys as unrecoverable secrets.
-
+- Do **not** use the Vercel invite API for this flow. Usage should be attributed to teams, not individual invited users.
+- Keep the parent team separate from internal-use teams when possible.
+- Treat API keys as unrecoverable secrets.
 
 ---
 

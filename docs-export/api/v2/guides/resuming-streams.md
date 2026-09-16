@@ -13,16 +13,14 @@ related:
 
 # Resume a Chat Stream
 
-
-
 A dropped client connection (e.g. if you refresh your browser) does not stop the agent's active v0 generation. Resume the
 latest generation with its chat ID, then continue receiving accumulated
 message snapshots until the stream finishes.
 
 This guide shows two ways to reconnect:
 
-* Simplest: use `@v0-sdk/react` if you're building a React or Next.js application.
-* Otherwise, use the core `v0` package and manage stream state yourself.
+- Simplest: use `@v0-sdk/react` if you're building a React or Next.js application.
+- Otherwise, use the core `v0` package and manage stream state yourself.
 
 <Callout type="info">
   Resuming reconnects to the latest generation for a chat. It does not restart a
@@ -67,11 +65,7 @@ import { v0 } from 'v0'
 
 import { V0Chat } from './v0-chat'
 
-export default async function ChatPage({
-  params,
-}: {
-  params: Promise<{ chatId: string }>
-}) {
+export default async function ChatPage({ params }: { params: Promise<{ chatId: string }> }) {
   const { chatId } = await params
   const result = await v0.messages.list({
     chatId,
@@ -253,10 +247,9 @@ reconstruct the same `V0StreamResult` with the browser-safe entrypoint:
 import { readV0Stream } from 'v0/browser'
 
 export async function resumeChat(chatId: string) {
-  const response = await fetch(
-    `/api/v0/chats/${encodeURIComponent(chatId)}/resume`,
-    { method: 'POST' },
-  )
+  const response = await fetch(`/api/v0/chats/${encodeURIComponent(chatId)}/resume`, {
+    method: 'POST',
+  })
 
   const result = readV0Stream(response)
 
@@ -273,15 +266,14 @@ can access the requested chat before calling v0.
 
 ## Resume behavior
 
-* The endpoint resumes only the latest message when it is an unfinished
+- The endpoint resumes only the latest message when it is an unfinished
   assistant message.
-* If the latest assistant message has already finished, the endpoint emits its
+- If the latest assistant message has already finished, the endpoint emits its
   current chat state and closes.
-* If the chat has no assistant message to resume, or its backing stream is no
+- If the chat has no assistant message to resume, or its backing stream is no
   longer available, the endpoint returns `404`.
-* Resuming a stopped message does not start generation again. Send a new
+- Resuming a stopped message does not start generation again. Send a new
   message to create another assistant generation.
-
 
 ---
 

@@ -9,7 +9,6 @@ related:
   - /docs/api/v2/guides/create-v0-sdk-app
 ---
 
-
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
@@ -32,20 +31,21 @@ create-v0-sdk-app [directory] [options]
 
 ### Options
 
-| Option | Description |
-|--------|-------------|
+| Option                 | Description                                |
+| ---------------------- | ------------------------------------------ |
 | `-e, --example <name>` | Example to bootstrap (default: `v0-clone`) |
-| `--use-pnpm` | Use pnpm as package manager |
-| `--use-npm` | Use npm as package manager |
-| `--use-yarn` | Use Yarn as package manager |
-| `--use-bun` | Use Bun as package manager |
-| `--skip-install` | Skip installing packages |
+| `--use-pnpm`           | Use pnpm as package manager                |
+| `--use-npm`            | Use npm as package manager                 |
+| `--use-yarn`           | Use Yarn as package manager                |
+| `--use-bun`            | Use Bun as package manager                 |
+| `--skip-install`       | Skip installing packages                   |
 
 ## Currently Available Example
 
 ### v0-clone
 
 A full-featured v0 clone built with the v0 SDK, including:
+
 - A complete chat interface with live previews
 - AI SDK `useChat` integration with `V0Transport`
 - Preview proxy routes
@@ -58,6 +58,7 @@ npx create-v0-sdk-app my-app --example v0-clone
 ## Generated Project Structure
 
 The bootstrapped project includes:
+
 - `app/` - Next.js app directory with chat pages
 - `lib/` - v0 client, proxy, and utility code
 - `components/` - UI components for the chat interface

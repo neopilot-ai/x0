@@ -6,16 +6,9 @@
   "category": "API · V1",
   "type": "guide",
   "description": "A faithful recreation of the original v0.dev interface",
-  "topics": [
-    "design",
-    "api"
-  ],
-  "related": [
-    "api/v1/packages/v0-sdk"
-  ],
-  "requires": [
-    "api/v1/quickstart"
-  ],
+  "topics": ["design", "api"],
+  "related": ["api/v1/packages/v0-sdk"],
+  "requires": ["api/v1/quickstart"],
   "headings": [
     "Features",
     "Technologies Used",

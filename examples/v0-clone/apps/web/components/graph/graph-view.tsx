@@ -89,9 +89,7 @@ export function GraphView({
   return (
     <main className="flex min-h-screen flex-col">
       <div className="mx-auto w-full max-w-7xl px-6 pt-8">
-        <p className="text-xs text-muted-foreground">
-          Graph generated from the indexed corpus
-        </p>
+        <p className="text-xs text-muted-foreground">Graph generated from the indexed corpus</p>
         <h1 className="mt-2 text-4xl font-semibold tracking-tight">Knowledge graph</h1>
         <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
           Nodes are indexed documentation pages; edges represent related and prerequisite links

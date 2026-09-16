@@ -6,14 +6,8 @@
   "category": "FAQs",
   "type": "troubleshooting",
   "description": "Common questions about what v0 is, how it works, and how to build with it.",
-  "topics": [
-    "design",
-    "pricing"
-  ],
-  "related": [
-    "quickstart",
-    "pricing"
-  ],
+  "topics": ["design", "pricing"],
+  "related": ["quickstart", "pricing"],
   "requires": [],
   "headings": [
     "New v0 Update",

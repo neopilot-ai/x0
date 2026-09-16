@@ -6,10 +6,7 @@ interface Params {
   cmdId: string
 }
 
-export async function GET(
-  _request: NextRequest,
-  { params }: { params: Promise<Params> }
-) {
+export async function GET(_request: NextRequest, { params }: { params: Promise<Params> }) {
   const cmdParams = await params
   const sandbox = await Sandbox.get(cmdParams)
   const command = await sandbox.getCommand(cmdParams.cmdId)

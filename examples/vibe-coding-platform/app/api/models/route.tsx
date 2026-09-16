@@ -9,6 +9,6 @@ export async function GET() {
         name: MODEL_NAMES[id] ?? id,
       })),
     },
-    { headers: { 'Cache-Control': 'public, max-age=300' } }
+    { headers: { 'Cache-Control': 'public, max-age=300' } },
   )
 }

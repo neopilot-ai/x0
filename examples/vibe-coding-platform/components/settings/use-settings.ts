@@ -12,9 +12,7 @@ export function useSettings() {
 export function useModelId() {
   const [modelId, setModelId] = useQueryState(
     'modelId',
-    parseAsStringLiteral(SUPPORTED_MODELS.map((model) => model)).withDefault(
-      DEFAULT_MODEL
-    )
+    parseAsStringLiteral(SUPPORTED_MODELS.map((model) => model)).withDefault(DEFAULT_MODEL),
   )
   const [customModels, setCustomModels] = useState<string[]>([])
 
@@ -35,10 +33,7 @@ export function useModelId() {
 }
 
 export function useReasoningEffort() {
-  return useQueryState(
-    'effort',
-    parseAsStringLiteral(['medium', 'low']).withDefault('low')
-  )
+  return useQueryState('effort', parseAsStringLiteral(['medium', 'low']).withDefault('low'))
 }
 
 export function useFixErrors() {

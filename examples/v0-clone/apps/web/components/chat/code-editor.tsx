@@ -253,9 +253,7 @@ function CodeEditor({
   }
 
   const deleteFolder = (path: string) => {
-    const affected = files.filter(
-      (file) => file.path === path || file.path.startsWith(`${path}/`),
-    )
+    const affected = files.filter((file) => file.path === path || file.path.startsWith(`${path}/`))
     if (affected.length === 0 && !pendingFolders.includes(path)) return
     if (
       !window.confirm(
@@ -301,7 +299,10 @@ function CodeEditor({
     const match = fileMatches[clampedIndex]
     if (!activeFile || !match) return
     const content = activeFile.content
-    updateFile(activeFile.path, `${content.slice(0, match.start)}${replaceText}${content.slice(match.end)}`)
+    updateFile(
+      activeFile.path,
+      `${content.slice(0, match.start)}${replaceText}${content.slice(match.end)}`,
+    )
     setFileMatchIndex(0)
   }
 
@@ -338,7 +339,13 @@ function CodeEditor({
         disabled={isSaving}
         onChange={(content) => updateFile(file.path, content)}
         path={file.path}
-        reveal={pane === 'primary' && searchMode === 'file' ? fileReveal : pane === 'primary' ? globalReveal : null}
+        reveal={
+          pane === 'primary' && searchMode === 'file'
+            ? fileReveal
+            : pane === 'primary'
+              ? globalReveal
+              : null
+        }
         value={file.content}
       />
     )
@@ -405,14 +412,14 @@ function CodeEditor({
           Split
         </Button>
         <span className="flex-1" />
-        {changedCount > 0 ? (
-          <span className="text-xs text-amber-600">Unsaved Changes</span>
-        ) : null}
+        {changedCount > 0 ? <span className="text-xs text-amber-600">Unsaved Changes</span> : null}
         {status ? (
           <span
             className={cn(
               'text-xs',
-              status === 'Saved' || status === 'Copied' ? 'text-muted-foreground' : 'text-amber-600',
+              status === 'Saved' || status === 'Copied'
+                ? 'text-muted-foreground'
+                : 'text-amber-600',
             )}
           >
             {status}
@@ -490,10 +497,20 @@ function CodeEditor({
               placeholder="Replace with…"
               value={replaceText}
             />
-            <Button disabled={!fileMatches.length} onClick={replaceCurrentMatch} size="xs" variant="ghost">
+            <Button
+              disabled={!fileMatches.length}
+              onClick={replaceCurrentMatch}
+              size="xs"
+              variant="ghost"
+            >
               Replace
             </Button>
-            <Button disabled={!fileMatches.length} onClick={replaceAllMatches} size="xs" variant="ghost">
+            <Button
+              disabled={!fileMatches.length}
+              onClick={replaceAllMatches}
+              size="xs"
+              variant="ghost"
+            >
               All
             </Button>
           </div>
@@ -590,9 +607,7 @@ function CodeEditor({
             <div className="flex h-9 shrink-0 items-center border-b border-border px-3 text-xs text-muted-foreground">
               <span className="truncate">{selectedFile?.path}</span>
             </div>
-            <div className="min-h-0 flex-1">
-              {renderEditor(selectedFile, 'primary')}
-            </div>
+            <div className="min-h-0 flex-1">{renderEditor(selectedFile, 'primary')}</div>
           </div>
           {splitView ? (
             <div className="relative flex min-w-0 flex-1 flex-col">
@@ -610,9 +625,7 @@ function CodeEditor({
                   ))}
                 </select>
               </div>
-              <div className="min-h-0 flex-1">
-                {renderEditor(secondaryFile, 'secondary')}
-              </div>
+              <div className="min-h-0 flex-1">{renderEditor(secondaryFile, 'secondary')}</div>
             </div>
           ) : null}
         </div>

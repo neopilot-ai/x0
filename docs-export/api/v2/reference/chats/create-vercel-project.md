@@ -1,37 +1,35 @@
 ---
 title: Create Vercel Project
 description: Creates a Vercel project and attaches it to the chat.
-badge: "POST"
+badge: 'POST'
 ---
 
 # Create Vercel Project
-
-
 
 <EndpointDisplay method="post" path="/chats/{chatId}/vercel-project" versionPrefix="/v2" />
 
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0'
 
 const result = await v0.chats.createVercelProject({
-  chatId: 'chat_abc123',
+chatId: 'chat_abc123',
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X POST "https://api.v0.dev/v2/chats/chat_abc123/vercel-project" \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X POST "https://api.v0.dev/v2/chats/chat_abc123/vercel-project" \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -41,48 +39,47 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "chatId",
-    "type": "string",
-    "required": true,
-    "description": "The unique identifier of the chat.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "chatId",
+"type": "string",
+"required": true,
+"description": "The unique identifier of the chat.",
+"deprecated": false
+}
 ]}
 />
 
 #### Request Body
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "name",
-    "type": "string",
-    "required": false,
-    "description": "Name for the Vercel project. When omitted, the chat's title is used.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "name",
+"type": "string",
+"required": false,
+"description": "Name for the Vercel project. When omitted, the chat's title is used.",
+"deprecated": false
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "vercelProjectId",
-    "type": "string",
-    "required": true,
-    "description": "Created Vercel project ID.",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "vercelProjectId",
+"type": "string",
+"required": true,
+"description": "Created Vercel project ID.",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

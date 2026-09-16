@@ -6,12 +6,7 @@
   "category": "API Reference",
   "type": "overview",
   "description": "Build custom app-generation experiences with the v0 API",
-  "topics": [
-    "design",
-    "api",
-    "previews",
-    "agents"
-  ],
+  "topics": ["design", "api", "previews", "agents"],
   "related": [
     "api/v2/quickstart",
     "api/v2/guides/custom-chat-interface",
@@ -19,11 +14,7 @@
     "api/v2/guides/integrating-v0-into-agents"
   ],
   "requires": [],
-  "headings": [
-    "Why use the v0 API?",
-    "Get Started",
-    "Reference and migration"
-  ],
+  "headings": ["Why use the v0 API?", "Get Started", "Reference and migration"],
   "excerpt": "The v0 API gives your product v0's app-building agent, including code generation, secure live previews, integrations, and deployment to Vercel.",
   "snippets": [
     {

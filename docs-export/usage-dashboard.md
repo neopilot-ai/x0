@@ -15,12 +15,12 @@ The **Usage & Activity** dashboard at [v0.app/settings/usage](https://v0.app/set
 
 ## What you see on the page
 
-| Account type and role | What the page shows |
-| --- | --- |
+| Account type and role                                               | What the page shows                                                                |
+| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | Team **Owner** or **Billing** role on Plus, Business, or Enterprise | Team-wide and personal activity, plus team-wide consumption on the **Credits** tab |
-| Any other member of an eligible team | Only their own activity and consumption |
-| Personal Free or Premium account | Personal activity and credit consumption |
-| An unsupported plan or billing model | The legacy usage view or a message explaining usage data isn't available |
+| Any other member of an eligible team                                | Only their own activity and consumption                                            |
+| Personal Free or Premium account                                    | Personal activity and credit consumption                                           |
+| An unsupported plan or billing model                                | The legacy usage view or a message explaining usage data isn't available           |
 
 Credit-based accounts have **Credits** and **Activity** tabs. When credit data isn't available, the page shows **Activity** only.
 

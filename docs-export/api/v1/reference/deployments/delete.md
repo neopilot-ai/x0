@@ -1,7 +1,7 @@
 ---
 title: Delete Deployment
 description: Delete a deployment by ID. This will delete the deployment from Vercel.
-badge: "DEL"
+badge: 'DEL'
 product: v0 API
 type: reference
 prerequisites:
@@ -11,9 +11,8 @@ prerequisites:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Delete Deployment
-
-
 
 <EndpointDisplay method="delete" path="/deployments/{deploymentId}" />
 
@@ -24,25 +23,25 @@ prerequisites:
 ## Usage
 
 <CustomCodeBlock languages={['TypeScript', 'cURL']} defaultLanguage="TypeScript">
-  <CodeVariant
-    language="TypeScript"
-    title="TypeScript Example"
-    code={`import { v0 } from 'v0-sdk'
+<CodeVariant
+language="TypeScript"
+title="TypeScript Example"
+code={`import { v0 } from 'v0-sdk'
 
 const result = await v0.deployments.delete({
-  deploymentId: '123',
+deploymentId: '123',
 })
 
 console.log(result)`}
-  />
+/>
 
-  <CodeVariant
-    language="cURL"
-    title="cURL Example"
-    code={`curl -X DELETE https://api.v0.dev/v1/deployments/123 \
+<CodeVariant
+language="cURL"
+title="cURL Example"
+code={`curl -X DELETE https://api.v0.dev/v1/deployments/123 \
   -H "Authorization: Bearer $V0_API_KEY" \
   -H "Content-Type: application/json"`}
-  />
+/>
 </CustomCodeBlock>
 
 ## API Signature
@@ -52,46 +51,45 @@ console.log(result)`}
 #### Path Parameters
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "deploymentId",
-    "type": "string",
-    "required": true,
-    "description": "Path parameter \"deploymentId\""
-  }
+title=""
+parameters={[
+{
+"name": "deploymentId",
+"type": "string",
+"required": true,
+"description": "Path parameter \"deploymentId\""
+}
 ]}
 />
 
 ### Response
 
 <APISignature
-  title=""
-  parameters={[
-  {
-    "name": "id",
-    "type": "string",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "object",
-    "type": "'deployment'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  },
-  {
-    "name": "deleted",
-    "type": "'true'",
-    "required": true,
-    "description": "",
-    "deprecated": false
-  }
+title=""
+parameters={[
+{
+"name": "id",
+"type": "string",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "object",
+"type": "'deployment'",
+"required": true,
+"description": "",
+"deprecated": false
+},
+{
+"name": "deleted",
+"type": "'true'",
+"required": true,
+"description": "",
+"deprecated": false
+}
 ]}
 />
-
 
 ---
 

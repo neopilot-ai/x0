@@ -6,13 +6,8 @@
   "category": "Overview",
   "type": "overview",
   "description": "v0 is an AI agent that helps anyone create real code and full-stack apps and agents.",
-  "topics": [
-    "design",
-    "agents"
-  ],
-  "related": [
-    "quickstart"
-  ],
+  "topics": ["design", "agents"],
+  "related": ["quickstart"],
   "requires": [],
   "headings": [
     "What can you do with v0?",

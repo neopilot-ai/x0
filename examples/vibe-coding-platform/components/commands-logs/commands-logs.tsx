@@ -22,31 +22,23 @@ export function CommandsLogs(props: Props) {
     <Panel className={props.className}>
       <PanelHeader>
         <SquareChevronRight className="mr-2 w-4" />
-        <span className="font-mono uppercase font-semibold">
-          Sandbox Remote Output
-        </span>
+        <span className="font-mono uppercase font-semibold">Sandbox Remote Output</span>
       </PanelHeader>
       <div className="h-[calc(100%-2rem)]">
         <ScrollArea className="h-full">
           <div className="p-2 space-y-2">
             {props.commands.map((command) => {
-              const date = new Date(command.startedAt).toLocaleTimeString(
-                'en-US',
-                {
-                  hour12: false,
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  second: '2-digit',
-                }
-              )
+              const date = new Date(command.startedAt).toLocaleTimeString('en-US', {
+                hour12: false,
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+              })
 
               const line = `${command.command} ${command.args.join(' ')}`
               const body = command.logs?.map((log) => log.data).join('') || ''
               return (
-                <pre
-                  key={command.cmdId}
-                  className="whitespace-pre-wrap font-mono text-sm"
-                >
+                <pre key={command.cmdId} className="whitespace-pre-wrap font-mono text-sm">
                   {`[${date}] ${line}\n${body}`}
                 </pre>
               )

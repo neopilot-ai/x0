@@ -2,7 +2,16 @@
 
 import * as React from 'react'
 import { useRouter } from 'next/navigation'
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut } from '@/components/ui/command'
+import {
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
+} from '@/components/ui/command'
 import { docs, sections, topics, searchDocs } from '@/lib/docs-data'
 import { ExternalIcon as ExternalLink } from '@/lib/icons'
 
@@ -34,7 +43,12 @@ export function CommandPalette() {
   )
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen} title="Jump to" description="Search the documentation corpus and navigation.">
+    <CommandDialog
+      open={open}
+      onOpenChange={setOpen}
+      title="Jump to"
+      description="Search the documentation corpus and navigation."
+    >
       <CommandInput
         placeholder="Search docs, topics, sections..."
         value={query}
@@ -76,18 +90,28 @@ export function CommandPalette() {
             <CommandSeparator />
             <CommandGroup heading="Sections">
               {sections.map((section) => (
-                <CommandItem key={section} onSelect={() => run(`/docs?section=${encodeURIComponent(section)}`)}>
+                <CommandItem
+                  key={section}
+                  onSelect={() => run(`/docs?section=${encodeURIComponent(section)}`)}
+                >
                   {section}
-                  <CommandShortcut>{docs.filter((doc) => doc.section === section).length}</CommandShortcut>
+                  <CommandShortcut>
+                    {docs.filter((doc) => doc.section === section).length}
+                  </CommandShortcut>
                 </CommandItem>
               ))}
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading="Topics">
               {topics.slice(0, 12).map((topic) => (
-                <CommandItem key={topic} onSelect={() => run(`/topics/${encodeURIComponent(topic)}`)}>
+                <CommandItem
+                  key={topic}
+                  onSelect={() => run(`/topics/${encodeURIComponent(topic)}`)}
+                >
                   {topic}
-                  <CommandShortcut>{docs.filter((doc) => doc.topics.includes(topic)).length}</CommandShortcut>
+                  <CommandShortcut>
+                    {docs.filter((doc) => doc.topics.includes(topic)).length}
+                  </CommandShortcut>
                 </CommandItem>
               ))}
             </CommandGroup>

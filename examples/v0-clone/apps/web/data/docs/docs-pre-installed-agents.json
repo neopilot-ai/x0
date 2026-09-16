@@ -6,18 +6,8 @@
   "category": "Guides",
   "type": "reference",
   "description": "Use pre-installed coding agents like Claude Code directly in the v0 terminal.",
-  "topics": [
-    "ai",
-    "security",
-    "agents",
-    "terminal"
-  ],
-  "related": [
-    "security",
-    "enterprise",
-    "agentic-features",
-    "ai-models"
-  ],
+  "topics": ["ai", "security", "agents", "terminal"],
+  "related": ["security", "enterprise", "agentic-features", "ai-models"],
   "requires": [],
   "headings": [
     "How it works",

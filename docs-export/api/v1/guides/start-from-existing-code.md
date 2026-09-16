@@ -12,9 +12,8 @@ related:
 ---
 
 > **Deprecated**: The v1 API has been replaced by v2. See [Migrate from v1 to v2](/docs/api/v2/guides/migrating-from-v1-to-v2) for the current API.
+
 # Start from Existing Code
-
-
 
 Learn how to bootstrap v0 chats from your existing code, whether it's a GitHub repository, local files, or zip archives.
 
@@ -22,10 +21,10 @@ Learn how to bootstrap v0 chats from your existing code, whether it's a GitHub r
 
 The v0 API supports multiple ways to initialize chats from existing code:
 
-* **GitHub Repositories** - Import directly from public or private repos
-* **File Uploads** - Upload individual files with content
-* **Zip Archives** - Import from zip file URLs
-* **Registry Components** - Use community components
+- **GitHub Repositories** - Import directly from public or private repos
+- **File Uploads** - Upload individual files with content
+- **Zip Archives** - Import from zip file URLs
+- **Registry Components** - Use community components
 
 ## Importing from GitHub Repositories
 
@@ -157,17 +156,17 @@ const chat = await v0.chats.init({
 
 Use `chats.init()` when you have existing code and want to start development:
 
-* **Fast** - No AI processing during initialization
-* **Free** - Doesn't consume tokens
-* **Files-first** - Start with existing code structure
+- **Fast** - No AI processing during initialization
+- **Free** - Doesn't consume tokens
+- **Files-first** - Start with existing code structure
 
 ### When to Use `chats.create()`
 
 Use `chats.create()` when starting from scratch:
 
-* **AI-powered** - Generates initial code from prompts
-* **Token cost** - Consumes tokens for AI generation
-* **Prompt-first** - Start with natural language description
+- **AI-powered** - Generates initial code from prompts
+- **Token cost** - Consumes tokens for AI generation
+- **Prompt-first** - Start with natural language description
 
 ```typescript
 // chats.init() - Fast, no tokens, existing code
@@ -212,7 +211,6 @@ const chat = await v0.chats.init({
   ],
 })
 ```
-
 
 ---
 

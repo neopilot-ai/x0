@@ -16,11 +16,15 @@ export default function AboutPage() {
       <section className="mt-10 space-y-5 text-[15px] leading-7">
         <h2 className="text-lg font-semibold">How the knowledge base works</h2>
         <p>
-          The corpus is ingested from <Link className="underline underline-offset-4" href="https://v0.app/docs">v0.app/docs</Link>{' '}
+          The corpus is ingested from{' '}
+          <Link className="underline underline-offset-4" href="https://v0.app/docs">
+            v0.app/docs
+          </Link>{' '}
           — including its sitemap, LLMs.txt corpus, and per-page Markdown — via a local ingestion
-          script under <code className="rounded bg-muted px-1.5 py-0.5">scripts/ingest-docs.mjs</code>.
-          It is committed to the app as static data so the deployed site needs no external calls to
-          render any page.
+          script under{' '}
+          <code className="rounded bg-muted px-1.5 py-0.5">scripts/ingest-docs.mjs</code>. It is
+          committed to the app as static data so the deployed site needs no external calls to render
+          any page.
         </p>
         <p>
           Currently the index contains <strong>{stats.total} documents</strong> across{' '}
@@ -40,25 +44,43 @@ export default function AboutPage() {
         <h2 className="text-lg font-semibold">Capabilities</h2>
         <ul className="list-disc space-y-1.5 pl-6 marker:text-muted-foreground">
           <li>
-            <Link className="underline underline-offset-4" href="/docs">Documentation</Link> — browsable corpus with per-page content and provenance.
+            <Link className="underline underline-offset-4" href="/docs">
+              Documentation
+            </Link>{' '}
+            — browsable corpus with per-page content and provenance.
           </li>
           <li>
-            <Link className="underline underline-offset-4" href="/search">Search</Link> — server-side ranked search over stored body text.
+            <Link className="underline underline-offset-4" href="/search">
+              Search
+            </Link>{' '}
+            — server-side ranked search over stored body text.
           </li>
           <li>
-            <Link className="underline underline-offset-4" href="/graph">Knowledge graph</Link> — docs connected by recorded related/prerequisite links.
+            <Link className="underline underline-offset-4" href="/graph">
+              Knowledge graph
+            </Link>{' '}
+            — docs connected by recorded related/prerequisite links.
           </li>
           <li>
-            <Link className="underline underline-offset-4" href="/assistant">Ask the docs</Link> — retrieval-augmented assistant with citations.
+            <Link className="underline underline-offset-4" href="/assistant">
+              Ask the docs
+            </Link>{' '}
+            — retrieval-augmented assistant with citations.
           </li>
           <li>
-            <Link className="underline underline-offset-4" href="/admin">Admin</Link> — ingestion tool and coverage report.
+            <Link className="underline underline-offset-4" href="/admin">
+              Admin
+            </Link>{' '}
+            — ingestion tool and coverage report.
           </li>
         </ul>
 
         <h2 className="text-lg font-semibold">Surfaces</h2>
         <p>
-          <Link className="underline underline-offset-4" href="/">The dashboard</Link> ties together the surfaces and navigation. Press{' '}
+          <Link className="underline underline-offset-4" href="/">
+            The dashboard
+          </Link>{' '}
+          ties together the surfaces and navigation. Press{' '}
           <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 text-xs">⌘K</kbd> or{' '}
           <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 text-xs">Ctrl K</kbd>{' '}
           anywhere to jump across the corpus.

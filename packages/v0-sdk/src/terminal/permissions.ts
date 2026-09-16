@@ -33,7 +33,7 @@ export async function addRule(rule: PermissionRule): Promise<void> {
 }
 
 export async function removeRule(pattern: string): Promise<void> {
-  rules = rules.filter(r => r.pattern !== pattern)
+  rules = rules.filter((r) => r.pattern !== pattern)
   await fetch(`/api/sandbox/rules?pattern=${encodeURIComponent(pattern)}`, { method: 'DELETE' })
 }
 
@@ -52,6 +52,6 @@ export async function evaluateCommand(command: string, mode?: PermissionMode): P
 
 function evaluateAgainstBuiltinAllow(command: string): boolean {
   const denied = ['rm -rf', 'sudo', 'shutdown', 'reboot']
-  if (denied.some(p => command.includes(p))) return false
+  if (denied.some((p) => command.includes(p))) return false
   return true
 }

@@ -99,7 +99,10 @@ function Block({ block }: { block: Block }) {
         )
       }
       return (
-        <h3 id={slugify(block.text)} className="scroll-mt-20 pt-2 text-lg font-semibold text-foreground">
+        <h3
+          id={slugify(block.text)}
+          className="scroll-mt-20 pt-2 text-lg font-semibold text-foreground"
+        >
           {block.text}
         </h3>
       )
@@ -129,9 +132,7 @@ function Block({ block }: { block: Block }) {
         </ul>
       )
     case 'code':
-      return (
-        <CodeBlock language={block.language} code={block.code} />
-      )
+      return <CodeBlock language={block.language} code={block.code} />
     case 'table':
       return (
         <div className="overflow-x-auto rounded-xl border border-border">
@@ -175,7 +176,7 @@ function parseBlocks(content: string): Block[] {
   let i = 0
 
   const pushParagraph = (linesToMerge: string[]) => {
-    const text = linesToMerge.map((line) => line.trim().replace(/^[+#>\-\*]+\s*/, '')).join(' ')
+    const text = linesToMerge.map((line) => line.trim().replace(/^[+#>\-*]+\s*/, '')).join(' ')
     if (text) blocks.push({ type: 'paragraph', text })
   }
 
@@ -235,8 +236,16 @@ function parseBlocks(content: string): Block[] {
     if (/^[-*]\s+/.test(trimmed) || /^\d+\.\s+/.test(trimmed)) {
       const ordered = /^\d+\./.test(trimmed)
       const items: string[] = []
-      while (i < lines.length && (/^[-*]\s+/.test(lines[i].trim()) || /^\d+\.\s+/.test(lines[i].trim()))) {
-        items.push(lines[i].trim().replace(/^[-*]\s+/, '').replace(/^\d+\.\s+/, ''))
+      while (
+        i < lines.length &&
+        (/^[-*]\s+/.test(lines[i].trim()) || /^\d+\.\s+/.test(lines[i].trim()))
+      ) {
+        items.push(
+          lines[i]
+            .trim()
+            .replace(/^[-*]\s+/, '')
+            .replace(/^\d+\.\s+/, ''),
+        )
         i++
       }
       blocks.push({ type: 'list', ordered, items })

@@ -6,21 +6,9 @@
   "category": "Integrations",
   "type": "integration",
   "description": "Connect GitHub repositories to v0 and ship changes through branches, previews, pull requests, and CI.",
-  "topics": [
-    "github",
-    "deployment",
-    "previews",
-    "integrations"
-  ],
-  "related": [
-    "git-import",
-    "deployments",
-    "vercel-integration",
-    "projects"
-  ],
-  "requires": [
-    "quickstart"
-  ],
+  "topics": ["github", "deployment", "previews", "integrations"],
+  "related": ["git-import", "deployments", "vercel-integration", "projects"],
+  "requires": ["quickstart"],
   "headings": [
     "How v0 works with Git",
     "Connect a project to GitHub",
