@@ -10,7 +10,4 @@ export default defineConfig({
   publint: true,
   attw: true,
   minify: true,
-  checks: {
-    pluginTimings: false,
-  },
 })

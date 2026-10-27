@@ -5,10 +5,10 @@
     "target": "ES2022",
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "moduleResolution": "bundler",
-    "types": ["bun"],
     "exactOptionalPropertyTypes": false,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "types": ["bun"]
   },
   "include": ["src/**/*.ts"]
 }

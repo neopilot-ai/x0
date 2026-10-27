@@ -1,5 +1,5 @@
-import { DocsDashboard } from '@/components/docs/docs-dashboard'
+import { HomeClient } from '@/components/home/home-client'
 
 export default function HomePage() {
-  return <DocsDashboard />
+  return <HomeClient />
 }

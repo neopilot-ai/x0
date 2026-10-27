@@ -4,33 +4,20 @@ import { client as generatedClient } from './generated/client.gen'
 import type { Auth, AuthToken } from './generated/core/auth.gen'
 import { createV0StreamResult, type V0StreamResult } from './stream/result'
 import { vercelOidcAuth } from './vercel-oidc'
+
+export { parseDesignModeMessage, toDesignModeMessage } from './design-mode/payload'
+export type {
+  DesignModeEdit,
+  DesignModeElement,
+  DesignModeInput,
+  DesignModeMessage,
+  DesignModeRuntimePayload,
+} from './design-mode/types'
 export { fetchPreview } from './preview-proxy'
 export * from './stream'
 export type { FetchPreviewOptions } from './preview-proxy'
 export { vercelOidcAuth, type VercelOidcAuthOptions } from './vercel-oidc'
 export type * from './generated/types.gen'
-export * from './sandbox'
-export {
-  connectToSandbox as connectToCodeServerSandbox,
-  startCodeServer,
-  stopCodeServer,
-  getCodeServerUrl,
-} from './sandbox/code-server'
-export type { V0SandboxConfig, CodeServerSandboxConnection } from './sandbox/code-server'
-export * from './code-server'
-export * from './design-systems'
-export * from './deployments'
-export * from './versions'
-export * from './screenshots'
-export * from './agents'
-export * from './paper'
-export * from './instructions'
-export * from './settings'
-export { executeBash, getBashHistory, cancelCommand } from './terminal'
-export { setPermissionMode, addRule, removeRule, evaluateCommand } from './terminal'
-export { BUILTIN_ALLOW, BUILTIN_DENY, DEFAULT_RULES } from './terminal'
-export { getAgentPermissions, setAgentPermissions, resetToDefault } from './terminal'
-export type { PermissionMode } from './terminal'
 
 type CreateClientConfig = NonNullable<Parameters<typeof createClient>[0]>
 type CreateV0ClientConfig = CreateClientConfig & {

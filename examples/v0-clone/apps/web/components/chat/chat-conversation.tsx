@@ -10,29 +10,32 @@ import {
   type V0UIMessage,
 } from '@v0-sdk/react'
 import { useMessages, useResolveTask, useRestoreMessage, useStopMessage } from '@v0-sdk/react/swr'
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { readV0Stream } from 'v0/browser'
 import { ConversationView } from '@/components/chat/conversation-view'
 import { PromptBox } from '@/components/prompt-box'
 import type { ResolveTask } from '@/components/chat/task-resolution'
 import { useSettings } from '@/lib/hooks/useSettings'
+import { withDesignModeTurn, type DesignModeTurn } from '@/lib/design-mode-message'
 
 export function ChatConversation({
   chatId,
   messages: initialMessages,
+  externallyBusy,
+  designTurn,
+  onDesignTurnSettled,
+  onBusyChange,
   onContentChange,
   vercelProjectId,
-  isNewChat = false,
-  onChatCreated,
-  onChatFinished,
 }: {
   chatId: string
   messages: Message[]
+  externallyBusy: boolean
+  designTurn: DesignModeTurn | null
+  onDesignTurnSettled: () => void
+  onBusyChange: (busy: boolean) => void
   onContentChange: () => void
   vercelProjectId?: string
-  isNewChat?: boolean
-  onChatCreated?: (chatId: string) => void
-  onChatFinished?: () => void
 }) {
   const { settings, updateSettings } = useSettings()
   const [isResolving, setIsResolving] = useState(false)
@@ -58,26 +61,18 @@ export function ChatConversation({
     `/api/chats/${encodeURIComponent(chatId)}/restore`,
   )
   const initialUiMessages = useMemo(() => toV0UIMessages(initialMessages), [initialMessages])
-  const createdChatIdRef = useRef<string | null>(null)
   const transport = useMemo(
     () =>
       new V0Transport({
+        chatId,
         messages: persistedMessages,
         urls: {
           create: '/api/chats',
           send: (id) => `/api/chats/${encodeURIComponent(id)}/messages`,
           resume: (id) => `/api/chats/${encodeURIComponent(id)}/resume`,
         },
-        ...(isNewChat
-          ? {
-              onChatCreated: (id: string) => {
-                createdChatIdRef.current = id
-                onChatCreated?.(id)
-              },
-            }
-          : { chatId }),
       }),
-    [chatId, isNewChat, persistedMessages, onChatCreated],
+    [chatId, persistedMessages],
   )
 
   const {
@@ -95,10 +90,6 @@ export function ChatConversation({
     transport,
     onFinish: () => {
       onContentChange()
-      if (isNewChat) {
-        onChatFinished?.()
-        return
-      }
       void refreshMessages().catch((error) => {
         setActionError(errorMessage(error, 'Failed to refresh messages.'))
       })
@@ -106,6 +97,11 @@ export function ChatConversation({
   })
 
   const chatIsBusy = status === 'submitted' || status === 'streaming'
+  const busy = chatIsBusy || isResolving || isStopping || restoringMessageId !== null
+  useEffect(() => {
+    onBusyChange(busy)
+  }, [busy, onBusyChange])
+
   const activeAssistantMessage = resolvingMessageId
     ? uiMessages.find((message) => message.id === resolvingMessageId)
     : uiMessages.findLast(
@@ -124,13 +120,13 @@ export function ChatConversation({
   }, [chatIsBusy, isResolving, persistedMessages, setMessages])
 
   const refreshMessages = async () => {
-    if (isNewChat) return
     if (!(await messagesQuery.mutate())) {
       throw new Error('Failed to refresh messages.')
     }
   }
 
   const submitMessage = async (message: string) => {
+    if (externallyBusy) return
     setActionError(null)
     clearError()
 
@@ -148,6 +144,7 @@ export function ChatConversation({
   }
 
   const restoreMessage = async (messageId: string) => {
+    if (externallyBusy) return
     setActionError(null)
     setRestoringMessageId(messageId)
 
@@ -162,6 +159,7 @@ export function ChatConversation({
   }
 
   const resolveTask = async (task: ResolveTask) => {
+    if (externallyBusy) return
     setActionError(null)
     clearError()
     setIsResolving(true)
@@ -204,19 +202,6 @@ export function ChatConversation({
     setActionError(null)
     setIsStopping(true)
 
-    if (isNewChat) {
-      try {
-        await stop()
-        onContentChange()
-        if (createdChatIdRef.current) onChatFinished?.()
-      } catch (error) {
-        setActionError(errorMessage(error, 'Failed to stop message.'))
-      } finally {
-        setIsStopping(false)
-      }
-      return
-    }
-
     try {
       await stopMessageMutation.trigger()
       await stop()
@@ -229,16 +214,34 @@ export function ChatConversation({
     }
   }
 
-  const isSubmitting = chatIsBusy || isResolving
+  const designAssistantId = designTurn?.assistant?.id
+  useEffect(() => {
+    if (
+      !externallyBusy &&
+      designAssistantId &&
+      uiMessages.some((message) => message.id === designAssistantId)
+    ) {
+      onDesignTurnSettled()
+    }
+  }, [designAssistantId, externallyBusy, onDesignTurnSettled, uiMessages])
+  const visibleMessages = useMemo(
+    () => withDesignModeTurn(uiMessages, designTurn),
+    [uiMessages, designTurn],
+  )
+  const isSubmitting = chatIsBusy || isResolving || externallyBusy
   const isStreaming =
-    activeAssistantMessage !== undefined && (status === 'streaming' || resolvingMessageId !== null)
+    (externallyBusy && Boolean(designTurn?.assistant)) ||
+    (activeAssistantMessage !== undefined &&
+      (status === 'streaming' || resolvingMessageId !== null))
   const error = actionError ?? chatError?.message
 
   return (
     <>
       <ConversationView
         isStreaming={isStreaming}
-        messages={uiMessages}
+        isProcessing={externallyBusy || status === 'submitted'}
+        processingLabel={externallyBusy ? 'Applying design changes…' : 'Thinking…'}
+        messages={visibleMessages}
         onRejectPermission={() => submitMessage('Do not run this action. Continue without it.')}
         onResolveTask={resolveTask}
         onRestoreMessage={restoreMessage}

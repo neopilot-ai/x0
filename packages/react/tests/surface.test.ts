@@ -23,12 +23,17 @@ describe('generated hook surface', () => {
     expect(V0_REACT_OPERATION_HOOKS['chats.getConnectStatus']).toBe('useConnectStatus')
     expect(V0_REACT_OPERATION_HOOKS['chats.restoreMessage']).toBe('useRestoreMessage')
     expect(V0_REACT_OPERATION_HOOKS['chats.createVercelProject']).toBe('useCreateProject')
+    expect(V0_REACT_OPERATION_HOOKS['chats.createFromVercelProject']).toBe(
+      'useCreateChatFromVercelProject',
+    )
     expect(V0_REACT_OPERATION_HOOKS['chats.createStream']).toBe('useCreateChat')
     expect(V0_REACT_OPERATION_HOOKS['chats.create']).toBe('useCreateChatBlocking')
     expect(V0_REACT_OPERATION_HOOKS['messages.sendStream']).toBe('useSendMessage')
     expect(V0_REACT_OPERATION_HOOKS['messages.resolveStream']).toBe('useResolveTask')
     expect(V0_REACT_OPERATION_HOOKS['settings.getPreviewHosts']).toBe('usePreviewHosts')
     expect(V0_REACT_OPERATION_HOOKS['settings.setPreviewHosts']).toBe('useSetPreviewHosts')
+    expect(V0_REACT_OPERATION_HOOKS['settings.appendPreviewHosts']).toBe('useAppendPreviewHosts')
+    expect(V0_REACT_OPERATION_HOOKS['settings.deletePreviewHosts']).toBe('useDeletePreviewHosts')
     expect(V0_REACT_OPERATION_HOOKS['usage.getActivity']).toBe('useUsageActivity')
     expect(V0_REACT_OPERATION_HOOKS['usage.getSummary']).toBe('useUsageSummary')
     expect(V0_REACT_OPERATION_HOOKS['usage.listEvents']).toBe('useUsageEvents')
