@@ -14,7 +14,7 @@ export interface UsePreviewHostsReturn {
   error: Error | null
 }
 
-export function usePreviewHosts(): UsePreviewHostsReturn {
+export function usePreviewHostSettings(): UsePreviewHostsReturn {
   const [hosts, setHostsState] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)

@@ -93,9 +93,9 @@ See [Code Editing](/docs/code-editing) and [Terminal Commands](/docs/terminal-co
 ## Preview-host settings
 
 ```tsx
-import { usePreviewHosts } from '@v0-sdk/react'
+import { usePreviewHostSettings } from '@v0-sdk/react'
 
-const { hosts, setHosts, addHost, removeHost, isLoading, error } = usePreviewHosts()
+const { hosts, setHosts, addHost, removeHost, isLoading, error } = usePreviewHostSettings()
 ```
 
 ## Request primitives
