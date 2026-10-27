@@ -2,7 +2,7 @@ import { parseDesignModeMessage, type DesignModeMessage } from 'v0'
 import { authorizeProxyRequest } from '@/lib/proxy'
 import { v0 } from '@/lib/v0-client'
 
-export const maxDuration = 1800
+export const maxDuration = 300
 
 export async function POST(request: Request, { params }: { params: Promise<{ chatId: string }> }) {
   const denied = authorizeProxyRequest(request)
