@@ -14,6 +14,7 @@ export * from './settings'
 // './settings' defines local ones that would conflict.
 export type {
   Chat,
+  ChatsGetResponse,
   Files,
   Message,
   MessagesListResponse,
