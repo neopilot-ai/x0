@@ -21,7 +21,6 @@ yarn add v0@canary
 bun add v0@canary
 ```
 
-
 ## Usage
 
 Set `V0_API_KEY`, or deploy server-side code on Vercel with OIDC enabled, then use the default client.
