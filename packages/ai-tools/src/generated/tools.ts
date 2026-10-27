@@ -17,6 +17,7 @@ export type V0ToolName =
   | 'chatsCreateAsync'
   | 'chatsCreateFromFiles'
   | 'chatsCreateFromRepo'
+  | 'chatsCreateFromVercelProject'
   | 'chatsCreateFromZip'
   | 'chatsCreateStream'
   | 'chatsCreateVercelProject'
@@ -47,6 +48,8 @@ export type V0ToolName =
   | 'messagesSendAsync'
   | 'messagesSendStream'
   | 'messagesStop'
+  | 'settingsAppendPreviewHosts'
+  | 'settingsDeletePreviewHosts'
   | 'settingsGetPreviewHosts'
   | 'settingsSetPreviewHosts'
   | 'usageGetActivity'
@@ -67,6 +70,7 @@ export type V0ToolsByCategory = {
     | 'chatsCreateAsync'
     | 'chatsCreateFromFiles'
     | 'chatsCreateFromRepo'
+    | 'chatsCreateFromVercelProject'
     | 'chatsCreateFromZip'
     | 'chatsCreateStream'
     | 'chatsCreateVercelProject'
@@ -104,7 +108,13 @@ export type V0ToolsByCategory = {
     | 'messagesSendStream'
     | 'messagesStop'
   >
-  settings: Pick<V0ToolsFlat, 'settingsGetPreviewHosts' | 'settingsSetPreviewHosts'>
+  settings: Pick<
+    V0ToolsFlat,
+    | 'settingsAppendPreviewHosts'
+    | 'settingsDeletePreviewHosts'
+    | 'settingsGetPreviewHosts'
+    | 'settingsSetPreviewHosts'
+  >
   usage: Pick<V0ToolsFlat, 'usageGetActivity' | 'usageGetSummary' | 'usageListEvents'>
   webhooks: Pick<
     V0ToolsFlat,
@@ -125,8 +135,10 @@ const chatsCreateInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -185,6 +197,29 @@ const chatsCreateInputSchema = z.object({
   metadata: z
     .record(z.string(), z.string())
     .describe('Arbitrary key-value data to attach to the chat.')
+    .optional(),
+  credentialAccess: z
+    .object({
+      sharedNpm: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.",
+        )
+        .optional(),
+      vercel: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.",
+        )
+        .optional(),
+      github: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.",
+        )
+        .optional(),
+    })
+    .describe("Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.")
     .optional(),
 })
 
@@ -199,8 +234,10 @@ const chatsCreateAsyncInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -260,6 +297,29 @@ const chatsCreateAsyncInputSchema = z.object({
     .record(z.string(), z.string())
     .describe('Arbitrary key-value data to attach to the chat.')
     .optional(),
+  credentialAccess: z
+    .object({
+      sharedNpm: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.",
+        )
+        .optional(),
+      vercel: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.",
+        )
+        .optional(),
+      github: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.",
+        )
+        .optional(),
+    })
+    .describe("Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.")
+    .optional(),
 })
 
 const chatsCreateFromFilesInputSchema = z.object({
@@ -267,7 +327,11 @@ const chatsCreateFromFilesInputSchema = z.object({
     .array(
       z.object({
         name: z.string().describe('Path of the file in the project.'),
-        content: z.string().describe('UTF-8 text content of the file.'),
+        content: z.string().describe('File content encoded according to `encoding`.'),
+        encoding: z
+          .enum(['utf8', 'base64'])
+          .describe('How `content` is encoded. Defaults to `utf8` when omitted.')
+          .optional(),
       }),
     )
     .describe('Source files used to seed the new chat.'),
@@ -307,6 +371,25 @@ const chatsCreateFromRepoInputSchema = z.object({
     .optional(),
 })
 
+const chatsCreateFromVercelProjectInputSchema = z.object({
+  vercelProjectId: z.string().describe('Vercel project ID in the active user or team scope.'),
+  baseBranch: z
+    .string()
+    .describe(
+      'Base branch for a GitHub-linked project. Defaults to the repository default branch. Ignored for projects without a GitHub link.',
+    )
+    .optional(),
+  privacy: z
+    .enum(['public', 'private', 'team', 'team-edit', 'unlisted'])
+    .describe('Visibility setting for the new chat.')
+    .optional(),
+  title: z.string().describe('Title for the new chat.').optional(),
+  metadata: z
+    .record(z.string(), z.string())
+    .describe('Arbitrary key-value data to attach to the chat.')
+    .optional(),
+})
+
 const chatsCreateFromZipInputSchema = z.object({
   url: z.string().url().describe('Zip archive used to seed the new chat.'),
   privacy: z
@@ -331,8 +414,10 @@ const chatsCreateStreamInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -392,6 +477,29 @@ const chatsCreateStreamInputSchema = z.object({
     .record(z.string(), z.string())
     .describe('Arbitrary key-value data to attach to the chat.')
     .optional(),
+  credentialAccess: z
+    .object({
+      sharedNpm: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.",
+        )
+        .optional(),
+      vercel: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.",
+        )
+        .optional(),
+      github: z
+        .boolean()
+        .describe(
+          "Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.",
+        )
+        .optional(),
+    })
+    .describe("Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.")
+    .optional(),
 })
 
 const chatsCreateVercelProjectInputSchema = z.object({
@@ -424,6 +532,10 @@ const chatsDuplicateInputSchema = z.object({
     .describe(
       'Custom title for the duplicated chat. If omitted, the original title is reused with an incremented suffix (e.g. "My Chat (2)").',
     )
+    .optional(),
+  metadata: z
+    .record(z.string(), z.string())
+    .describe('Arbitrary key-value data to attach to the chat.')
     .optional(),
 })
 
@@ -504,6 +616,10 @@ const chatsUpdateFilesInputSchema = z.object({
         content: z
           .union([z.string(), z.null()])
           .describe('New file content. Pass `null` to delete the file at this path.'),
+        encoding: z
+          .enum(['utf8', 'base64'])
+          .describe('How non-null `content` is encoded. Defaults to `utf8` when omitted.')
+          .optional(),
       }),
     )
     .describe('The files to create, update, or delete. Each path must be unique.'),
@@ -637,7 +753,7 @@ const messagesResolveInputSchema = z.object({
         connectedNpmRegistryIds: z
           .array(z.string())
           .describe(
-            'Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.',
+            'Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.',
           )
           .optional(),
         connectedMcpPresetNames: z
@@ -654,7 +770,10 @@ const messagesResolveInputSchema = z.object({
               'Granola',
               'PostHog',
               'Contentful',
+              'Mobbin',
               'Slack',
+              'Nitrosend',
+              'Datadog',
             ]),
           )
           .describe(
@@ -742,6 +861,9 @@ const messagesResolveInputSchema = z.object({
       z.object({
         type: z.enum(['vercel-connect-setup']),
       }),
+      z.object({
+        type: z.enum(['vercel-connect-authorization']),
+      }),
     ])
     .describe(
       'The task resolution data. Use this when the chat is waiting for user input on the matching task type.',
@@ -749,8 +871,10 @@ const messagesResolveInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.')
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        )
         .optional(),
       imageGenerations: z
         .boolean()
@@ -776,7 +900,7 @@ const messagesResolveAsyncInputSchema = z.object({
         connectedNpmRegistryIds: z
           .array(z.string())
           .describe(
-            'Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.',
+            'Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.',
           )
           .optional(),
         connectedMcpPresetNames: z
@@ -793,7 +917,10 @@ const messagesResolveAsyncInputSchema = z.object({
               'Granola',
               'PostHog',
               'Contentful',
+              'Mobbin',
               'Slack',
+              'Nitrosend',
+              'Datadog',
             ]),
           )
           .describe(
@@ -881,6 +1008,9 @@ const messagesResolveAsyncInputSchema = z.object({
       z.object({
         type: z.enum(['vercel-connect-setup']),
       }),
+      z.object({
+        type: z.enum(['vercel-connect-authorization']),
+      }),
     ])
     .describe(
       'The task resolution data. Use this when the chat is waiting for user input on the matching task type.',
@@ -888,8 +1018,10 @@ const messagesResolveAsyncInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.')
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        )
         .optional(),
       imageGenerations: z
         .boolean()
@@ -915,7 +1047,7 @@ const messagesResolveStreamInputSchema = z.object({
         connectedNpmRegistryIds: z
           .array(z.string())
           .describe(
-            'Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.',
+            'Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.',
           )
           .optional(),
         connectedMcpPresetNames: z
@@ -932,7 +1064,10 @@ const messagesResolveStreamInputSchema = z.object({
               'Granola',
               'PostHog',
               'Contentful',
+              'Mobbin',
               'Slack',
+              'Nitrosend',
+              'Datadog',
             ]),
           )
           .describe(
@@ -1020,6 +1155,9 @@ const messagesResolveStreamInputSchema = z.object({
       z.object({
         type: z.enum(['vercel-connect-setup']),
       }),
+      z.object({
+        type: z.enum(['vercel-connect-authorization']),
+      }),
     ])
     .describe(
       'The task resolution data. Use this when the chat is waiting for user input on the matching task type.',
@@ -1027,8 +1165,10 @@ const messagesResolveStreamInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.')
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        )
         .optional(),
       imageGenerations: z
         .boolean()
@@ -1041,7 +1181,127 @@ const messagesResolveStreamInputSchema = z.object({
 
 const messagesSendInputSchema = z.object({
   chatId: z.string(),
-  message: z.string().describe('The prompt or instruction to send to the model.'),
+  message: z
+    .string()
+    .describe(
+      'The prompt or instruction to send to the model. May be omitted when designMode contains edits.',
+    )
+    .optional(),
+  designMode: z
+    .object({
+      edits: z
+        .array(
+          z.union([
+            z.object({
+              type: z.enum(['style']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              changes: z
+                .record(
+                  z.string(),
+                  z.object({
+                    from: z
+                      .string()
+                      .describe(
+                        'Previous value. Context for the model, not a checked precondition.',
+                      ),
+                    to: z.string().describe('Requested value.'),
+                  }),
+                )
+                .describe(
+                  'CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.',
+                ),
+            }),
+            z.object({
+              type: z.enum(['deleteElement']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+            }),
+            z.object({
+              type: z.enum(['move']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              toParentSelector: z
+                .string()
+                .describe('Destination parent selector. Required when position is inside.')
+                .optional(),
+              targetSelector: z
+                .string()
+                .describe(
+                  'Destination sibling selector. Required when position is before or after.',
+                )
+                .optional(),
+              position: z
+                .enum(['before', 'after', 'inside'])
+                .describe('Placement relative to the destination.'),
+            }),
+            z.object({
+              type: z.enum(['fontInjection']),
+              fontName: z.string().describe('Font to add to the project, such as Inter.'),
+            }),
+          ]),
+        )
+        .describe('Element edits to apply to the source code. Maximum 100.')
+        .optional(),
+      element: z
+        .string()
+        .describe('CSS selector limiting the scope of the message instructions.')
+        .optional(),
+      screenshot: z
+        .object({
+          url: z
+            .string()
+            .describe(
+              'HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.',
+            ),
+          anchorElement: z
+            .string()
+            .describe('CSS selector anchoring the screenshot to a rendered element.')
+            .optional(),
+        })
+        .describe('Screenshot providing visual context for the requested edits.')
+        .optional(),
+    })
+    .describe(
+      'Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.',
+    )
+    .optional(),
   systemPrompt: z
     .string()
     .describe(
@@ -1051,8 +1311,10 @@ const messagesSendInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -1107,7 +1369,127 @@ const messagesSendInputSchema = z.object({
 
 const messagesSendAsyncInputSchema = z.object({
   chatId: z.string(),
-  message: z.string().describe('The prompt or instruction to send to the model.'),
+  message: z
+    .string()
+    .describe(
+      'The prompt or instruction to send to the model. May be omitted when designMode contains edits.',
+    )
+    .optional(),
+  designMode: z
+    .object({
+      edits: z
+        .array(
+          z.union([
+            z.object({
+              type: z.enum(['style']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              changes: z
+                .record(
+                  z.string(),
+                  z.object({
+                    from: z
+                      .string()
+                      .describe(
+                        'Previous value. Context for the model, not a checked precondition.',
+                      ),
+                    to: z.string().describe('Requested value.'),
+                  }),
+                )
+                .describe(
+                  'CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.',
+                ),
+            }),
+            z.object({
+              type: z.enum(['deleteElement']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+            }),
+            z.object({
+              type: z.enum(['move']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              toParentSelector: z
+                .string()
+                .describe('Destination parent selector. Required when position is inside.')
+                .optional(),
+              targetSelector: z
+                .string()
+                .describe(
+                  'Destination sibling selector. Required when position is before or after.',
+                )
+                .optional(),
+              position: z
+                .enum(['before', 'after', 'inside'])
+                .describe('Placement relative to the destination.'),
+            }),
+            z.object({
+              type: z.enum(['fontInjection']),
+              fontName: z.string().describe('Font to add to the project, such as Inter.'),
+            }),
+          ]),
+        )
+        .describe('Element edits to apply to the source code. Maximum 100.')
+        .optional(),
+      element: z
+        .string()
+        .describe('CSS selector limiting the scope of the message instructions.')
+        .optional(),
+      screenshot: z
+        .object({
+          url: z
+            .string()
+            .describe(
+              'HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.',
+            ),
+          anchorElement: z
+            .string()
+            .describe('CSS selector anchoring the screenshot to a rendered element.')
+            .optional(),
+        })
+        .describe('Screenshot providing visual context for the requested edits.')
+        .optional(),
+    })
+    .describe(
+      'Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.',
+    )
+    .optional(),
   systemPrompt: z
     .string()
     .describe(
@@ -1117,8 +1499,10 @@ const messagesSendAsyncInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -1173,7 +1557,127 @@ const messagesSendAsyncInputSchema = z.object({
 
 const messagesSendStreamInputSchema = z.object({
   chatId: z.string(),
-  message: z.string().describe('The prompt or instruction to send to the model.'),
+  message: z
+    .string()
+    .describe(
+      'The prompt or instruction to send to the model. May be omitted when designMode contains edits.',
+    )
+    .optional(),
+  designMode: z
+    .object({
+      edits: z
+        .array(
+          z.union([
+            z.object({
+              type: z.enum(['style']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              changes: z
+                .record(
+                  z.string(),
+                  z.object({
+                    from: z
+                      .string()
+                      .describe(
+                        'Previous value. Context for the model, not a checked precondition.',
+                      ),
+                    to: z.string().describe('Requested value.'),
+                  }),
+                )
+                .describe(
+                  'CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.',
+                ),
+            }),
+            z.object({
+              type: z.enum(['deleteElement']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+            }),
+            z.object({
+              type: z.enum(['move']),
+              element: z.object({
+                selectorPath: z.string().describe('CSS selector identifying the rendered element.'),
+                tagName: z.string().describe('HTML tag name, such as h1 or button.'),
+                id: z.string().describe('Element ID, if present.').optional(),
+                classNames: z.array(z.string()).describe('Element CSS classes.').optional(),
+                textContent: z
+                  .string()
+                  .describe('Current text of the element, to help locate its source.')
+                  .optional(),
+                reactComponentName: z
+                  .string()
+                  .describe('React component name, if known.')
+                  .optional(),
+              }),
+              toParentSelector: z
+                .string()
+                .describe('Destination parent selector. Required when position is inside.')
+                .optional(),
+              targetSelector: z
+                .string()
+                .describe(
+                  'Destination sibling selector. Required when position is before or after.',
+                )
+                .optional(),
+              position: z
+                .enum(['before', 'after', 'inside'])
+                .describe('Placement relative to the destination.'),
+            }),
+            z.object({
+              type: z.enum(['fontInjection']),
+              fontName: z.string().describe('Font to add to the project, such as Inter.'),
+            }),
+          ]),
+        )
+        .describe('Element edits to apply to the source code. Maximum 100.')
+        .optional(),
+      element: z
+        .string()
+        .describe('CSS selector limiting the scope of the message instructions.')
+        .optional(),
+      screenshot: z
+        .object({
+          url: z
+            .string()
+            .describe(
+              'HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.',
+            ),
+          anchorElement: z
+            .string()
+            .describe('CSS selector anchoring the screenshot to a rendered element.')
+            .optional(),
+        })
+        .describe('Screenshot providing visual context for the requested edits.')
+        .optional(),
+    })
+    .describe(
+      'Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.',
+    )
+    .optional(),
   systemPrompt: z
     .string()
     .describe(
@@ -1183,8 +1687,10 @@ const messagesSendStreamInputSchema = z.object({
   modelConfiguration: z
     .object({
       modelId: z
-        .enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast'])
-        .describe('Model to use for the generation.'),
+        .union([z.enum(['v0-mini', 'v0-pro', 'v0-max', 'v0-max-fast']), z.string()])
+        .describe(
+          'Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.',
+        ),
       imageGenerations: z
         .boolean()
         .describe('Enables image generations to generate up to 5 images per version.'),
@@ -1240,6 +1746,22 @@ const messagesSendStreamInputSchema = z.object({
 const messagesStopInputSchema = z.object({
   chatId: z.string(),
   messageId: z.string(),
+})
+
+const settingsAppendPreviewHostsInputSchema = z.object({
+  hosts: z
+    .array(z.string())
+    .describe(
+      'Distinct hostname patterns to append. Provide hostnames only, without scheme, port, path, userinfo, query, or fragment. *.example.com matches one subdomain label; **.example.com matches one or more. Neither includes the apex. Patterns are canonicalized before comparison.',
+    ),
+})
+
+const settingsDeletePreviewHostsInputSchema = z.object({
+  hosts: z
+    .array(z.string())
+    .describe(
+      'Distinct hostname patterns to delete. Provide hostnames only, without scheme, port, path, userinfo, query, or fragment. *.example.com matches one subdomain label; **.example.com matches one or more. Neither includes the apex. Patterns are canonicalized before comparison.',
+    ),
 })
 
 const settingsGetPreviewHostsInputSchema = z.object({})
@@ -1342,6 +1864,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
           privacy: input.privacy,
           title: input.title,
           metadata: input.metadata,
+          credentialAccess: input.credentialAccess,
         }
         return toToolResult(await client.chats.create(parameters))
       },
@@ -1361,12 +1884,14 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
           privacy: input.privacy,
           title: input.title,
           metadata: input.metadata,
+          credentialAccess: input.credentialAccess,
         }
         return toToolResult(await client.chats.createAsync(parameters))
       },
     }),
     chatsCreateFromFiles: tool({
-      description: 'Create Chat From Files: Creates a new chat from inline source files.',
+      description:
+        'Create Chat From Files: Creates a new chat from inline UTF-8 or base64-encoded source files.',
       inputSchema: chatsCreateFromFilesInputSchema,
       execute: async (input) => {
         const parameters = {
@@ -1391,6 +1916,21 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
         return toToolResult(await client.chats.createFromRepo(parameters))
       },
     }),
+    chatsCreateFromVercelProject: tool({
+      description:
+        'Create Chat From Vercel Project: Creates a new chat from an existing Vercel project.',
+      inputSchema: chatsCreateFromVercelProjectInputSchema,
+      execute: async (input) => {
+        const parameters = {
+          vercelProjectId: input.vercelProjectId,
+          baseBranch: input.baseBranch,
+          privacy: input.privacy,
+          title: input.title,
+          metadata: input.metadata,
+        }
+        return toToolResult(await client.chats.createFromVercelProject(parameters))
+      },
+    }),
     chatsCreateFromZip: tool({
       description: 'Create Chat From ZIP: Creates a new chat from a zip archive.',
       inputSchema: chatsCreateFromZipInputSchema,
@@ -1406,7 +1946,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     chatsCreateStream: tool({
       description:
-        'Create Chat (Streaming): Creates a new chat with a user message and returns a Server-Sent Events stream. Events include initial chat state, title deltas, content chunk deltas, and final chat state. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to ChatStreamEvent.',
+        'Create Chat (Streaming): Creates a new chat with a user message and returns a Server-Sent Events stream. Events include initial chat state, title deltas, content chunk deltas, and final chat state. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to ChatStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of sending the message again.',
       inputSchema: chatsCreateStreamInputSchema,
       execute: async function* (input) {
         const parameters = {
@@ -1419,6 +1959,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
           privacy: input.privacy,
           title: input.title,
           metadata: input.metadata,
+          credentialAccess: input.credentialAccess,
         }
         const result = await client.chats.createStream(parameters)
         yield* result.stream
@@ -1475,6 +2016,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
           chatId: input.chatId,
           privacy: input.privacy,
           title: input.title,
+          metadata: input.metadata,
         }
         return toToolResult(await client.chats.duplicate(parameters))
       },
@@ -1576,7 +2118,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     chatsUpdateFiles: tool({
       description:
-        "Update Chat Files: Creates, updates, or deletes files for a chat. Pass null to delete. This requires the chat's preview to be running.",
+        'Update Chat Files: Creates, updates, or deletes UTF-8 or base64-encoded files for a chat. Pass null to delete.',
       inputSchema: chatsUpdateFilesInputSchema,
       execute: async (input) => {
         const parameters = {
@@ -1697,7 +2239,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     messagesResolveStream: tool({
       description:
-        'Resolve Task (Streaming): Resolves a pending task in a chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to MessageStreamEvent.',
+        'Resolve Task (Streaming): Resolves a pending task in a chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to MessageStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of resolving the task again.',
       inputSchema: messagesResolveStreamInputSchema,
       execute: async function* (input) {
         const parameters = {
@@ -1711,12 +2253,13 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     messagesSend: tool({
       description:
-        'Send Message: Sends a new message to an existing chat. Blocks until the model response is complete and returns the message response.',
+        'Send Message: Sends a new message to an existing chat. Blocks until the model response is complete and returns the message response. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided.',
       inputSchema: messagesSendInputSchema,
       execute: async (input) => {
         const parameters = {
           chatId: input.chatId,
           message: input.message,
+          designMode: input.designMode,
           systemPrompt: input.systemPrompt,
           modelConfiguration: input.modelConfiguration,
           mcpServerIds: input.mcpServerIds,
@@ -1728,12 +2271,13 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     messagesSendAsync: tool({
       description:
-        'Send Message (Async): Sends a new message to an existing chat and processes it in the background. Returns immediately with the assistant message ID. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` to detect completion.',
+        'Send Message (Async): Sends a new message to an existing chat and processes it in the background. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided. Returns immediately with the assistant message ID. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` to detect completion.',
       inputSchema: messagesSendAsyncInputSchema,
       execute: async (input) => {
         const parameters = {
           chatId: input.chatId,
           message: input.message,
+          designMode: input.designMode,
           systemPrompt: input.systemPrompt,
           modelConfiguration: input.modelConfiguration,
           mcpServerIds: input.mcpServerIds,
@@ -1745,12 +2289,13 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     messagesSendStream: tool({
       description:
-        'Send Message (Streaming): Sends a new message to an existing chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to MessageStreamEvent.',
+        'Send Message (Streaming): Sends a new message to an existing chat and returns a Server-Sent Events stream. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\\n\\n` where the JSON conforms to MessageStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of sending the message again.',
       inputSchema: messagesSendStreamInputSchema,
       execute: async function* (input) {
         const parameters = {
           chatId: input.chatId,
           message: input.message,
+          designMode: input.designMode,
           systemPrompt: input.systemPrompt,
           modelConfiguration: input.modelConfiguration,
           mcpServerIds: input.mcpServerIds,
@@ -1773,9 +2318,31 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
         return toToolResult(await client.messages.stop(parameters))
       },
     }),
+    settingsAppendPreviewHosts: tool({
+      description:
+        'Append Trusted Preview Hosts: Appends host patterns without replacing existing hosts. Returns 422 if any normalized pattern already exists or the resulting list exceeds 100 hosts. The entire request succeeds or fails together.',
+      inputSchema: settingsAppendPreviewHostsInputSchema,
+      execute: async (input) => {
+        const parameters = {
+          hosts: input.hosts,
+        }
+        return toToolResult(await client.settings.appendPreviewHosts(parameters))
+      },
+    }),
+    settingsDeletePreviewHosts: tool({
+      description:
+        'Delete Trusted Preview Hosts: Deletes exact normalized host patterns. Returns 404 if any pattern is not configured. Wildcard coverage does not count as an exact match. The entire request succeeds or fails together.',
+      inputSchema: settingsDeletePreviewHostsInputSchema,
+      execute: async (input) => {
+        const parameters = {
+          hosts: input.hosts,
+        }
+        return toToolResult(await client.settings.deletePreviewHosts(parameters))
+      },
+    }),
     settingsGetPreviewHosts: tool({
       description:
-        'Get Trusted Preview Hosts: Returns the hostname patterns trusted to embed previews for the current team. Organization child teams inherit the parent organization’s hosts.',
+        'Get Trusted Preview Hosts: Returns the hostname patterns trusted to embed previews for the current team.',
       inputSchema: settingsGetPreviewHostsInputSchema,
       execute: async () => {
         return toToolResult(await client.settings.getPreviewHosts())
@@ -1783,7 +2350,7 @@ export function v0Tools(config: V0ToolsConfig = {}): V0ToolsFlat {
     }),
     settingsSetPreviewHosts: tool({
       description:
-        'Set Trusted Preview Hosts: Sets the host patterns trusted to embed previews for a standalone team or parent organization. Organization child teams cannot override this setting.',
+        'Set Trusted Preview Hosts: Sets the host patterns trusted to embed previews for a team.',
       inputSchema: settingsSetPreviewHostsInputSchema,
       execute: async (input) => {
         const parameters = {
@@ -1902,6 +2469,7 @@ export function v0ToolsByCategory(config: V0ToolsConfig = {}): V0ToolsByCategory
       chatsCreateAsync: pickTool(tools, 'chatsCreateAsync'),
       chatsCreateFromFiles: pickTool(tools, 'chatsCreateFromFiles'),
       chatsCreateFromRepo: pickTool(tools, 'chatsCreateFromRepo'),
+      chatsCreateFromVercelProject: pickTool(tools, 'chatsCreateFromVercelProject'),
       chatsCreateFromZip: pickTool(tools, 'chatsCreateFromZip'),
       chatsCreateStream: pickTool(tools, 'chatsCreateStream'),
       chatsCreateVercelProject: pickTool(tools, 'chatsCreateVercelProject'),
@@ -1938,6 +2506,8 @@ export function v0ToolsByCategory(config: V0ToolsConfig = {}): V0ToolsByCategory
       messagesStop: pickTool(tools, 'messagesStop'),
     },
     settings: {
+      settingsAppendPreviewHosts: pickTool(tools, 'settingsAppendPreviewHosts'),
+      settingsDeletePreviewHosts: pickTool(tools, 'settingsDeletePreviewHosts'),
       settingsGetPreviewHosts: pickTool(tools, 'settingsGetPreviewHosts'),
       settingsSetPreviewHosts: pickTool(tools, 'settingsSetPreviewHosts'),
     },

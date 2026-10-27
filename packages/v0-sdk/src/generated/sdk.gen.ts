@@ -2,8 +2,8 @@
 
 import { buildClientParams, type Client, type Options as Options2, type TDataShape } from './client';
 import { client } from './client.gen';
-import { chatsCreateFromFilesResponseTransformer, chatsCreateFromRepoResponseTransformer, chatsCreateFromZipResponseTransformer, chatsCreateResponseTransformer, chatsDuplicateResponseTransformer, chatsGetPreviewResponseTransformer, chatsGetResponseTransformer, chatsListResponseTransformer, chatsRestoreMessageResponseTransformer, chatsUpdateFilesResponseTransformer, chatsUpdateResponseTransformer, mcpServersCreateResponseTransformer, mcpServersGetResponseTransformer, mcpServersListResponseTransformer, mcpServersUpdateResponseTransformer, messagesGetResponseTransformer, messagesListResponseTransformer, messagesResolveResponseTransformer, messagesSendResponseTransformer, usageGetActivityResponseTransformer, usageGetSummaryResponseTransformer, usageListEventsResponseTransformer, webhooksCreateResponseTransformer, webhooksGetResponseTransformer, webhooksUpdateResponseTransformer } from './transformers.gen';
-import type { ChatsCreateAsyncErrors, ChatsCreateAsyncResponses, ChatsCreateErrors, ChatsCreateFromFilesErrors, ChatsCreateFromFilesResponses, ChatsCreateFromRepoErrors, ChatsCreateFromRepoResponses, ChatsCreateFromZipErrors, ChatsCreateFromZipResponses, ChatsCreateResponses, ChatsCreateStreamErrors, ChatsCreateStreamResponses, ChatsCreateVercelProjectErrors, ChatsCreateVercelProjectResponses, ChatsDeleteErrors, ChatsDeleteResponses, ChatsDeployErrors, ChatsDeployResponses, ChatsDownloadFilesErrors, ChatsDownloadFilesResponses, ChatsDuplicateErrors, ChatsDuplicateResponses, ChatsGetConnectStatusErrors, ChatsGetConnectStatusResponses, ChatsGetErrors, ChatsGetFilesErrors, ChatsGetFilesResponses, ChatsGetPreviewErrors, ChatsGetPreviewResponses, ChatsGetResponses, ChatsListErrors, ChatsListResponses, ChatsRestoreMessageErrors, ChatsRestoreMessageResponses, ChatsResumeErrors, ChatsResumeResponses, ChatsUpdateErrors, ChatsUpdateFilesErrors, ChatsUpdateFilesResponses, ChatsUpdateResponses, McpServersCreateErrors, McpServersCreateResponses, McpServersDeleteErrors, McpServersDeleteResponses, McpServersGetErrors, McpServersGetResponses, McpServersListErrors, McpServersListResponses, McpServersUpdateErrors, McpServersUpdateResponses, MessagesGetErrors, MessagesGetResponses, MessagesListErrors, MessagesListResponses, MessagesResolveAsyncErrors, MessagesResolveAsyncResponses, MessagesResolveErrors, MessagesResolveResponses, MessagesResolveStreamErrors, MessagesResolveStreamResponses, MessagesSendAsyncErrors, MessagesSendAsyncResponses, MessagesSendErrors, MessagesSendResponses, MessagesSendStreamErrors, MessagesSendStreamResponses, MessagesStopErrors, MessagesStopResponses, SettingsGetPreviewHostsErrors, SettingsGetPreviewHostsResponses, SettingsSetPreviewHostsErrors, SettingsSetPreviewHostsResponses, UsageGetActivityErrors, UsageGetActivityResponses, UsageGetSummaryErrors, UsageGetSummaryResponses, UsageListEventsErrors, UsageListEventsResponses, WebhooksCreateErrors, WebhooksCreateResponses, WebhooksDeleteErrors, WebhooksDeleteResponses, WebhooksGetErrors, WebhooksGetResponses, WebhooksListErrors, WebhooksListResponses, WebhooksUpdateErrors, WebhooksUpdateResponses } from './types.gen';
+import { chatsCreateFromFilesResponseTransformer, chatsCreateFromRepoResponseTransformer, chatsCreateFromVercelProjectResponseTransformer, chatsCreateFromZipResponseTransformer, chatsCreateResponseTransformer, chatsDuplicateResponseTransformer, chatsGetPreviewResponseTransformer, chatsGetResponseTransformer, chatsListResponseTransformer, chatsRestoreMessageResponseTransformer, chatsUpdateFilesResponseTransformer, chatsUpdateResponseTransformer, mcpServersCreateResponseTransformer, mcpServersGetResponseTransformer, mcpServersListResponseTransformer, mcpServersUpdateResponseTransformer, messagesGetResponseTransformer, messagesListResponseTransformer, messagesResolveResponseTransformer, messagesSendResponseTransformer, usageGetActivityResponseTransformer, usageGetSummaryResponseTransformer, usageListEventsResponseTransformer, webhooksCreateResponseTransformer, webhooksGetResponseTransformer, webhooksUpdateResponseTransformer } from './transformers.gen';
+import type { ChatsCreateAsyncErrors, ChatsCreateAsyncResponses, ChatsCreateErrors, ChatsCreateFromFilesErrors, ChatsCreateFromFilesResponses, ChatsCreateFromRepoErrors, ChatsCreateFromRepoResponses, ChatsCreateFromVercelProjectErrors, ChatsCreateFromVercelProjectResponses, ChatsCreateFromZipErrors, ChatsCreateFromZipResponses, ChatsCreateResponses, ChatsCreateStreamErrors, ChatsCreateStreamResponses, ChatsCreateVercelProjectErrors, ChatsCreateVercelProjectResponses, ChatsDeleteErrors, ChatsDeleteResponses, ChatsDeployErrors, ChatsDeployResponses, ChatsDownloadFilesErrors, ChatsDownloadFilesResponses, ChatsDuplicateErrors, ChatsDuplicateResponses, ChatsGetConnectStatusErrors, ChatsGetConnectStatusResponses, ChatsGetErrors, ChatsGetFilesErrors, ChatsGetFilesResponses, ChatsGetPreviewErrors, ChatsGetPreviewResponses, ChatsGetResponses, ChatsListErrors, ChatsListResponses, ChatsRestoreMessageErrors, ChatsRestoreMessageResponses, ChatsResumeErrors, ChatsResumeResponses, ChatsUpdateErrors, ChatsUpdateFilesErrors, ChatsUpdateFilesResponses, ChatsUpdateResponses, McpServersCreateErrors, McpServersCreateResponses, McpServersDeleteErrors, McpServersDeleteResponses, McpServersGetErrors, McpServersGetResponses, McpServersListErrors, McpServersListResponses, McpServersUpdateErrors, McpServersUpdateResponses, MessagesGetErrors, MessagesGetResponses, MessagesListErrors, MessagesListResponses, MessagesResolveAsyncErrors, MessagesResolveAsyncResponses, MessagesResolveErrors, MessagesResolveResponses, MessagesResolveStreamErrors, MessagesResolveStreamResponses, MessagesSendAsyncErrors, MessagesSendAsyncResponses, MessagesSendErrors, MessagesSendResponses, MessagesSendStreamErrors, MessagesSendStreamResponses, MessagesStopErrors, MessagesStopResponses, SettingsAppendPreviewHostsErrors, SettingsAppendPreviewHostsResponses, SettingsDeletePreviewHostsErrors, SettingsDeletePreviewHostsResponses, SettingsGetPreviewHostsErrors, SettingsGetPreviewHostsResponses, SettingsSetPreviewHostsErrors, SettingsSetPreviewHostsResponses, UsageGetActivityErrors, UsageGetActivityResponses, UsageGetSummaryErrors, UsageGetSummaryResponses, UsageListEventsErrors, UsageListEventsResponses, WebhooksCreateErrors, WebhooksCreateResponses, WebhooksDeleteErrors, WebhooksDeleteResponses, WebhooksGetErrors, WebhooksGetResponses, WebhooksListErrors, WebhooksListResponses, WebhooksUpdateErrors, WebhooksUpdateResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = Options2<TData, ThrowOnError> & {
     /**
@@ -88,9 +88,9 @@ export class Chats extends HeyApiClient {
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -149,6 +149,20 @@ export class Chats extends HeyApiClient {
         metadata?: {
             [key: string]: string;
         };
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
+        };
     }, options?: Options<never, ThrowOnError>) {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'body', key: 'message' },
@@ -159,7 +173,8 @@ export class Chats extends HeyApiClient {
                     { in: 'body', key: 'skills' },
                     { in: 'body', key: 'privacy' },
                     { in: 'body', key: 'title' },
-                    { in: 'body', key: 'metadata' }
+                    { in: 'body', key: 'metadata' },
+                    { in: 'body', key: 'credentialAccess' }
                 ] }]);
         return (options?.client ?? this.client).post<ChatsCreateResponses, ChatsCreateErrors, ThrowOnError>({
             responseTransformer: chatsCreateResponseTransformer,
@@ -178,7 +193,7 @@ export class Chats extends HeyApiClient {
     /**
      * Create Chat From Files
      *
-     * Creates a new chat from inline source files.
+     * Creates a new chat from inline UTF-8 or base64-encoded source files.
      */
     public createFromFiles<ThrowOnError extends boolean = false>(parameters: {
         files: Array<{
@@ -187,9 +202,13 @@ export class Chats extends HeyApiClient {
              */
             name: string;
             /**
-             * UTF-8 text content of the file.
+             * File content encoded according to `encoding`.
              */
             content: string;
+            /**
+             * How `content` is encoded. Defaults to `utf8` when omitted.
+             */
+            encoding?: 'utf8' | 'base64';
         }>;
         privacy?: 'public' | 'private' | 'team' | 'team-edit' | 'unlisted';
         title?: string;
@@ -293,18 +312,53 @@ export class Chats extends HeyApiClient {
     }
     
     /**
+     * Create Chat From Vercel Project
+     *
+     * Creates a new chat from an existing Vercel project.
+     */
+    public createFromVercelProject<ThrowOnError extends boolean = false>(parameters: {
+        vercelProjectId: string;
+        baseBranch?: string;
+        privacy?: 'public' | 'private' | 'team' | 'team-edit' | 'unlisted';
+        title?: string;
+        metadata?: {
+            [key: string]: string;
+        };
+    }, options?: Options<never, ThrowOnError>) {
+        const params = buildClientParams([parameters], [{ args: [
+                    { in: 'body', key: 'vercelProjectId' },
+                    { in: 'body', key: 'baseBranch' },
+                    { in: 'body', key: 'privacy' },
+                    { in: 'body', key: 'title' },
+                    { in: 'body', key: 'metadata' }
+                ] }]);
+        return (options?.client ?? this.client).post<ChatsCreateFromVercelProjectResponses, ChatsCreateFromVercelProjectErrors, ThrowOnError>({
+            responseTransformer: chatsCreateFromVercelProjectResponseTransformer,
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/chats/from-vercel-project',
+            ...options,
+            ...params,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers,
+                ...params.headers
+            }
+        });
+    }
+    
+    /**
      * Create Chat (Streaming)
      *
-     * Creates a new chat with a user message and returns a Server-Sent Events stream. Events include initial chat state, title deltas, content chunk deltas, and final chat state. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to ChatStreamEvent.
+     * Creates a new chat with a user message and returns a Server-Sent Events stream. Events include initial chat state, title deltas, content chunk deltas, and final chat state. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to ChatStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of sending the message again.
      */
     public createStream<ThrowOnError extends boolean = false>(parameters: {
         message: string;
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -363,6 +417,20 @@ export class Chats extends HeyApiClient {
         metadata?: {
             [key: string]: string;
         };
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
+        };
     }, options?: Options<never, ThrowOnError>) {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'body', key: 'message' },
@@ -373,7 +441,8 @@ export class Chats extends HeyApiClient {
                     { in: 'body', key: 'skills' },
                     { in: 'body', key: 'privacy' },
                     { in: 'body', key: 'title' },
-                    { in: 'body', key: 'metadata' }
+                    { in: 'body', key: 'metadata' },
+                    { in: 'body', key: 'credentialAccess' }
                 ] }]);
         return (options?.client ?? this.client).sse.post<ChatsCreateStreamResponses, ChatsCreateStreamErrors, ThrowOnError>({
             security: [{ scheme: 'bearer', type: 'http' }],
@@ -398,9 +467,9 @@ export class Chats extends HeyApiClient {
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -459,6 +528,20 @@ export class Chats extends HeyApiClient {
         metadata?: {
             [key: string]: string;
         };
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
+        };
     }, options?: Options<never, ThrowOnError>) {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'body', key: 'message' },
@@ -469,7 +552,8 @@ export class Chats extends HeyApiClient {
                     { in: 'body', key: 'skills' },
                     { in: 'body', key: 'privacy' },
                     { in: 'body', key: 'title' },
-                    { in: 'body', key: 'metadata' }
+                    { in: 'body', key: 'metadata' },
+                    { in: 'body', key: 'credentialAccess' }
                 ] }]);
         return (options?.client ?? this.client).post<ChatsCreateAsyncResponses, ChatsCreateAsyncErrors, ThrowOnError>({
             security: [{ scheme: 'bearer', type: 'http' }],
@@ -590,7 +674,7 @@ export class Chats extends HeyApiClient {
     /**
      * Update Chat Files
      *
-     * Creates, updates, or deletes files for a chat. Pass null to delete. This requires the chat's preview to be running.
+     * Creates, updates, or deletes UTF-8 or base64-encoded files for a chat. Pass null to delete.
      */
     public updateFiles<ThrowOnError extends boolean = false>(parameters: {
         chatId: string;
@@ -603,6 +687,10 @@ export class Chats extends HeyApiClient {
              * New file content. Pass `null` to delete the file at this path.
              */
             content: string | null;
+            /**
+             * How non-null `content` is encoded. Defaults to `utf8` when omitted.
+             */
+            encoding?: 'utf8' | 'base64';
         }>;
     }, options?: Options<never, ThrowOnError>) {
         const params = buildClientParams([parameters], [{ args: [{ in: 'path', key: 'chatId' }, { in: 'body', key: 'files' }] }]);
@@ -688,11 +776,15 @@ export class Chats extends HeyApiClient {
         chatId: string;
         privacy: 'public' | 'private' | 'team' | 'team-edit' | 'unlisted';
         title?: string;
+        metadata?: {
+            [key: string]: string;
+        };
     }, options?: Options<never, ThrowOnError>) {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'path', key: 'chatId' },
                     { in: 'body', key: 'privacy' },
-                    { in: 'body', key: 'title' }
+                    { in: 'body', key: 'title' },
+                    { in: 'body', key: 'metadata' }
                 ] }]);
         return (options?.client ?? this.client).post<ChatsDuplicateResponses, ChatsDuplicateErrors, ThrowOnError>({
             responseTransformer: chatsDuplicateResponseTransformer,
@@ -794,17 +886,157 @@ export class Messages extends HeyApiClient {
     /**
      * Send Message
      *
-     * Sends a new message to an existing chat. Blocks until the model response is complete and returns the message response.
+     * Sends a new message to an existing chat. Blocks until the model response is complete and returns the message response. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided.
      */
     public send<ThrowOnError extends boolean = false>(parameters: {
         chatId: string;
-        message: string;
+        message?: string;
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -862,6 +1094,7 @@ export class Messages extends HeyApiClient {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'path', key: 'chatId' },
                     { in: 'body', key: 'message' },
+                    { in: 'body', key: 'designMode' },
                     { in: 'body', key: 'systemPrompt' },
                     { in: 'body', key: 'modelConfiguration' },
                     { in: 'body', key: 'mcpServerIds' },
@@ -904,17 +1137,157 @@ export class Messages extends HeyApiClient {
     /**
      * Send Message (Streaming)
      *
-     * Sends a new message to an existing chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to MessageStreamEvent.
+     * Sends a new message to an existing chat and returns a Server-Sent Events stream. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to MessageStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of sending the message again.
      */
     public sendStream<ThrowOnError extends boolean = false>(parameters: {
         chatId: string;
-        message: string;
+        message?: string;
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -972,6 +1345,7 @@ export class Messages extends HeyApiClient {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'path', key: 'chatId' },
                     { in: 'body', key: 'message' },
+                    { in: 'body', key: 'designMode' },
                     { in: 'body', key: 'systemPrompt' },
                     { in: 'body', key: 'modelConfiguration' },
                     { in: 'body', key: 'mcpServerIds' },
@@ -994,17 +1368,157 @@ export class Messages extends HeyApiClient {
     /**
      * Send Message (Async)
      *
-     * Sends a new message to an existing chat and processes it in the background. Returns immediately with the assistant message ID. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` to detect completion.
+     * Sends a new message to an existing chat and processes it in the background. Include designMode to apply element-scoped design edits; message may be omitted when edits are provided. Returns immediately with the assistant message ID. Poll GET /chats/:chatId/messages/:messageId and check `finishReason` to detect completion.
      */
     public sendAsync<ThrowOnError extends boolean = false>(parameters: {
         chatId: string;
-        message: string;
+        message?: string;
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         systemPrompt?: string;
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -1062,6 +1576,7 @@ export class Messages extends HeyApiClient {
         const params = buildClientParams([parameters], [{ args: [
                     { in: 'path', key: 'chatId' },
                     { in: 'body', key: 'message' },
+                    { in: 'body', key: 'designMode' },
                     { in: 'body', key: 'systemPrompt' },
                     { in: 'body', key: 'modelConfiguration' },
                     { in: 'body', key: 'mcpServerIds' },
@@ -1095,13 +1610,15 @@ export class Messages extends HeyApiClient {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -1181,12 +1698,14 @@ export class Messages extends HeyApiClient {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -1215,7 +1734,7 @@ export class Messages extends HeyApiClient {
     /**
      * Resolve Task (Streaming)
      *
-     * Resolves a pending task in a chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to MessageStreamEvent.
+     * Resolves a pending task in a chat and returns a Server-Sent Events stream. Events include the initial assistant-message snapshot, content chunk deltas, final usage, and a closing message snapshot. The response is `text/event-stream`; each event is `data: <JSON>\n\n` where the JSON conforms to MessageStreamEvent. If the stream disconnects before the final event, reconnect with `POST /chats/{chatId}/resume` instead of resolving the task again.
      */
     public resolveStream<ThrowOnError extends boolean = false>(parameters: {
         chatId: string;
@@ -1226,13 +1745,15 @@ export class Messages extends HeyApiClient {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -1312,12 +1833,14 @@ export class Messages extends HeyApiClient {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -1356,13 +1879,15 @@ export class Messages extends HeyApiClient {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -1442,12 +1967,14 @@ export class Messages extends HeyApiClient {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -1698,9 +2225,31 @@ export class McpServers extends HeyApiClient {
 
 export class Settings extends HeyApiClient {
     /**
+     * Delete Trusted Preview Hosts
+     *
+     * Deletes exact normalized host patterns. Returns 404 if any pattern is not configured. Wildcard coverage does not count as an exact match. The entire request succeeds or fails together.
+     */
+    public deletePreviewHosts<ThrowOnError extends boolean = false>(parameters: {
+        hosts: Array<string>;
+    }, options?: Options<never, ThrowOnError>) {
+        const params = buildClientParams([parameters], [{ args: [{ in: 'body', key: 'hosts' }] }]);
+        return (options?.client ?? this.client).delete<SettingsDeletePreviewHostsResponses, SettingsDeletePreviewHostsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/settings/preview-hosts',
+            ...options,
+            ...params,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers,
+                ...params.headers
+            }
+        });
+    }
+    
+    /**
      * Get Trusted Preview Hosts
      *
-     * Returns the hostname patterns trusted to embed previews for the current team. Organization child teams inherit the parent organization’s hosts.
+     * Returns the hostname patterns trusted to embed previews for the current team.
      */
     public getPreviewHosts<ThrowOnError extends boolean = false>(options?: Options<never, ThrowOnError>) {
         return (options?.client ?? this.client).get<SettingsGetPreviewHostsResponses, SettingsGetPreviewHostsErrors, ThrowOnError>({
@@ -1711,9 +2260,31 @@ export class Settings extends HeyApiClient {
     }
     
     /**
+     * Append Trusted Preview Hosts
+     *
+     * Appends host patterns without replacing existing hosts. Returns 422 if any normalized pattern already exists or the resulting list exceeds 100 hosts. The entire request succeeds or fails together.
+     */
+    public appendPreviewHosts<ThrowOnError extends boolean = false>(parameters: {
+        hosts: Array<string>;
+    }, options?: Options<never, ThrowOnError>) {
+        const params = buildClientParams([parameters], [{ args: [{ in: 'body', key: 'hosts' }] }]);
+        return (options?.client ?? this.client).patch<SettingsAppendPreviewHostsResponses, SettingsAppendPreviewHostsErrors, ThrowOnError>({
+            security: [{ scheme: 'bearer', type: 'http' }],
+            url: '/settings/preview-hosts',
+            ...options,
+            ...params,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options?.headers,
+                ...params.headers
+            }
+        });
+    }
+    
+    /**
      * Set Trusted Preview Hosts
      *
-     * Sets the host patterns trusted to embed previews for a standalone team or parent organization. Organization child teams cannot override this setting.
+     * Sets the host patterns trusted to embed previews for a team.
      */
     public setPreviewHosts<ThrowOnError extends boolean = false>(parameters: {
         hosts: Array<string>;

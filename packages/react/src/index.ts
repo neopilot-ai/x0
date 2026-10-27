@@ -8,15 +8,4 @@ export type {
   V0ResponseKind,
   V0ResponseTransformer,
 } from './request'
-export * from './settings'
-// v0 API types re-exported for consumers (message/chat shapes used with
-// the transport and SWR hooks). TrustHost* intentionally excluded here:
-// './settings' defines local ones that would conflict.
-export type {
-  Chat,
-  ChatsGetResponse,
-  Files,
-  Message,
-  MessagesListResponse,
-  MessagesResolveStreamData,
-} from 'v0/browser'
+export type * from 'v0/browser'

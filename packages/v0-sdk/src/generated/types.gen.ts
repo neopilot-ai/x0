@@ -601,7 +601,9 @@ export type Message = {
              */
             requestedIntegrations: Array<string>;
             /**
-             * Qualified npm registry IDs the agent is asking you to connect (for example, "npm:https://registry.example.com/"). Pass these back in `connectedNpmRegistryIds` when resolving with a `confirmed-steps` task.
+             * Deprecated. npm registry connections are no longer requested; this array is always empty.
+             *
+             * @deprecated
              */
             requestedNpmRegistryIds: Array<string>;
             /**
@@ -656,13 +658,42 @@ export type Message = {
             };
         } | {
             /**
+             * The agent is waiting for the current user to authorize a connector in a browser.
+             */
+            status: 'authorization-required';
+            /**
+             * Authorization request identifier. Pass as `requestId` to GET /chats/{chatId}/connect/status to poll for completion.
+             */
+            requestId: string;
+            /**
+             * The service being authorized.
+             */
+            service: string;
+            /**
+             * Icon URL for the service, hosted on vercel.com.
+             */
+            serviceIconUrl?: string;
+            /**
+             * Connector being authorized.
+             */
+            connectorId: string;
+            /**
+             * Display name of the connector.
+             */
+            connectorName: string;
+            /**
+             * Open this vercel.com URL in a browser to sign in to the provider as the current user. Requires a vercel.com session for a member of the team.
+             */
+            authorizationUrl: string;
+        } | {
+            /**
              * The Connect action finished; no user input is needed.
              */
             status: 'completed';
             /**
              * The Connect action that ran.
              */
-            action: 'list' | 'create' | 'attach';
+            action: 'list' | 'create' | 'attach' | 'authorize';
             /**
              * Human-readable result summary.
              */
@@ -1083,7 +1114,9 @@ export type MessageListResponse = {
                  */
                 requestedIntegrations: Array<string>;
                 /**
-                 * Qualified npm registry IDs the agent is asking you to connect (for example, "npm:https://registry.example.com/"). Pass these back in `connectedNpmRegistryIds` when resolving with a `confirmed-steps` task.
+                 * Deprecated. npm registry connections are no longer requested; this array is always empty.
+                 *
+                 * @deprecated
                  */
                 requestedNpmRegistryIds: Array<string>;
                 /**
@@ -1138,13 +1171,42 @@ export type MessageListResponse = {
                 };
             } | {
                 /**
+                 * The agent is waiting for the current user to authorize a connector in a browser.
+                 */
+                status: 'authorization-required';
+                /**
+                 * Authorization request identifier. Pass as `requestId` to GET /chats/{chatId}/connect/status to poll for completion.
+                 */
+                requestId: string;
+                /**
+                 * The service being authorized.
+                 */
+                service: string;
+                /**
+                 * Icon URL for the service, hosted on vercel.com.
+                 */
+                serviceIconUrl?: string;
+                /**
+                 * Connector being authorized.
+                 */
+                connectorId: string;
+                /**
+                 * Display name of the connector.
+                 */
+                connectorName: string;
+                /**
+                 * Open this vercel.com URL in a browser to sign in to the provider as the current user. Requires a vercel.com session for a member of the team.
+                 */
+                authorizationUrl: string;
+            } | {
+                /**
                  * The Connect action finished; no user input is needed.
                  */
                 status: 'completed';
                 /**
                  * The Connect action that ran.
                  */
-                action: 'list' | 'create' | 'attach';
+                action: 'list' | 'create' | 'attach' | 'authorize';
                 /**
                  * Human-readable result summary.
                  */
@@ -1579,7 +1641,9 @@ export type MessageStreamEvent = {
              */
             requestedIntegrations: Array<string>;
             /**
-             * Qualified npm registry IDs the agent is asking you to connect (for example, "npm:https://registry.example.com/"). Pass these back in `connectedNpmRegistryIds` when resolving with a `confirmed-steps` task.
+             * Deprecated. npm registry connections are no longer requested; this array is always empty.
+             *
+             * @deprecated
              */
             requestedNpmRegistryIds: Array<string>;
             /**
@@ -1634,13 +1698,42 @@ export type MessageStreamEvent = {
             };
         } | {
             /**
+             * The agent is waiting for the current user to authorize a connector in a browser.
+             */
+            status: 'authorization-required';
+            /**
+             * Authorization request identifier. Pass as `requestId` to GET /chats/{chatId}/connect/status to poll for completion.
+             */
+            requestId: string;
+            /**
+             * The service being authorized.
+             */
+            service: string;
+            /**
+             * Icon URL for the service, hosted on vercel.com.
+             */
+            serviceIconUrl?: string;
+            /**
+             * Connector being authorized.
+             */
+            connectorId: string;
+            /**
+             * Display name of the connector.
+             */
+            connectorName: string;
+            /**
+             * Open this vercel.com URL in a browser to sign in to the provider as the current user. Requires a vercel.com session for a member of the team.
+             */
+            authorizationUrl: string;
+        } | {
+            /**
              * The Connect action finished; no user input is needed.
              */
             status: 'completed';
             /**
              * The Connect action that ran.
              */
-            action: 'list' | 'create' | 'attach';
+            action: 'list' | 'create' | 'attach' | 'authorize';
             /**
              * Human-readable result summary.
              */
@@ -2373,7 +2466,11 @@ export type UsageEventList = {
          */
         waived: boolean;
         /**
-         * Persisted token counts, or null when the source message is unavailable.
+         * Whether the cost components are estimated or unavailable. When unavailable, creditsCost components are zero placeholders for compatibility and must be ignored; total and charged remain authoritative.
+         */
+        costBreakdownStatus?: 'estimated' | 'unavailable';
+        /**
+         * Persisted token counts, or null for image generation and when the source message is unavailable.
          */
         tokens: {
             /**
@@ -2415,7 +2512,7 @@ export type UsageEventList = {
              */
             cacheWrite: number;
             /**
-             * Total amount across all categories.
+             * Total recorded cost, including costs without an available breakdown.
              */
             total: number;
             /**
@@ -2590,9 +2687,9 @@ export type ChatsCreateData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -2669,6 +2766,23 @@ export type ChatsCreateData = {
         metadata?: {
             [key: string]: string;
         };
+        /**
+         * Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.
+         */
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
+        };
     };
     path?: never;
     query?: never;
@@ -2720,9 +2834,13 @@ export type ChatsCreateFromFilesData = {
              */
             name: string;
             /**
-             * UTF-8 text content of the file.
+             * File content encoded according to `encoding`.
              */
             content: string;
+            /**
+             * How `content` is encoded. Defaults to `utf8` when omitted.
+             */
+            encoding?: 'utf8' | 'base64';
         }>;
         /**
          * Visibility setting for the new chat.
@@ -2907,6 +3025,70 @@ export type ChatsCreateFromRepoResponses = {
 
 export type ChatsCreateFromRepoResponse = ChatsCreateFromRepoResponses[keyof ChatsCreateFromRepoResponses];
 
+export type ChatsCreateFromVercelProjectData = {
+    body: {
+        /**
+         * Vercel project ID in the active user or team scope.
+         */
+        vercelProjectId: string;
+        /**
+         * Base branch for a GitHub-linked project. Defaults to the repository default branch. Ignored for projects without a GitHub link.
+         */
+        baseBranch?: string;
+        /**
+         * Visibility setting for the new chat.
+         */
+        privacy?: 'public' | 'private' | 'team' | 'team-edit' | 'unlisted';
+        /**
+         * Title for the new chat.
+         */
+        title?: string;
+        /**
+         * Arbitrary key-value data to attach to the chat.
+         */
+        metadata?: {
+            [key: string]: string;
+        };
+    };
+    path?: never;
+    query?: never;
+    url: '/chats/from-vercel-project';
+};
+
+export type ChatsCreateFromVercelProjectErrors = {
+    /**
+     * Response for status 401
+     */
+    401: Error;
+    /**
+     * Response for status 403
+     */
+    403: Error;
+    /**
+     * Response for status 404
+     */
+    404: Error;
+    /**
+     * Response for status 422
+     */
+    422: Error;
+    /**
+     * Response for status 500
+     */
+    500: Error;
+};
+
+export type ChatsCreateFromVercelProjectError = ChatsCreateFromVercelProjectErrors[keyof ChatsCreateFromVercelProjectErrors];
+
+export type ChatsCreateFromVercelProjectResponses = {
+    /**
+     * A chat response that also reports the usage.
+     */
+    200: ChatWithUsage;
+};
+
+export type ChatsCreateFromVercelProjectResponse = ChatsCreateFromVercelProjectResponses[keyof ChatsCreateFromVercelProjectResponses];
+
 export type ChatsCreateStreamData = {
     body: {
         /**
@@ -2922,9 +3104,9 @@ export type ChatsCreateStreamData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3001,6 +3183,23 @@ export type ChatsCreateStreamData = {
         metadata?: {
             [key: string]: string;
         };
+        /**
+         * Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.
+         */
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
+        };
     };
     path?: never;
     query?: never;
@@ -3020,6 +3219,10 @@ export type ChatsCreateStreamErrors = {
      * Response for status 404
      */
     404: Error;
+    /**
+     * Response for status 409
+     */
+    409: Error;
     /**
      * Response for status 422
      */
@@ -3056,9 +3259,9 @@ export type ChatsCreateAsyncData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3134,6 +3337,23 @@ export type ChatsCreateAsyncData = {
          */
         metadata?: {
             [key: string]: string;
+        };
+        /**
+         * Credentials the chat's sandbox may use. Not supported for Vercel OIDC principals.
+         */
+        credentialAccess?: {
+            /**
+             * Let the chat's sandbox install private packages with the team's shared npm credentials (`NPM_RC` / `NPM_TOKEN`). Defaults to `false`.
+             */
+            sharedNpm?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's Vercel credentials instead of a project-only token. Defaults to `false`.
+             */
+            vercel?: boolean;
+            /**
+             * Let the chat's sandbox use the requesting user's GitHub credentials. Defaults to `false`.
+             */
+            github?: boolean;
         };
     };
     path?: never;
@@ -3233,9 +3453,152 @@ export type MessagesListResponse = MessagesListResponses[keyof MessagesListRespo
 export type MessagesSendData = {
     body: {
         /**
-         * The prompt or instruction to send to the model.
+         * The prompt or instruction to send to the model. May be omitted when designMode contains edits.
          */
-        message: string;
+        message?: string;
+        /**
+         * Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.
+         */
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         /**
          * System-level context for the chat, such as frameworks or development environment details.
          */
@@ -3245,9 +3608,9 @@ export type MessagesSendData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3408,9 +3771,152 @@ export type MessagesGetResponse = MessagesGetResponses[keyof MessagesGetResponse
 export type MessagesSendStreamData = {
     body: {
         /**
-         * The prompt or instruction to send to the model.
+         * The prompt or instruction to send to the model. May be omitted when designMode contains edits.
          */
-        message: string;
+        message?: string;
+        /**
+         * Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.
+         */
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         /**
          * System-level context for the chat, such as frameworks or development environment details.
          */
@@ -3420,9 +3926,9 @@ export type MessagesSendStreamData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3510,6 +4016,10 @@ export type MessagesSendStreamErrors = {
      */
     404: Error;
     /**
+     * Response for status 409
+     */
+    409: Error;
+    /**
      * Response for status 422
      */
     422: Error;
@@ -3533,9 +4043,152 @@ export type MessagesSendStreamResponse = MessagesSendStreamResponses[keyof Messa
 export type MessagesSendAsyncData = {
     body: {
         /**
-         * The prompt or instruction to send to the model.
+         * The prompt or instruction to send to the model. May be omitted when designMode contains edits.
          */
-        message: string;
+        message?: string;
+        /**
+         * Apply element-scoped design edits using Design Mode. Source changes are model-generated, not deterministic DOM patches. The Design Mode model is selected automatically, regardless of modelConfiguration.modelId.
+         */
+        designMode?: {
+            /**
+             * Element edits to apply to the source code. Maximum 100.
+             */
+            edits?: Array<{
+                type: 'style';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * CSS property names in camelCase mapped to old and new values. Use textContent for text replacement.
+                 */
+                changes: {
+                    [key: string]: {
+                        /**
+                         * Previous value. Context for the model, not a checked precondition.
+                         */
+                        from: string;
+                        /**
+                         * Requested value.
+                         */
+                        to: string;
+                    };
+                };
+            } | {
+                type: 'deleteElement';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+            } | {
+                type: 'move';
+                element: {
+                    /**
+                     * CSS selector identifying the rendered element.
+                     */
+                    selectorPath: string;
+                    /**
+                     * HTML tag name, such as h1 or button.
+                     */
+                    tagName: string;
+                    /**
+                     * Element ID, if present.
+                     */
+                    id?: string;
+                    /**
+                     * Element CSS classes.
+                     */
+                    classNames?: Array<string>;
+                    /**
+                     * Current text of the element, to help locate its source.
+                     */
+                    textContent?: string;
+                    /**
+                     * React component name, if known.
+                     */
+                    reactComponentName?: string;
+                };
+                /**
+                 * Destination parent selector. Required when position is inside.
+                 */
+                toParentSelector?: string;
+                /**
+                 * Destination sibling selector. Required when position is before or after.
+                 */
+                targetSelector?: string;
+                /**
+                 * Placement relative to the destination.
+                 */
+                position: 'before' | 'after' | 'inside';
+            } | {
+                type: 'fontInjection';
+                /**
+                 * Font to add to the project, such as Inter.
+                 */
+                fontName: string;
+            }>;
+            /**
+             * CSS selector limiting the scope of the message instructions.
+             */
+            element?: string;
+            /**
+             * Screenshot providing visual context for the requested edits.
+             */
+            screenshot?: {
+                /**
+                 * HTTPS image URL or base64 image data URI. Counts toward the attachment limits. Not supported for Vercel OIDC principals.
+                 */
+                url: string;
+                /**
+                 * CSS selector anchoring the screenshot to a rendered element.
+                 */
+                anchorElement?: string;
+            };
+        };
         /**
          * System-level context for the chat, such as frameworks or development environment details.
          */
@@ -3545,9 +4198,9 @@ export type MessagesSendAsyncData = {
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3667,13 +4320,15 @@ export type MessagesResolveData = {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -3753,15 +4408,17 @@ export type MessagesResolveData = {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         /**
          * Overrides for the model behavior.
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3828,13 +4485,15 @@ export type MessagesResolveStreamData = {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -3914,15 +4573,17 @@ export type MessagesResolveStreamData = {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         /**
          * Overrides for the model behavior.
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -3989,13 +4650,15 @@ export type MessagesResolveAsyncData = {
              */
             connectedIntegrationNames?: Array<string>;
             /**
-             * Qualified npm registry IDs that were successfully connected (e.g. "npm:https://registry.example.com/"). Pass an empty array to skip.
+             * Deprecated. npm registry connections are no longer supported; this field is accepted for compatibility and ignored.
+             *
+             * @deprecated
              */
             connectedNpmRegistryIds?: Array<string>;
             /**
              * Names of MCP presets that were connected (e.g. "Linear", "Sentry"). Pass an empty array to skip.
              */
-            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Slack'>;
+            connectedMcpPresetNames?: Array<'Linear' | 'Notion' | 'Context7' | 'Sentry' | 'Zapier' | 'Glean' | 'Hex' | 'Sanity' | 'Granola' | 'PostHog' | 'Contentful' | 'Mobbin' | 'Slack' | 'Nitrosend' | 'Datadog'>;
             /**
              * Names of scripts that were applied.
              */
@@ -4075,15 +4738,17 @@ export type MessagesResolveAsyncData = {
             userMessage?: string;
         } | {
             type: 'vercel-connect-setup';
+        } | {
+            type: 'vercel-connect-authorization';
         };
         /**
          * Overrides for the model behavior.
          */
         modelConfiguration?: {
             /**
-             * Model to use for the generation.
+             * Model to use for the generation. Use a v0 model ID, or an [AI Gateway](https://vercel.com/ai-gateway/models) model ID in `creator/model` format. Gateway models must support tool calling and Zero Data Retention, and are subject to team model policy; unsupported IDs are rejected.
              */
-            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast';
+            modelId?: 'v0-mini' | 'v0-pro' | 'v0-max' | 'v0-max-fast' | string;
             /**
              * Enables image generations to generate up to 5 images per version.
              */
@@ -4478,6 +5143,10 @@ export type ChatsUpdateFilesData = {
              * New file content. Pass `null` to delete the file at this path.
              */
             content: string | null;
+            /**
+             * How non-null `content` is encoded. Defaults to `utf8` when omitted.
+             */
+            encoding?: 'utf8' | 'base64';
         }>;
     };
     path: {
@@ -4503,10 +5172,6 @@ export type ChatsUpdateFilesErrors = {
      * Response for status 404
      */
     404: Error;
-    /**
-     * Response for status 409
-     */
-    409: Error;
     /**
      * Response for status 422
      */
@@ -4818,7 +5483,9 @@ export type ChatsUpdateFilesResponses = {
                      */
                     requestedIntegrations: Array<string>;
                     /**
-                     * Qualified npm registry IDs the agent is asking you to connect (for example, "npm:https://registry.example.com/"). Pass these back in `connectedNpmRegistryIds` when resolving with a `confirmed-steps` task.
+                     * Deprecated. npm registry connections are no longer requested; this array is always empty.
+                     *
+                     * @deprecated
                      */
                     requestedNpmRegistryIds: Array<string>;
                     /**
@@ -4873,13 +5540,42 @@ export type ChatsUpdateFilesResponses = {
                     };
                 } | {
                     /**
+                     * The agent is waiting for the current user to authorize a connector in a browser.
+                     */
+                    status: 'authorization-required';
+                    /**
+                     * Authorization request identifier. Pass as `requestId` to GET /chats/{chatId}/connect/status to poll for completion.
+                     */
+                    requestId: string;
+                    /**
+                     * The service being authorized.
+                     */
+                    service: string;
+                    /**
+                     * Icon URL for the service, hosted on vercel.com.
+                     */
+                    serviceIconUrl?: string;
+                    /**
+                     * Connector being authorized.
+                     */
+                    connectorId: string;
+                    /**
+                     * Display name of the connector.
+                     */
+                    connectorName: string;
+                    /**
+                     * Open this vercel.com URL in a browser to sign in to the provider as the current user. Requires a vercel.com session for a member of the team.
+                     */
+                    authorizationUrl: string;
+                } | {
+                    /**
                      * The Connect action finished; no user input is needed.
                      */
                     status: 'completed';
                     /**
                      * The Connect action that ran.
                      */
-                    action: 'list' | 'create' | 'attach';
+                    action: 'list' | 'create' | 'attach' | 'authorize';
                     /**
                      * Human-readable result summary.
                      */
@@ -5517,7 +6213,9 @@ export type ChatsRestoreMessageResponses = {
                      */
                     requestedIntegrations: Array<string>;
                     /**
-                     * Qualified npm registry IDs the agent is asking you to connect (for example, "npm:https://registry.example.com/"). Pass these back in `connectedNpmRegistryIds` when resolving with a `confirmed-steps` task.
+                     * Deprecated. npm registry connections are no longer requested; this array is always empty.
+                     *
+                     * @deprecated
                      */
                     requestedNpmRegistryIds: Array<string>;
                     /**
@@ -5572,13 +6270,42 @@ export type ChatsRestoreMessageResponses = {
                     };
                 } | {
                     /**
+                     * The agent is waiting for the current user to authorize a connector in a browser.
+                     */
+                    status: 'authorization-required';
+                    /**
+                     * Authorization request identifier. Pass as `requestId` to GET /chats/{chatId}/connect/status to poll for completion.
+                     */
+                    requestId: string;
+                    /**
+                     * The service being authorized.
+                     */
+                    service: string;
+                    /**
+                     * Icon URL for the service, hosted on vercel.com.
+                     */
+                    serviceIconUrl?: string;
+                    /**
+                     * Connector being authorized.
+                     */
+                    connectorId: string;
+                    /**
+                     * Display name of the connector.
+                     */
+                    connectorName: string;
+                    /**
+                     * Open this vercel.com URL in a browser to sign in to the provider as the current user. Requires a vercel.com session for a member of the team.
+                     */
+                    authorizationUrl: string;
+                } | {
+                    /**
                      * The Connect action finished; no user input is needed.
                      */
                     status: 'completed';
                     /**
                      * The Connect action that ran.
                      */
-                    action: 'list' | 'create' | 'attach';
+                    action: 'list' | 'create' | 'attach' | 'authorize';
                     /**
                      * Human-readable result summary.
                      */
@@ -5735,6 +6462,12 @@ export type ChatsDuplicateData = {
          * Custom title for the duplicated chat. If omitted, the original title is reused with an incremented suffix (e.g. "My Chat (2)").
          */
         title?: string;
+        /**
+         * Arbitrary key-value data to attach to the chat.
+         */
+        metadata?: {
+            [key: string]: string;
+        };
     };
     path: {
         /**
@@ -5813,6 +6546,10 @@ export type ChatsDeployErrors = {
      * Response for status 422
      */
     422: Error;
+    /**
+     * Response for status 429
+     */
+    429: Error;
     /**
      * Response for status 500
      */
@@ -6357,6 +7094,54 @@ export type McpServersUpdateResponses = {
 
 export type McpServersUpdateResponse = McpServersUpdateResponses[keyof McpServersUpdateResponses];
 
+export type SettingsDeletePreviewHostsData = {
+    body: {
+        /**
+         * Distinct hostname patterns to delete. Provide hostnames only, without scheme, port, path, userinfo, query, or fragment. *.example.com matches one subdomain label; **.example.com matches one or more. Neither includes the apex. Patterns are canonicalized before comparison.
+         */
+        hosts: Array<string>;
+    };
+    path?: never;
+    query?: never;
+    url: '/settings/preview-hosts';
+};
+
+export type SettingsDeletePreviewHostsErrors = {
+    /**
+     * Response for status 401
+     */
+    401: Error;
+    /**
+     * Response for status 403
+     */
+    403: Error;
+    /**
+     * Response for status 404
+     */
+    404: Error;
+    /**
+     * Response for status 422
+     */
+    422: Error;
+    /**
+     * Response for status 500
+     */
+    500: Error;
+};
+
+export type SettingsDeletePreviewHostsError = SettingsDeletePreviewHostsErrors[keyof SettingsDeletePreviewHostsErrors];
+
+export type SettingsDeletePreviewHostsResponses = {
+    /**
+     * Response for status 200
+     */
+    200: {
+        success: true;
+    };
+};
+
+export type SettingsDeletePreviewHostsResponse = SettingsDeletePreviewHostsResponses[keyof SettingsDeletePreviewHostsResponses];
+
 export type SettingsGetPreviewHostsData = {
     body?: never;
     path?: never;
@@ -6393,6 +7178,52 @@ export type SettingsGetPreviewHostsResponses = {
 };
 
 export type SettingsGetPreviewHostsResponse = SettingsGetPreviewHostsResponses[keyof SettingsGetPreviewHostsResponses];
+
+export type SettingsAppendPreviewHostsData = {
+    body: {
+        /**
+         * Distinct hostname patterns to append. Provide hostnames only, without scheme, port, path, userinfo, query, or fragment. *.example.com matches one subdomain label; **.example.com matches one or more. Neither includes the apex. Patterns are canonicalized before comparison.
+         */
+        hosts: Array<string>;
+    };
+    path?: never;
+    query?: never;
+    url: '/settings/preview-hosts';
+};
+
+export type SettingsAppendPreviewHostsErrors = {
+    /**
+     * Response for status 401
+     */
+    401: Error;
+    /**
+     * Response for status 403
+     */
+    403: Error;
+    /**
+     * Response for status 404
+     */
+    404: Error;
+    /**
+     * Response for status 422
+     */
+    422: Error;
+    /**
+     * Response for status 500
+     */
+    500: Error;
+};
+
+export type SettingsAppendPreviewHostsError = SettingsAppendPreviewHostsErrors[keyof SettingsAppendPreviewHostsErrors];
+
+export type SettingsAppendPreviewHostsResponses = {
+    /**
+     * Response for status 200
+     */
+    200: TrustedPreviewHosts;
+};
+
+export type SettingsAppendPreviewHostsResponse = SettingsAppendPreviewHostsResponses[keyof SettingsAppendPreviewHostsResponses];
 
 export type SettingsSetPreviewHostsData = {
     body: {

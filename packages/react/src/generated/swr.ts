@@ -3,6 +3,7 @@
 import {
   chatsCreateFromFilesResponseTransformer,
   chatsCreateFromRepoResponseTransformer,
+  chatsCreateFromVercelProjectResponseTransformer,
   chatsCreateFromZipResponseTransformer,
   chatsCreateResponseTransformer,
   chatsDuplicateResponseTransformer,
@@ -39,6 +40,9 @@ import type {
   ChatsCreateFromRepoData,
   ChatsCreateFromRepoError,
   ChatsCreateFromRepoResponse,
+  ChatsCreateFromVercelProjectData,
+  ChatsCreateFromVercelProjectError,
+  ChatsCreateFromVercelProjectResponse,
   ChatsCreateFromZipData,
   ChatsCreateFromZipError,
   ChatsCreateFromZipResponse,
@@ -113,6 +117,12 @@ import type {
   MessagesSendStreamError,
   MessagesStopError,
   MessagesStopResponse,
+  SettingsAppendPreviewHostsData,
+  SettingsAppendPreviewHostsError,
+  SettingsAppendPreviewHostsResponse,
+  SettingsDeletePreviewHostsData,
+  SettingsDeletePreviewHostsError,
+  SettingsDeletePreviewHostsResponse,
   SettingsGetPreviewHostsError,
   SettingsGetPreviewHostsResponse,
   SettingsSetPreviewHostsData,
@@ -155,6 +165,7 @@ export const V0_REACT_OPERATION_HOOKS = {
   'chats.createAsync': 'useCreateChatAsync',
   'chats.createFromFiles': 'useCreateChatFromFiles',
   'chats.createFromRepo': 'useCreateChatFromRepo',
+  'chats.createFromVercelProject': 'useCreateChatFromVercelProject',
   'chats.createFromZip': 'useCreateChatFromZip',
   'chats.createStream': 'useCreateChat',
   'chats.createVercelProject': 'useCreateProject',
@@ -185,6 +196,8 @@ export const V0_REACT_OPERATION_HOOKS = {
   'messages.sendAsync': 'useSendMessageAsync',
   'messages.sendStream': 'useSendMessage',
   'messages.stop': 'useStopMessage',
+  'settings.appendPreviewHosts': 'useAppendPreviewHosts',
+  'settings.deletePreviewHosts': 'useDeletePreviewHosts',
   'settings.getPreviewHosts': 'usePreviewHosts',
   'settings.setPreviewHosts': 'useSetPreviewHosts',
   'usage.getActivity': 'useUsageActivity',
@@ -270,6 +283,25 @@ export function useCreateChatFromRepo(
   > = {},
 ) {
   return useV0Mutation(createChatFromRepoOperation, url, configuration)
+}
+
+const createChatFromVercelProjectOperation: V0Operation<ChatsCreateFromVercelProjectResponse> = {
+  id: 'chats.createFromVercelProject',
+  method: 'POST',
+  response: 'json',
+  transform: chatsCreateFromVercelProjectResponseTransformer,
+}
+
+export type CreateChatFromVercelProjectInput = ChatsCreateFromVercelProjectData['body']
+export function useCreateChatFromVercelProject(
+  url: string,
+  configuration: V0MutationConfiguration<
+    ChatsCreateFromVercelProjectResponse,
+    ChatsCreateFromVercelProjectError,
+    ChatsCreateFromVercelProjectData['body']
+  > = {},
+) {
+  return useV0Mutation(createChatFromVercelProjectOperation, url, configuration)
 }
 
 const createChatFromZipOperation: V0Operation<ChatsCreateFromZipResponse> = {
@@ -823,6 +855,42 @@ export function useStopMessage(
   configuration: V0MutationConfiguration<MessagesStopResponse, MessagesStopError, never> = {},
 ) {
   return useV0Mutation(stopMessageOperation, url, configuration)
+}
+
+const appendPreviewHostsOperation: V0Operation<SettingsAppendPreviewHostsResponse> = {
+  id: 'settings.appendPreviewHosts',
+  method: 'PATCH',
+  response: 'json',
+}
+
+export type AppendPreviewHostsInput = SettingsAppendPreviewHostsData['body']
+export function useAppendPreviewHosts(
+  url: string,
+  configuration: V0MutationConfiguration<
+    SettingsAppendPreviewHostsResponse,
+    SettingsAppendPreviewHostsError,
+    SettingsAppendPreviewHostsData['body']
+  > = {},
+) {
+  return useV0Mutation(appendPreviewHostsOperation, url, configuration)
+}
+
+const deletePreviewHostsOperation: V0Operation<SettingsDeletePreviewHostsResponse> = {
+  id: 'settings.deletePreviewHosts',
+  method: 'DELETE',
+  response: 'json',
+}
+
+export type DeletePreviewHostsInput = SettingsDeletePreviewHostsData['body']
+export function useDeletePreviewHosts(
+  url: string,
+  configuration: V0MutationConfiguration<
+    SettingsDeletePreviewHostsResponse,
+    SettingsDeletePreviewHostsError,
+    SettingsDeletePreviewHostsData['body']
+  > = {},
+) {
+  return useV0Mutation(deletePreviewHostsOperation, url, configuration)
 }
 
 const previewHostsOperation: V0Operation<SettingsGetPreviewHostsResponse> = {
